@@ -36,8 +36,13 @@ public class SharingBoardController {
 	
 	@RequestMapping(value = "write.action", method = RequestMethod.GET)
 	public String write() {
-		
 		return "write";
+	}
+	
+	@RequestMapping(value = "write.action", method = RequestMethod.POST)
+	public String write(String editor) {
+		System.err.println("저장할 내용 : " + editor);
+		return "list";
 	}
 	
 	@RequestMapping(value = "update.action", method = RequestMethod.GET)
@@ -46,19 +51,6 @@ public class SharingBoardController {
 		return "update";
 	}
 	
-	
-	
-	@RequestMapping(value = "/coding.do")
-    public String coding() {
-        return "coding";
-    }
- 
-    @RequestMapping(value = "/insertBoard.do", method = RequestMethod.POST)
-    public String insertBoard(String editor) {
-        System.err.println("저장할 내용 : " + editor);
-        return "redirect:/coding.do";
-    }
- 
     // 다중파일업로드
     @RequestMapping(value = "/file_uploader_html5.do",
                   method = RequestMethod.POST)
@@ -70,7 +62,7 @@ public class SharingBoardController {
             // 파일명을 받는다 - 일반 원본파일명
             String oldName = request.getHeader("file-name");
             // 파일 기본경로 _ 상세경로
-            String filePath = "D:/workspace/Spring/src/main/webapp/resources/photoUpload/";
+            String filePath = "C:/0_IOT2/GitLocal/BikeLong/src/main/webapp/resources/photoUpload/";
             String saveName = sb.append(new SimpleDateFormat("yyyyMMddHHmmss")
                           .format(System.currentTimeMillis()))
                           .append(UUID.randomUUID().toString())
@@ -88,7 +80,7 @@ public class SharingBoardController {
             sb = new StringBuffer();
             sb.append("&bNewLine=true")
               .append("&sFileName=").append(oldName)
-              .append("&sFileURL=").append("http://localhost:8090/Spring/resources/photoUpload/")
+              .append("&sFileURL=").append("http://localhost:8087/Crong/resources/photoUpload/")
         .append(saveName);
         } catch (Exception e) {
             e.printStackTrace();

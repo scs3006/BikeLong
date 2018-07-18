@@ -217,9 +217,9 @@ $(function(){
 							<div class="row">
 								<div class="col-md-12">
 								
-									<form action="./insertBoard.do" method="post" id="insertBoardFrm" enctype="multipart/form-data">
+									<form action="write.action" method="post" id="insertBoardFrm" enctype="multipart/form-data">
 								        <textarea name="editor" id="editor" style="width: 700px; height: 400px;"></textarea>
-								        <input type="button" id="insertBoard" value="등록" />
+								        <input type="button" id="insertBoard" class="btn btn-black" value="등록" />
 								    </form>
 
 
