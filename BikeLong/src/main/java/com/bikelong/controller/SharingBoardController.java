@@ -3,10 +3,12 @@ package com.bikelong.controller;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +32,7 @@ public class SharingBoardController {
 	
 	@RequestMapping(value = "write.action", method = RequestMethod.GET)
 	public String write() {
+		
 		return "write";
 	}
 	
@@ -49,7 +52,7 @@ public class SharingBoardController {
     @RequestMapping(value = "/file_uploader_html5.do",
                   method = RequestMethod.POST)
     @ResponseBody
-    public String multiplePhotoUpload(HttpServletRequest request) {
+    public void multiplePhotoUpload(HttpServletRequest request,  HttpServletResponse response) {
         // 파일정보
         StringBuffer sb = new StringBuffer();
         try {
@@ -74,11 +77,15 @@ public class SharingBoardController {
             sb = new StringBuffer();
             sb.append("&bNewLine=true")
               .append("&sFileName=").append(oldName)
-              .append("&sFileURL=").append("http://0_IOT2/Lab/Crong/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/BikeLong/resources/photoUpload/")
+              .append("&sFileURL=").append("http://localhost:8087/BikeLong/resources/photoUpload/")
         .append(saveName);
+            PrintWriter print = response.getWriter(); 
+            print.print(sb); 
+            print.flush(); 
+            print.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return sb.toString();
+      //  return sb.toString();
     }
 }
