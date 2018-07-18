@@ -1,8 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- 외부 설정 파일을 읽어서 dataSource에서 사용할 수 있도록 제공 -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:mysqlenvironment.properties"></property>
+	</bean>	
+		
+	<!-- BasicDataSource dataSource = new BasicDataSource(); -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="${datasource.driverClassName}"/>
+		<property name="url" value="${datasource.url}"/>
+		<property name="username" value="${datasource.username}"/>
+		<property name="password" value="${datasource.password}" />
+	</bean>
+	
+	<!-- sqlSessionFactory 빈 등록 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+	</bean>
+	
+	<!-- DataSourceTransactionManager 빈 등록-->
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- 스프링이 지원하는 트랜잭션 용 어드바이스 -->
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="*Tx"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- AOP를 사용해 트랜잭션을 지원 -->
+	<aop:config>
+		<aop:pointcut id="MovieTxPointcut" expression="bean(movieService)" />
+		<aop:pointcut id="EateryTxPointcut" expression="bean(eatearyService)" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="MovieTxPointcut"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="EateryTxPointcut"/>
+	</aop:config>
+	
+	<!-- 공통 부분의 의존성 주입 -->
+	
+	
+	<!-- 공통부분 xml의 매핑을 구현하는 빈 자동 생성 -->
+	
+	
+	<!-- 개인 설정 xml파일 임포트 -->
 		
 </beans>

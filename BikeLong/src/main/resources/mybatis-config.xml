@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- Mapper에서 사용할 Vo Class에 Alias 설정하는 곳  -->
+	<typeAliases>
+		
+	</typeAliases>
+
+	<environments default="mysql">
+		<environment id="mysql">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://211.197.18.246:3306/iot2_crong" />
+				<property name="username" value="iot2_crong" />
+				<property name="password" value="Iot2_crong" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<!-- Mapper 파일 경로 등록 -->	
+	<mappers>
+		
+	</mappers>
+
+</configuration>
