@@ -16,12 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class SharingBoardController {
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home() {
-		
-		return "index";
-	}
-	
 	@RequestMapping(value = "list.action", method = RequestMethod.GET)
 	public String list() {
 		
@@ -80,7 +74,7 @@ public class SharingBoardController {
             sb = new StringBuffer();
             sb.append("&bNewLine=true")
               .append("&sFileName=").append(oldName)
-              .append("&sFileURL=").append("http://localhost:8087/bikelong/resources/photoUpload/")
+              .append("&sFileURL=").append("http://0_IOT2/Lab/Crong/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/BikeLong/resources/photoUpload/")
         .append(saveName);
         } catch (Exception e) {
             e.printStackTrace();
