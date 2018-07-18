@@ -41,10 +41,7 @@
 	
 	<!-- AOP를 사용해 트랜잭션을 지원 -->
 	<aop:config>
-		<aop:pointcut id="MovieTxPointcut" expression="bean(movieService)" />
-		<aop:pointcut id="EateryTxPointcut" expression="bean(eatearyService)" />
-		<aop:advisor advice-ref="txAdvice" pointcut-ref="MovieTxPointcut"/>
-		<aop:advisor advice-ref="txAdvice" pointcut-ref="EateryTxPointcut"/>
+
 	</aop:config>
 	
 	<!-- 공통 부분의 의존성 주입 -->
