@@ -80,7 +80,7 @@ public class SharingBoardController {
             sb = new StringBuffer();
             sb.append("&bNewLine=true")
               .append("&sFileName=").append(oldName)
-              .append("&sFileURL=").append("http://localhost:8087/Crong/resources/photoUpload/")
+              .append("&sFileURL=").append("http://localhost:8087/bikelong/resources/photoUpload/")
         .append(saveName);
         } catch (Exception e) {
             e.printStackTrace();
