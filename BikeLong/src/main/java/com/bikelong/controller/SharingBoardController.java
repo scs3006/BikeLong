@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.bikelong.service.SharingBoardService;
 import com.bikelong.vo.SharingBoard;
@@ -32,11 +32,15 @@ public class SharingBoardController {
 	@RequestMapping(value = "list.action", method = RequestMethod.GET)
 	public String list() {
 		
+		List<SharingBoard> sharingboardList = sharingBoarService.findBoardList();
+		
 		return "list";
 	}
 	
 	@RequestMapping(value = "detail.action", method = RequestMethod.GET)
-	public String detail() {
+	public String detail(String boardNo) {
+		
+		List<SharingBoard> sharingboardDetail = sharingBoarService.findBoard(boardNo);
 		
 		return "detail";
 	}
