@@ -5,5 +5,6 @@ import com.bikelong.vo.Member;
 public interface AccountDao {
 
 	Member selectMemberByIdAndPasswd(String id, String passwd);
+	void insertMember(Member member);
 
 }

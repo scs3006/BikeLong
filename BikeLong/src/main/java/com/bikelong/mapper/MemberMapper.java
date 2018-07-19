@@ -7,5 +7,6 @@ import com.bikelong.vo.Member;
 public interface MemberMapper {
 	
 	Member selectMemberByIdAndPasswd(HashMap<String, Object> params);
+	void insertMember(Member member);
 
 }

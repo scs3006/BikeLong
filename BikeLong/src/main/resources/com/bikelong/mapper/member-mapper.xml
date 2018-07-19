@@ -10,6 +10,10 @@
 		FROM Member
 		WHERE ID=#{id} AND PASSWORD=#{password}
 	</select>
+	
+	<insert id="insertMember" parameterType="Member">
+		INSERT INTO Member VALUES (#{id},#{name},#{password},#{phone},#{weight},#{address},0)
+	</insert>
 </mapper>
 
 
