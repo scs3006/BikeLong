@@ -21,6 +21,37 @@
 		<link href="/bikelong/resources/assets/css/plugins.min.css" rel="stylesheet">
 		<!-- Template core CSS-->
 		<link href="/bikelong/resources/assets/css/template.css" rel="stylesheet">
+		<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+		
+		<style type="text/css">
+			.form-control{color : white;}
+		</style>
+		
+		<script type="text/javascript">
+		$(function(){
+			$('form').on('submit',function(event){
+				event.preventDefault();
+				var id = $(this).find('[name=id]').val();
+				var password = $(this).find('[name=password]').val();
+				$.ajax({
+					url : "signin.action",
+					method : "POST",
+					data : {"id" : id, "password" : password},
+					success : function(data,status,xhr){
+						if(data=="success"){
+							location.href = '/bikelong/index.action';
+						}
+						if(data=="fail"){
+							alert('로그인에 실패하였습니다.');
+						}
+					},
+					error : function(xhr, status, err){
+						alert('로그인에 실패하였습니다.');
+					}
+				});
+			});
+		});
+		</script>
 	</head>
 	<body>
 
@@ -61,7 +92,6 @@
 								</div>
 								<div class="up-help">
 									<p class="m-b-5">아직 회원가입을 안하셨나요? <a href="signup.action">회원 가입</a></p>
-									<p>아이디/비밀번호를 잊어버리셨나요? <a href="#">계정 정보 찾기</a></p>
 								</div>
 							</div>
 						</div>

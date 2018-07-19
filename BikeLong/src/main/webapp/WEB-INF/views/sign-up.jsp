@@ -22,6 +22,87 @@
 		<link href="/bikelong/resources/assets/css/plugins.min.css" rel="stylesheet">
 		<!-- Template core CSS-->
 		<link href="/bikelong/resources/assets/css/template.css" rel="stylesheet">
+		<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+		
+		<style type="text/css">
+			.form-control{color : white;}
+		</style>
+		
+		<script type="text/javascript">
+		$(function(){
+			
+			$('form').on('submit',function(event){
+				event.preventDefault();
+				
+				var regId = /^[A-Za-z0-9]{4,10}$/;
+				var id = $(this).find('[name=id]').val();
+				if(id != "") {
+				 if(!regId.test(id)) {
+					 alert('아이디의 형식을 확인하세요.');
+					 return;
+					 }
+				}
+			
+				var regPw = /^[A-Za-z0-9]{6,20}$/;
+				var password = $(this).find('[name=password]').val();
+				var cpassword = $(this).find('[name=cpassword]').val();
+				if(password != "") {
+				if(!regPw.test(password)) {
+					alert('비밀번호의 형식을 확인하세요.');
+					return;
+				} else {
+					if(password != cpassword){
+							alert('비밀번호가 불일치합니다.');
+							$(this).find('[name=password]').val('');
+							$(this).find('[name=cpassword]').val('');
+							return;
+						}
+					}
+				}
+
+				var regName = /^[가-힣]{2,10}$/;
+				var name = $(this).find('[name=name]').val();
+				if(name != "") {
+				if(!regName.test(name)) {
+					 alert('이름은 한글만 가능, 10문자까지입니다.');
+					 return;
+					}
+				}
+				 
+				var regex= /^\d{3}-\d{4}-\d{4}$/;
+				var phone = $(this).find('[name=phone]').val();
+				if(phone != "") {
+					if(!regex.test(phone) ) {
+						alert('전화번호 형식이 맞지 않습니다.');
+						return;
+					}
+				}
+				
+				var address = $(this).find('[name=address]').val();
+				var weight = $(this).find('[name=weight]').val();
+				
+				$.ajax({
+					url : "signup.action",
+					method : "POST",
+					data : {"id" : id, "name" : name, "password" : password, "phone" : phone, "address" : address, "weight" : weight},
+					success : function(data,status,xhr){
+						if(data=="success"){
+							alert('회원가입에 성공하셨습니다.');
+							location.href = '/bikelong/account/signin.action';
+						}
+						if(data=="fail"){
+							$('form').find('[name=id]').val('');
+							alert('이미 존재하는 아이디 입니다.');
+						}
+					},
+					error : function(xhr, status, err){
+						$('form').find('[name=id]').val('');
+						alert('이미 존재하는 아이디 입니다.');
+					}
+				});
+			});
+		});
+		</script>
 	</head>
 	<body>
 
@@ -50,22 +131,22 @@
 								<div class="up-form">
 									<form method="post" action="signup.action">
 										<div class="form-group">
-											<input class="form-control" type="text" name="id" placeholder="id">
+											<input class="form-control" type="text" name="id" required="required" placeholder="id(영문 대,소문자,숫자 포함 4~10글자)">
 										</div>
 										<div class="form-group">
-											<input class="form-control" type="text" name="name" placeholder="name">
+											<input class="form-control" type="text" name="name" required="required" placeholder="name(한글만 2~10글자)">
 										</div>
 										<div class="form-group">
-											<input class="form-control" type="password" name="password" placeholder="Pasword">
+											<input class="form-control" type="password" name="password" required="required" placeholder="Pasword(영문 대,소문자,숫자 포함 6~20)">
 										</div>
 										<div class="form-group">
-											<input class="form-control" type="password" placeholder="Confirm password">
+											<input class="form-control" type="password" name="cpassword" required="required" placeholder="Confirm password">
 										</div>
 										<div class="form-group">
-											<input class="form-control" type="text" name="phone" placeholder="phone">
+											<input class="form-control" type="text" name="phone" required="required" placeholder="phone(010-xxxx-xxxx)">
 										</div>
 										<div class="form-group">
-											<input class="form-control" type="text" name="address" placeholder="address">
+											<input class="form-control" type="text" name="address" required="required" placeholder="address(시, 구 까지)">
 										</div>
 										<div class="form-group">
 											<input class="form-control" type="text" name="basicWeight" placeholder="weight">
