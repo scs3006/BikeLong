@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.bikelong.mapper.SharingBoardMapper">
+	
+	<insert id="insertBoard" parameterType="SharingBoard">
+		INSERT INTO Board(id, locationNo, category, date, title, content)
+		VALUES(#{id}, #{locationNo}, #{category}, #{date}, #{title}, #{content})
+	</insert>
+	
+	<select id="selectBoardList" resultType="SharingBoard">
+		SELECT boardNo, id, locationNo, date, title, content  
+		FROM Board
+		WHERE category = 2 
+	</select>
+	
+	<select id="selectBoard" parameterType="hashmap" resultType="SharingBoard">
+		SELECT id, locationNo, date, title, content
+		FROM Board
+		WHERE boardNo = #{boardNo} AND category = 2
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
