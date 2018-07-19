@@ -93,7 +93,7 @@
 								<li><a href="/bikelong/account/signup.action"><span class="menu-item-span"><i class="ti-notepad">&nbsp;&nbsp;</i>Sign Up</span></a></li>
 							</c:if>
 							<c:if test="${ not empty loginuser }">
-								<li><a href="/bikelong/account/mypage.action"><span class="menu-item-span"><i class="ti-user">&nbsp;&nbsp;</i>${loginuser.id} 님</span></a></li>
+								<li><a href="/bikelong/account/mypage.action"><span class="menu-item-span"><i class="ti-user">&nbsp;&nbsp;</i>${id} 님</span></a></li>
 								<li><a href="/bikelong/account/logout.action"><span class="menu-item-span"><i class="icon_trash_alt">&nbsp;&nbsp;</i>Log Out</span></a></li>
 							</c:if>
 							<!-- <li><a class="popup-book-a-table" href="#test-form"><span class="menu-item-span">Book now</span></a></li> -->
