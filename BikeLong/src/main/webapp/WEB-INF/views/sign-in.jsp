@@ -133,7 +133,7 @@
 								<div class="up-form">
 									<form method="post">
 										<div class="form-group">
-											<input class="form-control" type="email" placeholder="Email">
+											<input class="form-control" type="id" placeholder="id">
 										</div>
 										<div class="form-group">
 											<input class="form-control" type="password" placeholder="Pasword">
