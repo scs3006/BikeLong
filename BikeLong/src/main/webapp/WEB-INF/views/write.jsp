@@ -10,38 +10,37 @@
 <meta name="author" content=""/>
 <title>Tavern - Responsive Restaurant Template(Bootstrap 4)</title>
 
-<script src="https://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript" src="./resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+ 
+</head>
 <script type="text/javascript">
-$(function(){
-    //전역변수
-    var obj = [];              
-    //스마트에디터 프레임생성
-    nhn.husky.EZCreator.createInIFrame({
-        oAppRef: obj,
-        elPlaceHolder: "editor",
-        sSkinURI: "./resources/editor/SmartEditor2Skin.html",
-        htParams : {
-            // 툴바 사용 여부
-            bUseToolbar : true,            
-            // 입력창 크기 조절바 사용 여부
-            bUseVerticalResizer : true,    
-            // 모드 탭(Editor | HTML | TEXT) 사용 여부
-            bUseModeChanger : true,
-        }
+    $(function(){
+        //전역변수
+        var obj = [];              
+        //스마트에디터 프레임생성
+        nhn.husky.EZCreator.createInIFrame({
+            oAppRef: obj,
+            elPlaceHolder: "smarteditor",
+            sSkinURI: "/bikelong/resources/editor/SmartEditor2Skin.html",
+            htParams : {
+                // 툴바 사용 여부
+                bUseToolbar : true,            
+                // 입력창 크기 조절바 사용 여부
+                bUseVerticalResizer : true,    
+                // 모드 탭(Editor | HTML | TEXT) 사용 여부
+                bUseModeChanger : true,
+            }
+        });
+        //전송버튼
+        $("#savebutton").click(function(){
+            //id가 smarteditor인 textarea에 에디터에서 대입
+            obj.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD", []);
+            //폼 submit
+            $("#frm").submit();
+        });
     });
-    //전송버튼
-    $("#insertBoard").click(function(){
-        //id가 smarteditor인 textarea에 에디터에서 대입
-        obj.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
-        //폼 submit
-        $("#insertBoardFrm").submit();
-    });
-
-});
-
-
 </script>
 
 <!-- Favicons-->
@@ -197,7 +196,7 @@ $(function(){
 		</div>
 	</header>
 	<!-- Header end-->
-
+<!-- ========================================================================================================= -->
 	<!-- Wrapper-->
 	<div class="wrapper">
 
@@ -209,22 +208,22 @@ $(function(){
 						<article class="post">
 
 							<div class="post-preview">
-								<img
-									src="http://piquant.mikado-themes.com/wp-content/uploads/2015/11/b-grilled-chorizo-with-spicy-sauce.jpg"
-									alt="">
+									<!--  -->
 							</div>
 
 							<div class="row">
 								<div class="col-md-12">
 								
-									<form action="write.action" method="post" id="insertBoardFrm" enctype="multipart/form-data">
-								        <textarea name="editor" id="editor" style="width: 700px; height: 400px;"></textarea>
-								        <input type="button" id="insertBoard" class="btn btn-black" value="등록" />
-								    </form>
-
+								<form action="writeditor.action" id="frm" method="POST" >
+									<p><input type="text" style="width: 767px" name="title" placeholder="제목"></p>
+									<p><input type="text" style="width: 767px" name="writer" placeholder="작성자"></p>
+									<p><textarea rows="10" cols="100" name="smarteditor" id="smarteditor" style="width: 100%; height: 482px" 
+									placeholder="내용"></textarea></p>
+									<p><input type="button" id="savebutton" value="서버전송"/></p>									
+								</form>
 
 								
-									<!-- <form method="post" novalidate>
+									<form method="post" novalidate>
 										<div class="row">
 											<div class="col-md-6">
 												<div class="form-group">
@@ -252,17 +251,12 @@ $(function(){
 												</div>
 											</div>
 											<div class="col-md-12">
-												<div class="form-group">
-													<textarea class="form-control" name="message" rows="6" placeholder="내용" required=""></textarea>
-												</div>
-											</div>
-											<div class="col-md-12">
 												<div class="text-center">
 													<input class="btn btn-black" type="submit" value="Reserve">
 												</div>
 											</div>
 										</div>
-									</form> -->
+									</form>
 								</div>
 							</div>
 						</article>
@@ -503,78 +497,7 @@ $(function(){
 	</div>
 	<!-- Off canvas end-->
 
-	<!-- Reserve Popup-->
-	<div class="white-popup-block mfp-hide" id="test-form">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4 p-0">
-					<div class="qwert"
-						data-background="resources/assets/images/module-2.jpg"></div>
-				</div>
-				<div class="col-md-8">
-					<div class="ddd">
-						<a class="popup-modal-dismiss" href="#"><i class="ti-close"></i></a>
-						<h1 class="display-1">Book a Table</h1>
-						<p class="lead">
-							See how your users experience your website in realtime or view <br />
-							trends to see any changes in performance over time.
-						</p>
-						<div class="divider-border-left"></div>
-						<div class="space" data-mY="60px"></div>
-						<form method="post" novalidate>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<input class="form-control" type="text" name="name"
-											placeholder="Name" required="">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<input class="form-control" type="text" name="name"
-											placeholder="Phone" required="">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<input class="form-control" type="email" name="email"
-											placeholder="E-mail" required="">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<input class="form-control" type="text" name="subject"
-											placeholder="Persons" required="">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<input class="form-control" type="email" name="email"
-											placeholder="Date" required="">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<input class="form-control" type="text" name="subject"
-											placeholder="Time" required="">
-									</div>
-								</div>
-								<div class="col-md-12">
-									<div class="form-group">
-										<textarea class="form-control" name="message"
-											placeholder="Special Requests" rows="6" required=""></textarea>
-									</div>
-								</div>
-								<div class="col-md-12">
-									<input class="btn btn-black" type="submit" value="Reserve">
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 
 	<!-- Reserve Popup end-->
 
