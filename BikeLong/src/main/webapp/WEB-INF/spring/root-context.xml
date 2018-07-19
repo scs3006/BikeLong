@@ -46,10 +46,23 @@
 
 	
 	<!-- 공통 부분의 의존성 주입 -->
-	
+	<bean id="accountService"
+		class="com.bikelong.service.AccountServiceImpl">
+		<property name="accountDao" ref="accountDao" />
+	</bean>
+	<bean id="accountDao" class="com.bikelong.dao.MySqlAccountDao">
+		<property name="memberMapper" ref="memberMapper" />
+	</bean>
 	
 	<!-- 공통부분 xml의 매핑을 구현하는 빈 자동 생성 -->
-	
+	<bean id="memberMapper"
+		class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.bikelong.mapper.MemberMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
 	
 	<!-- 개인 설정 xml파일 임포트 -->
+	
+	
 </beans>
