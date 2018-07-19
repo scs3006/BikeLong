@@ -78,19 +78,23 @@
 						    zoom: 10
 						});
 						
-						var marker = new naver.maps.Marker({
-							map: map,
-						    position: new naver.maps.LatLng(37.485344, 126.901107),
-						    icon: '/resources/assets/images/icon1.gif'
-						});
-						
 						var markerOptions = {
-								
+							position: new naver.maps.LatLng(37.485266, 126.901468),
+							map: map,
+							icon: {
+								url: '/bikelong/resources/assets/images/icon1.gif',
+								size: new naver.maps.Size(50, 50),
+						        origin: new naver.maps.Point(0, 0),
+						        anchor: new naver.maps.Point(25, 50)
+							}
 						};
+						
+						var marker = new naver.maps.Marker(markerOptions);
 						
 						var contentString = [
 						        '<div class="iw_inner">',
-						        '   <h3>서울특별시청</h3>',
+						        '   <center>1.구로디지털단지 1번출구 옆</center>',
+						        '   <hr color="black" style="width:50px;">',
 						        '   <p>서울특별시 중구 태평로1가 31 | 서울특별시 중구 세종대로 110 서울특별시청<br />',
 						        /* '       <img src="'+ HOME_PATH +'/img/example/hi-seoul.jpg" width="55" height="55" alt="서울시청" class="thumb" /><br />', */
 						        '       02-120 | 공공,사회기관 &gt; 특별,광역시청<br />',
@@ -101,14 +105,14 @@
 	
 						var infowindow = new naver.maps.InfoWindow({
 						    content: contentString,
-						    maxWidth: 140,
+						    maxWidth: 265,
 						    backgroundColor: "#eee",
 						    borderColor: "#2db400",
 						    borderWidth: 5,
 						    anchorSize: new naver.maps.Size(30, 30), //창 아래 화살표
 						    anchorSkew: true,
 						    anchorColor: "#eee",
-						    pixelOffset: new naver.maps.Point(20, -20) //창 위치
+						    pixelOffset: new naver.maps.Point(5, -20) //창 위치
 						});
 	
 						naver.maps.Event.addListener(marker, "click", function(e) {
