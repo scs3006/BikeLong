@@ -17,6 +17,13 @@ public class AccountServiceImpl implements AccountService {
 		//Member member = accountDao.selectMemberByIdAndPasswd(id, hashedPasswd);
 		Member member = accountDao.selectMemberByIdAndPasswd(id, password);
 		return member;		
+	}
+
+	@Override
+	public void signUpMember(Member member) {
+		String hashedPasswd = Util.getHashedString(member.getPassword(), "SHA-256");
+		member.setPassword(hashedPasswd);		
+		accountDao.insertMember(member);
 	}	
 
 }

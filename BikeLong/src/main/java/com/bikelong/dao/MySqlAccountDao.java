@@ -20,5 +20,10 @@ public class MySqlAccountDao implements AccountDao {
 		Member member = memberMapper.selectMemberByIdAndPasswd(params);
 		return member;
 	}
+
+	@Override
+	public void insertMember(Member member) {
+		memberMapper.insertMember(member);
+	}
 	
 }

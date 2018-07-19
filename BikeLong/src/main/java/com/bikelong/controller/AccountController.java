@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bikelong.service.AccountService;
 import com.bikelong.vo.Member;
@@ -44,6 +45,22 @@ public class AccountController {
 
 		return "redirect:/";
 
+	}
+	
+	@GetMapping(value = "/signup.action")
+	public String getSignUp() {
+		return "sign-up";
+	}
+	
+	@PostMapping(value = "/signup.action")
+	public String register(@RequestParam(value = "basicWeight", defaultValue = "65") int weight, Member member) {
+		member.setWeight(weight);
+		try {
+			accountService.signUpMember(member);
+		} catch (Exception ex) { // 등록 실패한 경우
+			return "redirect:signup.action?registerfail=" + member.getId();
+		}
+		return "redirect:signin.action"; 
 	}
 	
 }
