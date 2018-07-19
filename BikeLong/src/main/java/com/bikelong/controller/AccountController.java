@@ -36,7 +36,7 @@ public class AccountController {
 		if (member != null) {// 데이터베이스에서 데이터가 조회된 경우
 			System.out.println("성공");
 			// 로그인 가능한 사용자라면 로그인 처리 (세션이나 쿠키에 데이터 저장)
-			session.setAttribute("loginUser", member);// session에 Member 객체 저장
+			session.setAttribute("loginuser", member);// session에 Member 객체 저장
 			session.setAttribute("id", member.getId());
 		} else {
 			System.out.println("실패");
@@ -53,7 +53,7 @@ public class AccountController {
 	}
 	
 	@PostMapping(value = "/signup.action")
-	public String register(@RequestParam(value = "basicWeight", defaultValue = "65") int weight, Member member) {
+	public String postSingUp(@RequestParam(value = "basicWeight", defaultValue = "65") int weight, Member member) {
 		member.setWeight(weight);
 		try {
 			accountService.signUpMember(member);
@@ -61,6 +61,12 @@ public class AccountController {
 			return "redirect:signup.action?registerfail=" + member.getId();
 		}
 		return "redirect:signin.action"; 
+	}
+	
+	@GetMapping(value = "/logout.action")
+	public String logout(HttpSession session) {
+		session.removeAttribute("loginuser");
+		return "redirect:/index.action";
 	}
 	
 }

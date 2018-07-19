@@ -13,10 +13,9 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public Member login(String id, String password) {
-		//String hashedPasswd = Util.getHashedString(password, "SHA-256");
-		//Member member = accountDao.selectMemberByIdAndPasswd(id, hashedPasswd);
-		Member member = accountDao.selectMemberByIdAndPasswd(id, password);
-		return member;		
+		String hashedPasswd = Util.getHashedString(password, "SHA-256");
+		Member member = accountDao.selectMemberByIdAndPasswd(id, hashedPasswd);
+		return member;
 	}
 
 	@Override
