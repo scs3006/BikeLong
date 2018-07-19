@@ -10,18 +10,18 @@
 		<meta name="author" content="">
 		<title>Tavern - Responsive Restaurant Template(Bootstrap 4)</title>
 		<!-- Favicons-->
-		<link rel="shortcut icon" href="resources/assets/images/favicon.png">
-		<link rel="apple-touch-icon" href="resources/assets/images/apple-touch-icon.png">
-		<link rel="apple-touch-icon" sizes="72x72" href="resources/assets/images/apple-touch-icon-72x72.png">
-		<link rel="apple-touch-icon" sizes="114x114" href="resources/assets/images/apple-touch-icon-114x114.png">
+		<link rel="shortcut icon" href="/bikelong/resources/assets/images/favicon.png">
+		<link rel="apple-touch-icon" href="/bikelong/resources/assets/images/apple-touch-icon.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/bikelong/resources/assets/images/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/bikelong/resources/assets/images/apple-touch-icon-114x114.png">
 		<!-- Web Fonts-->
 		<link href="https://fonts.googleapis.com/css?family=PT+Serif%7cSignika:300,400,600,700" rel="stylesheet">
 		<!-- Bootstrap core CSS-->
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet">
 		<!-- Plugins and Icon Fonts-->
-		<link href="resources/assets/css/plugins.min.css" rel="stylesheet">
+		<link href="/bikelong/resources/assets/css/plugins.min.css" rel="stylesheet">
 		<!-- Template core CSS-->
-		<link href="resources/assets/css/template.css" rel="stylesheet">
+		<link href="/bikelong/resources/assets/css/template.css" rel="stylesheet">
 	</head>
 	<body>
 
@@ -58,7 +58,7 @@
 			<div class="navigation navigation-center">
 				<div class="container-fluid">
 					<!-- Brand-->
-					<div class="inner-header"><a class="inner-brand" href="index.jsp"><img class="brand-dark" src="resources/assets/images/logo.png" width="74px" alt=""><img class="brand-light" src="resources/assets/images/logo-light.png" width="74px" alt=""></a></div>
+					<div class="inner-header"><a class="inner-brand" href="index.jsp"><img class="brand-dark" src="/bikelong/resources/assets/images/logo.png" width="74px" alt=""><img class="brand-light" src="/bikelong/resources/assets/images/logo-light.png" width="74px" alt=""></a></div>
 					<!-- Navigation-->
 					<div class="inner-navigation collapse">
 						<div class="inner-nav onepage-nav">
@@ -143,7 +143,7 @@
 		<div class="wrapper">
 
 			<!-- Hero-->
-			<section class="module-cover parallax" data-background="resources/assets/images/module-4.jpg" data-overlay="1" data-gradient="1">
+			<section class="module-cover parallax" data-background="/bikelong/resources/assets/images/module-4.jpg" data-overlay="1" data-gradient="1">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12">
@@ -164,7 +164,7 @@
 						<div class="col-md-4 post-item">
 							<!-- Post-->
 							<article class="post">
-								<div class="post-preview"><a href="#"><img src="resources/assets/images/menu/1.jpg" alt=""></a></div>
+								<div class="post-preview"><a href="#"><img src="/bikelong/resources/assets/images/menu/1.jpg" alt=""></a></div>
 								<div class="post-wrapper">
 									<div class="post-header" style="height: 15%">
 										<h2 class="post-title display-1"><a href="blog-single-1.jsp">Which Lamb is New Zealand?</a></h2>
@@ -179,7 +179,7 @@
 						<div class="col-md-4 post-item">
 							<!-- Post-->
 							<article class="post">
-								<div class="post-preview"><a href="#"><img src="resources/assets/images/menu/1.jpg" alt=""></a></div>
+								<div class="post-preview"><a href="#"><img src="/bikelong/resources/assets/images/menu/1.jpg" alt=""></a></div>
 								<div class="post-wrapper">
 									<div class="post-header" style="height: 15%">
 										<h2 class="post-title display-1"><a href="blog-single-1.jsp">Which Lamb is the Bes</a></h2>
@@ -194,7 +194,7 @@
 						<div class="col-md-4 post-item">
 							<!-- Post-->
 							<article class="post">
-								<div class="post-preview"><a href="#"><img src="resources/assets/images/menu/1.jpg" alt=""></a></div>
+								<div class="post-preview"><a href="#"><img src="/bikelong/resources/assets/images/menu/1.jpg" alt=""></a></div>
 								<div class="post-wrapper">
 									<div class="post-header" style="height: 15%">
 										<h2 class="post-title display-1"><a href="blog-single-1.jsp">Which Lamb is the Best:</a></h2>
@@ -209,7 +209,7 @@
 						<div class="col-md-4 post-item">
 							<!-- Post-->
 							<article class="post">
-								<div class="post-preview"><a href="#"><img src="resources/assets/images/menu/1.jpg" alt=""></a></div>
+								<div class="post-preview"><a href="#"><img src="/bikelong/resources/assets/images/menu/1.jpg" alt=""></a></div>
 								<div class="post-wrapper">
 									<div class="post-header" style="height: 15%">
 										<h2 class="post-title display-1"><a href="blog-single-1.jsp">Which Lamb is the Best:</a></h2>
@@ -224,7 +224,7 @@
 						<div class="col-md-4 post-item">
 							<!-- Post-->
 							<article class="post">
-								<div class="post-preview"><a href="#"><img src="resources/assets/images/menu/1.jpg" alt=""></a></div>
+								<div class="post-preview"><a href="#"><img src="/bikelong/resources/assets/images/menu/1.jpg" alt=""></a></div>
 								<div class="post-wrapper">
 									<div class="post-header" style="height: 15%">
 										<h2 class="post-title display-1"><a href="blog-single-1.jsp">Which Lamb is the Best:</a></h2>
@@ -239,7 +239,7 @@
 						<div class="col-md-4 post-item">
 							<!-- Post-->
 							<article class="post">
-								<div class="post-preview"><a href="#"><img src="resources/assets/images/menu/1.jpg" alt=""></a></div>
+								<div class="post-preview"><a href="#"><img src="/bikelong/resources/assets/images/menu/1.jpg" alt=""></a></div>
 								<div class="post-wrapper">
 									<div class="post-header" style="height: 15%">
 										<h2 class="post-title display-1"><a href="blog-single-1.jsp">Which Lamb is the Best:</a></h2>
@@ -282,7 +282,7 @@
 							<!-- Text widget-->
 							<aside class="widget widget_text">
 								<div class="textwidget">
-									<p><img src="resources/assets/images/logo-light.png" width="74px" alt=""></p>
+									<p><img src="/bikelong/resources/assets/images/logo-light.png" width="74px" alt=""></p>
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
 									<ul class="icon-list">
 										<li><i class="ti-email"></i> info@themebusiness.com</li>
@@ -322,12 +322,12 @@
 									<h5>Instagram</h5>
 								</div>
 								<ul>
-									<li><a href="#"><img src="resources/assets/images/widgets/1.jpg" alt=""></a></li>
-									<li><a href="#"><img src="resources/assets/images/widgets/2.jpg" alt=""></a></li>
-									<li><a href="#"><img src="resources/assets/images/widgets/3.jpg" alt=""></a></li>
-									<li><a href="#"><img src="resources/assets/images/widgets/4.jpg" alt=""></a></li>
-									<li><a href="#"><img src="resources/assets/images/widgets/5.jpg" alt=""></a></li>
-									<li><a href="#"><img src="resources/assets/images/widgets/6.jpg" alt=""></a></li>
+									<li><a href="#"><img src="/bikelong/resources/assets/images/widgets/1.jpg" alt=""></a></li>
+									<li><a href="#"><img src="/bikelong/resources/assets/images/widgets/2.jpg" alt=""></a></li>
+									<li><a href="#"><img src="/bikelong/resources/assets/images/widgets/3.jpg" alt=""></a></li>
+									<li><a href="#"><img src="/bikelong/resources/assets/images/widgets/4.jpg" alt=""></a></li>
+									<li><a href="#"><img src="/bikelong/resources/assets/images/widgets/5.jpg" alt=""></a></li>
+									<li><a href="#"><img src="/bikelong/resources/assets/images/widgets/6.jpg" alt=""></a></li>
 								</ul>
 							</aside>
 						</div>
@@ -356,14 +356,14 @@
 		<!-- Wrapper end-->
 
 		<!-- Off canvas--><!-- ======================================================================== -->
-		<div class="off-canvas-sidebar" data-background="resources/assets/images/sidebar.jpg">
+		<div class="off-canvas-sidebar" data-background="/bikelong/resources/assets/images/sidebar.jpg">
 			<div class="off-canvas-sidebar-wrapper">
 				<div class="off-canvas-header"><a class="close-offcanvas" href="#"><span class="arrows arrows-arrows-remove"></span></a></div>
 				<div class="off-canvas-content">
 					<!-- Text widget-->
 					<aside class="widget widget_text">
 						<div class="textwidget">
-							<p><img src="resources/assets/images/logo-light.png" width="74px" alt=""></p>
+							<p><img src="/bikelong/resources/assets/images/logo-light.png" width="74px" alt=""></p>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
 							<ul class="icon-list">
 								<li><i class="ti-email"></i> info@themebusiness.com</li>
@@ -378,19 +378,19 @@
 							<h5>Instagram</h5>
 						</div>
 						<ul>
-							<li><a href="#"><img src="resources/assets/images/widgets/1.jpg" alt=""></a></li>
-							<li><a href="#"><img src="resources/assets/images/widgets/2.jpg" alt=""></a></li>
-							<li><a href="#"><img src="resources/assets/images/widgets/3.jpg" alt=""></a></li>
-							<li><a href="#"><img src="resources/assets/images/widgets/4.jpg" alt=""></a></li>
-							<li><a href="#"><img src="resources/assets/images/widgets/5.jpg" alt=""></a></li>
-							<li><a href="#"><img src="resources/assets/images/widgets/6.jpg" alt=""></a></li>
+							<li><a href="#"><img src="/bikelong/resources/assets/images/widgets/1.jpg" alt=""></a></li>
+							<li><a href="#"><img src="/bikelong/resources/assets/images/widgets/2.jpg" alt=""></a></li>
+							<li><a href="#"><img src="/bikelong/resources/assets/images/widgets/3.jpg" alt=""></a></li>
+							<li><a href="#"><img src="/bikelong/resources/assets/images/widgets/4.jpg" alt=""></a></li>
+							<li><a href="#"><img src="/bikelong/resources/assets/images/widgets/5.jpg" alt=""></a></li>
+							<li><a href="#"><img src="/bikelong/resources/assets/images/widgets/6.jpg" alt=""></a></li>
 						</ul>
 					</aside>
 					<!-- Text widget-->
 					<!--aside.widget.widget_text
 					.textwidget
 						.up-logo
-							p.text-center.m-b-50: img(src="resources/assets/images/logo-light.png" width="100" alt="")
+							p.text-center.m-b-50: img(src="/bikelong/resources/assets/images/logo-light.png" width="100" alt="")
 						.up-form
 							form(method="post")
 								.form-group
@@ -432,7 +432,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA0rANX07hh6ASNKdBr4mZH0KZSqbHYc3Q"></script>
-		<script src="resources/assets/js/plugins.min.js"></script>
-		<script src="resources/assets/js/custom.min.js"></script>
+		<script src="/bikelong/resources/assets/js/plugins.min.js"></script>
+		<script src="/bikelong/resources/assets/js/custom.min.js"></script>
 	</body>
 </html>

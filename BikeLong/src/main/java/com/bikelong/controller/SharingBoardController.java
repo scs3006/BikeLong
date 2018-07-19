@@ -1,46 +1,149 @@
 package com.bikelong.controller;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bikelong.service.SharingBoardService;
+import com.bikelong.vo.SharingBoard;
+
 @Controller
+@RequestMapping(value = "pathboard")
 public class SharingBoardController {
+	
+	@Autowired
+	@Qualifier(value = "sharingBoardService")
+	private SharingBoardService sharingBoarService;
 	
 	@RequestMapping(value = "list.action", method = RequestMethod.GET)
 	public String list() {
+		
+		List<SharingBoard> sharingboardList = sharingBoarService.findBoardList();
 		
 		return "list";
 	}
 	
 	@RequestMapping(value = "detail.action", method = RequestMethod.GET)
-	public String detail() {
+	public String detail(String boardNo) {
+		
+		List<SharingBoard> sharingboardDetail = sharingBoarService.findBoard(boardNo);
 		
 		return "detail";
 	}
 	
 	@RequestMapping(value = "write.action", method = RequestMethod.GET)
 	public String write() {
-		
 		return "write";
 	}
 	
 	@RequestMapping(value = "write.action", method = RequestMethod.POST)
-	public String write(String editor) {
-		System.err.println("저장할 내용 : " + editor);
-		return "list";
+	public String writePost(SharingBoard sharingBoard) {
+		int cate = 2;
+		sharingBoard.setCategory(cate);
+		sharingBoarService.writeBoard(sharingBoard);
+		
+		System.out.println(sharingBoard.getContent());
+		System.out.println(sharingBoard.getDate());
+		System.out.println(sharingBoard.getLocationNo());
+		System.out.println(sharingBoard.getTitle());
+		
+		return "write";
 	}
+	
+	@RequestMapping(value = "multiuploadimage.action", method = RequestMethod.POST)
+	@ResponseBody
+	public String uploadMultipleImage(HttpServletRequest req) {
+		
+		String sFileInfo = "";
+		//파일명 - 싱글파일업로드와 다르게 멀티파일업로드는 HEADER로 넘어옴 
+		String name = req.getHeader("file-name");
+		String ext = name.substring(name.lastIndexOf(".")+1);
+		//파일 기본경로
+		String defaultPath = req.getSession().getServletContext().getRealPath("/");
+		//파일 기본경로 _ 상세경로
+		String path = defaultPath + "resources/photoupload/" + File.separator;
+		File file = new File(path);
+		if(!file.exists()) {
+		   file.mkdirs();
+		}
+		String realname = UUID.randomUUID().toString() + "." + ext;
+		try {
+			
+			InputStream is = req.getInputStream();
+			OutputStream os=new FileOutputStream(path + realname);
+			int numRead;
+			// 파일쓰기
+			byte b[] = new byte[Integer.parseInt(req.getHeader("file-size"))];
+			while((numRead = is.read(b,0,b.length)) != -1){
+			    os.write(b,0,numRead);
+			}
+			if(is != null) {
+			    is.close();
+			}
+			os.flush();
+			os.close();
+		}catch (Exception e) {
+		} 
+		sFileInfo += "&bNewLine=true&sFileName="+ name+"&sFileURL=/bikelong/resources/photoupload/"+realname;
+		return sFileInfo;
+		
+	}
+	
+	@RequestMapping(value = "singleuploadimage.action", method = RequestMethod.POST)
+	public String writeditor1(HttpServletRequest req, HttpServletResponse resp) {
+		
+	    try {
+		String sFileInfo = "";
+		//파일명 - 싱글파일업로드와 다르게 멀티파일업로드는 HEADER로 넘어옴 
+		String name = req.getHeader("file-name");
+		String ext = name.substring(name.lastIndexOf(".")+1);
+		//파일 기본경로
+		String defaultPath = req.getSession().getServletContext().getRealPath("/");
+		//파일 기본경로 _ 상세경로
+		String path = defaultPath +  "resources/photoupload/" + File.separator;
+		File file = new File(path);
+		if(!file.exists()) {
+		    file.mkdirs();
+		}
+		String realname = UUID.randomUUID().toString() + "." + ext;
+		InputStream is = req.getInputStream();
+		OutputStream os=new FileOutputStream(path + realname);
+		int numRead;
+		// 파일쓰기
+		byte b[] = new byte[Integer.parseInt(req.getHeader("file-size"))];
+		while((numRead = is.read(b,0,b.length)) != -1){
+		    os.write(b,0,numRead);
+		}
+		if(is != null) {
+		    is.close();
+		}
+		os.flush();
+		os.close();
+		sFileInfo += "&bNewLine=true&sFileName="+ name+"&sFileURL=/bikelong/resources/photoupload/"+realname;
+		
+		PrintWriter out = resp.getWriter();
+		
+		out.println(sFileInfo);
+	    }catch (Exception e) {
+		}
+		
+		return "index";
+	}
+	
 	
 	@RequestMapping(value = "update.action", method = RequestMethod.GET)
 	public String update() {
@@ -48,44 +151,5 @@ public class SharingBoardController {
 		return "update";
 	}
 	
-    // 다중파일업로드
-    @RequestMapping(value = "/file_uploader_html5.do",
-                  method = RequestMethod.POST)
-    @ResponseBody
-    public void multiplePhotoUpload(HttpServletRequest request,  HttpServletResponse response) {
-        // 파일정보
-        StringBuffer sb = new StringBuffer();
-        try {
-            // 파일명을 받는다 - 일반 원본파일명
-            String oldName = request.getHeader("file-name");
-            // 파일 기본경로 _ 상세경로
-            String filePath = "C:/0_IOT2/GitLocal/BikeLong/src/main/webapp/resources/photoUpload/";
-            String saveName = sb.append(new SimpleDateFormat("yyyyMMddHHmmss")
-                          .format(System.currentTimeMillis()))
-                          .append(UUID.randomUUID().toString())
-                          .append(oldName.substring(oldName.lastIndexOf("."))).toString();
-            InputStream is = request.getInputStream();
-            OutputStream os = new FileOutputStream(filePath + saveName);
-            int numRead;
-            byte b[] = new byte[Integer.parseInt(request.getHeader("file-size"))];
-            while ((numRead = is.read(b, 0, b.length)) != -1) {
-                os.write(b, 0, numRead);
-            }
-            os.flush();
-            os.close();
-            // 정보 출력
-            sb = new StringBuffer();
-            sb.append("&bNewLine=true")
-              .append("&sFileName=").append(oldName)
-              .append("&sFileURL=").append("http://localhost:8087/BikeLong/resources/photoUpload/")
-        .append(saveName);
-            PrintWriter print = response.getWriter(); 
-            print.print(sb); 
-            print.flush(); 
-            print.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-      //  return sb.toString();
-    }
+  
 }
