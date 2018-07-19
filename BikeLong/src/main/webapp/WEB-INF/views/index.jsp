@@ -47,7 +47,7 @@
 							<ul class="top-bar-tools">
 								<li><a class="open-offcanvas" href="#"><i class="ti-menu"></i></a></li>
 								<li><a href="sign-in.jsp"><i class="ti-search"></i></a></li>
-								<li><a href="sign-in.jsp"><i class="ti-user"></i></a></li>
+								<li><a href="account/signin.action"><i class="ti-user"></i></a></li>
 							</ul>
 						</div>
 					</div>
@@ -79,7 +79,7 @@
 												
 												<li><a href="list.action">List</a></li>
 												<li><a href="detail.action">Detail</a></li>
-												<li><a href="write.action">Write</a></li>
+												<li><a href="/bikelong/pathboard/write.action">Write</a></li>
 												<li><a href="update.action">Update</a></li>
 											</ul>
 										</li>

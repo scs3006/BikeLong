@@ -11,13 +11,13 @@
 <title>Tavern - Responsive Restaurant Template(Bootstrap 4)</title>
 
 <!-- Favicons-->
-<link rel="shortcut icon" href="resources/assets/images/favicon.png">
+<link rel="shortcut icon" href="/bikelong/resources/assets/images/favicon.png">
 <link rel="apple-touch-icon"
-	href="resources/assets/images/apple-touch-icon.png">
+	href="/bikelong/resources/assets/images/apple-touch-icon.png">
 <link rel="apple-touch-icon" sizes="72x72"
-	href="resources/assets/images/apple-touch-icon-72x72.png">
+	href="/bikelong/resources/assets/images/apple-touch-icon-72x72.png">
 <link rel="apple-touch-icon" sizes="114x114"
-	href="resources/assets/images/apple-touch-icon-114x114.png">
+	href="/bikelong/resources/assets/images/apple-touch-icon-114x114.png">
 <!-- Web Fonts-->
 <link
 	href="https://fonts.googleapis.com/css?family=PT+Serif%7cSignika:300,400,600,700"
@@ -27,9 +27,9 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
 	rel="stylesheet">
 <!-- Plugins and Icon Fonts-->
-<link href="resources/assets/css/plugins.min.css" rel="stylesheet">
+<link href="/bikelong/resources/assets/css/plugins.min.css" rel="stylesheet">
 <!-- Template core CSS-->
-<link href="resources/assets/css/template.css" rel="stylesheet">
+<link href="/bikelong/resources/assets/css/template.css" rel="stylesheet">
 </head>
 <body>
 
@@ -69,8 +69,8 @@
 				<!-- Brand-->
 				<div class="inner-header">
 					<a class="inner-brand" href="index.jsp"><img class="brand-dark"
-						src="resources/assets/images/logo.png" width="74px" alt=""><img
-						class="brand-light" src="resources/assets/images/logo-light.png"
+						src="/bikelong/resources/assets/images/logo.png" width="74px" alt=""><img
+						class="brand-light" src="/bikelong/resources/assets/images/logo-light.png"
 						width="74px" alt=""></a>
 				</div>
 				<!-- Navigation-->
@@ -204,7 +204,7 @@
 								<!-- Comment-->
 								<div class="comment">
 									<div class="comment-author">
-										<img class="avatar" src="resources/assets/images/avatar/1.jpg"
+										<img class="avatar" src="/bikelong/resources/assets/images/avatar/1.jpg"
 											alt="">
 									</div>
 									<div class="comment-body">
@@ -256,7 +256,7 @@
 						<aside class="widget widget_text">
 							<div class="textwidget">
 								<p>
-									<img src="resources/assets/images/logo-light.png" width="74px"
+									<img src="/bikelong/resources/assets/images/logo-light.png" width="74px"
 										alt="">
 								</p>
 								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -306,17 +306,17 @@
 							</div>
 							<ul>
 								<li><a href="#"><img
-										src="resources/assets/images/widgets/1.jpg" alt=""></a></li>
+										src="/bikelong/resources/assets/images/widgets/1.jpg" alt=""></a></li>
 								<li><a href="#"><img
-										src="resources/assets/images/widgets/2.jpg" alt=""></a></li>
+										src="/bikelong/resources/assets/images/widgets/2.jpg" alt=""></a></li>
 								<li><a href="#"><img
-										src="resources/assets/images/widgets/3.jpg" alt=""></a></li>
+										src="/bikelong/resources/assets/images/widgets/3.jpg" alt=""></a></li>
 								<li><a href="#"><img
-										src="resources/assets/images/widgets/4.jpg" alt=""></a></li>
+										src="/bikelong/resources/assets/images/widgets/4.jpg" alt=""></a></li>
 								<li><a href="#"><img
-										src="resources/assets/images/widgets/5.jpg" alt=""></a></li>
+										src="/bikelong/resources/assets/images/widgets/5.jpg" alt=""></a></li>
 								<li><a href="#"><img
-										src="resources/assets/images/widgets/6.jpg" alt=""></a></li>
+										src="/bikelong/resources/assets/images/widgets/6.jpg" alt=""></a></li>
 							</ul>
 						</aside>
 					</div>
@@ -349,7 +349,7 @@
 
 	<!-- Off canvas-->
 	<div class="off-canvas-sidebar"
-		data-background="resources/assets/images/sidebar.jpg">
+		data-background="/bikelong/resources/assets/images/sidebar.jpg">
 		<div class="off-canvas-sidebar-wrapper">
 			<div class="off-canvas-header">
 				<a class="close-offcanvas" href="#"><span
@@ -360,7 +360,7 @@
 				<aside class="widget widget_text">
 					<div class="textwidget">
 						<p>
-							<img src="resources/assets/images/logo-light.png" width="74px"
+							<img src="/bikelong/resources/assets/images/logo-light.png" width="74px"
 								alt="">
 						</p>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -380,24 +380,24 @@
 					</div>
 					<ul>
 						<li><a href="#"><img
-								src="resources/assets/images/widgets/1.jpg" alt=""></a></li>
+								src="/bikelong/resources/assets/images/widgets/1.jpg" alt=""></a></li>
 						<li><a href="#"><img
-								src="resources/assets/images/widgets/2.jpg" alt=""></a></li>
+								src="/bikelong/resources/assets/images/widgets/2.jpg" alt=""></a></li>
 						<li><a href="#"><img
-								src="resources/assets/images/widgets/3.jpg" alt=""></a></li>
+								src="/bikelong/resources/assets/images/widgets/3.jpg" alt=""></a></li>
 						<li><a href="#"><img
-								src="resources/assets/images/widgets/4.jpg" alt=""></a></li>
+								src="/bikelong/resources/assets/images/widgets/4.jpg" alt=""></a></li>
 						<li><a href="#"><img
-								src="resources/assets/images/widgets/5.jpg" alt=""></a></li>
+								src="/bikelong/resources/assets/images/widgets/5.jpg" alt=""></a></li>
 						<li><a href="#"><img
-								src="resources/assets/images/widgets/6.jpg" alt=""></a></li>
+								src="/bikelong/resources/assets/images/widgets/6.jpg" alt=""></a></li>
 					</ul>
 				</aside>
 				<!-- Text widget-->
 				<!--aside.widget.widget_text
 					.textwidget
 						.up-logo
-							p.text-center.m-b-50: img(src="resources/assets/images/logo-light.png" width="100" alt="")
+							p.text-center.m-b-50: img(src="/bikelong/resources/assets/images/logo-light.png" width="100" alt="")
 						.up-form
 							form(method="post")
 								.form-group
@@ -438,7 +438,7 @@
 			<div class="row">
 				<div class="col-md-4 p-0">
 					<div class="qwert"
-						data-background="resources/assets/images/module-2.jpg"></div>
+						data-background="/bikelong/resources/assets/images/module-2.jpg"></div>
 				</div>
 				<div class="col-md-8">
 					<div class="ddd">
@@ -518,7 +518,7 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 	<script
 		src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA0rANX07hh6ASNKdBr4mZH0KZSqbHYc3Q"></script>
-	<script src="resources/assets/js/plugins.min.js"></script>
-	<script src="resources/assets/js/custom.min.js"></script>
+	<script src="/bikelong/resources/assets/js/plugins.min.js"></script>
+	<script src="/bikelong/resources/assets/js/custom.min.js"></script>
 </body>
 </html>
