@@ -4,8 +4,8 @@ package com.bikelong.vo;
 public class SharingBoard {
 
 	private int category;
+	private String writer;
 	private String date;
-	private String conut;
 	private String title;
 	private String content;
 	private String locationNo;
@@ -15,12 +15,6 @@ public class SharingBoard {
 	}
 	public void setDate(String date) {
 		this.date = date;
-	}
-	public String getConut() {
-		return conut;
-	}
-	public void setConut(String conut) {
-		this.conut = conut;
 	}
 	public String getTitle() {
 		return title;
@@ -45,6 +39,12 @@ public class SharingBoard {
 	}
 	public void setLocationNo(String locationNo) {
 		this.locationNo = locationNo;
+	}
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
 	
 		

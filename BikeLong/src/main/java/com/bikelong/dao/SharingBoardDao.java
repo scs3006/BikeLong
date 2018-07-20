@@ -8,7 +8,7 @@ public interface SharingBoardDao {
 
 	void insertBoard(SharingBoard sharingBoard);
 
-	List<SharingBoard> selectBoard(String boardNo);
+	SharingBoard selectBoard(String boardNo);
 
 	List<SharingBoard> selectBoardList();
 

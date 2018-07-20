@@ -8,7 +8,7 @@ public interface SharingBoardService {
 
 	void writeBoard(SharingBoard sharingBoard);
 
-	List<SharingBoard> findBoard(String boardNo);
+	SharingBoard findBoard(String boardNo);
 
 	List<SharingBoard> findBoardList();
 

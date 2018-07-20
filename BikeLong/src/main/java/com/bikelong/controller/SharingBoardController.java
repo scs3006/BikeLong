@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,18 +31,18 @@ public class SharingBoardController {
 	private SharingBoardService sharingBoarService;
 	
 	@RequestMapping(value = "list.action", method = RequestMethod.GET)
-	public String list() {
+	public String list(Model model) {
 		
 		List<SharingBoard> sharingboardList = sharingBoarService.findBoardList();
-		
+		model.addAttribute("sharingboardList", sharingboardList);
 		return "list";
 	}
 	
 	@RequestMapping(value = "detail.action", method = RequestMethod.GET)
-	public String detail(String boardNo) {
-		
-		List<SharingBoard> sharingboardDetail = sharingBoarService.findBoard(boardNo);
-		
+	public String detail(String boardNo, Model model ) {
+		boardNo = "2";
+		SharingBoard sharingBoardsDetail = sharingBoarService.findBoard(boardNo);
+		model.addAttribute("sharingBoardsDetail", sharingBoardsDetail);
 		return "detail";
 	}
 	
@@ -49,17 +50,11 @@ public class SharingBoardController {
 	public String write() {
 		return "write";
 	}
-	
 	@RequestMapping(value = "write.action", method = RequestMethod.POST)
 	public String writePost(SharingBoard sharingBoard) {
 		int cate = 2;
 		sharingBoard.setCategory(cate);
 		sharingBoarService.writeBoard(sharingBoard);
-		
-		System.out.println(sharingBoard.getContent());
-		System.out.println(sharingBoard.getDate());
-		System.out.println(sharingBoard.getLocationNo());
-		System.out.println(sharingBoard.getTitle());
 		
 		return "write";
 	}
@@ -100,7 +95,6 @@ public class SharingBoardController {
 		} 
 		sFileInfo += "&bNewLine=true&sFileName="+ name+"&sFileURL=/bikelong/resources/photoupload/"+realname;
 		return sFileInfo;
-		
 	}
 	
 	@RequestMapping(value = "singleuploadimage.action", method = RequestMethod.POST)

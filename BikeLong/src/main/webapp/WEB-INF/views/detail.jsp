@@ -5,15 +5,40 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content=""/>
+<meta name="author" content=""/>
 <title>Tavern - Responsive Restaurant Template(Bootstrap 4)</title>
+
+
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+ 
+</head>
+<script type="text/javascript">
+    $(function(){
+       //전역변수
+        var obj = [];              
+        //스마트에디터 프레임생성
+        nhn.husky.EZCreator.createInIFrame({
+            oAppRef: obj,
+            elPlaceHolder: "content",
+            sSkinURI: "/bikelong/resources/editor/SmartEditor2Skin.html",
+            htParams : {
+                // 툴바 사용 여부
+                bUseToolbar : true,            
+                // 입력창 크기 조절바 사용 여부
+                bUseVerticalResizer : true,    
+                // 모드 탭(Editor | HTML | TEXT) 사용 여부
+                bUseModeChanger : true,
+            }
+        });
+    });
+</script>
 
 <!-- Favicons-->
 <link rel="shortcut icon" href="/bikelong/resources/assets/images/favicon.png">
-<link rel="apple-touch-icon"
-	href="/bikelong/resources/assets/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="/bikelong/resources/assets/images/apple-touch-icon.png">
 <link rel="apple-touch-icon" sizes="72x72"
 	href="/bikelong/resources/assets/images/apple-touch-icon-72x72.png">
 <link rel="apple-touch-icon" sizes="114x114"
@@ -31,6 +56,7 @@
 <!-- Template core CSS-->
 <link href="/bikelong/resources/assets/css/template.css" rel="stylesheet">
 </head>
+
 <body>
 
 	<!-- Preloader-->
@@ -38,165 +64,95 @@
 		<div class="loader"></div>
 	</div>
 	<!-- Preloader end-->
-
+	
 	<!-- Header-->
-	<header class="header">
-		<!-- Top bar-->
-		<div class="top-bar">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-6">
-						<ul class="list-left-align">
-							<li>Mon - Fri: 07:00 am - 05:00 pm</li>
-							<li><abbr title="Phone">P:</abbr> +39 02 87 21 43 19</li>
-							<li><a href="start.jsp" data-color="#e1be64">Demos</a></li>
-						</ul>
-					</div>
-					<div class="col-md-6">
-						<ul class="top-bar-tools">
-							<li><a class="open-offcanvas" href="#"><i
-									class="ti-menu"></i></a></li>
-							<li><a href="sign-in.jsp"><i class="ti-search"></i></a></li>
-							<li><a href="sign-in.jsp"><i class="ti-user"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="navigation navigation-center">
-			<div class="container-fluid">
-				<!-- Brand-->
-				<div class="inner-header">
-					<a class="inner-brand" href="index.jsp"><img class="brand-dark"
-						src="/bikelong/resources/assets/images/logo.png" width="74px" alt=""><img
-						class="brand-light" src="/bikelong/resources/assets/images/logo-light.png"
-						width="74px" alt=""></a>
-				</div>
-				<!-- Navigation-->
-				<div class="inner-navigation collapse">
-					<div class="inner-nav onepage-nav">
-						<ul>
-							<li><a href="index.jsp#home"><span
-									class="menu-item-span">Home</span></a></li>
-							<li><a href="index.jsp#story"><span
-									class="menu-item-span">Our story</span></a></li>
-							<li><a href="index.jsp#special"><span
-									class="menu-item-span">Special</span></a></li>
-							<li><a href="index.jsp#popular"><span
-									class="menu-item-span">Popular</span></a></li>
-							<li><a href="index.jsp#gallery"><span
-									class="menu-item-span">Gallery</span></a></li>
-							<li><a href="index.jsp#services"><span
-									class="menu-item-span">Services</span></a></li>
-							<li><a href="index.jsp#news"><span
-									class="menu-item-span">News</span></a></li>
-							<!-- Pages-->
-							<li class="menu-item-has-children"><a href="features.jsp"><span
-									class="menu-item-span">Pages</span></a>
-								<ul class="sub-menu">
-									<li class="menu-item-has-children"><a href="#">Blog</a>
-										<ul class="sub-menu">
-											<li><a href="blog-1.jsp">Blog</a></li>
-											<li><a href="blog-single-1.jsp">Post Single</a></li>
-										</ul></li>
-									<li class="menu-item-has-children"><a href="#">Gallery</a>
-										<ul class="sub-menu">
-											<li><a href="gallery-1.jsp">2 Columns</a></li>
-											<li><a href="gallery-2.jsp">3 Columns</a></li>
-											<li><a href="gallery-3.jsp">4 Columns</a></li>
-										</ul></li>
-									<li class="menu-item-has-children"><a href="#">Menu
-											Grid</a>
-										<ul class="sub-menu">
-											<li><a href="menu-gallery-1.jsp">2 Columns</a></li>
-											<li><a href="menu-gallery-2.jsp">3 Columns</a></li>
-											<li><a href="menu-gallery-3.jsp">4 Columns</a></li>
-										</ul></li>
-									<li class="menu-item-has-children"><a href="#">Menu
-											Tiles</a>
-										<ul class="sub-menu">
-											<li><a href="menu-tiles-1.jsp">1 Column</a></li>
-											<li><a href="menu-tiles-2.jsp">2 Columns</a></li>
-										</ul></li>
-									<li class="menu-item-has-children"><a href="#">Menu
-											Simple</a>
-										<ul class="sub-menu">
-											<li><a href="menu-simple-1.jsp">1 Column</a></li>
-											<li><a href="menu-simple-2.jsp">2 Columns</a></li>
-										</ul></li>
-									<li class="menu-item-has-children"><a href="#">User
-											Pages</a>
-										<ul class="sub-menu">
-											<li><a href="sign-in.jsp">Sign in</a></li>
-											<li><a href="sign-up.jsp">Sign up</a></li>
-											<li><a href="password-recovery.jsp">Recover password</a></li>
-										</ul></li>
-									<li class="menu-item-has-children"><a href="#">Contact
-											Us</a>
-										<ul class="sub-menu">
-											<li><a href="contact.jsp">Contact Us 1</a></li>
-											<li><a href="contact-2.jsp">Contact Us 2</a></li>
-										</ul></li>
-									<li><a href="reservations.jsp">Reservations</a></li>
-									<li><a href="elements.jsp">Elements</a></li>
-									<li><a href="icons.jsp">Icons</a></li>
-								</ul></li>
-						</ul>
-					</div>
-				</div>
-				<!-- Extra-nav - will be hidden on mobile-->
-				<div class="extra-nav">
-					<ul>
-						<li><a class="popup-book-a-table" href="#test-form"><span
-								class="menu-item-span">Book now</span></a></li>
-					</ul>
-				</div>
-				<!-- Mobile menu-->
-				<div class="nav-toggle">
-					<a href="#" data-toggle="collapse" data-target=".inner-navigation"><span
-						class="icon-bar"></span><span class="icon-bar"></span><span
-						class="icon-bar"></span></a>
-				</div>
-			</div>
-		</div>
-	</header>
+	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<!-- Header end-->
-
+	
+<!-- ========================================================================================================= -->
 	<!-- Wrapper-->
 	<div class="wrapper">
-
 		<section class="module">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-11 m-auto">
 						<!-- Post-->
 						<article class="post">
+
 							<div class="post-preview">
-								<img
-									src="http://piquant.mikado-themes.com/wp-content/uploads/2015/11/b-grilled-chorizo-with-spicy-sauce.jpg"
-									alt="">
+									<!--  -->
 							</div>
-							<div class="post-wrapper">
-								<div class="post-header">
-									<h1 class="post-title display-1">Try some healthy crackers
-										for snacks</h1>
-									<ul class="post-meta">
-										<li>November 18, 2016</li>
-										<li>In <a href="#">Branding</a>, <a href="#">Design</a></li>
-										<li><a href="#">3 Comments</a></li>
-									</ul>
-								</div>
-								<div class="post-content">
-									<p>Exercitation photo booth stumptown tote bag Banksy, elit
-										small batch freegan sed. Craft beer elit seitan exercitation,
-										photo booth et 8-bit kale chips proident chillwave deep v
-										laborum. Aliquip veniam delectus, Marfa eiusmod Pinterest in
-										do umami readymade swag.</p>
+
+							<div class="row">
+								<div class="col-md-12">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<input class="form-control" type="text" value="${sharingBoard.writer}" readonly>
+												</div>
+												
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<input class="form-control" type="text" value="${sharingBoardsDetail.date}" readonly>
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+												<input class="form-control" type="text" value="${sharingBoardsDetail.locationNo}" readonly>
+												지역 
+												<!--  <select class="select form-control" name="locationNo" >
+														<option value="1">강남구</option>
+														<option value="2">강동구</option>
+														<option value="3">강북구</option>
+														<option value="4">강서구</option>
+														<option value="5">관악구</option>
+														<option value="6">광진구</option>
+														<option value="7">구로구</option>
+														<option value="8">금천구</option>
+														<option value="9">노원구</option>
+														<option value="10">도봉구</option>
+														<option value="11">동대문구</option>
+														<option value="12">동작구</option>
+														<option value="13">마포구</option>
+														<option value="14">서대문구</option>
+														<option value="15">서초구</option>
+														<option value="16">성동구</option>
+														<option value="17">성북구</option>
+														<option value="18">송파구</option>
+														<option value="19">양천구</option>
+														<option value="20">영등포구</option>
+														<option value="21">용산구</option>
+														<option value="22">은평구</option>
+														<option value="23">종로구</option>
+														<option value="24">중구</option>
+														<option value="25">중랑구</option>
+													</select>	-->
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													<input class="form-control" type="text" value="${sharingBoardDetail.title}" readonly>
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													<textarea rows="10" cols="100" name="content" id="content" class="form-control" 
+													style="width: 100%; height: 482px"  readonly></textarea>
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="text-center">
+													<input type="button" id="lsitbtn" class="btn btn-black" value="목록"/>
+													<input type="button" id="cencel" class="btn btn-black" value="취소"/>
+												</div>
+											</div>
+										</div>
 								</div>
 							</div>
 						</article>
 						<!-- Post end-->
+						
 						<!-- Comments area-->
 						<div class="comments-area">
 							<h5 class="comments-title">Comments</h5>
@@ -248,101 +204,7 @@
 				<path d="M0 100 C40 0 60 0 100 100 Z"></path>
 			</svg>
 		<!-- Footer-->
-		<footer class="footer">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-3">
-						<!-- Text widget-->
-						<aside class="widget widget_text">
-							<div class="textwidget">
-								<p>
-									<img src="/bikelong/resources/assets/images/logo-light.png" width="74px"
-										alt="">
-								</p>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-									sed do eiusmod tempor.</p>
-								<ul class="icon-list">
-									<li><i class="ti-email"></i> info@themebusiness.com</li>
-									<li><i class="ti-headphone-alt"></i> 1-444-123-4559</li>
-									<li><i class="ti-location-pin"></i> Raymond Boulevard 224,
-										New York</li>
-								</ul>
-							</div>
-						</aside>
-					</div>
-					<div class="col-md-3">
-						<!-- Recent entries widget-->
-						<aside class="widget widget_recent_entries">
-							<div class="widget-title">
-								<h5>Recent Posts</h5>
-							</div>
-							<ul>
-								<li><a href="#">Matcha Portuguese Egg Tarts</a> <span
-									class="post-date">May 8, 2016</span></li>
-								<li><a href="#">Camp Cooking: One Pan Yaki Udon</a> <span
-									class="post-date">April 7, 2016</span></li>
-								<li><a href="#">Chicken & Spring Vegetable Lasagna</a> <span
-									class="post-date">April 7, 2016</span></li>
-								<li><a href="#">Mini California Sushi Cones</a> <span
-									class="post-date">April 7, 2016</span></li>
-							</ul>
-						</aside>
-					</div>
-					<div class="col-md-3">
-						<!-- Twitter-->
-						<aside class="widget twitter-feed-widget">
-							<div class="widget-title">
-								<h5>Twitter Feed</h5>
-							</div>
-							<div class="twitter-feed" data-twitter="345170787868762112"
-								data-number="2"></div>
-						</aside>
-					</div>
-					<div class="col-md-3">
-						<!-- Recent portfolio widget-->
-						<aside class="widget widget_recent_works">
-							<div class="widget-title">
-								<h5>Instagram</h5>
-							</div>
-							<ul>
-								<li><a href="#"><img
-										src="/bikelong/resources/assets/images/widgets/1.jpg" alt=""></a></li>
-								<li><a href="#"><img
-										src="/bikelong/resources/assets/images/widgets/2.jpg" alt=""></a></li>
-								<li><a href="#"><img
-										src="/bikelong/resources/assets/images/widgets/3.jpg" alt=""></a></li>
-								<li><a href="#"><img
-										src="/bikelong/resources/assets/images/widgets/4.jpg" alt=""></a></li>
-								<li><a href="#"><img
-										src="/bikelong/resources/assets/images/widgets/5.jpg" alt=""></a></li>
-								<li><a href="#"><img
-										src="/bikelong/resources/assets/images/widgets/6.jpg" alt=""></a></li>
-							</ul>
-						</aside>
-					</div>
-				</div>
-			</div>
-			<div class="small-footer">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-6">
-							<div class="copyright">
-								© 2017 <a href="http://2the.me/">2theme</a>, All Rights
-								Reserved.
-							</div>
-						</div>
-						<div class="col-md-6">
-							<ul class="social-links">
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-vimeo"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</footer>
+			<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 		<!-- Footer end-->
 	</div>
 	<!-- Wrapper end-->
@@ -393,24 +255,6 @@
 								src="/bikelong/resources/assets/images/widgets/6.jpg" alt=""></a></li>
 					</ul>
 				</aside>
-				<!-- Text widget-->
-				<!--aside.widget.widget_text
-					.textwidget
-						.up-logo
-							p.text-center.m-b-50: img(src="/bikelong/resources/assets/images/logo-light.png" width="100" alt="")
-						.up-form
-							form(method="post")
-								.form-group
-									input.form-control.form-control-lg(type="email" placeholder="Email")
-								.form-group
-									input.form-control.form-control-lg(type="password" placeholder="Pasword")
-								.form-group
-									button(type="submit" class="btn btn-block btn-lg btn-round btn-brand") Log in
-						.up-help
-							p: a(href="#") Forgot your password?
-							p Don't have an account yet? <a href="#">Sign in</a>
-					
-					-->
 
 				<!-- Twitter widget-->
 				<aside class="widget twitter-feed-widget">
@@ -432,78 +276,8 @@
 	</div>
 	<!-- Off canvas end-->
 
-	<!-- Reserve Popup-->
-	<div class="white-popup-block mfp-hide" id="test-form">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4 p-0">
-					<div class="qwert"
-						data-background="/bikelong/resources/assets/images/module-2.jpg"></div>
-				</div>
-				<div class="col-md-8">
-					<div class="ddd">
-						<a class="popup-modal-dismiss" href="#"><i class="ti-close"></i></a>
-						<h1 class="display-1">Book a Table</h1>
-						<p class="lead">
-							See how your users experience your website in realtime or view <br />
-							trends to see any changes in performance over time.
-						</p>
-						<div class="divider-border-left"></div>
-						<div class="space" data-mY="60px"></div>
-						<form method="post" novalidate>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<input class="form-control" type="text" name="name"
-											placeholder="Name" required="">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<input class="form-control" type="text" name="name"
-											placeholder="Phone" required="">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<input class="form-control" type="email" name="email"
-											placeholder="E-mail" required="">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<input class="form-control" type="text" name="subject"
-											placeholder="Persons" required="">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<input class="form-control" type="email" name="email"
-											placeholder="Date" required="">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<input class="form-control" type="text" name="subject"
-											placeholder="Time" required="">
-									</div>
-								</div>
-								<div class="col-md-12">
-									<div class="form-group">
-										<textarea class="form-control" name="message"
-											placeholder="Special Requests" rows="6" required=""></textarea>
-									</div>
-								</div>
-								<div class="col-md-12">
-									<input class="btn btn-black" type="submit" value="Reserve">
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	
+
 	<!-- Reserve Popup end-->
 
 	<!-- To top button-->
