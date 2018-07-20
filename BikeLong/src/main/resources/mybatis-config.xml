@@ -27,6 +27,7 @@
 	<mappers>
 		<mapper resource="com/bikelong/mapper/member-mapper.xml" />
 		<mapper resource="com/bikelong/mapper/sharingBoard-mapper.xml" />
+		<mapper resource="com/bikelong/mapper/rentalShop-mapper.xml" />
 	</mappers>
 
 </configuration>
