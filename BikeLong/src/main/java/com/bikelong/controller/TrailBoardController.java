@@ -35,19 +35,19 @@ public class TrailBoardController {
 	public String list(Model model) {
 		List<TrailBoard> trailBoard = trailBoardService.findBoardList();
 		model.addAttribute("trailBoard", trailBoard);
-		return "list";
+		return "trail/list";
 	}
 	
 	@GetMapping(value = "detail.action")
 	public String detail(String boardNo, Model model) {
 		TrailBoard trailBoard = trailBoardService.findBoard(boardNo);
 		model.addAttribute("TrailBoard",trailBoard);
-		return "detail";
+		return "trail/detail";
 	}
 	
 	@GetMapping(value = "write.action")
 	public String write() {
-		return "write";
+		return "trail/write";
 	}
 	
 	@PostMapping(value = "write.action")
@@ -56,7 +56,7 @@ public class TrailBoardController {
 		trailBoard.setCategory(cate);
 		trailBoardService.writeBoard(trailBoard);
 		
-		return "write";
+		return "trail/write";
 	}
 	
 	@PostMapping(value = "multiuploadimage.action")
@@ -143,7 +143,7 @@ public class TrailBoardController {
 	@GetMapping(value = "update.action")
 	public String update() {
 		
-		return "update";
+		return "trail/update";
 	}
 	
   
