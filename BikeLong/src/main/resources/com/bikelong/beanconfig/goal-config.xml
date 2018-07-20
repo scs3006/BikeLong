@@ -7,6 +7,14 @@
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
+	<!-- Mapper 등록 -->
+	<bean id ="goalMapper" 
+		class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.bikelong.mapper.GoalMapper"/>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+
 	<!-- 의존성 주입 -->
 	<bean id="goalService"
 		class="com.bikelong.service.GoalServiceImpl">
@@ -16,13 +24,5 @@
 		class="com.bikelong.dao.MySqlGoalDao">
 		<property name="goalMapper" ref="goalMapper" />	
 	</bean>	
-
-<!-- Mapper 등록 -->
-	<bean id ="goalMapper" 
-		class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface"
-			value="com.bikelong.mapper.GoalMapper"/>
-		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
-	</bean>
 
 </beans>

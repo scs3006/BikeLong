@@ -20,7 +20,7 @@ public class GoalController {
 	@GetMapping(value = "/elements2.action")
 	public String elementsView() {
 		
-		return "elements2";
+		return "goal/elements2";
 	}
 
 }
