@@ -10,6 +10,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bikelong.service.TrailBoardService;
-import com.bikelong.vo.TrailBoard;
+import com.bikelong.vo.Board;
 
 @Controller
 @RequestMapping(value = "trailpathboard")
@@ -33,25 +34,29 @@ public class TrailBoardController {
 	
 	@GetMapping(value = "list.action")
 	public String list(Model model) {
-		List<TrailBoard> trailBoard = trailBoardService.findBoardList();
-		model.addAttribute("trailBoard", trailBoard);
+		List<Board> trailBoardList = trailBoardService.findBoardList();
+		model.addAttribute("trailBoardList", trailBoardList);
 		return "trail/list";
 	}
 	
 	@GetMapping(value = "detail.action")
 	public String detail(String boardNo, Model model) {
-		TrailBoard trailBoard = trailBoardService.findBoard(boardNo);
-		model.addAttribute("TrailBoard",trailBoard);
+		Board trailBoardDetail = trailBoardService.findBoard(boardNo);
+		model.addAttribute("trailBoardDetail",trailBoardDetail);
 		return "trail/detail";
 	}
 	
 	@GetMapping(value = "write.action")
-	public String write() {
-		return "trail/write";
+	public String write(HttpSession session) {
+		if(session.getAttribute("id")!=null) {
+			return "trail/write";
+		}else {
+			return "sign-in";
+		}
 	}
 	
 	@PostMapping(value = "write.action")
-	public String writePost(TrailBoard trailBoard) {
+	public String writePost(Board trailBoard) {
 		int cate = 1;
 		trailBoard.setCategory(cate);
 		trailBoardService.writeBoard(trailBoard);

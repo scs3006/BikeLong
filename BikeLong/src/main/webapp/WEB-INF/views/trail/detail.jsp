@@ -88,18 +88,18 @@
 										<div class="row">
 											<div class="col-md-6">
 												<div class="form-group">
-													<input class="form-control" type="text" value="${sharingBoard.id}" readonly>
+													<input class="form-control" type="text" value="${trailBoard.id}" readonly>
 												</div>
 												
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
-													<input class="form-control" type="text" value="${sharingBoardsDetail.date}" readonly>
+													<input class="form-control" type="text" value="${trailBoardsDetail.date}" readonly>
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="form-group">
-												<input class="form-control" type="text" value="${sharingBoardsDetail.locationNo}" readonly>
+												<input class="form-control" type="text" value="${trailBoardsDetail.locationNo}" readonly>
 												지역 
 												<!--  <select class="select form-control" name="locationNo" >
 														<option value="1">강남구</option>

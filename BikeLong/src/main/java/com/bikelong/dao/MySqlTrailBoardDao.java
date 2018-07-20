@@ -3,7 +3,7 @@ package com.bikelong.dao;
 import java.util.List;
 
 import com.bikelong.mapper.TrailBoardMapper;
-import com.bikelong.vo.TrailBoard;
+import com.bikelong.vo.Board;
 
 public class MySqlTrailBoardDao implements TrailBoardDao{
 	
@@ -14,19 +14,19 @@ public class MySqlTrailBoardDao implements TrailBoardDao{
 
 
 	@Override
-	public void insertBoard(TrailBoard trailBoard) {
+	public void insertBoard(Board trailBoard) {
 		trailBoardMapper.insertBoard(trailBoard);
 	}
 
 	@Override
-	public TrailBoard selectBoard(String boardNo) {
-		TrailBoard trailBoard = trailBoardMapper.selectBoard(boardNo);
+	public Board selectBoard(String boardNo) {
+		Board trailBoard = trailBoardMapper.selectBoard(boardNo);
 		return trailBoard;
 	}
 
 	@Override
-	public List<TrailBoard> selectBoardList() {
-		List<TrailBoard> trailBoard = trailBoardMapper.selectBoardList();
+	public List<Board> selectBoardList() {
+		List<Board> trailBoard = trailBoardMapper.selectBoardList();
 		return trailBoard;
 	}
 
