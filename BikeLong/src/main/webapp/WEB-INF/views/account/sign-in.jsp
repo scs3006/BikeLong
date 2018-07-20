@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"	pageEncoding="utf-8"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,74 +29,24 @@
 		
 		<script type="text/javascript">
 		$(function(){
-			
 			$('form').on('submit',function(event){
 				event.preventDefault();
-				
-				var regId = /^[A-Za-z0-9]{4,10}$/;
 				var id = $(this).find('[name=id]').val();
-				if(id != "") {
-				 if(!regId.test(id)) {
-					 alert('아이디의 형식을 확인하세요.');
-					 return;
-					 }
-				}
-			
-				var regPw = /^[A-Za-z0-9]{6,20}$/;
 				var password = $(this).find('[name=password]').val();
-				var cpassword = $(this).find('[name=cpassword]').val();
-				if(password != "") {
-				if(!regPw.test(password)) {
-					alert('비밀번호의 형식을 확인하세요.');
-					return;
-				} else {
-					if(password != cpassword){
-							alert('비밀번호가 불일치합니다.');
-							$(this).find('[name=password]').val('');
-							$(this).find('[name=cpassword]').val('');
-							return;
-						}
-					}
-				}
-
-				var regName = /^[가-힣]{2,10}$/;
-				var name = $(this).find('[name=name]').val();
-				if(name != "") {
-				if(!regName.test(name)) {
-					 alert('이름은 한글만 가능, 10문자까지입니다.');
-					 return;
-					}
-				}
-				 
-				var regex= /^\d{3}-\d{4}-\d{4}$/;
-				var phone = $(this).find('[name=phone]').val();
-				if(phone != "") {
-					if(!regex.test(phone) ) {
-						alert('전화번호 형식이 맞지 않습니다.');
-						return;
-					}
-				}
-				
-				var address = $(this).find('[name=address]').val();
-				var weight = $(this).find('[name=weight]').val();
-				
 				$.ajax({
-					url : "signup.action",
+					url : "signin.action",
 					method : "POST",
-					data : {"id" : id, "name" : name, "password" : password, "phone" : phone, "address" : address, "weight" : weight},
+					data : {"id" : id, "password" : password},
 					success : function(data,status,xhr){
 						if(data=="success"){
-							alert('회원가입에 성공하셨습니다.');
-							location.href = '/bikelong/account/signin.action';
+							location.href = '/bikelong/index.action';
 						}
 						if(data=="fail"){
-							$('form').find('[name=id]').val('');
-							alert('이미 존재하는 아이디 입니다.');
+							alert('로그인에 실패하였습니다.');
 						}
 					},
 					error : function(xhr, status, err){
-						$('form').find('[name=id]').val('');
-						alert('이미 존재하는 아이디 입니다.');
+						alert('로그인에 실패하였습니다.');
 					}
 				});
 			});
@@ -120,44 +69,29 @@
 		<div class="wrapper">
 
 			<!-- Hero-->
-			<section class="module-cover fullscreen parallax" data-background="/bikelong/resources/assets/images/module-21.jpg" data-overlay="0.7">
+			<section class="module-cover fullscreen parallax" data-background="/bikelong/resources/assets/images/main.jpg" data-overlay="0.5">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-4 m-auto">
 							<div class="text-center">
 								<div class="up-as">
-									<h5>Create a new account</h5>
+									<h5>Sign into your account</h5>
 								</div>
 								<div class="up-form">
-									<form method="post" action="signup.action">
+									<form method="post" action="signin.action">
 										<div class="form-group">
-											<input class="form-control" type="text" name="id" required="required" placeholder="id(영문 대,소문자,숫자 포함 4~10글자)">
+											<input class="form-control" type="text" name="id" placeholder="id">
 										</div>
 										<div class="form-group">
-											<input class="form-control" type="text" name="name" required="required" placeholder="name(한글만 2~10글자)">
+											<input class="form-control" type="password" name="password" placeholder="Pasword">
 										</div>
 										<div class="form-group">
-											<input class="form-control" type="password" name="password" required="required" placeholder="Pasword(영문 대,소문자,숫자 포함 6~20)">
-										</div>
-										<div class="form-group">
-											<input class="form-control" type="password" name="cpassword" required="required" placeholder="Confirm password">
-										</div>
-										<div class="form-group">
-											<input class="form-control" type="text" name="phone" required="required" placeholder="phone(010-xxxx-xxxx)">
-										</div>
-										<div class="form-group">
-											<input class="form-control" type="text" name="address" required="required" placeholder="address(시, 구 까지)">
-										</div>
-										<div class="form-group">
-											<input class="form-control" type="text" name="basicWeight" placeholder="weight">
-										</div>
-										<div class="form-group">
-											<button class="btn btn-block btn-round btn-brand" type="submit">Sign Up</button>
+											<button class="btn btn-block btn-round btn-brand" type="submit">Login</button>
 										</div>
 									</form>
 								</div>
 								<div class="up-help">
-									<p>By clicking "Sign Up", you agree to our <br> <a href="#">software services agreement</a>.</p>
+									<p class="m-b-5">아직 회원가입을 안하셨나요? <a href="signup.action">회원 가입</a></p>
 								</div>
 							</div>
 						</div>

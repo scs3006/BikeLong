@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +17,7 @@
 		<!-- Web Fonts-->
 		<link href="https://fonts.googleapis.com/css?family=PT+Serif%7cSignika:300,400,600,700" rel="stylesheet">
 		<!-- Bootstrap core CSS-->
-		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/bikelong/resources/assets/bootstrap/css/bootstrap.css" rel="stylesheet">
 		<!-- Plugins and Icon Fonts-->
 		<link href="/bikelong/resources/assets/css/plugins.min.css" rel="stylesheet">
 		<!-- Template core CSS-->
@@ -29,24 +30,74 @@
 		
 		<script type="text/javascript">
 		$(function(){
+			
 			$('form').on('submit',function(event){
 				event.preventDefault();
+				
+				var regId = /^[A-Za-z0-9]{4,10}$/;
 				var id = $(this).find('[name=id]').val();
+				if(id != "") {
+				 if(!regId.test(id)) {
+					 alert('아이디의 형식을 확인하세요.');
+					 return;
+					 }
+				}
+			
+				var regPw = /^[A-Za-z0-9]{6,20}$/;
 				var password = $(this).find('[name=password]').val();
+				var cpassword = $(this).find('[name=cpassword]').val();
+				if(password != "") {
+				if(!regPw.test(password)) {
+					alert('비밀번호의 형식을 확인하세요.');
+					return;
+				} else {
+					if(password != cpassword){
+							alert('비밀번호가 불일치합니다.');
+							$(this).find('[name=password]').val('');
+							$(this).find('[name=cpassword]').val('');
+							return;
+						}
+					}
+				}
+
+				var regName = /^[가-힣]{2,10}$/;
+				var name = $(this).find('[name=name]').val();
+				if(name != "") {
+				if(!regName.test(name)) {
+					 alert('이름은 한글만 가능, 10문자까지입니다.');
+					 return;
+					}
+				}
+				 
+				var regex= /^\d{3}-\d{4}-\d{4}$/;
+				var phone = $(this).find('[name=phone]').val();
+				if(phone != "") {
+					if(!regex.test(phone) ) {
+						alert('전화번호 형식이 맞지 않습니다.');
+						return;
+					}
+				}
+				
+				var address = $(this).find('[name=address]').val();
+				var weight = $(this).find('[name=weight]').val();
+				
 				$.ajax({
-					url : "signin.action",
+					url : "signup.action",
 					method : "POST",
-					data : {"id" : id, "password" : password},
+					data : {"id" : id, "name" : name, "password" : password, "phone" : phone, "address" : address, "weight" : weight},
 					success : function(data,status,xhr){
 						if(data=="success"){
-							location.href = '/bikelong/index.action';
+							alert('회원가입에 성공하셨습니다.');
+							location.href = '/bikelong/account/signin.action';
 						}
 						if(data=="fail"){
-							alert('로그인에 실패하였습니다.');
+							$('form').find('[name=id]').val('');
+							alert('이미 존재하는 아이디 입니다.');
 						}
 					},
 					error : function(xhr, status, err){
-						alert('로그인에 실패하였습니다.');
+						$('form').find('[name=id]').val('');
+						alert('이미 존재하는 아이디 입니다.');
 					}
 				});
 			});
@@ -69,29 +120,41 @@
 		<div class="wrapper">
 
 			<!-- Hero-->
-			<section class="module-cover fullscreen parallax" data-background="/bikelong/resources/assets/images/module-21.jpg" data-overlay="0.7">
+			<section class="module-cover fullscreen parallax" data-background="/bikelong/resources/assets/images/main.jpg" data-overlay="0.5">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-4 m-auto">
 							<div class="text-center">
 								<div class="up-as">
-									<h5>Sign into your account</h5>
+									<h5>Create a new account</h5>
 								</div>
 								<div class="up-form">
-									<form method="post" action="signin.action">
+									<form method="post" action="signup.action">
 										<div class="form-group">
-											<input class="form-control" type="text" name="id" placeholder="id">
+											<input class="form-control" type="text" name="id" required="required" placeholder="id(영문 대,소문자,숫자 포함 4~10글자)">
 										</div>
 										<div class="form-group">
-											<input class="form-control" type="password" name="password" placeholder="Pasword">
+											<input class="form-control" type="text" name="name" required="required" placeholder="name(한글만 2~10글자)">
 										</div>
 										<div class="form-group">
-											<button class="btn btn-block btn-round btn-brand" type="submit">Login</button>
+											<input class="form-control" type="password" name="password" required="required" placeholder="Pasword(영문 대,소문자,숫자 포함 6~20)">
+										</div>
+										<div class="form-group">
+											<input class="form-control" type="password" name="cpassword" required="required" placeholder="Confirm password">
+										</div>
+										<div class="form-group">
+											<input class="form-control" type="text" name="phone" required="required" placeholder="phone(010-xxxx-xxxx)">
+										</div>
+										<div class="form-group">
+											<input class="form-control" type="text" name="address" required="required" placeholder="address(시, 구 까지)">
+										</div>
+										<div class="form-group">
+											<input class="form-control" type="text" name="basicWeight" placeholder="weight">
+										</div>
+										<div class="form-group">
+											<button class="btn btn-block btn-round btn-brand" type="submit">Sign Up</button>
 										</div>
 									</form>
-								</div>
-								<div class="up-help">
-									<p class="m-b-5">아직 회원가입을 안하셨나요? <a href="signup.action">회원 가입</a></p>
 								</div>
 							</div>
 						</div>
@@ -179,68 +242,6 @@
 			</div>
 		</div>
 		<!-- Off canvas end-->
-
-		<!-- Reserve Popup-->
-		<div class="white-popup-block mfp-hide" id="test-form">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4 p-0">
-						<div class="qwert" data-background="/bikelong/resources/assets/images/module-2.jpg"></div>
-					</div>
-					<div class="col-md-8">
-						<div class="ddd"><a class="popup-modal-dismiss" href="#"><i class="ti-close"></i></a>
-							<h1 class="display-1">Book a Table</h1>
-							<p class="lead">See how your users experience your website in realtime or view <br/> trends to see any changes in performance over time.</p>
-							<div class="divider-border-left"></div>
-							<div class="space" data-mY="60px"></div>
-							<form method="post" novalidate>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="text" name="name" placeholder="Name" required="">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="text" name="name" placeholder="Phone" required="">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="email" name="email" placeholder="E-mail" required="">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="text" name="subject" placeholder="Persons" required="">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="email" name="email" placeholder="Date" required="">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="text" name="subject" placeholder="Time" required="">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<textarea class="form-control" name="message" placeholder="Special Requests" rows="6" required=""></textarea>
-										</div>
-									</div>
-									<div class="col-md-12">
-										<input class="btn btn-black" type="submit" value="Reserve">
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Reserve Popup end-->
 
 		<!-- To top button--><a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
 
