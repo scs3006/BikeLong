@@ -30,34 +30,40 @@ public class SharingBoardController {
 	@Qualifier(value = "sharingBoardService")
 	private SharingBoardService sharingBoarService;
 	
+	
 	@RequestMapping(value = "list.action", method = RequestMethod.GET)
 	public String list(Model model) {
 		
-		List<SharingBoard> sharingboardList = sharingBoarService.findBoardList();
-		model.addAttribute("sharingboardList", sharingboardList);
-		return "list";
+		List<SharingBoard> sharingboardLists = sharingBoarService.findBoardList();
+		model.addAttribute("sharingboardLists", sharingboardLists);
+		return "sharinglist";
 	}
 	
+	
 	@RequestMapping(value = "detail.action", method = RequestMethod.GET)
-	public String detail(String boardNo, Model model ) {
+	public String detail(String boardNo, Model model, SharingBoard sharingBoardDetail) {
 		boardNo = "2";
-		SharingBoard sharingBoardsDetail = sharingBoarService.findBoard(boardNo);
-		model.addAttribute("sharingBoardsDetail", sharingBoardsDetail);
-		return "detail";
+		sharingBoardDetail = sharingBoarService.findBoard(boardNo);
+		model.addAttribute("sharingBoardDetail", sharingBoardDetail);
+		return "sharingdetail";
 	}
+	
 	
 	@RequestMapping(value = "write.action", method = RequestMethod.GET)
 	public String write() {
-		return "write";
+		return "sharingwrite";
 	}
+	
+	
 	@RequestMapping(value = "write.action", method = RequestMethod.POST)
 	public String writePost(SharingBoard sharingBoard) {
 		int cate = 2;
 		sharingBoard.setCategory(cate);
 		sharingBoarService.writeBoard(sharingBoard);
 		
-		return "write";
+		return "sharingwrite";
 	}
+	
 	
 	@RequestMapping(value = "multiuploadimage.action", method = RequestMethod.POST)
 	@ResponseBody
@@ -97,8 +103,9 @@ public class SharingBoardController {
 		return sFileInfo;
 	}
 	
+	
 	@RequestMapping(value = "singleuploadimage.action", method = RequestMethod.POST)
-	public String writeditor1(HttpServletRequest req, HttpServletResponse resp) {
+	public void writeditor1(HttpServletRequest req, HttpServletResponse resp) {
 		
 	    try {
 		String sFileInfo = "";
@@ -134,16 +141,13 @@ public class SharingBoardController {
 		out.println(sFileInfo);
 	    }catch (Exception e) {
 		}
-		
-		return "index";
 	}
 	
 	
 	@RequestMapping(value = "update.action", method = RequestMethod.GET)
 	public String update() {
 		
-		return "update";
+		return "sharingupdate";
 	}
 	
-  
 }

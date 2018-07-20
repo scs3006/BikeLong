@@ -60,7 +60,18 @@
 	</bean>
 	<bean id="sharingBoardDao" class="com.bikelong.dao.MySqlSharingBoardDao">
 		<property name="sharingBoardMapper" ref="sharingBoardMapper" />
-	</bean>				
+	</bean>		
+	
+	<!-- 영민 -->
+	<bean id="rentalShopService"
+		class="com.bikelong.service.RentalShopServiceImpl">
+		<property name="rentalShopDao" ref="rentalShopDao" />
+	</bean>
+	<bean id="rentalShopDao"
+		class="com.bikelong.dao.MySqlRentalShopDao">
+		<property name="rentalShopMapper" ref="rentalShopMapper" />	
+	</bean>	
+	
 	
 	<!-- 공통부분 xml의 매핑을 구현하는 빈 자동 생성 -->
 	<bean id="memberMapper"
@@ -76,6 +87,14 @@
 		<property name="mapperInterface"
 			value="com.bikelong.mapper.SharingBoardMapper" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
+	<!-- 영민 -->
+	<bean id="rentalShopMapper"
+		class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.bikelong.mapper.RentalShopMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />	
 	</bean>
 	
 	<!-- 개인 설정 xml파일 임포트 -->
