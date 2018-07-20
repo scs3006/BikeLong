@@ -93,10 +93,9 @@
 						
 						var contentString = [
 						        '<div class="iw_inner">',
-						        '   <center>1.구로디지털단지 1번출구 옆</center>',
-						        '   <hr color="black" style="width:50px;">',
+						        '   <center style="margin-top: 20px; font-size:15px;">1.구로디지털단지 1번출구 옆</center>',
+						        '   <hr color="black" style="width:220px; height:2px; margin-top: 3px;">',
 						        '   <p>서울특별시 중구 태평로1가 31 | 서울특별시 중구 세종대로 110 서울특별시청<br />',
-						        /* '       <img src="'+ HOME_PATH +'/img/example/hi-seoul.jpg" width="55" height="55" alt="서울시청" class="thumb" /><br />', */
 						        '       02-120 | 공공,사회기관 &gt; 특별,광역시청<br />',
 						        '       <a href="http://www.seoul.go.kr" target="_blank">www.seoul.go.kr/</a>',
 						        '   </p>',
@@ -109,7 +108,7 @@
 						    backgroundColor: "#eee",
 						    borderColor: "#2db400",
 						    borderWidth: 5,
-						    anchorSize: new naver.maps.Size(30, 30), //창 아래 화살표
+						    anchorSize: new naver.maps.Size(20, 10), //창 아래 화살표
 						    anchorSkew: true,
 						    anchorColor: "#eee",
 						    pixelOffset: new naver.maps.Point(5, -20) //창 위치
