@@ -7,7 +7,7 @@
 	
 	<insert id="insertBoard" parameterType="SharingBoard">
 		INSERT INTO Board(id, locationNo, category, date, title, content)
-		VALUES(#{writer}, #{locationNo}, #{category}, #{date}, #{title}, #{content})
+		VALUES(#{id}, #{locationNo}, #{category}, #{date}, #{title}, #{content})
 	</insert>
 	
 	<select id="selectBoardList" resultType="SharingBoard">
@@ -17,7 +17,7 @@
 	</select>
 	
 	<select id="selectBoard" parameterType="hashmap" resultType="SharingBoard">
-		SELECT id writer, locationNo, date, title, content
+		SELECT id , locationNo, date, title, content
 		FROM Board
 		WHERE boardNo = #{boardNo} AND category = 2
 	</select>

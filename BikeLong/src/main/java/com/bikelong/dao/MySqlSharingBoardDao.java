@@ -20,7 +20,7 @@ public class MySqlSharingBoardDao implements SharingBoardDao {
 
 
 	@Override
-	public SharingBoard selectBoard(String boardNo) {
+	public SharingBoard selectBoard(int boardNo) {
 		SharingBoard sharingBoard = sharingBoardMapper.selectBoard(boardNo);
 		return sharingBoard;
 	}

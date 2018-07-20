@@ -18,13 +18,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bikelong.service.SharingBoardService;
 import com.bikelong.vo.SharingBoard;
 
 @Controller
-@RequestMapping(value = "pathboard")
+@RequestMapping(value = "route")
 public class SharingBoardController {
 	
 	@Autowired
@@ -32,45 +33,49 @@ public class SharingBoardController {
 	private SharingBoardService sharingBoarService;
 	
 	
-	@RequestMapping(value = "list.action", method = RequestMethod.GET)
+	@RequestMapping(value = "sharingboardlist.action", method = RequestMethod.GET)
 	public String list(Model model) {
 		
 		List<SharingBoard> sharingboardLists = sharingBoarService.findBoardList();
+		for (SharingBoard sharingBoard : sharingboardLists) {
+			String [] imagepath = sharingBoard.getContent().split("photoupload/", 40);
+			sharingBoard.setImageName((String) imagepath[1].subSequence(0, 40));
+		}
+		
 		model.addAttribute("sharingboardLists", sharingboardLists);
-		return "sharinglist";
+		return "sharingboard/sharingboardlist";
 	}
 	
 	
-	@RequestMapping(value = "detail.action", method = RequestMethod.GET)
-	public String detail(String boardNo, Model model, SharingBoard sharingBoardDetail) {
-		boardNo = "2";
+	@RequestMapping(value = "sharingboarddetail.action", method = RequestMethod.GET)
+	public String detail(@RequestParam (value="boardNo") int boardNo, Model model, SharingBoard sharingBoardDetail) {
+		boardNo = 2;
 		sharingBoardDetail = sharingBoarService.findBoard(boardNo);
 		
 		sharingBoardDetail.setDate(sharingBoardDetail.getDate().substring(0, 10));
 		
 		model.addAttribute("sharingBoardDetail", sharingBoardDetail);
-		return "sharingdetail";
+		return "sharingboard/sharingboarddetail";
 	}
 	
 	
-	@RequestMapping(value = "write.action", method = RequestMethod.GET)
-	@ResponseBody
+	@RequestMapping(value = "sharingboardwrite.action", method = RequestMethod.GET)
 	public String write(HttpSession session) {
 		if(session.getAttribute("id")!=null) {
-			return "sharingwrite";
+			return "sharingboard/sharingboardwrite";
 		}else {
-			return "sign-in";
+			return "index";
 		}
 	}
 	
 	
-	@RequestMapping(value = "write.action", method = RequestMethod.POST)
+	@RequestMapping(value = "sharingboardwrite.action", method = RequestMethod.POST)
 	public String writePost(SharingBoard sharingBoard) {
 		int cate = 2;
 		sharingBoard.setCategory(cate);
 		sharingBoarService.writeBoard(sharingBoard);
-		
-		return "sharingwrite";
+				
+		return "sharingboard/sharingboardlist";
 	}
 	
 	
@@ -86,6 +91,7 @@ public class SharingBoardController {
 		String defaultPath = req.getSession().getServletContext().getRealPath("/");
 		//파일 기본경로 _ 상세경로
 		String path = defaultPath + "resources/photoupload/" + File.separator;
+		
 		File file = new File(path);
 		if(!file.exists()) {
 		   file.mkdirs();
@@ -96,6 +102,7 @@ public class SharingBoardController {
 			InputStream is = req.getInputStream();
 			OutputStream os=new FileOutputStream(path + realname);
 			int numRead;
+
 			// 파일쓰기
 			byte b[] = new byte[Integer.parseInt(req.getHeader("file-size"))];
 			while((numRead = is.read(b,0,b.length)) != -1){
@@ -153,10 +160,10 @@ public class SharingBoardController {
 	}
 	
 	
-	@RequestMapping(value = "update.action", method = RequestMethod.GET)
+	@RequestMapping(value = "sharingboardupdate.action", method = RequestMethod.GET)
 	public String update() {
 		
-		return "sharingupdate";
+		return "sharingboard/sharingboardupdate";
 	}
 	
 }

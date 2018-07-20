@@ -4,11 +4,13 @@ package com.bikelong.vo;
 public class SharingBoard {
 
 	private int category;
-	private String writer;
+	private int boardNo;
+	private String id;
 	private String date;
 	private String title;
 	private String content;
 	private String locationNo;
+	private String imageName;
 	
 	public String getDate() {
 		return date;
@@ -40,11 +42,23 @@ public class SharingBoard {
 	public void setLocationNo(String locationNo) {
 		this.locationNo = locationNo;
 	}
-	public String getWriter() {
-		return writer;
+	public int getBoardNo() {
+		return boardNo;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setBoardNo(int boardNo) {
+		this.boardNo = boardNo;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getImageName() {
+		return imageName;
+	}
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
 	}
 	
 		

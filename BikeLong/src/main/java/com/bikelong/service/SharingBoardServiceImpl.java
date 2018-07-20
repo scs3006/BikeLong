@@ -18,7 +18,7 @@ public class SharingBoardServiceImpl implements SharingBoardService {
 	}
 
 	@Override
-	public SharingBoard findBoard(String boardNo) {
+	public SharingBoard findBoard(int boardNo) {
 		SharingBoard sharingBoard = sharingBoardDao.selectBoard(boardNo);
 		return sharingBoard;
 	}

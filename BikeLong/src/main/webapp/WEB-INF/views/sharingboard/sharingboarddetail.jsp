@@ -5,47 +5,44 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content=""/>
-<meta name="author" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="" />
+<meta name="author" content="" />
 <title>Tavern - Responsive Restaurant Template(Bootstrap 4)</title>
 
 
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
- 
+<script type="text/javascript"
+	src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+
 </head>
 <script type="text/javascript">
-    $(function(){
-       //전역변수
-        var obj = [];              
-        //스마트에디터 프레임생성
-        nhn.husky.EZCreator.createInIFrame({
-            oAppRef: obj,
-            elPlaceHolder: "content",
-            sSkinURI: "/bikelong/resources/editor/SmartEditor2Skin.html",
-            htParams : {
-                // 툴바 사용 여부
-                bUseToolbar : true,            
-                // 입력창 크기 조절바 사용 여부
-                bUseVerticalResizer : true,    
-                // 모드 탭(Editor | HTML | TEXT) 사용 여부
-                bUseModeChanger : true,
-            }
-        });
-        //전송버튼
-        $("#savebtn").click(function(event){
-        	event.preventDefault();
-        	obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-            //폼 submit
-            $("#frm").submit();
-        }); 
-    });
+	$(function() {
+		//전역변수
+		var obj = [];
+		//스마트에디터 프레임생성
+		nhn.husky.EZCreator.createInIFrame({
+			oAppRef : obj,
+			elPlaceHolder : "content",
+			sSkinURI : "/bikelong/resources/editor/SmartEditor2Skin.html",
+			htParams : {
+				// 툴바 사용 여부
+				bUseToolbar : true,
+				// 입력창 크기 조절바 사용 여부
+				bUseVerticalResizer : true,
+				// 모드 탭(Editor | HTML | TEXT) 사용 여부
+				bUseModeChanger : true,
+			}
+		});
+
+	});
 </script>
 
 <!-- Favicons-->
-<link rel="shortcut icon" href="/bikelong/resources/assets/images/favicon.png">
-<link rel="apple-touch-icon" href="/bikelong/resources/assets/images/apple-touch-icon.png">
+<link rel="shortcut icon"
+	href="/bikelong/resources/assets/images/favicon.png">
+<link rel="apple-touch-icon"
+	href="/bikelong/resources/assets/images/apple-touch-icon.png">
 <link rel="apple-touch-icon" sizes="72x72"
 	href="/bikelong/resources/assets/images/apple-touch-icon-72x72.png">
 <link rel="apple-touch-icon" sizes="114x114"
@@ -59,9 +56,11 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
 	rel="stylesheet">
 <!-- Plugins and Icon Fonts-->
-<link href="/bikelong/resources/assets/css/plugins.min.css" rel="stylesheet">
+<link href="/bikelong/resources/assets/css/plugins.min.css"
+	rel="stylesheet">
 <!-- Template core CSS-->
-<link href="/bikelong/resources/assets/css/template.css" rel="stylesheet">
+<link href="/bikelong/resources/assets/css/template.css"
+	rel="stylesheet">
 </head>
 
 <body>
@@ -71,12 +70,12 @@
 		<div class="loader"></div>
 	</div>
 	<!-- Preloader end-->
-	
+
 	<!-- Header-->
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<!-- Header end-->
-	
-<!-- ========================================================================================================= -->
+
+	<!-- ========================================================================================================= -->
 	<!-- Wrapper-->
 	<div class="wrapper">
 		<section class="module">
@@ -87,27 +86,29 @@
 						<article class="post">
 
 							<div class="post-preview">
-									<!--  -->
+								<!--  -->
 							</div>
 
 							<div class="row">
 								<div class="col-md-12">
-									<form action="write.action" id="frm" method="POST" enctype="multipart/form-data" novalidate>
-										<div class="row">
-											<div class="col-md-6">
-												<div class="form-group">
-													<input class="form-control" type="text" name="writer" value="${loginuser.id}" placeholder="작성자" readonly>
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<input class="form-control" type="date" name="date" placeholder="작성일" >
-												</div>
-											</div>
-											<div class="col-md-12">
-												<div class="form-group">
-												지역 
-												<select class="select form-control" name="locationNo" >
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">제목 :
+												${sharingBoardDetail.title}</div>
+										</div>
+										<div class="col-md-12">
+											<div class="form-group">글쓴이 :
+												${sharingBoardDetail.id}</div>
+										</div>
+										<div class="col-md-12">
+											<div class="form-group">작성일 :
+												${sharingBoardDetail.date}</div>
+										</div>
+										<div class="col-md-12">
+											<div class="form-group">
+												해당 경로 지역구 : ${sharingBoardDetail.locationNo} <br />
+												<br />
+												<!--  <select class="select form-control" name="locationNo" >
 														<option value="1">강남구</option>
 														<option value="2">강동구</option>
 														<option value="3">강북구</option>
@@ -133,33 +134,28 @@
 														<option value="23">종로구</option>
 														<option value="24">중구</option>
 														<option value="25">중랑구</option>
-													</select>
-												</div>
-											</div>
-											<div class="col-md-12">
-												<div class="form-group">
-													<input class="form-control" type="text" name="title" placeholder="제목" required>
-												</div>
-											</div>
-											<div class="col-md-12">
-												<div class="form-group">
-													<textarea rows="10" cols="100" name="content" id="content" class="form-control" 
-													style="width: 100%; height: 482px" placeholder="내용" required></textarea>
-												</div>
-											</div>
-											<div class="col-md-12">
-												<div class="text-center">
-													<input type="button" id="savebtn" class="btn btn-black" value="글쓰기"/>
-													<input type="button" id="cencel" class="btn btn-black" value="취소"/>
-												</div>
+													</select>	-->
 											</div>
 										</div>
-									</form>
+										<div class="col-md-12">
+											<div class="form-group">
+												${sharingBoardDetail.content} <br />
+												<br />
+											</div>
+										</div>
+										<div class="col-md-12">
+											<div class="text-center">
+												<a class="btn btn-black" href="/bikelong/route/sharingboardlist.action">목록보기</a>
+												<a class="btn btn-black" href="/bikelong/route/sharingboardupdate.action">수정</a>
+												<a class="btn btn-black" href="/bikelong/route/sharingboarddelete.action">삭제</a>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</article>
 						<!-- Post end-->
-						
+
 						<!-- Comments area-->
 						<div class="comments-area">
 							<h5 class="comments-title">Comments</h5>
@@ -167,8 +163,8 @@
 								<!-- Comment-->
 								<div class="comment">
 									<div class="comment-author">
-										<img class="avatar" src="/bikelong/resources/assets/images/avatar/1.jpg"
-											alt="">
+										<img class="avatar"
+											src="/bikelong/resources/assets/images/avatar/1.jpg" alt="">
 									</div>
 									<div class="comment-body">
 										<div class="comment-meta">
@@ -211,7 +207,7 @@
 				<path d="M0 100 C40 0 60 0 100 100 Z"></path>
 			</svg>
 		<!-- Footer-->
-			<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 		<!-- Footer end-->
 	</div>
 	<!-- Wrapper end-->
@@ -229,8 +225,8 @@
 				<aside class="widget widget_text">
 					<div class="textwidget">
 						<p>
-							<img src="/bikelong/resources/assets/images/logo-light.png" width="74px"
-								alt="">
+							<img src="/bikelong/resources/assets/images/logo-light.png"
+								width="74px" alt="">
 						</p>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
 							sed do eiusmod tempor.</p>
@@ -262,24 +258,6 @@
 								src="/bikelong/resources/assets/images/widgets/6.jpg" alt=""></a></li>
 					</ul>
 				</aside>
-				<!-- Text widget-->
-				<!--aside.widget.widget_text
-					.textwidget
-						.up-logo
-							p.text-center.m-b-50: img(src="/bikelong/resources/assets/images/logo-light.png" width="100" alt="")
-						.up-form
-							form(method="post")
-								.form-group
-									input.form-control.form-control-lg(type="email" placeholder="Email")
-								.form-group
-									input.form-control.form-control-lg(type="password" placeholder="Pasword")
-								.form-group
-									button(type="submit" class="btn btn-block btn-lg btn-round btn-brand") Log in
-						.up-help
-							p: a(href="#") Forgot your password?
-							p Don't have an account yet? <a href="#">Sign in</a>
-					
-					-->
 
 				<!-- Twitter widget-->
 				<aside class="widget twitter-feed-widget">
@@ -301,7 +279,7 @@
 	</div>
 	<!-- Off canvas end-->
 
-	
+
 
 	<!-- Reserve Popup end-->
 
