@@ -86,21 +86,26 @@
 							<div class="row">
 								<div class="col-md-12">
 										<div class="row">
-											<div class="col-md-6">
+											<div class="col-md-12">
 												<div class="form-group">
-													<input class="form-control" type="text" value="${sharingBoard.writer}" readonly>
-												</div>
-												
-											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<input class="form-control" type="text" value="${sharingBoardsDetail.date}" readonly>
+												제목 : ${sharingBoardDetail.title}
+													
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="form-group">
-												<input class="form-control" type="text" value="${sharingBoardsDetail.locationNo}" readonly>
-												지역 
+												글쓴이 : ${sharingBoardDetail.writer}
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+												작성일 : ${sharingBoardDetail.date}
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+												해당 경로 지역구 : ${sharingBoardDetail.locationNo}
+												<br/><br/>
 												<!--  <select class="select form-control" name="locationNo" >
 														<option value="1">강남구</option>
 														<option value="2">강동구</option>
@@ -132,19 +137,15 @@
 											</div>
 											<div class="col-md-12">
 												<div class="form-group">
-													<input class="form-control" type="text" value="${sharingBoardDetail.title}" readonly>
-												</div>
-											</div>
-											<div class="col-md-12">
-												<div class="form-group">
-													<textarea rows="10" cols="100" name="content" id="content" class="form-control" 
-													style="width: 100%; height: 482px"  readonly></textarea>
+													${sharingBoardDetail.content}
+													<br/><br/>
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="text-center">
-													<input type="button" id="lsitbtn" class="btn btn-black" value="목록"/>
-													<input type="button" id="cencel" class="btn btn-black" value="취소"/>
+													<input type="button" id="lsitbtn" class="btn btn-black" value="목록보기"/>
+													<input type="button" id="updatebtn" class="btn btn-black" value="수정"/>
+													<input type="button" id="deletebtn" class="btn btn-black" value="삭제"/>
 												</div>
 											</div>
 										</div>

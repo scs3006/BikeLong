@@ -24,7 +24,7 @@
 							<ul>
 								<li><a href="index.jsp#home"><span class="menu-item-span">서비스 소개</span></a></li>
 								<li><a href="index.jsp#story"><span class="menu-item-span">산책로 추천</span></a></li>
-								<li><a href="index.jsp#special"><span class="menu-item-span">경로 공유</span></a></li>
+								<li><a href=""><span class="menu-item-span">경로 공유</span></a></li>
 								<li><a href="rentalShop.action"><span class="menu-item-span">대여소 위치</span></a></li>
 								<li><a href="index.jsp#gallery"><span class="menu-item-span">공지사항</span></a></li>
 								<li><a href="index.jsp#services"><span class="menu-item-span">고객의 의견</span></a></li>
