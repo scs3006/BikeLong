@@ -25,7 +25,7 @@
 		<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 		
 		<style type="text/css">
-			.form-control{color : white;}
+			
 		</style>
 		
 		<script type="text/javascript">
@@ -131,25 +131,25 @@
 								<div class="up-form">
 									<form method="post" action="signup.action">
 										<div class="form-group">
-											<input class="form-control" type="text" name="id" required="required" placeholder="id(영문 대,소문자,숫자 포함 4~10글자)">
+											<input class="form-control placeholder" id="aaaa" type="text" name="id" required="required" placeholder="id(영문 대,소문자,숫자 포함 4~10글자)">
 										</div>
 										<div class="form-group">
-											<input class="form-control" type="text" name="name" required="required" placeholder="name(한글만 2~10글자)">
+											<input class="form-control placeholder" type="text" name="name" required="required" placeholder="name(한글만 2~10글자)">
 										</div>
 										<div class="form-group">
-											<input class="form-control" type="password" name="password" required="required" placeholder="Pasword(영문 대,소문자,숫자 포함 6~20)">
+											<input class="form-control placeholder" type="password" name="password" required="required" placeholder="Pasword(영문 대,소문자,숫자 포함 6~20)">
 										</div>
 										<div class="form-group">
-											<input class="form-control" type="password" name="cpassword" required="required" placeholder="Confirm password">
+											<input class="form-control placeholder" type="password" name="cpassword" required="required" placeholder="Confirm password">
 										</div>
 										<div class="form-group">
-											<input class="form-control" type="text" name="phone" required="required" placeholder="phone(010-xxxx-xxxx)">
+											<input class="form-control placeholder" type="text" name="phone" required="required" placeholder="phone(010-xxxx-xxxx)">
 										</div>
 										<div class="form-group">
-											<input class="form-control" type="text" name="address" required="required" placeholder="address(시, 구 까지)">
+											<input class="form-control placeholder" type="text" name="address" required="required" placeholder="address(시, 구 까지)">
 										</div>
 										<div class="form-group">
-											<input class="form-control" type="text" name="basicWeight" placeholder="weight">
+											<input class="form-control placeholder" type="text" name="basicWeight" placeholder="weight">
 										</div>
 										<div class="form-group">
 											<button class="btn btn-block btn-round btn-brand" type="submit">Sign Up</button>
