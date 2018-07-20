@@ -87,17 +87,25 @@
 					</div>
 					<!-- Extra-nav - will be hidden on mobile-->
 					<div class="extra-nav">
+					<div class="inner-nav onepage-nav">
 						<ul>
 							<c:if test="${ empty loginuser }">
 								<li><a href="/bikelong/account/signin.action"><span class="menu-item-span"><i class="ti-power-off">&nbsp;&nbsp;</i>Sign In</span></a></li>
 								<li><a href="/bikelong/account/signup.action"><span class="menu-item-span"><i class="ti-notepad">&nbsp;&nbsp;</i>Sign Up</span></a></li>
 							</c:if>
 							<c:if test="${ not empty loginuser }">
-								<li><a href="/bikelong/account/mypage.action"><span class="menu-item-span"><i class="ti-user">&nbsp;&nbsp;</i>${id} 님</span></a></li>
+								<li class="menu-item-has-children"><a href="#"><span class="menu-item-span"><i class="ti-user">&nbsp;&nbsp;</i>${id} 님</span></a>
+										<ul class="sub-menu">
+											<li><a href="reservations.jsp">마이페이지</a></li>
+											<li><a href="elements2.action">GOAL</a></li>
+											<li><a href="icons.jsp">Icons</a></li> 
+										</ul>
+								</li>
 								<li><a href="/bikelong/account/logout.action"><span class="menu-item-span"><i class="icon_trash_alt">&nbsp;&nbsp;</i>Log Out</span></a></li>
 							</c:if>
 							<!-- <li><a class="popup-book-a-table" href="#test-form"><span class="menu-item-span">Book now</span></a></li> -->
 						</ul>
+						</div>
 					</div>
 					<!-- Mobile menu-->
 					<div class="nav-toggle"><a href="#" data-toggle="collapse" data-target=".inner-navigation"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a></div>
