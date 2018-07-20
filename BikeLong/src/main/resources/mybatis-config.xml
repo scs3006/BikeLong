@@ -7,6 +7,7 @@
 	<!-- Mapper에서 사용할 Vo Class에 Alias 설정하는 곳  -->
 	<typeAliases>
 		<typeAlias type="com.bikelong.vo.Member" alias="Member"/>
+		<typeAlias type="com.bikelong.vo.SharingBoard" alias="SharingBoard"/>
 	</typeAliases>
 
 	<environments default="mysql">
@@ -24,6 +25,7 @@
 	<!-- Mapper 파일 경로 등록 -->	
 	<mappers>
 		<mapper resource="com/bikelong/mapper/member-mapper.xml" />
+		<mapper resource="com/bikelong/mapper/sharingBoard-mapper.xml" />
 	</mappers>
 
 </configuration>
