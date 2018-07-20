@@ -67,5 +67,6 @@
 	<import resource="classpath:com/bikelong/beanconfig/rentalShop-congif.xml" />
 	<import resource="classpath:com/bikelong/beanconfig/sharingBoard-config.xml" />	
 	<import resource="classpath:com/bikelong/beanconfig/trailBoard-config.xml" />
+	<import resource="classpath:com/bikelong/beanconfig/goal-config.xml" />
 	
 </beans>
