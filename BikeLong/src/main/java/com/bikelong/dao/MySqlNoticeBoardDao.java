@@ -22,5 +22,20 @@ public class MySqlNoticeBoardDao implements NoticeBoardDao {
 	public List<Board> selectNoticeBoardList() {
 		return noticeBoardMapper.selectNoticeBoardList();
 	}
+
+	@Override
+	public Board selectBoardByBoardNo(int boardNo) {
+		return noticeBoardMapper.selectBoardByBoardNo(boardNo);
+	}
+
+	@Override
+	public void deleteBoard(int boardNo) {
+		noticeBoardMapper.deleteBoard(boardNo);
+	}
+
+	@Override
+	public void updateBoard(Board board) {
+		noticeBoardMapper.updateBoard(board);
+	}
 	
 }

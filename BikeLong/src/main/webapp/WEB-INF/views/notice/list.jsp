@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,6 +37,19 @@
 <link href="/bikelong/resources/assets/css/plugins.min.css" rel="stylesheet">
 <!-- Template core CSS-->
 <link href="/bikelong/resources/assets/css/template.css" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('.clickTr').each(function(index){
+			$(this).hover(function(){$(this).css('cursor', 'pointer')},function(){$(this).css('cursor')});
+			$(this).on("click",function(event){
+				var boardNo = $(this).attr('data-boardNo');
+				location.href="detail.action?boardNo=" + boardNo;
+			});		
+		});
+	});
+</script>
 </head>
 
 <body>
@@ -62,29 +74,36 @@
 						<!-- Post-->
 						<article class="post">
 
-							<div class="post-preview">
+							<div>
 								<h1>공지사항</h1>
 							</div>
 							
 							<div class="row">
-								<div class="col-md-12">
-									<table class="table">
-									<tr>
-									  	<th width="10%">글번호</th>
-									  	<th width="60%">제목</th>
-									  	<th width="15%">작성자</th>
-									  	<th width="15%">작성일</th>
-									</tr>
-									<c:forEach var="notice" items="${ noticeList }">
-									<tr style='height:25px'>
-										<td>${ notice.boardNo }</td>
-										<td>${ notice.title }</td>
-										<td>${ notice.id }</td>
-										<td>${ notice.date }</td>
-									</tr>
-									</c:forEach>
+								<div class="table-responsive">
+									<table class="table table-hover">
+										<tr>
+										  	<th>번호</th>
+										  	<th>제목</th>
+										  	<th>작성자</th>
+										  	<th>작성일</th>
+										</tr>
+										<c:forEach var="notice" items="${ noticeList }">
+										<tr class="clickTr" data-boardNo="${ notice.boardNo }">
+											<td>${ notice.boardNo }</td>
+											<td>${ notice.title }</td>
+											<td>${ notice.id }</td>
+											<td>${ notice.date }</td>
+										</tr>
+										</c:forEach>
 									</table>
 								</div>
+								<c:if test="${loginuser.id eq 'manager' && loginuser ne null}">
+									<div class="col-md-12">
+										<div class="text-center">
+											<a class="btn btn-black" href="write.action">글쓰기</a>
+										</div>
+									</div>
+								</c:if>
 							</div>
 						</article>
 						<!-- Post end-->

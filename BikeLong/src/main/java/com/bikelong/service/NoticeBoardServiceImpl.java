@@ -22,5 +22,20 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 	public List<Board> findBoardList() {
 		return noticeBoardDao.selectNoticeBoardList();
 	}
+
+	@Override
+	public Board findBoardByBoardNo(int boardNo) {
+		return noticeBoardDao.selectBoardByBoardNo(boardNo);
+	}
+
+	@Override
+	public void deleteBoard(int boardNo) {
+		noticeBoardDao.deleteBoard(boardNo);
+	}
+
+	@Override
+	public void updateBoard(Board board) {
+		noticeBoardDao.updateBoard(board);
+	}
 		
 }

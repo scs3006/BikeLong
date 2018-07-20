@@ -43,13 +43,9 @@ public class NoticeBoardController {
 	
 	
 	@GetMapping(value = "detail.action")
-	public String getDetail(String boardNo, Model model, SharingBoard sharingBoardDetail) {
-//		boardNo = "2";
-//		sharingBoardDetail = sharingBoarService.findBoard(boardNo);
-//		
-//		sharingBoardDetail.setDate(sharingBoardDetail.getDate().substring(0, 10));
-//		
-//		model.addAttribute("sharingBoardDetail", sharingBoardDetail);
+	public String getDetail(int boardNo, Model model) {
+		Board board = noticeBoarService.findBoardByBoardNo(boardNo);
+		model.addAttribute("board", board);
 		return "notice/detail";
 	}
 	
@@ -77,6 +73,35 @@ public class NoticeBoardController {
 		noticeBoarService.writeBoard(board);
 		
 		return "redirect:list.action";
+	}
+	
+	@GetMapping(value = "update.action")
+	public String getUpdate(int boardNo, Model model) {
+		Board board = noticeBoarService.findBoardByBoardNo(boardNo);
+		model.addAttribute("board", board);
+		return "notice/update";
+	}
+	
+	@PostMapping(value = "update.action")
+	@ResponseBody
+	public String postUpdate(Board board) {
+		try {
+			noticeBoarService.updateBoard(board);
+		} catch (Exception ex) { // 등록 실패한 경우
+			return "fail";
+		}
+		return "success"; 
+	}
+	
+	@GetMapping(value = "delete.action")
+	@ResponseBody
+	public String getDelete(int boardNo) {
+		try {
+			noticeBoarService.deleteBoard(boardNo);	// 서비스에서 트랜잭션으로 댓글까지 지우는거 잊지말자!
+		} catch (Exception ex) { // 등록 실패한 경우
+			return "fail";
+		}
+		return "success"; 
 	}
 	
 	
@@ -156,13 +181,6 @@ public class NoticeBoardController {
 		out.println(sFileInfo);
 	    }catch (Exception e) {
 		}
-	}
-	
-	
-	@GetMapping(value = "update.action")
-	public String update() {
-		
-		return "notice/update";
 	}
 	
 }

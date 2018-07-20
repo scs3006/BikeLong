@@ -26,7 +26,7 @@
 								<li><a href="index.jsp#story"><span class="menu-item-span">산책로 추천</span></a></li>
 								<li><a href="pathboard/list.action"><span class="menu-item-span">경로 공유</span></a></li>
 								<li><a href="rentalShop.action"><span class="menu-item-span">대여소 위치</span></a></li>
-								<li><a href="index.jsp#gallery"><span class="menu-item-span">공지사항</span></a></li>
+								<li><a href="/bikelong/noticeboard/list.action"><span class="menu-item-span">공지사항</span></a></li>
 								<li><a href="index.jsp#services"><span class="menu-item-span">고객의 의견</span></a></li>
 								<li><a href="index.jsp#news"><span class="menu-item-span">갤러리</span></a></li>
 								<!-- Pages-->

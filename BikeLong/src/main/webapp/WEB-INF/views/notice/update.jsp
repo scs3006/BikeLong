@@ -14,7 +14,7 @@
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
  
-</head>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript">
     $(function(){
        //전역변수
@@ -33,13 +33,37 @@
                 bUseModeChanger : true,
             }
         });
+        
         //전송버튼
         $("#savebtn").click(function(event){
         	event.preventDefault();
         	obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-            //폼 submit
-            $("#frm").submit();
+        	
+        	var queryString =  $("#frm").serialize();
+        	$.ajax({
+				url : "update.action",
+				method : "POST",
+				data : queryString,
+				success : function(data,status,xhr){
+					if(data=="success"){
+						alert('게시글 수정에 성공하셨습니다.');
+						location.href = 'detail.action?boardNo='+${board.boardNo};
+					}
+					if(data=="fail"){
+						alert('게시글 수정에 실패하셨습니다.');
+						return;
+					}
+				},
+				error : function(xhr, status, err){
+					alert('게시글 수정에 실패하셨습니다.');
+					return;
+				}
+			});
         }); 
+        
+        $('#cencel').on("click",function(){
+			location.href="detail.action?boardNo="+${board.boardNo};
+		})		
     });
 </script>
 
@@ -62,6 +86,7 @@
 <link href="/bikelong/resources/assets/css/plugins.min.css" rel="stylesheet">
 <!-- Template core CSS-->
 <link href="/bikelong/resources/assets/css/template.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -87,28 +112,29 @@
 						<article class="post">
 
 							<div>
-								<h1>공지사항 글쓰기</h1>
+								<h1>공지사항</h1>
 							</div>
 							
 							<div class="row">
 								<div class="col-md-12">
-									<form action="write.action" id="frm" method="POST" enctype="multipart/form-data" novalidate>
+									<form action="update.action" id="frm" method="POST" enctype="multipart/form-data" novalidate>
 										<div class="row">
-											<input type="hidden" name="id" value="${loginuser.id}">
+											<input type="hidden" name="id" value="${board.id}">
+											<input type="hidden" name="boardNo" value="${board.boardNo}">
 											<div class="col-md-12">
 												<div class="form-group">
-													<input class="form-control" type="text" name="title" placeholder="제목" required>
+													<input class="form-control" type="text" name="title" value="${board.title}" required>
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="form-group">
 													<textarea rows="10" cols="100" name="content" id="content" class="form-control" 
-													style="width: 100%; height: 482px" placeholder="내용" required></textarea>
+													style="width: 100%; height: 482px" required>${board.content}</textarea>
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="text-center">
-													<input type="button" id="savebtn" class="btn btn-black" value="글쓰기"/>
+													<input type="button" id="savebtn" class="btn btn-black" value="수정"/>
 													<input type="button" id="cencel" class="btn btn-black" value="취소"/>
 												</div>
 											</div>

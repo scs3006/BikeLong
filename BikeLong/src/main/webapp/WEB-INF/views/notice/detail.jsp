@@ -1,51 +1,74 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content=""/>
-<meta name="author" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="" />
+<meta name="author" content="" />
 <title>Tavern - Responsive Restaurant Template(Bootstrap 4)</title>
 
 
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
- 
+<script type="text/javascript"
+	src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+
 </head>
 <script type="text/javascript">
-    $(function(){
-       //전역변수
-        var obj = [];              
-        //스마트에디터 프레임생성
-        nhn.husky.EZCreator.createInIFrame({
-            oAppRef: obj,
-            elPlaceHolder: "content",
-            sSkinURI: "/bikelong/resources/editor/SmartEditor2Skin.html",
-            htParams : {
-                // 툴바 사용 여부
-                bUseToolbar : true,            
-                // 입력창 크기 조절바 사용 여부
-                bUseVerticalResizer : true,    
-                // 모드 탭(Editor | HTML | TEXT) 사용 여부
-                bUseModeChanger : true,
-            }
-        });
-        //전송버튼
-        $("#savebtn").click(function(event){
-        	event.preventDefault();
-        	obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-            //폼 submit
-            $("#frm").submit();
-        }); 
-    });
+	$(function() {
+		/* //전역변수
+		var obj = [];
+		//스마트에디터 프레임생성
+		nhn.husky.EZCreator.createInIFrame({
+			oAppRef : obj,
+			elPlaceHolder : "content",
+			sSkinURI : "/bikelong/resources/editor/SmartEditor2Skin.html",
+			htParams : {
+				// 툴바 사용 여부
+				bUseToolbar : true,
+				// 입력창 크기 조절바 사용 여부
+				bUseVerticalResizer : true,
+				// 모드 탭(Editor | HTML | TEXT) 사용 여부
+				bUseModeChanger : true,
+			}
+		}); */
+
+		$('#noticeDelete').on('click',function(){
+			event.preventDefault();
+			var check = confirm('정말 삭제 하시겠습니까?');
+			if(check){
+				$.ajax({
+					url : "delete.action",
+					method : "GET",
+					data : {"boardNo" : ${board.boardNo}},
+					success : function(data,status,xhr){
+						if(data=="success"){
+							alert('삭제되었습니다.');
+							location.href = 'list.action';
+						}
+						if(data=="fail"){
+							alert('삭제에 실패하였습니다.');
+						}
+					},
+					error : function(xhr, status, err){
+						alert('삭제에 실패하였습니다.');
+					}
+				});	
+			}else{
+				return;
+			}
+		});
+	});
 </script>
 
 <!-- Favicons-->
-<link rel="shortcut icon" href="/bikelong/resources/assets/images/favicon.png">
-<link rel="apple-touch-icon" href="/bikelong/resources/assets/images/apple-touch-icon.png">
+<link rel="shortcut icon"
+	href="/bikelong/resources/assets/images/favicon.png">
+<link rel="apple-touch-icon"
+	href="/bikelong/resources/assets/images/apple-touch-icon.png">
 <link rel="apple-touch-icon" sizes="72x72"
 	href="/bikelong/resources/assets/images/apple-touch-icon-72x72.png">
 <link rel="apple-touch-icon" sizes="114x114"
@@ -59,9 +82,11 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
 	rel="stylesheet">
 <!-- Plugins and Icon Fonts-->
-<link href="/bikelong/resources/assets/css/plugins.min.css" rel="stylesheet">
+<link href="/bikelong/resources/assets/css/plugins.min.css"
+	rel="stylesheet">
 <!-- Template core CSS-->
-<link href="/bikelong/resources/assets/css/template.css" rel="stylesheet">
+<link href="/bikelong/resources/assets/css/template.css"
+	rel="stylesheet">
 </head>
 
 <body>
@@ -71,12 +96,12 @@
 		<div class="loader"></div>
 	</div>
 	<!-- Preloader end-->
-	
+
 	<!-- Header-->
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<!-- Header end-->
-	
-<!-- ========================================================================================================= -->
+
+	<!-- ========================================================================================================= -->
 	<!-- Wrapper-->
 	<div class="wrapper">
 		<section class="module">
@@ -86,38 +111,85 @@
 						<!-- Post-->
 						<article class="post">
 
-							<div>
-								<h1>공지사항 글쓰기</h1>
+							<div class="post-preview">
+								<!--  -->
 							</div>
-							
+
 							<div class="row">
 								<div class="col-md-12">
-									<form action="write.action" id="frm" method="POST" enctype="multipart/form-data" novalidate>
-										<div class="row">
-											<input type="hidden" name="id" value="${loginuser.id}">
-											<div class="col-md-12">
-												<div class="form-group">
-													<input class="form-control" type="text" name="title" placeholder="제목" required>
-												</div>
-											</div>
-											<div class="col-md-12">
-												<div class="form-group">
-													<textarea rows="10" cols="100" name="content" id="content" class="form-control" 
-													style="width: 100%; height: 482px" placeholder="내용" required></textarea>
-												</div>
-											</div>
-											<div class="col-md-12">
-												<div class="text-center">
-													<input type="button" id="savebtn" class="btn btn-black" value="글쓰기"/>
-													<input type="button" id="cencel" class="btn btn-black" value="취소"/>
-												</div>
+									<div class="row">
+										<div class="table-responsive">
+											<table class="table table-bordered">
+												 <tr>
+												 	<td>제목</td>
+												 	<td colspan="3">${board.title}</td>
+												  </tr>
+												  <tr>	
+												 	<td>글쓴이</td>
+												 	<td >${board.id}</td>
+												 	<td>작성일</td>
+												 	<td >${board.date}</td>
+												 </tr>
+												 <tr>
+												 	 <td colspan="4" height="400px;">${board.content}</td>
+												 </tr>
+											</table>
+										</div>
+										<div class="col-md-12">
+											<div class="text-center">
+												<a class="btn btn-black" href="list.action">목록보기</a>
+												<c:if test="${loginuser.id eq 'manager' && loginuser ne null}">
+													<a class="btn btn-black" href="update.action?boardNo=${board.boardNo}">수정</a>
+													<a class="btn btn-black" id="noticeDelete" href="#">삭제</a>
+												</c:if>
 											</div>
 										</div>
-									</form>
+									</div>
 								</div>
 							</div>
 						</article>
 						<!-- Post end-->
+
+						<!-- Comments area-->
+						<div class="comments-area">
+							<h5 class="comments-title">Comments</h5>
+							<div class="comment-list">
+								<!-- Comment-->
+								<div class="comment">
+									<div class="comment-author">
+										<img class="avatar"
+											src="/bikelong/resources/assets/images/avatar/1.jpg" alt="">
+									</div>
+									<div class="comment-body">
+										<div class="comment-meta">
+											<div class="comment-meta-author">Jason Ford</div>
+											<div class="comment-meta-date">May 5, 2015 at 4:51 am</div>
+										</div>
+										<div class="comment-content">
+											<p>fanny pack nostrud.</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="comment-respond">
+								<h5 class="comment-reply-title">Leave a Reply</h5>
+								<p class="comment-notes">Your email address will not be
+									published. Required fields are marked</p>
+								<form class="comment-form row">
+									<div class="form-group col-md-4">
+										<input class="form-control" type="text" placeholder="Name">
+									</div>
+									<div class="form-group col-md-12">
+										<textarea class="form-control" rows="8" placeholder="Comment"></textarea>
+									</div>
+									<div class="form-submit col-md-12">
+										<button class="btn btn-black" type="submit">Post
+											Comment</button>
+									</div>
+								</form>
+							</div>
+						</div>
+						<!-- Comments area end-->
 					</div>
 				</div>
 			</div>
@@ -129,7 +201,7 @@
 				<path d="M0 100 C40 0 60 0 100 100 Z"></path>
 			</svg>
 		<!-- Footer-->
-			<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 		<!-- Footer end-->
 	</div>
 	<!-- Wrapper end-->
@@ -147,8 +219,8 @@
 				<aside class="widget widget_text">
 					<div class="textwidget">
 						<p>
-							<img src="/bikelong/resources/assets/images/logo-light.png" width="74px"
-								alt="">
+							<img src="/bikelong/resources/assets/images/logo-light.png"
+								width="74px" alt="">
 						</p>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
 							sed do eiusmod tempor.</p>
@@ -180,24 +252,6 @@
 								src="/bikelong/resources/assets/images/widgets/6.jpg" alt=""></a></li>
 					</ul>
 				</aside>
-				<!-- Text widget-->
-				<!--aside.widget.widget_text
-					.textwidget
-						.up-logo
-							p.text-center.m-b-50: img(src="/bikelong/resources/assets/images/logo-light.png" width="100" alt="")
-						.up-form
-							form(method="post")
-								.form-group
-									input.form-control.form-control-lg(type="email" placeholder="Email")
-								.form-group
-									input.form-control.form-control-lg(type="password" placeholder="Pasword")
-								.form-group
-									button(type="submit" class="btn btn-block btn-lg btn-round btn-brand") Log in
-						.up-help
-							p: a(href="#") Forgot your password?
-							p Don't have an account yet? <a href="#">Sign in</a>
-					
-					-->
 
 				<!-- Twitter widget-->
 				<aside class="widget twitter-feed-widget">
@@ -219,7 +273,7 @@
 	</div>
 	<!-- Off canvas end-->
 
-	
+
 
 	<!-- Reserve Popup end-->
 
