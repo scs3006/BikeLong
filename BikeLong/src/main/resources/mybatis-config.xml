@@ -32,6 +32,7 @@
 		<mapper resource="com/bikelong/mapper/rentalShop-mapper.xml" />
 		<mapper resource="com/bikelong/mapper/TrailBoard-mapper.xml" />
 		<mapper resource="com/bikelong/mapper/goal-mapper.xml" />
+		<mapper resource="com/bikelong/mapper/noticeBoard-mapper.xml" />
 	</mappers>
 
 </configuration>

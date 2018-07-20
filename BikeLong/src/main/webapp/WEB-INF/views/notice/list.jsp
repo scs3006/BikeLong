@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,33 +17,7 @@
 <script type="text/javascript" src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
  
 </head>
-<script type="text/javascript">
-    $(function(){
-       //전역변수
-        var obj = [];              
-        //스마트에디터 프레임생성
-        nhn.husky.EZCreator.createInIFrame({
-            oAppRef: obj,
-            elPlaceHolder: "content",
-            sSkinURI: "/bikelong/resources/editor/SmartEditor2Skin.html",
-            htParams : {
-                // 툴바 사용 여부
-                bUseToolbar : true,            
-                // 입력창 크기 조절바 사용 여부
-                bUseVerticalResizer : true,    
-                // 모드 탭(Editor | HTML | TEXT) 사용 여부
-                bUseModeChanger : true,
-            }
-        });
-        //전송버튼
-        $("#savebtn").click(function(event){
-        	event.preventDefault();
-        	obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-            //폼 submit
-            $("#frm").submit();
-        }); 
-    });
-</script>
+
 
 <!-- Favicons-->
 <link rel="shortcut icon" href="/bikelong/resources/assets/images/favicon.png">
@@ -87,33 +63,27 @@
 						<article class="post">
 
 							<div class="post-preview">
-								<h1>공지사항 글쓰기</h1>
+								<h1>공지사항</h1>
 							</div>
 							
 							<div class="row">
 								<div class="col-md-12">
-									<form action="write.action" id="frm" method="POST" enctype="multipart/form-data" novalidate>
-										<div class="row">
-											<input type="hidden" name="id" value="${loginuser.id}">
-											<div class="col-md-12">
-												<div class="form-group">
-													<input class="form-control" type="text" name="title" placeholder="제목" required>
-												</div>
-											</div>
-											<div class="col-md-12">
-												<div class="form-group">
-													<textarea rows="10" cols="100" name="content" id="content" class="form-control" 
-													style="width: 100%; height: 482px" placeholder="내용" required></textarea>
-												</div>
-											</div>
-											<div class="col-md-12">
-												<div class="text-center">
-													<input type="button" id="savebtn" class="btn btn-black" value="글쓰기"/>
-													<input type="button" id="cencel" class="btn btn-black" value="취소"/>
-												</div>
-											</div>
-										</div>
-									</form>
+									<table class="table">
+									<tr>
+									  	<th width="10%">글번호</th>
+									  	<th width="60%">제목</th>
+									  	<th width="15%">작성자</th>
+									  	<th width="15%">작성일</th>
+									</tr>
+									<c:forEach var="notice" items="${ noticeList }">
+									<tr style='height:25px'>
+										<td>${ notice.boardNo }</td>
+										<td>${ notice.title }</td>
+										<td>${ notice.id }</td>
+										<td>${ notice.date }</td>
+									</tr>
+									</c:forEach>
+									</table>
 								</div>
 							</div>
 						</article>

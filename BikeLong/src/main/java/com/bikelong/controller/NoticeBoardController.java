@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bikelong.service.NoticeBoardService;
+import com.bikelong.vo.Board;
 import com.bikelong.vo.SharingBoard;
 
 @Controller
@@ -33,15 +35,15 @@ public class NoticeBoardController {
 	
 	
 	@GetMapping(value = "list.action")
-	public String list(Model model) {
-//		List<SharingBoard> sharingboardLists = sharingBoarService.findBoardList();
-//		model.addAttribute("sharingboardLists", sharingboardLists);
+	public String getList(Model model) {
+		List<Board> noticeBoardLists = noticeBoarService.findBoardList();
+		model.addAttribute("noticeList", noticeBoardLists);
 		return "notice/list";
 	}
 	
 	
 	@GetMapping(value = "detail.action")
-	public String detail(String boardNo, Model model, SharingBoard sharingBoardDetail) {
+	public String getDetail(String boardNo, Model model, SharingBoard sharingBoardDetail) {
 //		boardNo = "2";
 //		sharingBoardDetail = sharingBoarService.findBoard(boardNo);
 //		
@@ -53,7 +55,7 @@ public class NoticeBoardController {
 	
 	
 	@GetMapping(value = "write.action")
-	public String write(HttpSession session) {
+	public String getWrite(HttpSession session) {
 //		if(session.getAttribute("id")!=null) {
 //			return "sharingwrite";
 //		}else {
@@ -64,10 +66,15 @@ public class NoticeBoardController {
 	
 	
 	@PostMapping(value = "write.action")
-	public String writePost(SharingBoard sharingBoard) {
-//		int cate = 2;
-//		sharingBoard.setCategory(cate);
-//		sharingBoarService.writeBoard(sharingBoard);
+	public String postWrite(Board board) {
+		//게시판 분류 번호
+		int category = 3;
+		//공지사항에는 필요없는 지역번호지면 Not Null 컬럼이기 때문에 임의의 int값을 넣어준다.
+		int locationNo = 1;
+		
+		board.setCategory(category);
+		board.setLocationNo(locationNo);
+		noticeBoarService.writeBoard(board);
 		
 		return "redirect:list.action";
 	}
