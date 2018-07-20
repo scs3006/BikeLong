@@ -73,7 +73,7 @@
 	</bean>	
 	
 	<!-- 김일해 -->
-	<bean id="tarilBoardService"
+	<bean id="trailBoardService"
 		class="com.bikelong.service.TrailBoardServiceImpl">
 		<property name="trailBoardDao" ref="trailBoardDao" />
 	</bean>

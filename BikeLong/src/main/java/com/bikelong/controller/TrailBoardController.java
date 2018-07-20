@@ -28,19 +28,19 @@ import com.bikelong.vo.TrailBoard;
 public class TrailBoardController {
 	
 	@Autowired
-	@Qualifier(value = "TrailBoardService")
-	private TrailBoardService TrailBoardService;
+	@Qualifier(value = "trailBoardService")
+	private TrailBoardService trailBoardService;
 	
 	@GetMapping(value = "list.action")
 	public String list(Model model) {
-		List<TrailBoard> trailBoard = TrailBoardService.findBoardList();
+		List<TrailBoard> trailBoard = trailBoardService.findBoardList();
 		model.addAttribute("trailBoard", trailBoard);
 		return "list";
 	}
 	
 	@GetMapping(value = "detail.action")
 	public String detail(String boardNo, Model model) {
-		TrailBoard trailBoard = (TrailBoard) TrailBoardService.findBoard(boardNo);
+		TrailBoard trailBoard = trailBoardService.findBoard(boardNo);
 		model.addAttribute("TrailBoard",trailBoard);
 		return "detail";
 	}
@@ -54,7 +54,7 @@ public class TrailBoardController {
 	public String writePost(TrailBoard trailBoard) {
 		int cate = 1;
 		trailBoard.setCategory(cate);
-		TrailBoardService.writeBoard(trailBoard);
+		trailBoardService.writeBoard(trailBoard);
 		
 		return "write";
 	}
