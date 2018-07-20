@@ -1,16 +1,17 @@
 package com.bikelong.vo;
 
-import java.util.Date;
 
-public class Board {
+public class TrailBoard {
 
 	private int boardNo;
 	private String id;
+	private String locationNo;
 	private int category;
-	private Date date;
+	private String date;
 	private String title;
-	String content;
-	
+	private String content;
+
+
 	public int getBoardNo() {
 		return boardNo;
 	}
@@ -23,16 +24,22 @@ public class Board {
 	public void setId(String id) {
 		this.id = id;
 	}
+	public String getLocationNo() {
+		return locationNo;
+	}
+	public void setLocationNo(String locationNo) {
+		this.locationNo = locationNo;
+	}
 	public int getCategory() {
 		return category;
 	}
 	public void setCategory(int category) {
 		this.category = category;
 	}
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	public String getTitle() {
@@ -47,4 +54,5 @@ public class Board {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	
 }

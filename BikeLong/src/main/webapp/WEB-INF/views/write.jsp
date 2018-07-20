@@ -10,48 +10,46 @@
 <meta name="author" content=""/>
 <title>Tavern - Responsive Restaurant Template(Bootstrap 4)</title>
 
-<script src="https://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript" src="./resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+ 
+</head>
 <script type="text/javascript">
-$(function(){
-    //전역변수
-    var obj = [];              
-    //스마트에디터 프레임생성
-    nhn.husky.EZCreator.createInIFrame({
-        oAppRef: obj,
-        elPlaceHolder: "editor",
-        sSkinURI: "./resources/editor/SmartEditor2Skin.html",
-        htParams : {
-            // 툴바 사용 여부
-            bUseToolbar : true,            
-            // 입력창 크기 조절바 사용 여부
-            bUseVerticalResizer : true,    
-            // 모드 탭(Editor | HTML | TEXT) 사용 여부
-            bUseModeChanger : true,
-        }
+    $(function(){
+       //전역변수
+        var obj = [];              
+        //스마트에디터 프레임생성
+        nhn.husky.EZCreator.createInIFrame({
+            oAppRef: obj,
+            elPlaceHolder: "content",
+            sSkinURI: "/bikelong/resources/editor/SmartEditor2Skin.html",
+            htParams : {
+                // 툴바 사용 여부
+                bUseToolbar : true,            
+                // 입력창 크기 조절바 사용 여부
+                bUseVerticalResizer : true,    
+                // 모드 탭(Editor | HTML | TEXT) 사용 여부
+                bUseModeChanger : true,
+            }
+        });
+        //전송버튼
+        $("#savebtn").click(function(event){
+        	event.preventDefault();
+        	obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+            //폼 submit
+            $("#frm").submit();
+        }); 
     });
-    //전송버튼
-    $("#insertBoard").click(function(){
-        //id가 smarteditor인 textarea에 에디터에서 대입
-        obj.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
-        //폼 submit
-        $("#insertBoardFrm").submit();
-    });
-
-});
-
-
 </script>
 
 <!-- Favicons-->
-<link rel="shortcut icon" href="resources/assets/images/favicon.png">
-<link rel="apple-touch-icon"
-	href="resources/assets/images/apple-touch-icon.png">
+<link rel="shortcut icon" href="/bikelong/resources/assets/images/favicon.png">
+<link rel="apple-touch-icon" href="/bikelong/resources/assets/images/apple-touch-icon.png">
 <link rel="apple-touch-icon" sizes="72x72"
-	href="resources/assets/images/apple-touch-icon-72x72.png">
+	href="/bikelong/resources/assets/images/apple-touch-icon-72x72.png">
 <link rel="apple-touch-icon" sizes="114x114"
-	href="resources/assets/images/apple-touch-icon-114x114.png">
+	href="/bikelong/resources/assets/images/apple-touch-icon-114x114.png">
 <!-- Web Fonts-->
 <link
 	href="https://fonts.googleapis.com/css?family=PT+Serif%7cSignika:300,400,600,700"
@@ -61,9 +59,9 @@ $(function(){
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
 	rel="stylesheet">
 <!-- Plugins and Icon Fonts-->
-<link href="resources/assets/css/plugins.min.css" rel="stylesheet">
+<link href="/bikelong/resources/assets/css/plugins.min.css" rel="stylesheet">
 <!-- Template core CSS-->
-<link href="resources/assets/css/template.css" rel="stylesheet">
+<link href="/bikelong/resources/assets/css/template.css" rel="stylesheet">
 </head>
 
 <body>
@@ -104,8 +102,8 @@ $(function(){
 				<!-- Brand-->
 				<div class="inner-header">
 					<a class="inner-brand" href="index.jsp"><img class="brand-dark"
-						src="resources/assets/images/logo.png" width="74px" alt=""><img
-						class="brand-light" src="resources/assets/images/logo-light.png"
+						src="/bikelong/resources/assets/images/logo.png" width="74px" alt=""><img
+						class="brand-light" src="/bikelong/resources/assets/images/logo-light.png"
 						width="74px" alt=""></a>
 				</div>
 				<!-- Navigation-->
@@ -197,10 +195,9 @@ $(function(){
 		</div>
 	</header>
 	<!-- Header end-->
-
+<!-- ========================================================================================================= -->
 	<!-- Wrapper-->
 	<div class="wrapper">
-
 		<section class="module">
 			<div class="container">
 				<div class="row">
@@ -209,60 +206,74 @@ $(function(){
 						<article class="post">
 
 							<div class="post-preview">
-								<img
-									src="http://piquant.mikado-themes.com/wp-content/uploads/2015/11/b-grilled-chorizo-with-spicy-sauce.jpg"
-									alt="">
+									<!--  -->
 							</div>
 
 							<div class="row">
 								<div class="col-md-12">
-								
-									<form action="write.action" method="post" id="insertBoardFrm" enctype="multipart/form-data">
-								        <textarea name="editor" id="editor" style="width: 700px; height: 400px;"></textarea>
-								        <input type="button" id="insertBoard" class="btn btn-black" value="등록" />
-								    </form>
-
-
-								
-									<!-- <form method="post" novalidate>
+									<form action="write.action" id="frm" method="POST" enctype="multipart/form-data" novalidate>
 										<div class="row">
 											<div class="col-md-6">
 												<div class="form-group">
-													<input class="form-control" type="text" name="writer" placeholder="작성자" required="">
+													<input class="form-control" type="text" name="writer" value="${loginuser.id}" placeholder="작성자" readonly>
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
-													<input class="form-control" type="text" name="local" placeholder="지역" required="">
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<input class="form-control" type="date" name="date" placeholder="작성일" required="">
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<input class="form-control" type="number" name="count" placeholder="조회수" required="">
+													<input class="form-control" type="date" name="date" placeholder="작성일" >
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="form-group">
-													<input class="form-control" type="text" name="title" placeholder="제목" required="">
+												지역 
+												<select class="select form-control" name="locationNo" >
+														<option value="1">강남구</option>
+														<option value="2">강동구</option>
+														<option value="3">강북구</option>
+														<option value="4">강서구</option>
+														<option value="5">관악구</option>
+														<option value="6">광진구</option>
+														<option value="7">구로구</option>
+														<option value="8">금천구</option>
+														<option value="9">노원구</option>
+														<option value="10">도봉구</option>
+														<option value="11">동대문구</option>
+														<option value="12">동작구</option>
+														<option value="13">마포구</option>
+														<option value="14">서대문구</option>
+														<option value="15">서초구</option>
+														<option value="16">성동구</option>
+														<option value="17">성북구</option>
+														<option value="18">송파구</option>
+														<option value="19">양천구</option>
+														<option value="20">영등포구</option>
+														<option value="21">용산구</option>
+														<option value="22">은평구</option>
+														<option value="23">종로구</option>
+														<option value="23">중구</option>
+														<option value="23">중랑구</option>
+													</select>
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="form-group">
-													<textarea class="form-control" name="message" rows="6" placeholder="내용" required=""></textarea>
+													<input class="form-control" type="text" name="title" placeholder="제목" required>
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													<textarea rows="10" cols="100" name="content" id="content" class="form-control" 
+													style="width: 100%; height: 482px" placeholder="내용" required></textarea>
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="text-center">
-													<input class="btn btn-black" type="submit" value="Reserve">
+													<input type="button" id="savebtn" class="btn btn-black" value="글쓰기"/>
+													<input type="button" id="cencel" class="btn btn-black" value="취소"/>
 												</div>
 											</div>
 										</div>
-									</form> -->
+									</form>
 								</div>
 							</div>
 						</article>
@@ -275,7 +286,7 @@ $(function(){
 								<!-- Comment-->
 								<div class="comment">
 									<div class="comment-author">
-										<img class="avatar" src="resources/assets/images/avatar/1.jpg"
+										<img class="avatar" src="/bikelong/resources/assets/images/avatar/1.jpg"
 											alt="">
 									</div>
 									<div class="comment-body">
@@ -327,7 +338,7 @@ $(function(){
 						<aside class="widget widget_text">
 							<div class="textwidget">
 								<p>
-									<img src="resources/assets/images/logo-light.png" width="74px"
+									<img src="/bikelong/resources/assets/images/logo-light.png" width="74px"
 										alt="">
 								</p>
 								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -377,17 +388,17 @@ $(function(){
 							</div>
 							<ul>
 								<li><a href="#"><img
-										src="resources/assets/images/widgets/1.jpg" alt=""></a></li>
+										src="/bikelong/resources/assets/images/widgets/1.jpg" alt=""></a></li>
 								<li><a href="#"><img
-										src="resources/assets/images/widgets/2.jpg" alt=""></a></li>
+										src="/bikelong/resources/assets/images/widgets/2.jpg" alt=""></a></li>
 								<li><a href="#"><img
-										src="resources/assets/images/widgets/3.jpg" alt=""></a></li>
+										src="/bikelong/resources/assets/images/widgets/3.jpg" alt=""></a></li>
 								<li><a href="#"><img
-										src="resources/assets/images/widgets/4.jpg" alt=""></a></li>
+										src="/bikelong/resources/assets/images/widgets/4.jpg" alt=""></a></li>
 								<li><a href="#"><img
-										src="resources/assets/images/widgets/5.jpg" alt=""></a></li>
+										src="/bikelong/resources/assets/images/widgets/5.jpg" alt=""></a></li>
 								<li><a href="#"><img
-										src="resources/assets/images/widgets/6.jpg" alt=""></a></li>
+										src="/bikelong/resources/assets/images/widgets/6.jpg" alt=""></a></li>
 							</ul>
 						</aside>
 					</div>
@@ -420,7 +431,7 @@ $(function(){
 
 	<!-- Off canvas-->
 	<div class="off-canvas-sidebar"
-		data-background="resources/assets/images/sidebar.jpg">
+		data-background="/bikelong/resources/assets/images/sidebar.jpg">
 		<div class="off-canvas-sidebar-wrapper">
 			<div class="off-canvas-header">
 				<a class="close-offcanvas" href="#"><span
@@ -431,7 +442,7 @@ $(function(){
 				<aside class="widget widget_text">
 					<div class="textwidget">
 						<p>
-							<img src="resources/assets/images/logo-light.png" width="74px"
+							<img src="/bikelong/resources/assets/images/logo-light.png" width="74px"
 								alt="">
 						</p>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -451,24 +462,24 @@ $(function(){
 					</div>
 					<ul>
 						<li><a href="#"><img
-								src="resources/assets/images/widgets/1.jpg" alt=""></a></li>
+								src="/bikelong/resources/assets/images/widgets/1.jpg" alt=""></a></li>
 						<li><a href="#"><img
-								src="resources/assets/images/widgets/2.jpg" alt=""></a></li>
+								src="/bikelong/resources/assets/images/widgets/2.jpg" alt=""></a></li>
 						<li><a href="#"><img
-								src="resources/assets/images/widgets/3.jpg" alt=""></a></li>
+								src="/bikelong/resources/assets/images/widgets/3.jpg" alt=""></a></li>
 						<li><a href="#"><img
-								src="resources/assets/images/widgets/4.jpg" alt=""></a></li>
+								src="/bikelong/resources/assets/images/widgets/4.jpg" alt=""></a></li>
 						<li><a href="#"><img
-								src="resources/assets/images/widgets/5.jpg" alt=""></a></li>
+								src="/bikelong/resources/assets/images/widgets/5.jpg" alt=""></a></li>
 						<li><a href="#"><img
-								src="resources/assets/images/widgets/6.jpg" alt=""></a></li>
+								src="/bikelong/resources/assets/images/widgets/6.jpg" alt=""></a></li>
 					</ul>
 				</aside>
 				<!-- Text widget-->
 				<!--aside.widget.widget_text
 					.textwidget
 						.up-logo
-							p.text-center.m-b-50: img(src="resources/assets/images/logo-light.png" width="100" alt="")
+							p.text-center.m-b-50: img(src="/bikelong/resources/assets/images/logo-light.png" width="100" alt="")
 						.up-form
 							form(method="post")
 								.form-group
@@ -503,78 +514,7 @@ $(function(){
 	</div>
 	<!-- Off canvas end-->
 
-	<!-- Reserve Popup-->
-	<div class="white-popup-block mfp-hide" id="test-form">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4 p-0">
-					<div class="qwert"
-						data-background="resources/assets/images/module-2.jpg"></div>
-				</div>
-				<div class="col-md-8">
-					<div class="ddd">
-						<a class="popup-modal-dismiss" href="#"><i class="ti-close"></i></a>
-						<h1 class="display-1">Book a Table</h1>
-						<p class="lead">
-							See how your users experience your website in realtime or view <br />
-							trends to see any changes in performance over time.
-						</p>
-						<div class="divider-border-left"></div>
-						<div class="space" data-mY="60px"></div>
-						<form method="post" novalidate>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<input class="form-control" type="text" name="name"
-											placeholder="Name" required="">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<input class="form-control" type="text" name="name"
-											placeholder="Phone" required="">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<input class="form-control" type="email" name="email"
-											placeholder="E-mail" required="">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<input class="form-control" type="text" name="subject"
-											placeholder="Persons" required="">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<input class="form-control" type="email" name="email"
-											placeholder="Date" required="">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<input class="form-control" type="text" name="subject"
-											placeholder="Time" required="">
-									</div>
-								</div>
-								<div class="col-md-12">
-									<div class="form-group">
-										<textarea class="form-control" name="message"
-											placeholder="Special Requests" rows="6" required=""></textarea>
-									</div>
-								</div>
-								<div class="col-md-12">
-									<input class="btn btn-black" type="submit" value="Reserve">
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 
 	<!-- Reserve Popup end-->
 
@@ -590,7 +530,7 @@ $(function(){
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 	<script
 		src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA0rANX07hh6ASNKdBr4mZH0KZSqbHYc3Q"></script>
-	<script src="resources/assets/js/plugins.min.js"></script>
-	<script src="resources/assets/js/custom.min.js"></script>
+	<script src="/bikelong/resources/assets/js/plugins.min.js"></script>
+	<script src="/bikelong/resources/assets/js/custom.min.js"></script>
 </body>
 </html>

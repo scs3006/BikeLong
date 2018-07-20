@@ -18,21 +18,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bikelong.service.SharingBoardService;
-import com.bikelong.vo.SharingBoard;
+import com.bikelong.service.*;
+import com.bikelong.vo.*;
 
 @Controller
 @RequestMapping(value = "pathboard")
-public class SharingBoardController {
+public class TrailBoardController {
 	
 	@Autowired
-	@Qualifier(value = "sharingBoardService")
-	private SharingBoardService sharingBoarService;
+	@Qualifier(value = "TrailBoardService")
+	private TrailBoardService TrailBoardService;
 	
 	@RequestMapping(value = "list.action", method = RequestMethod.GET)
 	public String list() {
 		
-		List<SharingBoard> sharingboardList = sharingBoarService.findBoardList();
 		
 		return "list";
 	}
@@ -40,7 +39,7 @@ public class SharingBoardController {
 	@RequestMapping(value = "detail.action", method = RequestMethod.GET)
 	public String detail(String boardNo) {
 		
-		List<SharingBoard> sharingboardDetail = sharingBoarService.findBoard(boardNo);
+	
 		
 		return "detail";
 	}
@@ -51,15 +50,15 @@ public class SharingBoardController {
 	}
 	
 	@RequestMapping(value = "write.action", method = RequestMethod.POST)
-	public String writePost(SharingBoard sharingBoard) {
+	public String writePost(TrailBoard trailBoard) {
 		int cate = 2;
-		sharingBoard.setCategory(cate);
-		sharingBoarService.writeBoard(sharingBoard);
+		trailBoard.setCategory(cate);
+		TrailBoardService.writeBoard(trailBoard);
 		
-		System.out.println(sharingBoard.getContent());
-		System.out.println(sharingBoard.getDate());
-		System.out.println(sharingBoard.getLocationNo());
-		System.out.println(sharingBoard.getTitle());
+		System.out.println(trailBoard.getContent());
+		System.out.println(trailBoard.getDate());
+		System.out.println(trailBoard.getLocationNo());
+		System.out.println(trailBoard.getTitle());
 		
 		return "write";
 	}

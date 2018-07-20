@@ -22,13 +22,13 @@
 					<div class="inner-navigation collapse">
 						<div class="inner-nav onepage-nav">
 							<ul>
-								<li><a href="index.jsp#home"><span class="menu-item-span">Home</span></a></li>
-								<li><a href="index.jsp#story"><span class="menu-item-span">Our story</span></a></li>
-								<li><a href="index.jsp#special"><span class="menu-item-span">Special</span></a></li>
-								<li><a href="index.jsp#popular"><span class="menu-item-span">Popular</span></a></li>
-								<li><a href="index.jsp#gallery"><span class="menu-item-span">Gallery</span></a></li>
-								<li><a href="index.jsp#services"><span class="menu-item-span">Services</span></a></li>
-								<li><a href="index.jsp#news"><span class="menu-item-span">News</span></a></li>
+								<li><a href="index.jsp#home"><span class="menu-item-span">서비스 소개</span></a></li>
+								<li><a href="index.jsp#story"><span class="menu-item-span">산책로 추천</span></a></li>
+								<li><a href="index.jsp#special"><span class="menu-item-span">경로 공유</span></a></li>
+								<li><a href="rentalShop.action"><span class="menu-item-span">대여소 위치</span></a></li>
+								<li><a href="index.jsp#gallery"><span class="menu-item-span">공지사항</span></a></li>
+								<li><a href="index.jsp#services"><span class="menu-item-span">고객의 의견</span></a></li>
+								<li><a href="index.jsp#news"><span class="menu-item-span">갤러리</span></a></li>
 								<!-- Pages-->
 								<li class="menu-item-has-children"><a href="features.jsp"><span class="menu-item-span">Pages</span></a>
 									<ul class="sub-menu">
