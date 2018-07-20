@@ -80,10 +80,10 @@
 								<div class="up-form">
 									<form method="post" action="signin.action">
 										<div class="form-group">
-											<input class="form-control" type="text" name="id" placeholder="id">
+											<input class="form-control placeholder" type="text" name="id" placeholder="id">
 										</div>
 										<div class="form-group">
-											<input class="form-control" type="password" name="password" placeholder="Pasword">
+											<input class="form-control placeholder" type="password" name="password" placeholder="Pasword">
 										</div>
 										<div class="form-group">
 											<button class="btn btn-block btn-round btn-brand" type="submit">Login</button>

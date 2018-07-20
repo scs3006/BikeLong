@@ -597,6 +597,7 @@ pre {
 */
 
 .form-control {
+	color : white;
     background: #fff;
     box-shadow: none;
     border-radius: 0;
@@ -608,6 +609,10 @@ pre {
     font-size: .6875rem;
     padding: 1.125rem 1.125rem;
 }
+
+.placeholder::-ms-input-placeholder { color: #eeeeee; }
+.placeholder::-webkit-input-placeholder { color: #eeeeee; } 
+.placeholder::-moz-placeholder { color: #eeeeee; }
 
 .form-control:focus {
     border-color: #e1be64;
