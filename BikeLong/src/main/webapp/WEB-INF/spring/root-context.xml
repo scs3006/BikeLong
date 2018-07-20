@@ -72,6 +72,15 @@
 		<property name="rentalShopMapper" ref="rentalShopMapper" />	
 	</bean>	
 	
+	<!-- 김일해 -->
+	<bean id="trailBoardService"
+		class="com.bikelong.service.TrailBoardServiceImpl">
+		<property name="trailBoardDao" ref="trailBoardDao" />
+	</bean>
+	<bean id="trailBoardDao"
+		class="com.bikelong.dao.MySqlTrailBoardDao">
+		<property name="trailBoardMapper" ref="trailBoardMapper" />	
+	</bean>	
 	
 	<!-- 공통부분 xml의 매핑을 구현하는 빈 자동 생성 -->
 	<bean id="memberMapper"
@@ -96,6 +105,15 @@
 			value="com.bikelong.mapper.RentalShopMapper" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />	
 	</bean>
+	
+	<!-- 김일해 -->
+	<bean id="trailBoardMapper"
+		class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.bikelong.mapper.TrailBoardMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
 	
 	<!-- 개인 설정 xml파일 임포트 -->
 	

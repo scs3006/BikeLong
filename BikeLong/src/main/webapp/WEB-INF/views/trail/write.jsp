@@ -33,6 +33,13 @@
                 bUseModeChanger : true,
             }
         });
+        //전송버튼
+        $("#savebtn").click(function(event){
+        	event.preventDefault();
+        	obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+            //폼 submit
+            $("#frm").submit();
+        }); 
     });
 </script>
 
@@ -85,28 +92,22 @@
 
 							<div class="row">
 								<div class="col-md-12">
+									<form action="write.action" id="frm" method="POST" enctype="multipart/form-data" novalidate>
 										<div class="row">
-											<div class="col-md-12">
+											<div class="col-md-6">
 												<div class="form-group">
-												제목 : ${sharingBoardDetail.title}
-													
+													<input class="form-control" type="text" name="writer" value="${loginuser.id}" placeholder="작성자" readonly>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<input class="form-control" type="date" name="date" placeholder="작성일" >
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="form-group">
-												글쓴이 : ${sharingBoardDetail.writer}
-												</div>
-											</div>
-											<div class="col-md-12">
-												<div class="form-group">
-												작성일 : ${sharingBoardDetail.date}
-												</div>
-											</div>
-											<div class="col-md-12">
-												<div class="form-group">
-												해당 경로 지역구 : ${sharingBoardDetail.locationNo}
-												<br/><br/>
-												<!--  <select class="select form-control" name="locationNo" >
+												지역 
+												<select class="select form-control" name="locationNo" >
 														<option value="1">강남구</option>
 														<option value="2">강동구</option>
 														<option value="3">강북구</option>
@@ -132,23 +133,28 @@
 														<option value="23">종로구</option>
 														<option value="24">중구</option>
 														<option value="25">중랑구</option>
-													</select>	-->
+													</select>
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="form-group">
-													${sharingBoardDetail.content}
-													<br/><br/>
+													<input class="form-control" type="text" name="title" placeholder="제목" required>
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													<textarea rows="10" cols="100" name="content" id="content" class="form-control" 
+													style="width: 100%; height: 482px" placeholder="내용" required></textarea>
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="text-center">
-													<input type="button" id="lsitbtn" class="btn btn-black" value="목록보기"/>
-													<input type="button" id="updatebtn" class="btn btn-black" value="수정"/>
-													<input type="button" id="deletebtn" class="btn btn-black" value="삭제"/>
+													<input type="button" id="savebtn" class="btn btn-black" value="글쓰기"/>
+													<input type="button" id="cencel" class="btn btn-black" value="취소"/>
 												</div>
 											</div>
 										</div>
+									</form>
 								</div>
 							</div>
 						</article>
@@ -256,6 +262,24 @@
 								src="/bikelong/resources/assets/images/widgets/6.jpg" alt=""></a></li>
 					</ul>
 				</aside>
+				<!-- Text widget-->
+				<!--aside.widget.widget_text
+					.textwidget
+						.up-logo
+							p.text-center.m-b-50: img(src="/bikelong/resources/assets/images/logo-light.png" width="100" alt="")
+						.up-form
+							form(method="post")
+								.form-group
+									input.form-control.form-control-lg(type="email" placeholder="Email")
+								.form-group
+									input.form-control.form-control-lg(type="password" placeholder="Pasword")
+								.form-group
+									button(type="submit" class="btn btn-block btn-lg btn-round btn-brand") Log in
+						.up-help
+							p: a(href="#") Forgot your password?
+							p Don't have an account yet? <a href="#">Sign in</a>
+					
+					-->
 
 				<!-- Twitter widget-->
 				<aside class="widget twitter-feed-widget">

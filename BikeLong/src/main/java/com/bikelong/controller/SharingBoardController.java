@@ -10,6 +10,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -44,14 +45,22 @@ public class SharingBoardController {
 	public String detail(String boardNo, Model model, SharingBoard sharingBoardDetail) {
 		boardNo = "2";
 		sharingBoardDetail = sharingBoarService.findBoard(boardNo);
+		
+		sharingBoardDetail.setDate(sharingBoardDetail.getDate().substring(0, 10));
+		
 		model.addAttribute("sharingBoardDetail", sharingBoardDetail);
 		return "sharingdetail";
 	}
 	
 	
 	@RequestMapping(value = "write.action", method = RequestMethod.GET)
-	public String write() {
-		return "sharingwrite";
+	@ResponseBody
+	public String write(HttpSession session) {
+		if(session.getAttribute("id")!=null) {
+			return "sharingwrite";
+		}else {
+			return "sign-in";
+		}
 	}
 	
 	

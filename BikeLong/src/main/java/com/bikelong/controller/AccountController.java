@@ -26,7 +26,7 @@ public class AccountController {
 	
 	@GetMapping(value = "/signin.action")
 	public String getSignIn(String result,Model model) {
-		return "sign-in";
+		return "account/sign-in";
 	}
 
 	@PostMapping(value = "/signin.action")
@@ -51,7 +51,7 @@ public class AccountController {
 	
 	@GetMapping(value = "/signup.action")
 	public String getSignUp() {
-		return "sign-up";
+		return "account/sign-up";
 	}
 	
 	@PostMapping(value = "/signup.action")
