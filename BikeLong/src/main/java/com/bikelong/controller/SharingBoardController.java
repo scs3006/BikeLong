@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,26 +30,30 @@ public class SharingBoardController {
 	@Qualifier(value = "sharingBoardService")
 	private SharingBoardService sharingBoarService;
 	
+	
 	@RequestMapping(value = "list.action", method = RequestMethod.GET)
-	public String list() {
+	public String list(Model model) {
 		
-		List<SharingBoard> sharingboardList = sharingBoarService.findBoardList();
-		
-		return "list";
+		List<SharingBoard> sharingboardLists = sharingBoarService.findBoardList();
+		model.addAttribute("sharingboardLists", sharingboardLists);
+		return "sharinglist";
 	}
 	
+	
 	@RequestMapping(value = "detail.action", method = RequestMethod.GET)
-	public String detail(String boardNo) {
-		
-		List<SharingBoard> sharingboardDetail = sharingBoarService.findBoard(boardNo);
-		
-		return "detail";
+	public String detail(String boardNo, Model model, SharingBoard sharingBoardDetail) {
+		boardNo = "2";
+		sharingBoardDetail = sharingBoarService.findBoard(boardNo);
+		model.addAttribute("sharingBoardDetail", sharingBoardDetail);
+		return "sharingdetail";
 	}
+	
 	
 	@RequestMapping(value = "write.action", method = RequestMethod.GET)
 	public String write() {
-		return "write";
+		return "sharingwrite";
 	}
+	
 	
 	@RequestMapping(value = "write.action", method = RequestMethod.POST)
 	public String writePost(SharingBoard sharingBoard) {
@@ -56,13 +61,9 @@ public class SharingBoardController {
 		sharingBoard.setCategory(cate);
 		sharingBoarService.writeBoard(sharingBoard);
 		
-		System.out.println(sharingBoard.getContent());
-		System.out.println(sharingBoard.getDate());
-		System.out.println(sharingBoard.getLocationNo());
-		System.out.println(sharingBoard.getTitle());
-		
-		return "write";
+		return "sharingwrite";
 	}
+	
 	
 	@RequestMapping(value = "multiuploadimage.action", method = RequestMethod.POST)
 	@ResponseBody
@@ -100,11 +101,11 @@ public class SharingBoardController {
 		} 
 		sFileInfo += "&bNewLine=true&sFileName="+ name+"&sFileURL=/bikelong/resources/photoupload/"+realname;
 		return sFileInfo;
-		
 	}
 	
+	
 	@RequestMapping(value = "singleuploadimage.action", method = RequestMethod.POST)
-	public String writeditor1(HttpServletRequest req, HttpServletResponse resp) {
+	public void writeditor1(HttpServletRequest req, HttpServletResponse resp) {
 		
 	    try {
 		String sFileInfo = "";
@@ -140,16 +141,13 @@ public class SharingBoardController {
 		out.println(sFileInfo);
 	    }catch (Exception e) {
 		}
-		
-		return "index";
 	}
 	
 	
 	@RequestMapping(value = "update.action", method = RequestMethod.GET)
 	public String update() {
 		
-		return "update";
+		return "sharingupdate";
 	}
 	
-  
 }
