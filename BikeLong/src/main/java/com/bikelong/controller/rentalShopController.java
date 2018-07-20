@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.bikelong.service.RentalShopService;
+import com.bikelong.vo.RentalShop;
 
 @Controller
 public class rentalShopController {
@@ -19,7 +20,7 @@ public class rentalShopController {
 	@GetMapping(value = "/rentalShop.action")
 	public String rentalShop() {
 		
-		
+		RentalShop rentalShop = rentalShopService.findRentalShop();
 		
 		return "rentalShop/rentalShop";
 	}

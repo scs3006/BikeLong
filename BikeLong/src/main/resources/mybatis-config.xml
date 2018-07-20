@@ -8,6 +8,7 @@
 	<typeAliases>
 		<typeAlias type="com.bikelong.vo.Member" alias="Member"/>
 		<typeAlias type="com.bikelong.vo.SharingBoard" alias="SharingBoard"/>
+		<typeAlias type="com.bikelong.vo.RentalShop" alias="RentalShop"/>
 	</typeAliases>
 
 	<environments default="mysql">
