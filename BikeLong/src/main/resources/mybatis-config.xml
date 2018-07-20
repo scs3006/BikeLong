@@ -9,7 +9,7 @@
 		<typeAlias type="com.bikelong.vo.Member" alias="Member"/>
 		<typeAlias type="com.bikelong.vo.SharingBoard" alias="SharingBoard"/>
 		<typeAlias type="com.bikelong.vo.RentalShop" alias="RentalShop"/>
-		<typeAlias type="com.bikelong.vo.TrailBoard" alias="TrailBoard"/>
+		<typeAlias type="com.bikelong.vo.Board" alias="Board"/>
 		<typeAlias type="com.bikelong.vo.Goal" alias="Goal"/>
 	</typeAliases>
 

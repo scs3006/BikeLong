@@ -5,12 +5,12 @@
   
 <mapper namespace="com.bikelong.mapper.NoticeBoardMapper">
 	
-	<insert id="insertBoard" parameterType="com.bikelong.vo.Board">
+	<insert id="insertBoard" parameterType="Board">
 		INSERT INTO Board(id, locationNo, category, title, content)
 		VALUES(#{id}, #{locationNo}, #{category}, #{title}, #{content})
 	</insert>
 	
-	<select id="selectNoticeBoardList" resultType="com.bikelong.vo.Board">
+	<select id="selectNoticeBoardList" resultType="Board">
 		SELECT boardNo, title, content, id, date_format(date,'%Y-%m-%d') AS date 
 		FROM Board 
 		WHERE category=3 ORDER BY boardNo

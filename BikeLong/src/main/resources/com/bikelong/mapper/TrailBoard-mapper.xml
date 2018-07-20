@@ -5,18 +5,18 @@
   
 <mapper namespace="com.bikelong.mapper.TrailBoardMapper">
 	
-	<insert id="insertTrailBoard" parameterType="TrailBoard">
+	<insert id="insertTrailBoard" parameterType="Board">
 		INSERT INTO Board(id, locationNo, category, date, title, content)
 		VALUES(#{id}, #{locationNo}, #{category}, #{date}, #{title}, #{content})
 	</insert>
 	
-	<select id="selectTrailBoardList" resultType="TrailBoard">
+	<select id="selectTrailBoardList" resultType="Board">
 		SELECT boardNo, id, locationNo, date, title, content  
 		FROM Board
 		WHERE category = 1 
 	</select>
 	
-	<select id="selectTrailBoard" parameterType="hashmap" resultType="TrailBoard">
+	<select id="selectTrailBoard" parameterType="hashmap" resultType="Board">
 		SELECT id, locationNo, date, title, content
 		FROM Board
 		WHERE boardNo = #{boardNo} AND category = 1
