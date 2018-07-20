@@ -14,56 +14,52 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bikelong.service.*;
-import com.bikelong.vo.*;
+import com.bikelong.service.TrailBoardService;
+import com.bikelong.vo.TrailBoard;
 
 @Controller
-@RequestMapping(value = "pathboard")
+@RequestMapping(value = "trailpathboard")
 public class TrailBoardController {
 	
 	@Autowired
 	@Qualifier(value = "TrailBoardService")
 	private TrailBoardService TrailBoardService;
 	
-	@RequestMapping(value = "list.action", method = RequestMethod.GET)
-	public String list() {
-		
-		
+	@GetMapping(value = "list.action")
+	public String list(Model model) {
+		List<TrailBoard> trailBoard = TrailBoardService.findBoardList();
+		model.addAttribute("trailBoard", trailBoard);
 		return "list";
 	}
 	
-	@RequestMapping(value = "detail.action", method = RequestMethod.GET)
-	public String detail(String boardNo) {
-		
-	
-		
+	@GetMapping(value = "detail.action")
+	public String detail(String boardNo, Model model) {
+		TrailBoard trailBoard = (TrailBoard) TrailBoardService.findBoard(boardNo);
+		model.addAttribute("TrailBoard",trailBoard);
 		return "detail";
 	}
 	
-	@RequestMapping(value = "write.action", method = RequestMethod.GET)
+	@GetMapping(value = "write.action")
 	public String write() {
 		return "write";
 	}
 	
-	@RequestMapping(value = "write.action", method = RequestMethod.POST)
+	@PostMapping(value = "write.action")
 	public String writePost(TrailBoard trailBoard) {
-		int cate = 2;
+		int cate = 1;
 		trailBoard.setCategory(cate);
 		TrailBoardService.writeBoard(trailBoard);
-		
-		System.out.println(trailBoard.getContent());
-		System.out.println(trailBoard.getDate());
-		System.out.println(trailBoard.getLocationNo());
-		System.out.println(trailBoard.getTitle());
 		
 		return "write";
 	}
 	
-	@RequestMapping(value = "multiuploadimage.action", method = RequestMethod.POST)
+	@PostMapping(value = "multiuploadimage.action")
 	@ResponseBody
 	public String uploadMultipleImage(HttpServletRequest req) {
 		
@@ -102,7 +98,7 @@ public class TrailBoardController {
 		
 	}
 	
-	@RequestMapping(value = "singleuploadimage.action", method = RequestMethod.POST)
+	@PostMapping(value = "singleuploadimage.action")
 	public String writeditor1(HttpServletRequest req, HttpServletResponse resp) {
 		
 	    try {
@@ -144,7 +140,7 @@ public class TrailBoardController {
 	}
 	
 	
-	@RequestMapping(value = "update.action", method = RequestMethod.GET)
+	@GetMapping(value = "update.action")
 	public String update() {
 		
 		return "update";
