@@ -19,7 +19,7 @@ public class MySqlTrailBoardDao implements TrailBoardDao{
 	}
 
 	@Override
-	public Board selectBoard(String boardNo) {
+	public Board selectBoard(int boardNo) {
 		Board trailBoard = trailBoardMapper.selectBoard(boardNo);
 		return trailBoard;
 	}
@@ -28,6 +28,21 @@ public class MySqlTrailBoardDao implements TrailBoardDao{
 	public List<Board> selectBoardList() {
 		List<Board> trailBoard = trailBoardMapper.selectBoardList();
 		return trailBoard;
+	}
+
+
+	@Override
+	public void updateBoard(Board board) {
+		
+		trailBoardMapper.updateBoard(board);
+		
+	}
+
+
+	@Override
+	public void deleteBoard(int boardNo) {
+		
+		trailBoardMapper.deleteBoard(boardNo);
 	}
 
 

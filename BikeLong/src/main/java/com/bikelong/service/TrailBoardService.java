@@ -8,8 +8,11 @@ public interface TrailBoardService {
 
 	void writeBoard(Board trailBoard);
 
-	Board findBoard(String boardNo);
+	Board findBoard(int boardNo);
 
 	List<Board> findBoardList();
 
+	void updateBoard(Board board);
+
+	void deleteBoard(int boardNo);
 }
