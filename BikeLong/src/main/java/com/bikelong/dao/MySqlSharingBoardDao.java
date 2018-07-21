@@ -31,7 +31,20 @@ public class MySqlSharingBoardDao implements SharingBoardDao {
 		List<SharingBoard> sharingBoard = sharingBoardMapper.selectBoardList();
 		return sharingBoard;
 	}
-	
+
+
+	@Override
+	public void updateBoard(SharingBoard sharingBoard) {
+		sharingBoardMapper.updateBoard(sharingBoard);
+	}
+
+
+	@Override
+	public void deleteBoard(int boardNo) {
+		sharingBoardMapper.deleteBoard(boardNo);
+	}
+
+
 
 	
 }

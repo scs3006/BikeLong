@@ -34,7 +34,6 @@
 				bUseModeChanger : true,
 			}
 		});
-
 	});
 </script>
 
@@ -106,35 +105,8 @@
 										</div>
 										<div class="col-md-12">
 											<div class="form-group">
-												해당 경로 지역구 : ${sharingBoardDetail.locationNo} <br />
+												해당 지역구 : ${sharingBoardDetail.locationName} <br />
 												<br />
-												<!--  <select class="select form-control" name="locationNo" >
-														<option value="1">강남구</option>
-														<option value="2">강동구</option>
-														<option value="3">강북구</option>
-														<option value="4">강서구</option>
-														<option value="5">관악구</option>
-														<option value="6">광진구</option>
-														<option value="7">구로구</option>
-														<option value="8">금천구</option>
-														<option value="9">노원구</option>
-														<option value="10">도봉구</option>
-														<option value="11">동대문구</option>
-														<option value="12">동작구</option>
-														<option value="13">마포구</option>
-														<option value="14">서대문구</option>
-														<option value="15">서초구</option>
-														<option value="16">성동구</option>
-														<option value="17">성북구</option>
-														<option value="18">송파구</option>
-														<option value="19">양천구</option>
-														<option value="20">영등포구</option>
-														<option value="21">용산구</option>
-														<option value="22">은평구</option>
-														<option value="23">종로구</option>
-														<option value="24">중구</option>
-														<option value="25">중랑구</option>
-													</select>	-->
 											</div>
 										</div>
 										<div class="col-md-12">
@@ -146,8 +118,8 @@
 										<div class="col-md-12">
 											<div class="text-center">
 												<a class="btn btn-black" href="/bikelong/route/sharingboardlist.action">목록보기</a>
-												<a class="btn btn-black" href="/bikelong/route/sharingboardupdate.action">수정</a>
-												<a class="btn btn-black" href="/bikelong/route/sharingboarddelete.action">삭제</a>
+												<a class="btn btn-black" href="/bikelong/route/sharingboardupdate.action?boardNo=${sharingBoardDetail.boardNo}">수정</a>
+												<a class="btn btn-black" href="/bikelong/route/sharingboarddelete.action?boardNo=${sharingBoardDetail.boardNo}">삭제</a>
 											</div>
 										</div>
 									</div>

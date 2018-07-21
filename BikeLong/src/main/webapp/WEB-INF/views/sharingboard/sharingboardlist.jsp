@@ -80,12 +80,11 @@
 					</div>
 				<div class="row blog-masonry">
 				
-					<c:forEach var="lists" items="${ sharingboardLists }">
+					<c:forEach var="lists" items="${ sharingBoardLists }">
 						<div class="col-md-4 post-item">
 							<article class="post">
 								<div class="post-preview">
-									<a href="#"><img
-										src="${lists.imageName}" alt=""></a>
+									<img src="/bikelong/resources/photoupload/${lists.imageName}" alt="">
 								</div>
 								<div class="post-wrapper">
 									<div class="post-header" style="height: 15%">
