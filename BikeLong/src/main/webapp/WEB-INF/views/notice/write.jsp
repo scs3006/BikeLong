@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content=""/>
 <meta name="author" content=""/>
-<title>Tavern - Responsive Restaurant Template(Bootstrap 4)</title>
+<title>공지사항-글쓰기</title>
 
 
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -36,9 +36,24 @@
         //전송버튼
         $("#savebtn").click(function(event){
         	event.preventDefault();
-        	obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+        	
+        	var title = $('#frm').find('[name=title]').val();
+        	var content = $('#frm').find('[name=content]').val();
+         	
+        	if(title == null || title == ''){
+        		alert('제목을 입력해 주세요.');
+        		$('#frm').find('[name=title]').focus();
+        		return;
+        	}
+         	
+         	if(content == null || content == ''){
+        		alert('내용을 입력해 주세요.');
+        		return;
+        	}
+        	
+         	obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
             //폼 submit
-            $("#frm").submit();
+            //$("#frm").submit();
         }); 
     });
 </script>
@@ -87,7 +102,7 @@
 						<article class="post">
 
 							<div>
-								<h1>공지사항 글쓰기</h1>
+								<h1>공지사항</h1>
 							</div>
 							
 							<div class="row">
@@ -97,13 +112,13 @@
 											<input type="hidden" name="id" value="${loginuser.id}">
 											<div class="col-md-12">
 												<div class="form-group">
-													<input class="form-control" type="text" name="title" placeholder="제목" required>
+													<input class="form-control" type="text" name="title" placeholder="제목">
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="form-group">
 													<textarea rows="10" cols="100" name="content" id="content" class="form-control" 
-													style="width: 100%; height: 482px" placeholder="내용" required></textarea>
+													style="width: 100%; height: 482px" placeholder="내용"></textarea>
 												</div>
 											</div>
 											<div class="col-md-12">

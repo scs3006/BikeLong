@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content=""/>
 <meta name="author" content=""/>
-<title>Tavern - Responsive Restaurant Template(Bootstrap 4)</title>
+<title>공지사항-글 수정</title>
 
 
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>

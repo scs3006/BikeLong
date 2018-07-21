@@ -597,7 +597,6 @@ pre {
 */
 
 .form-control {
-	color : white;
     background: #fff;
     box-shadow: none;
     border-radius: 0;
@@ -609,6 +608,8 @@ pre {
     font-size: .6875rem;
     padding: 1.125rem 1.125rem;
 }
+
+.account .form-control{color : white;}
 
 .placeholder::-ms-input-placeholder { color: #eeeeee; }
 .placeholder::-webkit-input-placeholder { color: #eeeeee; } 
