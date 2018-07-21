@@ -103,7 +103,7 @@
 											<div class="col-md-6">
 												<div class="form-group">
 													<input class="form-control" type="text" name="id"
-														value="${loginuser.id}" placeholder="작성자" readonly>
+														value="${loginuser.id}"  readonly>
 												</div>
 											</div>
 											<div class="col-md-6">

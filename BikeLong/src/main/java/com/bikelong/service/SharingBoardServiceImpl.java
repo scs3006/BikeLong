@@ -29,6 +29,16 @@ public class SharingBoardServiceImpl implements SharingBoardService {
 		return sharingBoard;
 	}
 
+	@Override
+	public void updateBoard(SharingBoard sharingBoard) {
+		sharingBoardDao.updateBoard(sharingBoard);
+	}
+
+	@Override
+	public void deleteBoard(int boardNo) {
+		sharingBoardDao.deleteBoard(boardNo);
+	}
+
 
 
 }
