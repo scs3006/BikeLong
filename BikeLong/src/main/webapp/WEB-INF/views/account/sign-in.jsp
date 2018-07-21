@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="">
-		<title>Tavern - Responsive Restaurant Template(Bootstrap 4)</title>
+		<title>로그인</title>
 		<!-- Favicons-->
 		<link rel="shortcut icon" href="/bikelong/resources/assets/images/favicon.png">
 		<link rel="apple-touch-icon" href="/bikelong/resources/assets/images/apple-touch-icon.png">
@@ -70,7 +70,7 @@
 
 			<!-- Hero-->
 			<section class="module-cover fullscreen parallax" data-background="/bikelong/resources/assets/images/main.jpg" data-overlay="0.5">
-				<div class="container">
+				<div class="container account">
 					<div class="row">
 						<div class="col-md-4 m-auto">
 							<div class="text-center">

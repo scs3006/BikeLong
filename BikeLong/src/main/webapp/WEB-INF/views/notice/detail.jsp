@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>Tavern - Responsive Restaurant Template(Bootstrap 4)</title>
+<title>공지사항-상세보기</title>
 
 
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -18,21 +19,95 @@
 </head>
 <script type="text/javascript">
 	$(function() {
-		//전역변수
-		var obj = [];
-		//스마트에디터 프레임생성
-		nhn.husky.EZCreator.createInIFrame({
-			oAppRef : obj,
-			elPlaceHolder : "content",
-			sSkinURI : "/bikelong/resources/editor/SmartEditor2Skin.html",
-			htParams : {
-				// 툴바 사용 여부
-				bUseToolbar : true,
-				// 입력창 크기 조절바 사용 여부
-				bUseVerticalResizer : true,
-				// 모드 탭(Editor | HTML | TEXT) 사용 여부
-				bUseModeChanger : true,
+		
+		$('#noticeDelete').on('click',function(){
+			event.preventDefault();
+			var check = confirm('정말 삭제 하시겠습니까?');
+			if(check){
+				$.ajax({
+					url : "delete.action",
+					method : "GET",
+					data : {"boardNo" : ${board.boardNo}},
+					success : function(data,status,xhr){
+						if(data=="success"){
+							alert('삭제되었습니다.');
+							location.href = 'list.action';
+						}
+						if(data=="fail"){
+							alert('삭제에 실패하였습니다.');
+						}
+					},
+					error : function(xhr, status, err){
+						alert('삭제에 실패하였습니다.');
+					}
+				});	
+			}else{
+				return;
 			}
+		});
+		
+		$("#replySubmit").click(function(event){
+        	event.preventDefault();
+        	
+        	if(!($('#frm input[name=id]').val())){ // null or '' check!
+    			var value = confirm('로그인이 필요한 서비스입니다. 로그인 할까요?');
+    			if(value){
+    				location.href='/bikelong/account/signin.action';
+    			}
+    			return;
+    		}
+        	
+        	if($('#frm textarea').val().length == 0){
+    			alert('댓글 내용을 입력하세요.');
+    			return;
+    		}
+        	
+        	var queryString =  $("#frm").serialize();
+        	$.ajax({
+				url : "/bikelong/reply/insert.action",
+				method : "POST",
+				data : queryString,
+				success : function(data,status,xhr){
+					if(data=="success"){
+						alert('댓글 등록에 성공하셨습니다.');
+						$('#frm textarea').val('');
+						$('div#comments').load('/bikelong/reply/findReplyList.action?boardNo=' + $('#frm input[name=boardNo]').val());
+					}
+					if(data=="fail"){
+						alert('댓글 등록에 실패하셨습니다.');
+						return;
+					}
+				},
+				error : function(xhr, status, err){
+					alert('댓글 등록에 실패하셨습니다.');
+					return;
+				}
+			});
+        });
+		
+		$('.deleteReply').each(function(idx){
+			$(this).on('click',function(event){
+				var replyNo = $(this).attr('data-replyNo');
+				$.ajax({
+					url : "/bikelong/reply/delete.action",
+					method : "GET",
+					data : {'replyNo' : replyNo},
+					success : function(data,status,xhr){
+						if(data=="success"){
+							alert('댓글 삭제에 성공하셨습니다.');
+							location.href="/bikelong/noticeboard/detail.action?boardNo=${board.boardNo}";
+						}
+						if(data=="fail"){
+							alert('댓글 삭제에 실패하셨습니다.');
+							return;
+						}
+					},
+					error : function(xhr, status, err){
+						alert('댓글 삭제에 실패하셨습니다.');
+						return;
+					}
+				});
+			});
 		});
 	});
 </script>
@@ -84,42 +159,37 @@
 						<!-- Post-->
 						<article class="post">
 
-							<div class="post-preview">
-								<!--  -->
+							<div>
+								<h1>공지사항</h1>
 							</div>
 
 							<div class="row">
 								<div class="col-md-12">
 									<div class="row">
-										<div class="col-md-12">
-											<div class="form-group">제목 :
-												${sharingBoardDetail.title}</div>
-										</div>
-										<div class="col-md-12">
-											<div class="form-group">글쓴이 :
-												${sharingBoardDetail.id}</div>
-										</div>
-										<div class="col-md-12">
-											<div class="form-group">작성일 :
-												${sharingBoardDetail.date}</div>
-										</div>
-										<div class="col-md-12">
-											<div class="form-group">
-												해당 지역구 : ${sharingBoardDetail.locationName} <br />
-												<br />
-											</div>
-										</div>
-										<div class="col-md-12">
-											<div class="form-group">
-												${sharingBoardDetail.content} <br />
-												<br />
-											</div>
+										<div class="table-responsive">
+											<table class="table table-bordered">
+												 <tr>
+												 	<td>제목</td>
+												 	<td colspan="3">${board.title}</td>
+												  </tr>
+												  <tr>	
+												 	<td>글쓴이</td>
+												 	<td >${board.id}</td>
+												 	<td>작성일</td>
+												 	<td >${board.date}</td>
+												 </tr>
+												 <tr>
+												 	 <td colspan="4" height="400px;">${board.content}</td>
+												 </tr>
+											</table>
 										</div>
 										<div class="col-md-12">
 											<div class="text-center">
-												<a class="btn btn-black" href="/bikelong/route/sharingboardlist.action">목록보기</a>
-												<a class="btn btn-black" href="/bikelong/route/sharingboardupdate.action?boardNo=${sharingBoardDetail.boardNo}">수정</a>
-												<a class="btn btn-black" href="/bikelong/route/sharingboarddelete.action?boardNo=${sharingBoardDetail.boardNo}">삭제</a>
+												<a class="btn btn-black" href="list.action">목록보기</a>
+												<c:if test="${loginuser.id eq 'manager' && loginuser ne null}">
+													<a class="btn btn-black" href="update.action?boardNo=${board.boardNo}">수정</a>
+													<a class="btn btn-black" id="noticeDelete" href="#">삭제</a>
+												</c:if>
 											</div>
 										</div>
 									</div>
@@ -131,38 +201,49 @@
 						<!-- Comments area-->
 						<div class="comments-area">
 							<h5 class="comments-title">Comments</h5>
-							<div class="comment-list">
-								<!-- Comment-->
-								<div class="comment">
-									<div class="comment-author">
-										<img class="avatar"
-											src="/bikelong/resources/assets/images/avatar/1.jpg" alt="">
-									</div>
-									<div class="comment-body">
-										<div class="comment-meta">
-											<div class="comment-meta-author">Jason Ford</div>
-											<div class="comment-meta-date">May 5, 2015 at 4:51 am</div>
-										</div>
-										<div class="comment-content">
-											<p>fanny pack nostrud.</p>
-										</div>
-									</div>
-								</div>
+							<div class="comment-list" id="comments">
+								<c:choose>
+									<c:when test="${ replyList == '' || replyList eq null}">
+										<h3 id="nodata" style="text-align:center">
+										 작성된 댓글이 없습니다.
+										</h3>
+									</c:when>
+									<c:otherwise>
+										<!-- 댓글 리스트-->
+										<c:forEach var="reply" items="${ replyList }">
+											<div class="comment">
+												<div class="comment-author">
+													<img class="avatar"
+														src="/bikelong/resources/assets/images/avatar/1.jpg" alt="">
+												</div>
+												<div class="comment-body">
+													<div class="comment-meta">
+														<div class="comment-meta-author">${reply.id}</div>
+														<div class="comment-meta-date">${reply.date}</div>
+													</div>
+													<div class="comment-content">
+														<p>${reply.content}</p>
+													</div>
+													<c:if test="${loginuser.id eq reply.id && loginuser ne null}">
+														<a class="btn deleteReply" data-replyNo="${reply.replyNo}" href="#">삭제</a>
+													</c:if>
+												</div>
+											</div>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
 							</div>
 							<div class="comment-respond">
-								<h5 class="comment-reply-title">Leave a Reply</h5>
-								<p class="comment-notes">Your email address will not be
-									published. Required fields are marked</p>
-								<form class="comment-form row">
-									<div class="form-group col-md-4">
-										<input class="form-control" type="text" placeholder="Name">
-									</div>
+								<h5 class="comment-reply-title">댓글 쓰기</h5>
+								
+								<form id="frm" class="comment-form row">
+									<input class="form-control" type="hidden" name="id" value="${loginuser.id}">
+									<input class="form-control" type="hidden" name="boardNo" value="${board.boardNo}">
 									<div class="form-group col-md-12">
-										<textarea class="form-control" rows="8" placeholder="Comment"></textarea>
+										<textarea class="form-control" rows="8" name="content" placeholder="Comment"></textarea>
 									</div>
 									<div class="form-submit col-md-12">
-										<button class="btn btn-black" type="submit">Post
-											Comment</button>
+										<button class="btn btn-black" id="replySubmit" type="submit">Post Comment</button>
 									</div>
 								</form>
 							</div>

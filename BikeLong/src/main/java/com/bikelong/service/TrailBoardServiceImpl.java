@@ -3,7 +3,7 @@ package com.bikelong.service;
 import java.util.List;
 
 import com.bikelong.dao.TrailBoardDao;
-import com.bikelong.vo.TrailBoard;
+import com.bikelong.vo.Board;
 
 public class TrailBoardServiceImpl implements TrailBoardService {
 
@@ -15,19 +15,19 @@ public class TrailBoardServiceImpl implements TrailBoardService {
 	
 	
 	@Override
-	public  void writeBoard(TrailBoard trailBoard) {
+	public  void writeBoard(Board trailBoard) {
 		trailBoardDao.insertBoard(trailBoard);
 	}
 
 	@Override
-	public TrailBoard findBoard(String boardNo) {
-		TrailBoard trailBoard = trailBoardDao.selectBoard(boardNo);
+	public Board findBoard(String boardNo) {
+		Board trailBoard = trailBoardDao.selectBoard(boardNo);
 		return trailBoard;
 	}
 
 	@Override
-	public List<TrailBoard> findBoardList() {
-		List<TrailBoard> trailBoard = trailBoardDao.selectBoardList();
+	public List<Board> findBoardList() {
+		List<Board> trailBoard = trailBoardDao.selectBoardList();
 		return trailBoard;
 	}
 

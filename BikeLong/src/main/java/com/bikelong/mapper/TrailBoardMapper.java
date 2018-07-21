@@ -6,8 +6,8 @@ import com.bikelong.vo.*;
 
 public interface TrailBoardMapper {
 
-	void insertBoard(TrailBoard trailBoard);
-	TrailBoard selectBoard(String boardNo);
-	List<TrailBoard> selectBoardList();
+	void insertBoard(Board trailBoard);
+	Board selectBoard(String boardNo);
+	List<Board> selectBoardList();
 
 }

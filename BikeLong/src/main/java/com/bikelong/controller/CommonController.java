@@ -5,66 +5,20 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bikelong.service.TrailBoardService;
-import com.bikelong.vo.Board;
-
 @Controller
-@RequestMapping(value = "trailpathboard")
-public class TrailBoardController {
+public class CommonController {
 	
-	@Autowired
-	@Qualifier(value = "trailBoardService")
-	private TrailBoardService trailBoardService;
-	
-	@GetMapping(value = "list.action")
-	public String list(Model model) {
-		List<Board> trailBoardList = trailBoardService.findBoardList();
-		model.addAttribute("trailBoardList", trailBoardList);
-		return "trail/list";
-	}
-	
-	@GetMapping(value = "detail.action")
-	public String detail(String boardNo, Model model) {
-		Board trailBoardDetail = trailBoardService.findBoard(boardNo);
-		model.addAttribute("trailBoardDetail",trailBoardDetail);
-		return "trail/detail";
-	}
-	
-	@GetMapping(value = "write.action")
-	public String write(HttpSession session) {
-		if(session.getAttribute("id")!=null) {
-			return "trail/write";
-		}else {
-			return "sign-in";
-		}
-	}
-	
-	@PostMapping(value = "write.action")
-	public String writePost(Board trailBoard) {
-		int cate = 1;
-		trailBoard.setCategory(cate);
-		trailBoardService.writeBoard(trailBoard);
-		
-		return "trail/write";
-	}
-	
-	@PostMapping(value = "multiuploadimage.action")
+	@RequestMapping(value = "multiuploadimage.action", method = RequestMethod.POST)
 	@ResponseBody
 	public String uploadMultipleImage(HttpServletRequest req) {
 		
@@ -75,7 +29,7 @@ public class TrailBoardController {
 		//파일 기본경로
 		String defaultPath = req.getSession().getServletContext().getRealPath("/");
 		//파일 기본경로 _ 상세경로
-		String path = defaultPath + "resources/photoupload/" + File.separator;
+		String path = defaultPath + "resources/photoupload" + File.separator;
 		File file = new File(path);
 		if(!file.exists()) {
 		   file.mkdirs();
@@ -86,6 +40,7 @@ public class TrailBoardController {
 			InputStream is = req.getInputStream();
 			OutputStream os=new FileOutputStream(path + realname);
 			int numRead;
+
 			// 파일쓰기
 			byte b[] = new byte[Integer.parseInt(req.getHeader("file-size"))];
 			while((numRead = is.read(b,0,b.length)) != -1){
@@ -98,13 +53,13 @@ public class TrailBoardController {
 			os.close();
 		}catch (Exception e) {
 		} 
-		sFileInfo += "&bNewLine=true&sFileName="+ name+"&sFileURL=/bikelong/resources/photoupload/"+realname;
+		sFileInfo += "&bNewLine=true&sFileName="+ name+"&sFileURL="+"/bikelong/resources/photoupload/"+realname;
 		return sFileInfo;
-		
 	}
 	
-	@PostMapping(value = "singleuploadimage.action")
-	public String writeditor1(HttpServletRequest req, HttpServletResponse resp) {
+	
+	@RequestMapping(value = "singleuploadimage.action", method = RequestMethod.POST)
+	public void writeditor1(HttpServletRequest req, HttpServletResponse resp) {
 		
 	    try {
 		String sFileInfo = "";
@@ -114,7 +69,7 @@ public class TrailBoardController {
 		//파일 기본경로
 		String defaultPath = req.getSession().getServletContext().getRealPath("/");
 		//파일 기본경로 _ 상세경로
-		String path = defaultPath +  "resources/photoupload/" + File.separator;
+		String path = defaultPath +  "resources/photoupload" + File.separator;
 		File file = new File(path);
 		if(!file.exists()) {
 		    file.mkdirs();
@@ -133,23 +88,21 @@ public class TrailBoardController {
 		}
 		os.flush();
 		os.close();
-		sFileInfo += "&bNewLine=true&sFileName="+ name+"&sFileURL=/bikelong/resources/photoupload/"+realname;
+		sFileInfo += "&bNewLine=true&sFileName="+ name+"&sFileURL="+"/bikelong/resources/photoupload/"+realname;
 		
 		PrintWriter out = resp.getWriter();
 		
 		out.println(sFileInfo);
 	    }catch (Exception e) {
 		}
-		
-		return "index";
 	}
 	
-	
-	@GetMapping(value = "update.action")
-	public String update() {
-		
-		return "trail/update";
-	}
-	
-  
+
 }
+
+
+
+
+
+
+

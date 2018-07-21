@@ -10,6 +10,7 @@ public class SharingBoard {
 	private String title;
 	private String content;
 	private String locationNo;
+	private String locationName;
 	private String imageName;
 	
 	public String getDate() {
@@ -59,6 +60,12 @@ public class SharingBoard {
 	}
 	public void setImageName(String imageName) {
 		this.imageName = imageName;
+	}
+	public String getLocationName() {
+		return locationName;
+	}
+	public void setLocationName(String locationName) {
+		this.locationName = locationName;
 	}
 	
 		

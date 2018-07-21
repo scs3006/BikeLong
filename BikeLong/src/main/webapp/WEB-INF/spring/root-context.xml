@@ -69,5 +69,5 @@
 	<import resource="classpath:com/bikelong/beanconfig/trailBoard-config.xml" />
 	<import resource="classpath:com/bikelong/beanconfig/noticeBoard-config.xml" />
 	<import resource="classpath:com/bikelong/beanconfig/goal-config.xml" />
-	
+	<import resource="classpath:com/bikelong/beanconfig/reply-config.xml" />
 </beans>

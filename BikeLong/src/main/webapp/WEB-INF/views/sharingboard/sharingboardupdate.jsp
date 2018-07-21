@@ -104,19 +104,21 @@
 											<div class="col-md-6">
 												<div class="form-group">
 													<input class="form-control" type="text" name="id"
-														value="${loginuser.id}" placeholder="작성자" readonly>
+														value="${sharingBoardUpdate.id}" readonly>
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
 													<input class="form-control" type="date" name="date"
-														value="${sharingboardupdate.date}" readonly>
+														value="${sharingBoardUpdate.date}">
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="form-group">
-													현재 지역 : ${sharingboardupdate.locationNo} <select
-														class="select form-control" name="locationNo">
+												<input type="hidden" name="defaultLocationNo" value="${sharingBoardUpdate.locationNo}">
+													<p>지역 : ${sharingBoardUpdate.locationName}</p>
+													<select class="select form-control" name="locationNo">
+														<option value="0">지역 변경 없음</option>
 														<option value="1">강남구</option>
 														<option value="2">강동구</option>
 														<option value="3">강북구</option>
@@ -148,19 +150,20 @@
 											<div class="col-md-12">
 												<div class="form-group">
 													<input class="form-control" type="text" name="title"
-														value="${sharingboardupdate.title}">
+														value="${sharingBoardUpdate.title}">
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="form-group">
 													<textarea rows="10" cols="100" name="content" id="content"
-														class="form-control" style="width: 100%; height: 482px">${sharingboardupdate.content}</textarea>
+														class="form-control" style="width: 100%; height: 482px">${sharingBoardUpdate.content}</textarea>
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="text-center">
 													<input type="button" id="updatebtn" class="btn btn-black" value="수정" /> 
-													<a class="btn btn-black" href="/bikelong/route/sharingboardlist.action">취소</a>
+													<a class="btn btn-black" href="/bikelong/route/sharingboarddetail.action?boardNo=${sharingBoardUpdate.boardNo}">취소</a>
+													<input class="form-control" type="hidden" name="boardNo" value="${sharingBoardUpdate.boardNo}" >
 												</div>
 											</div>
 										</div>

@@ -12,4 +12,8 @@ public interface SharingBoardService {
 
 	List<SharingBoard> findBoardList();
 
+	void updateBoard(SharingBoard sharingBoard);
+
+	void deleteBoard(int boardNo);
+
 }

@@ -12,5 +12,9 @@ public interface SharingBoardDao {
 
 	List<SharingBoard> selectBoardList();
 
+	void updateBoard(SharingBoard sharingBoard);
+
+	void deleteBoard(int boardNo);
+
 
 }
