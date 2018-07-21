@@ -11,6 +11,7 @@
 		<typeAlias type="com.bikelong.vo.RentalShop" alias="RentalShop"/>
 		<typeAlias type="com.bikelong.vo.Board" alias="Board"/>
 		<typeAlias type="com.bikelong.vo.Goal" alias="Goal"/>
+		<typeAlias type="com.bikelong.vo.Reply" alias="Reply"/>
 	</typeAliases>
 
 	<environments default="mysql">
@@ -33,6 +34,7 @@
 		<mapper resource="com/bikelong/mapper/TrailBoard-mapper.xml" />
 		<mapper resource="com/bikelong/mapper/goal-mapper.xml" />
 		<mapper resource="com/bikelong/mapper/noticeBoard-mapper.xml" />
+		<mapper resource="com/bikelong/mapper/reply-mapper.xml" />
 	</mappers>
 
 </configuration>

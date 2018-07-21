@@ -7,7 +7,14 @@ public class Reply {
 	private String id;
 	private int boardNo;
 	private String content;
+	private String date;
 	
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
 	public int getReplyNo() {
 		return replyNo;
 	}

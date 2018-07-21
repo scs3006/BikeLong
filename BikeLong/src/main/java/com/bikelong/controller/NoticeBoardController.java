@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bikelong.service.NoticeBoardService;
+import com.bikelong.service.ReplyService;
 import com.bikelong.vo.Board;
+import com.bikelong.vo.Reply;
 import com.bikelong.vo.SharingBoard;
 
 @Controller
@@ -32,6 +34,10 @@ public class NoticeBoardController {
 	@Autowired
 	@Qualifier(value = "noticeBoardService")
 	private NoticeBoardService noticeBoarService;
+	
+	@Autowired
+	@Qualifier(value = "replyService")
+	private ReplyService replyService;
 	
 	
 	@GetMapping(value = "list.action")
@@ -45,6 +51,11 @@ public class NoticeBoardController {
 	@GetMapping(value = "detail.action")
 	public String getDetail(int boardNo, Model model) {
 		Board board = noticeBoarService.findBoardByBoardNo(boardNo);
+		List<Reply> replyList = replyService.getReplyList(boardNo);
+		
+		if(replyList != null && replyList.size() > 0) {
+			model.addAttribute("replyList", replyList);
+		}
 		model.addAttribute("board", board);
 		return "notice/detail";
 	}
