@@ -3266,7 +3266,6 @@ button {
 .comments-area {
     margin: 60px 0;
 }
-
 .comments-title {
     border-bottom: 1px solid rgba(225, 225, 225, .6);
     padding-bottom: 15px;
@@ -3317,6 +3316,7 @@ button {
     border-bottom: 1px solid rgba(225, 225, 225, .6);
     padding: 0 0 10px;
     margin: 0 0 0 85px;
+   
 }
 
 .comment-meta {

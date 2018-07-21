@@ -97,7 +97,7 @@
 								<li class="menu-item-has-children"><a href="#"><span class="menu-item-span"><i class="ti-user">&nbsp;&nbsp;</i>${id} 님</span></a>
 										<ul class="sub-menu">
 											<li><a href="reservations.jsp">마이페이지</a></li>
-											<li><a href="elements2.action">GOAL</a></li>
+											<li><a href="/bikelong/goal/goal.action">GOAL</a></li>
 											<li><a href="icons.jsp">Icons</a></li> 
 										</ul>
 								</li>
