@@ -47,7 +47,7 @@
 				success : function(data,status,xhr){
 					if(data=="success"){
 						alert('게시글 수정에 성공하셨습니다.');
-						location.href = 'detail.action?boardNo='+${board.boardNo};
+						location.href = 'detail.action?boardNo='+${board.boardNo}+'&pageno=${pageno}';
 					}
 					if(data=="fail"){
 						alert('게시글 수정에 실패하셨습니다.');

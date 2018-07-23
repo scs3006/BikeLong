@@ -19,6 +19,10 @@
 	<delete id="deleteReply" parameterType="int">
 		DELETE FROM Reply WHERE replyNo=#{replyNo}
 	</delete>
+	
+	<delete id="deleteReplyListByBoardNo" parameterType="int">
+		DELETE FROM Reply WHERE boardNo=#{boardNo}
+	</delete>
 </mapper>
 
 

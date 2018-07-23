@@ -27,4 +27,9 @@ public class MySqlReplyDao implements ReplyDao {
 	public void deleteReply(int replyNo) {
 		replyMapper.deleteReply(replyNo);
 	}
+
+	@Override
+	public void deleteReplyListByBoardNo(int boardNo) {
+		replyMapper.deleteReplyListByBoardNo(boardNo);
+	}
 }

@@ -185,9 +185,9 @@
 										</div>
 										<div class="col-md-12">
 											<div class="text-center">
-												<a class="btn btn-black" href="list.action">목록보기</a>
+												<a class="btn btn-black" href="list.action?pageno=${pageno}">목록보기</a>
 												<c:if test="${loginuser.id eq 'manager' && loginuser ne null}">
-													<a class="btn btn-black" href="update.action?boardNo=${board.boardNo}">수정</a>
+													<a class="btn btn-black" href="update.action?boardNo=${board.boardNo}&pageno=${pageno}">수정</a>
 													<a class="btn btn-black" id="noticeDelete" href="#">삭제</a>
 												</c:if>
 											</div>
