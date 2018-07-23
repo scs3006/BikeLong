@@ -17,7 +17,7 @@
 			<div class="navigation navigation-center">
 				<div class="container-fluid">
 					<!-- Brand-->
-					<div class="inner-header"><a class="inner-brand" href="/bikelong/index.action"><img class="brand-dark" src="/bikelong/resources/assets/images/logo.png" width="74px" alt=""><img class="brand-light" src="/bikelong/resources/assets/images/logo-light.png" width="74px" alt=""></a></div>
+					<div class="inner-header"><a class="inner-brand" href="/bikelong/index.action"><img class="brand-dark" src="/bikelong/resources/assets/images/bikelong-logo.png" width="90px" alt=""><img class="brand-light" src="/bikelong/resources/assets/images/bikelong-light.png" width="90px" alt=""></a></div>
 					<!-- Navigation-->
 					<div class="inner-navigation collapse">
 						<div class="inner-nav onepage-nav">
@@ -97,9 +97,9 @@
 							<c:if test="${ not empty loginuser }">
 								<li class="menu-item-has-children"><a href="#"><span class="menu-item-span"><i class="ti-user">&nbsp;&nbsp;</i>${id} 님</span></a>
 										<ul class="sub-menu">
-											<li><a href="/bikelong/mypage/mypage.action">MyPage</a></li>
-											<li><a href="/bikelong/mypage/activity.action">Activity</a></li> 
-											<li><a href="/bikelong/goal/goal.action">Goal</a></li>
+											<li><a href="reservations.jsp">마이페이지</a></li>
+											<li><a href="/bikelong/goal/goal.action">GOAL</a></li>
+											<li><a href="icons.jsp">Icons</a></li> 
 										</ul>
 								</li>
 								<li><a href="/bikelong/account/logout.action"><span class="menu-item-span"><i class="icon_trash_alt">&nbsp;&nbsp;</i>Log Out</span></a></li>
