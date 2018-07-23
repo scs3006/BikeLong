@@ -29,7 +29,7 @@ public class CommonController {
 		//파일 기본경로
 		String defaultPath = req.getSession().getServletContext().getRealPath("/");
 		//파일 기본경로 _ 상세경로
-		String path = defaultPath + "resources/photoupload" + File.separator;
+		String path = defaultPath + "resources/photoupload/" + File.separator;
 		File file = new File(path);
 		if(!file.exists()) {
 		   file.mkdirs();
@@ -69,7 +69,7 @@ public class CommonController {
 		//파일 기본경로
 		String defaultPath = req.getSession().getServletContext().getRealPath("/");
 		//파일 기본경로 _ 상세경로
-		String path = defaultPath +  "resources/photoupload" + File.separator;
+		String path = defaultPath +  "resources/photoupload/" + File.separator;
 		File file = new File(path);
 		if(!file.exists()) {
 		    file.mkdirs();

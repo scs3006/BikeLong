@@ -3,6 +3,7 @@ package com.bikelong.dao;
 import java.util.List;
 
 import com.bikelong.mapper.SharingBoardMapper;
+import com.bikelong.vo.History;
 import com.bikelong.vo.SharingBoard;
 
 public class MySqlSharingBoardDao implements SharingBoardDao {
@@ -45,6 +46,19 @@ public class MySqlSharingBoardDao implements SharingBoardDao {
 	}
 
 
+	@Override
+	public List<History> selectHistory(String id) {
+		List<History> history = sharingBoardMapper.selectHistory(id);
+		return history;
+	}
 
-	
+
+	@Override
+	public List<History> selectgps(History history) {
+		List<History> histories = sharingBoardMapper.selectgps(history);
+		return histories;
+	}
+
+
+
 }

@@ -11,19 +11,44 @@
 	</insert>
 	
 	<select id="selectBoardList" resultType="SharingBoard">
-		SELECT b.boardNo, b.id, b.locationNo, b.date, b.title, b.content, l.locationName  
+		SELECT b.boardNo, b.id, b.locationNo, date_format(b.date,'%Y-%m-%d') date, b.title, b.content, l.locationName  
 		FROM Board b INNER JOIN Location l
 		ON b.locationNo = l.locationNo
 		WHERE b.category = 2
 	</select>
 	
 	<select id="selectBoard" parameterType="hashmap" resultType="SharingBoard">
-		SELECT b.id , b.locationNo, b.date, b.title, b.content, l.locationName
+	
+		SELECT b.id , b.locationNo, date_format(b.date,'%Y-%m-%d') date, b.title, b.content, l.locationName
 		FROM Board b INNER JOIN Location l
 		ON b.locationNo = l.locationNo 
 		WHERE b.boardNo = #{boardNo} AND b.category = 2
+		
 	</select>
 	
+	<select id="selectHistory" parameterType="hashmap" resultType="History">
+		SELECT historyNo, startTime, endTime
+		FROM History
+		WHERE id = #{id}  
+	</select>
+	
+	<select id="selectgps" parameterType="History" resultType="History">
+		SELECT gpsNo, latitude, longitude  
+		FROM GPS
+		WHERE date BETWEEN #{startTime} AND #{endTime}
+	</select>
+	
+	<!-- <select id="selectBoardHistory" parameterType="" resultType="">
+		SELECT gpsNo, latitude, longitude
+		FROM GPS
+		WHERE date BETWEEN startTime AND endTime 
+	
+		SELECT h.startTime, h.endTime
+		FROM Board b INNER JOIN History h
+		ON b.historyNo = h.historyNo
+		WHERE h.historyNo = #{}
+	</select> -->
+
 	<update id="updateBoard" parameterType="SharingBoard">
 		UPDATE Board
 		SET date = #{date}, locationNo = #{locationNo}, title = #{title}, content = #{content}
@@ -36,11 +61,3 @@
 	</delete>
 	
 </mapper>
-
-
-
-
-
-
-
-
