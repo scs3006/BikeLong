@@ -75,7 +75,7 @@
 						<article class="post">
 
 							<div>
-								<h1>공지사항</h1>
+								<h1>공지사항</h1><br/>
 							</div>
 							
 							<div class="row">
@@ -97,6 +97,7 @@
 										</c:forEach>
 									</table>
 								</div>
+								<br>
 								<div class="col-md-12">
 									<div class="text-center">
 										${pager}
