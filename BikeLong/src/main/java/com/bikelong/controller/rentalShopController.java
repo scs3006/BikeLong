@@ -39,10 +39,6 @@ public class rentalShopController {
 		
 		List<RentalShop> rentalShop = rentalShopService.searchRentalShop(select, text);
 		
-		for(RentalShop re : rentalShop) {
-			System.out.println(re.getRentalShopName());
-		}
-		
 		return rentalShop;
 	}
 	

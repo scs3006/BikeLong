@@ -58,6 +58,17 @@
 					}
 				});
 			});
+			
+			$('#modalClose').on('click', function(event) {
+				$('#searchModal #modal-body').empty();
+			});
+			
+			$(document).keydown(function(event) {
+				if(event.keyCode == 27) {
+					$('#searchModal #modal-body').empty();
+				}
+			});
+			
 		});
 	</script>
 	
@@ -199,6 +210,7 @@
 						var markerOptions = null;						
 						var contentString = null;
 						var currentInfoWindow = null;
+						var modal = false;
 						
 						function search(data) {
 
@@ -209,15 +221,25 @@
 							
 							if(cnt > 1) {
 								var modalBody = $('#searchModal #modal-body');
-								$("<h4></h4>").text('1234').appendTo(modalBody);
+								
+								for(var i=0; i<data.length; i++) {
+									$("<a href='javascript:mapsMove("+ data[i].lat +","+ data[i].lng +","+ data[i].rentalShopNo +");'><center class='breadcrumb-item' color='black'></center></a><br>").text(data[i].rentalShopName).appendTo(modalBody);
+								}
+								
+								var modal = true;
 								$('#searchModal').modal('show');
 								$('#modal-title').text(cnt + "개의 항목이 검색되었습니다.");
-							}
-							
-							var location = new naver.maps.LatLng(data[0].lat, data[0].lng);
+							} else {
+								mapsMove(data[0].lat, data[0].lng, data[0].rentalShopNo);
+							}	
+						}
+						
+						function mapsMove(lat, lng, i) {
+							var location = new naver.maps.LatLng(lat, lng);
 							map.panTo(location);
 							
-							
+							$('#searchModal').modal('hide');
+							$('#searchModal #modal-body').empty();
 							
 						}
 						
@@ -278,8 +300,7 @@
 						}
 						
 						<c:forEach var="rentalShop" items="${ rentalShops }" varStatus="status">
-							
-							
+						
 							//marker = new naver.maps.Marker(markerOptions);
 							markerOptions = makeMarkerOptions(${ rentalShop.count }, ${ rentalShop.lat }, ${ rentalShop.lng });
 							marker = new naver.maps.Marker(markerOptions);
@@ -304,8 +325,8 @@
 						        	currentInfoWindow.close();
 						        });
 							});
-							
-						</c:forEach>
+						
+					</c:forEach>
 						
 					</script>
 				</div>
@@ -335,16 +356,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modal-title"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button id="modalClose" type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div id="modal-body" class="modal-body">
-				<h4>asdasdasdasdasdsa</h4>
+            <div id="modal-body" class="modal-body">	
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+            - 해당 대여소를 선택해 주세요. -
             </div>
         </div>
     </div>
