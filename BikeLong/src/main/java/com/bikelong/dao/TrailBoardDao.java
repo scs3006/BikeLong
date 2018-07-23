@@ -3,17 +3,19 @@ package com.bikelong.dao;
 import java.util.List;
 
 import com.bikelong.vo.Board;
+import com.bikelong.vo.TrailBoard;
 
 public interface TrailBoardDao {
 
-	void insertBoard(Board trailBoard);
+	void insertBoard(TrailBoard trailBoard);
 
-	Board selectBoard(int boardNo);
+	TrailBoard selectBoard(int boardNo);
 
-	List<Board> selectBoardList();
+	List<TrailBoard> selectBoardList();
 
-	void updateBoard(Board board);
+	void updateBoard(TrailBoard trailBoard);
 
 	void deleteBoard(int boardNo);
+
 
 }

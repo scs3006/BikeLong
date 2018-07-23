@@ -3,16 +3,18 @@ package com.bikelong.service;
 import java.util.List;
 
 import com.bikelong.vo.Board;
+import com.bikelong.vo.TrailBoard;
 
 public interface TrailBoardService {
 
-	void writeBoard(Board trailBoard);
+	void writeBoard(TrailBoard trailBoard);
 
-	Board findBoard(int boardNo);
+	TrailBoard findBoard(int boardNo);
 
-	List<Board> findBoardList();
+	List<TrailBoard> findBoardList();
 
-	void updateBoard(Board board);
+	void updateBoard(TrailBoard trailBoards);
 
 	void deleteBoard(int boardNo);
+
 }
