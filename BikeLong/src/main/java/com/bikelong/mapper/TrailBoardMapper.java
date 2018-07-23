@@ -7,7 +7,9 @@ import com.bikelong.vo.*;
 public interface TrailBoardMapper {
 
 	void insertBoard(Board trailBoard);
-	Board selectBoard(String boardNo);
+	Board selectBoard(int boardNo);
 	List<Board> selectBoardList();
+	void updateBoard(Board board);
+	void deleteBoard(int boardNo);
 
 }

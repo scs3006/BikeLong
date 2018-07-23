@@ -20,7 +20,7 @@ public class TrailBoardServiceImpl implements TrailBoardService {
 	}
 
 	@Override
-	public Board findBoard(String boardNo) {
+	public Board findBoard(int boardNo) {
 		Board trailBoard = trailBoardDao.selectBoard(boardNo);
 		return trailBoard;
 	}
@@ -29,6 +29,20 @@ public class TrailBoardServiceImpl implements TrailBoardService {
 	public List<Board> findBoardList() {
 		List<Board> trailBoard = trailBoardDao.selectBoardList();
 		return trailBoard;
+	}
+
+
+	@Override
+	public void updateBoard(Board board) {
+		
+		trailBoardDao.updateBoard(board);
+	}
+
+
+	@Override
+	public void deleteBoard(int boardNo) {
+		
+		trailBoardDao.deleteBoard(boardNo);
 	}
 
 

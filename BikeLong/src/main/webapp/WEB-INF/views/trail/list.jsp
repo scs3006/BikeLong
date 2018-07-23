@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>Tavern - Responsive Restaurant Template(Bootstrap 4)</title>
+<title>자전거 산책로 공유 목록</title>
 <!-- Favicons-->
 <link rel="shortcut icon"
 	href="/bikelong/resources/assets/images/favicon.png">
@@ -42,128 +42,7 @@
 	<!-- Preloader end-->
 
 	<!-- Header-->
-	<header class="header header-transparent">
-		<!-- Top bar-->
-		<div class="top-bar">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-6">
-						<ul class="list-left-align">
-							<li>Mon - Fri: 07:00 am - 05:00 pm</li>
-							<li><abbr title="Phone">P:</abbr> +39 02 87 21 43 19</li>
-							<li><a href="start.jsp" data-color="#e1be64">Demos</a></li>
-						</ul>
-					</div>
-					<div class="col-md-6">
-						<ul class="top-bar-tools">
-							<li><a class="open-offcanvas" href="#"><i
-									class="ti-menu"></i></a></li>
-							<li><a href="sign-in.jsp"><i class="ti-search"></i></a></li>
-							<li><a href="sign-in.jsp"><i class="ti-user"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="navigation navigation-center">
-			<div class="container-fluid">
-				<!-- Brand-->
-				<div class="inner-header">
-					<a class="inner-brand" href="index.jsp"><img class="brand-dark"
-						src="/bikelong/resources/assets/images/logo.png" width="74px"
-						alt=""><img class="brand-light"
-						src="/bikelong/resources/assets/images/logo-light.png"
-						width="74px" alt=""></a>
-				</div>
-				<!-- Navigation-->
-				<div class="inner-navigation collapse">
-					<div class="inner-nav onepage-nav">
-						<ul>
-							<li><a href="index.jsp#home"><span
-									class="menu-item-span">Home</span></a></li>
-							<li><a href="index.jsp#story"><span
-									class="menu-item-span">Our story</span></a></li>
-							<li><a href="index.jsp#special"><span
-									class="menu-item-span">Special</span></a></li>
-							<li><a href="index.jsp#popular"><span
-									class="menu-item-span">Popular</span></a></li>
-							<li><a href="index.jsp#gallery"><span
-									class="menu-item-span">Gallery</span></a></li>
-							<li><a href="index.jsp#services"><span
-									class="menu-item-span">Services</span></a></li>
-							<li><a href="index.jsp#news"><span
-									class="menu-item-span">News</span></a></li>
-							<!-- Pages-->
-							<li class="menu-item-has-children"><a href="features.jsp"><span
-									class="menu-item-span">Pages</span></a>
-								<ul class="sub-menu">
-									<li class="menu-item-has-children"><a href="#">Blog</a>
-										<ul class="sub-menu">
-											<li><a href="blog-1.jsp">Blog</a></li>
-											<li><a href="blog-single-1.jsp">Post Single</a></li>
-										</ul></li>
-									<li class="menu-item-has-children"><a href="#">Gallery</a>
-										<ul class="sub-menu">
-											<li><a href="gallery-1.jsp">2 Columns</a></li>
-											<li><a href="gallery-2.jsp">3 Columns</a></li>
-											<li><a href="gallery-3.jsp">4 Columns</a></li>
-										</ul></li>
-									<li class="menu-item-has-children"><a href="#">Menu
-											Grid</a>
-										<ul class="sub-menu">
-											<li><a href="menu-gallery-1.jsp">2 Columns</a></li>
-											<li><a href="menu-gallery-2.jsp">3 Columns</a></li>
-											<li><a href="menu-gallery-3.jsp">4 Columns</a></li>
-										</ul></li>
-									<li class="menu-item-has-children"><a href="#">Menu
-											Tiles</a>
-										<ul class="sub-menu">
-											<li><a href="menu-tiles-1.jsp">1 Column</a></li>
-											<li><a href="menu-tiles-2.jsp">2 Columns</a></li>
-										</ul></li>
-									<li class="menu-item-has-children"><a href="#">Menu
-											Simple</a>
-										<ul class="sub-menu">
-											<li><a href="menu-simple-1.jsp">1 Column</a></li>
-											<li><a href="menu-simple-2.jsp">2 Columns</a></li>
-										</ul></li>
-									<li class="menu-item-has-children"><a href="#">User
-											Pages</a>
-										<ul class="sub-menu">
-											<li><a href="sign-in.jsp">Sign in</a></li>
-											<li><a href="sign-up.jsp">Sign up</a></li>
-											<li><a href="password-recovery.jsp">Recover password</a></li>
-										</ul></li>
-									<li class="menu-item-has-children"><a href="#">Contact
-											Us</a>
-										<ul class="sub-menu">
-											<li><a href="contact.jsp">Contact Us 1</a></li>
-											<li><a href="contact-2.jsp">Contact Us 2</a></li>
-										</ul></li>
-									<li><a href="reservations.jsp">Reservations</a></li>
-									<li><a href="elements.jsp">Elements</a></li>
-									<li><a href="icons.jsp">Icons</a></li>
-								</ul></li>
-						</ul>
-					</div>
-				</div>
-				<!-- Extra-nav - will be hidden on mobile-->
-				<div class="extra-nav">
-					<ul>
-						<li><a class="popup-book-a-table" href="#test-form"><span
-								class="menu-item-span">Book now</span></a></li>
-					</ul>
-				</div>
-				<!-- Mobile menu-->
-				<div class="nav-toggle">
-					<a href="#" data-toggle="collapse" data-target=".inner-navigation"><span
-						class="icon-bar"></span><span class="icon-bar"></span><span
-						class="icon-bar"></span></a>
-				</div>
-			</div>
-		</div>
-	</header>
+	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<!-- Header end-->
 
 	<!-- Wrapper-->
@@ -190,149 +69,36 @@
 		<!-- Hero end-->
 
 		<section class="module">
-			<div class="container">
-				<div class="row blog-masonry">
-
-					<div class="col-md-4 post-item">
-						<!-- Post-->
-						<article class="post">
-							<div class="post-preview">
-								<a href="#"><img
-									src="/bikelong/resources/assets/images/menu/1.jpg" alt=""></a>
-							</div>
-							<div class="post-wrapper">
-								<div class="post-header" style="height: 15%">
-									<h2 class="post-title display-1">
-										<a href="blog-single-1.jsp">Which Lamb is New Zealand?</a>
-									</h2>
-								</div>
-								<div class="post-content" style="height: 10%">
-									<p>nges in performance over time...</p>
-								</div>
-							</div>
-						</article>
+				<div class="col-md-12">
+					<div class="text-center">
+						<a class="btn btn-black" href="/bikelong/trailpathboard/write.action">글쓰기</a>
 					</div>
-
-					<div class="col-md-4 post-item">
-						<!-- Post-->
-						<article class="post">
-							<div class="post-preview">
-								<a href="#"><img
-									src="/bikelong/resources/assets/images/menu/1.jpg" alt=""></a>
-							</div>
-							<div class="post-wrapper">
-								<div class="post-header" style="height: 15%">
-									<h2 class="post-title display-1">
-										<a href="blog-single-1.jsp">Which Lamb is the Bes</a>
-									</h2>
-								</div>
-								<div class="post-content" style="height: 10%">
-									<p>changes in performance over time...</p>
-								</div>
-							</div>
-						</article>
-					</div>
-
-					<div class="col-md-4 post-item">
-						<!-- Post-->
-						<article class="post">
-							<div class="post-preview">
-								<a href="#"><img
-									src="/bikelong/resources/assets/images/menu/1.jpg" alt=""></a>
-							</div>
-							<div class="post-wrapper">
-								<div class="post-header" style="height: 15%">
-									<h2 class="post-title display-1">
-										<a href="blog-single-1.jsp">Which Lamb is the Best:</a>
-									</h2>
-								</div>
-								<div class="post-content" style="height: 10%">
-									<p>performance over time...</p>
-								</div>
-							</div>
-						</article>
-					</div>
-
-					<div class="col-md-4 post-item">
-						<!-- Post-->
-						<article class="post">
-							<div class="post-preview">
-								<a href="#"><img
-									src="/bikelong/resources/assets/images/menu/1.jpg" alt=""></a>
-							</div>
-							<div class="post-wrapper">
-								<div class="post-header" style="height: 15%">
-									<h2 class="post-title display-1">
-										<a href="blog-single-1.jsp">Which Lamb is the Best:</a>
-									</h2>
-								</div>
-								<div class="post-content" style="height: 10%">
-									<p>performance over time...</p>
-								</div>
-							</div>
-						</article>
-					</div>
-
-					<div class="col-md-4 post-item">
-						<!-- Post-->
-						<article class="post">
-							<div class="post-preview">
-								<a href="#"><img
-									src="/bikelong/resources/assets/images/menu/1.jpg" alt=""></a>
-							</div>
-							<div class="post-wrapper">
-								<div class="post-header" style="height: 15%">
-									<h2 class="post-title display-1">
-										<a href="blog-single-1.jsp">Which Lamb is the Best:</a>
-									</h2>
-								</div>
-								<div class="post-content" style="height: 10%">
-									<p>performance over time...</p>
-								</div>
-							</div>
-						</article>
-					</div>
-
-					<div class="col-md-4 post-item">
-						<!-- Post-->
-						<article class="post">
-							<div class="post-preview">
-								<a href="#"><img
-									src="/bikelong/resources/assets/images/menu/1.jpg" alt=""></a>
-							</div>
-							<div class="post-wrapper">
-								<div class="post-header" style="height: 15%">
-									<h2 class="post-title display-1">
-										<a href="blog-single-1.jsp">Which Lamb is the Best:</a>
-									</h2>
-								</div>
-								<div class="post-content" style="height: 10%">
-									<p>performance over time...</p>
-								</div>
-							</div>
-						</article>
-					</div>
-
 				</div>
-				<div class="row">
+			<div class="container">
 					<div class="col-md-12">
 						<div class="space" data-mY="50px"></div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="text-center">
-							<a class="btn btn-black" href="#">Load More</a>
+				<div class="row blog-masonry">
+				
+					<c:forEach var="list" items="${ trailBoardlist }">
+						<div class="col-md-4 post-item">
+							<article class="post">
+								<div class="post-preview">
+									<img src="/bikelong/resources/photoupload/${list.savedFileName}" alt="">
+								</div>
+								<div class="post-wrapper">
+									<div class="post-header" style="height: 15%">
+										<h2 class="post-title display-1">
+											<a href="/bikelong/trailpathboard/detail.action?boardNo=${list.boardNo}">${list.title}</a>
+										</h2>
+									</div>
+								</div>
+							</article>
 						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="space" data-mY="100px"></div>
-					</div>
+					</c:forEach>
+					
 				</div>
 			</div>
-
 		</section>
 
 		<svg class="footer-circle" xmlns="http://www.w3.org/2000/svg"
@@ -341,101 +107,7 @@
 				<path d="M0 100 C40 0 60 0 100 100 Z"></path>
 			</svg>
 		<!-- Footer-->
-		<footer class="footer">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-3">
-						<!-- Text widget-->
-						<aside class="widget widget_text">
-							<div class="textwidget">
-								<p>
-									<img src="/bikelong/resources/assets/images/logo-light.png"
-										width="74px" alt="">
-								</p>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-									sed do eiusmod tempor.</p>
-								<ul class="icon-list">
-									<li><i class="ti-email"></i> info@themebusiness.com</li>
-									<li><i class="ti-headphone-alt"></i> 1-444-123-4559</li>
-									<li><i class="ti-location-pin"></i> Raymond Boulevard 224,
-										New York</li>
-								</ul>
-							</div>
-						</aside>
-					</div>
-					<div class="col-md-3">
-						<!-- Recent entries widget-->
-						<aside class="widget widget_recent_entries">
-							<div class="widget-title">
-								<h5>Recent Posts</h5>
-							</div>
-							<ul>
-								<li><a href="#">Matcha Portuguese Egg Tarts</a> <span
-									class="post-date">May 8, 2016</span></li>
-								<li><a href="#">Camp Cooking: One Pan Yaki Udon</a> <span
-									class="post-date">April 7, 2016</span></li>
-								<li><a href="#">Chicken & Spring Vegetable Lasagna</a> <span
-									class="post-date">April 7, 2016</span></li>
-								<li><a href="#">Mini California Sushi Cones</a> <span
-									class="post-date">April 7, 2016</span></li>
-							</ul>
-						</aside>
-					</div>
-					<div class="col-md-3">
-						<!-- Twitter-->
-						<aside class="widget twitter-feed-widget">
-							<div class="widget-title">
-								<h5>Twitter Feed</h5>
-							</div>
-							<div class="twitter-feed" data-twitter="345170787868762112"
-								data-number="2"></div>
-						</aside>
-					</div>
-					<div class="col-md-3">
-						<!-- Recent portfolio widget-->
-						<aside class="widget widget_recent_works">
-							<div class="widget-title">
-								<h5>Instagram</h5>
-							</div>
-							<ul>
-								<li><a href="#"><img
-										src="/bikelong/resources/assets/images/widgets/1.jpg" alt=""></a></li>
-								<li><a href="#"><img
-										src="/bikelong/resources/assets/images/widgets/2.jpg" alt=""></a></li>
-								<li><a href="#"><img
-										src="/bikelong/resources/assets/images/widgets/3.jpg" alt=""></a></li>
-								<li><a href="#"><img
-										src="/bikelong/resources/assets/images/widgets/4.jpg" alt=""></a></li>
-								<li><a href="#"><img
-										src="/bikelong/resources/assets/images/widgets/5.jpg" alt=""></a></li>
-								<li><a href="#"><img
-										src="/bikelong/resources/assets/images/widgets/6.jpg" alt=""></a></li>
-							</ul>
-						</aside>
-					</div>
-				</div>
-			</div>
-			<div class="small-footer">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-6">
-							<div class="copyright">
-								© 2017 <a href="http://2the.me/">2theme</a>, All Rights
-								Reserved.
-							</div>
-						</div>
-						<div class="col-md-6">
-							<ul class="social-links">
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-vimeo"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</footer>
+		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 		<!-- Footer end-->
 	</div>
 	<!-- Wrapper end-->
@@ -487,25 +159,6 @@
 								src="/bikelong/resources/assets/images/widgets/6.jpg" alt=""></a></li>
 					</ul>
 				</aside>
-				<!-- Text widget-->
-				<!--aside.widget.widget_text
-					.textwidget
-						.up-logo
-							p.text-center.m-b-50: img(src="/bikelong/resources/assets/images/logo-light.png" width="100" alt="")
-						.up-form
-							form(method="post")
-								.form-group
-									input.form-control.form-control-lg(type="email" placeholder="Email")
-								.form-group
-									input.form-control.form-control-lg(type="password" placeholder="Pasword")
-								.form-group
-									button(type="submit" class="btn btn-block btn-lg btn-round btn-brand") Log in
-						.up-help
-							p: a(href="#") Forgot your password?
-							p Don't have an account yet? <a href="#">Sign in</a>
-					
-					-->
-
 				<!-- Twitter widget-->
 				<aside class="widget twitter-feed-widget">
 					<div class="widget-title">
