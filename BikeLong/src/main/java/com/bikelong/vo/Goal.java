@@ -6,6 +6,7 @@ public class Goal {
 	private int goalNo;
 	private String goalName;
 	private int goalAmount;
+	private String goalInfo;
 	private String date;
 	
 	public int getGoalNo() {
@@ -26,12 +27,20 @@ public class Goal {
 	public void setGoalAmount(int goalAmount) {
 		this.goalAmount = goalAmount;
 	}
+	public String getGoalInfo() {
+		return goalInfo;
+	}
+	public void setGoalInfo(String goalInfo) {
+		this.goalInfo = goalInfo;
+	}
 	public String getDate() {
 		return date;
 	}
 	public void setDate(String date) {
 		this.date = date;
 	}
+	
+
 	
 	
 	

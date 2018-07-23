@@ -5,6 +5,10 @@
   
 <mapper namespace="com.bikelong.mapper.GoalMapper">
 	
+	<select id = "selectGoalList" resultType="Goal">
+		SELECT goalNo, goalName,goalAmount,goalInfo,date_format(date,'%Y-%m-%d') AS date
+		FROM Goal
+	</select>
 </mapper>
 
 
