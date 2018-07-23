@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
 
 /*! -----------------------------------------------------------------
 [Master Stylesheet]
@@ -21,7 +22,7 @@ html {
 
 body {
     background-color: #fff;
-    font-family: "Signika", Arial, serif;
+	font-family: 'Jeju Gothic', serif;
     line-height: 1.8;
     font-weight: 300;
     font-size: 16px;
@@ -381,7 +382,7 @@ h5,
 .h5,
 h6,
 .h6 {
-    font-family: "Signika", Arial, serif;
+    font-family: 'Jeju Gothic', serif;
     line-height: 1.3;
     font-weight: 400;
     color: #111;
@@ -435,7 +436,7 @@ h6.text-uppercase,
 .display-4,
 .display-5,
 .display-6 {
-    font-family: "PT Serif", Arial, serif;
+    font-family: 'Jeju Gothic', serif;
     font-weight: 400;
     margin: 0 0 20px;
 }
@@ -481,7 +482,7 @@ hr {
 blockquote {
     border: 0;
     color: #111;
-    font-family: "PT Serif", Arial, serif;
+    font-family: 'Jeju Gothic', serif;
     font-weight: 400;
     line-height: 1.45;
     font-weight: 400;
@@ -597,7 +598,6 @@ pre {
 */
 
 .form-control {
-	color : white;
     background: #fff;
     box-shadow: none;
     border-radius: 0;
@@ -609,6 +609,8 @@ pre {
     font-size: .6875rem;
     padding: 1.125rem 1.125rem;
 }
+
+.account .form-control{color : white;}
 
 .placeholder::-ms-input-placeholder { color: #eeeeee; }
 .placeholder::-webkit-input-placeholder { color: #eeeeee; } 
@@ -2263,7 +2265,7 @@ button {
     color: #fff;
     text-transform: uppercase;
     font-weight: 400;
-    font-size: 12px;
+    font-size: 14px;
     letter-spacing: 2px;
 }
 
@@ -3266,7 +3268,6 @@ button {
 .comments-area {
     margin: 60px 0;
 }
-
 .comments-title {
     border-bottom: 1px solid rgba(225, 225, 225, .6);
     padding-bottom: 15px;
@@ -3317,6 +3318,7 @@ button {
     border-bottom: 1px solid rgba(225, 225, 225, .6);
     padding: 0 0 10px;
     margin: 0 0 0 85px;
+   
 }
 
 .comment-meta {

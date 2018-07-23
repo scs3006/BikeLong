@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content=""/>
 <meta name="author" content=""/>
-<title>Tavern - Responsive Restaurant Template(Bootstrap 4)</title>
+<title>공지사항-글쓰기</title>
 
 
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -36,7 +36,17 @@
         //전송버튼
         $("#savebtn").click(function(event){
         	event.preventDefault();
-        	obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+        	
+        	var title = $('#frm').find('[name=title]').val();
+        	var content = $('#frm').find('[name=content]').val();
+         	
+        	if(title == null || title == ''){
+        		alert('제목을 입력해 주세요.');
+        		$('#frm').find('[name=title]').focus();
+        		return;
+        	}
+         	        	
+         	obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
             //폼 submit
             $("#frm").submit();
         }); 
@@ -86,65 +96,24 @@
 						<!-- Post-->
 						<article class="post">
 
-							<div class="post-preview">
-									<!--  -->
+							<div>
+								<h1>공지사항</h1>
 							</div>
-
+							
 							<div class="row">
 								<div class="col-md-12">
 									<form action="write.action" id="frm" method="POST" enctype="multipart/form-data" novalidate>
 										<div class="row">
-											<div class="col-md-6">
-												<div class="form-group">
-													<input class="form-control" type="text" name="writer" value="${loginuser.id}" placeholder="작성자" readonly>
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<input class="form-control" type="date" name="date" placeholder="작성일" >
-												</div>
-											</div>
+											<input type="hidden" name="id" value="${loginuser.id}">
 											<div class="col-md-12">
 												<div class="form-group">
-												지역 
-												<select class="select form-control" name="locationNo" >
-														<option value="1">강남구</option>
-														<option value="2">강동구</option>
-														<option value="3">강북구</option>
-														<option value="4">강서구</option>
-														<option value="5">관악구</option>
-														<option value="6">광진구</option>
-														<option value="7">구로구</option>
-														<option value="8">금천구</option>
-														<option value="9">노원구</option>
-														<option value="10">도봉구</option>
-														<option value="11">동대문구</option>
-														<option value="12">동작구</option>
-														<option value="13">마포구</option>
-														<option value="14">서대문구</option>
-														<option value="15">서초구</option>
-														<option value="16">성동구</option>
-														<option value="17">성북구</option>
-														<option value="18">송파구</option>
-														<option value="19">양천구</option>
-														<option value="20">영등포구</option>
-														<option value="21">용산구</option>
-														<option value="22">은평구</option>
-														<option value="23">종로구</option>
-														<option value="24">중구</option>
-														<option value="25">중랑구</option>
-													</select>
-												</div>
-											</div>
-											<div class="col-md-12">
-												<div class="form-group">
-													<input class="form-control" type="text" name="title" placeholder="제목" required>
+													<input class="form-control" type="text" name="title" placeholder="제목">
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="form-group">
 													<textarea rows="10" cols="100" name="content" id="content" class="form-control" 
-													style="width: 100%; height: 482px" placeholder="내용" required></textarea>
+													style="width: 100%; height: 482px" placeholder="내용"></textarea>
 												</div>
 											</div>
 											<div class="col-md-12">
@@ -159,47 +128,6 @@
 							</div>
 						</article>
 						<!-- Post end-->
-						
-						<!-- Comments area-->
-						<div class="comments-area">
-							<h5 class="comments-title">Comments</h5>
-							<div class="comment-list">
-								<!-- Comment-->
-								<div class="comment">
-									<div class="comment-author">
-										<img class="avatar" src="/bikelong/resources/assets/images/avatar/1.jpg"
-											alt="">
-									</div>
-									<div class="comment-body">
-										<div class="comment-meta">
-											<div class="comment-meta-author">Jason Ford</div>
-											<div class="comment-meta-date">May 5, 2015 at 4:51 am</div>
-										</div>
-										<div class="comment-content">
-											<p>fanny pack nostrud.</p>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="comment-respond">
-								<h5 class="comment-reply-title">Leave a Reply</h5>
-								<p class="comment-notes">Your email address will not be
-									published. Required fields are marked</p>
-								<form class="comment-form row">
-									<div class="form-group col-md-4">
-										<input class="form-control" type="text" placeholder="Name">
-									</div>
-									<div class="form-group col-md-12">
-										<textarea class="form-control" rows="8" placeholder="Comment"></textarea>
-									</div>
-									<div class="form-submit col-md-12">
-										<button class="btn btn-black" type="submit">Post
-											Comment</button>
-									</div>
-								</form>
-							</div>
-						</div>
-						<!-- Comments area end-->
 					</div>
 				</div>
 			</div>

@@ -38,7 +38,7 @@
 		<div class="wrapper">
 
 			<!-- Hero-->
-			<section class="module-cover parallax fullscreen" id="home" data-background="resources/assets/images/module-6.jpg" data-overlay="1" data-gradient="1">
+			<section class="module-cover parallax fullscreen" id="home" data-background="/bikelong/resources/assets/images/main.jpg" data-overlay="1" data-gradient="1">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12 m-auto">

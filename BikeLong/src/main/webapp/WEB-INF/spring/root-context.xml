@@ -43,7 +43,10 @@
 	</tx:advice>
 	
 	<!-- AOP를 사용해 트랜잭션을 지원 -->
-
+	<aop:config>
+		<aop:pointcut id="txPointcut" expression="within(*..*ServiceImpl)" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
+	</aop:config>
 
 	
 	<!-- 공통 부분의 의존성 주입 -->
@@ -69,5 +72,5 @@
 	<import resource="classpath:com/bikelong/beanconfig/trailBoard-config.xml" />
 	<import resource="classpath:com/bikelong/beanconfig/noticeBoard-config.xml" />
 	<import resource="classpath:com/bikelong/beanconfig/goal-config.xml" />
-	
+	<import resource="classpath:com/bikelong/beanconfig/reply-config.xml" />
 </beans>

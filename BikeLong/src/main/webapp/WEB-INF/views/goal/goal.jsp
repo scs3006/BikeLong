@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +23,26 @@
 		<link href="/bikelong/resources/assets/css/plugins.min.css" rel="stylesheet">
 		<!-- Template core CSS-->
 		<link href="/bikelong/resources/assets/css/template.css" rel="stylesheet">
+		
+		<!-- script -->
+		<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$('#goaltoggle').on('click',function(event){
+					event.preventDefault();
+					$('#myModal').modal();
+				});
+				
+			});
+		</script>
+
+<style type="text/css">
+.searchFilter{
+	margin-right : 500px;
+	margin-left : 500px;
+}
+</style>
+		
 	</head>
 	<body>
 
@@ -32,8 +53,30 @@
 		<!-- Preloader end-->
 
 		<!-- Header-->
-		<jsp:include page="/WEB-INF/views/include/header.jsp" />
+		<jsp:include page="/WEB-INF/views/include/header.jsp" /><br/><br/><br/>
 		<!-- Header end-->
+		
+		<!-- Goal Modal -->
+		 <div class="modal fade" id="myModal" role="dialog">
+		    <div class="modal-dialog">
+		    
+		      <!-- Modal content-->
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">×</button>
+		          <h4 class="modal-title">Modal Header</h4>
+		        </div>
+		        <div class="modal-body">
+		          <p>Some text in the modal.</p>
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+		      </div>
+		      
+		    </div>
+		  </div>
+		<!-- Goal Modal end -->
 
 		<!-- Wrapper-->
 		<div class="wrapper">
@@ -43,11 +86,11 @@
 				<div class="container">
 					<div class="row align-items-center">
 						<div class="col-md-6">
-							<h1 class="page-title-heading">Elements</h1>
+							<h1 class="page-title-heading">Goal</h1>
 						</div>
 						<div class="col-md-6">
 							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="#">Home</a></li>
+								<li class="breadcrumb-item"><a href="/bikelong/index.action">Home</a></li>
 								<li class="breadcrumb-item"><a href="#">Pages</a></li>
 								<li class="breadcrumb-item active">Elements</li>
 							</ol>
@@ -57,163 +100,74 @@
 			</section>
 			<!-- Page Header end-->
 			
-			<section class="module divider-top">
-				<div class="container">
+			<div class="container" style="padding-top:50px;">
 					<div class="row">
-						<div class="col-md-6">
-							<p><a class="photo" href="/bikelong/resources/assets/images/main/1.jpg"><img src="/bikelong/resources/assets/images/main/1.jpg" alt=""></a></p>
-						</div>
-						<div class="col-md-6">
-							<p><a class="photo" href="/bikelong/resources/assets/images/main/3.jpg"><img src="/bikelong/resources/assets/images/main/3.jpg" alt=""></a></p>
+						<div class="col-md-6 m-auto text-center">
+							<p class="subtitle">From the blog</p>
+							<h1 class="display-1">목표 거리</h1>
+							<p class="lead">나에게 맞는 목표를 설정하고 달성해보세요. <br/></p>
+							<div class="divider-border"> </div>
 						</div>
 					</div>
-				</div>
-			</section>
-
-			<section class="module divider-top">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-4">
-							<p><a class="btn btn-lg btn-brand" href="#">Preview template</a></p>
-							<p><a class="btn btn-brand" href="#">Preview template</a></p>
-							<p><a class="btn btn-sm btn-brand" href="#">Preview template</a></p>
-						</div>
-						<div class="col-md-4">
-							<p><a class="btn btn-lg btn-black" href="#">Preview template</a></p>
-							<p><a class="btn btn-black" href="#">Preview template</a></p>
-							<p><a class="btn btn-sm btn-black" href="#">Preview template</a></p>
-						</div>
-						<div class="col-md-4">
-							<p><a class="btn btn-lg btn-gray" href="#">Preview template</a></p>
-							<p><a class="btn btn-gray" href="#">Preview template</a></p>
-							<p><a class="btn btn-sm btn-gray" href="#">Preview template</a></p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="space" data-mY="40px"></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-4">
-							<p><a class="btn btn-round btn-lg btn-brand" href="#">Preview template</a></p>
-							<p><a class="btn btn-round btn-brand" href="#">Preview template</a></p>
-							<p><a class="btn btn-round btn-sm btn-brand" href="#">Preview template</a></p>
-						</div>
-						<div class="col-md-4">
-							<p><a class="btn btn-round btn-lg btn-black" href="#">Preview template</a></p>
-							<p><a class="btn btn-round btn-black" href="#">Preview template</a></p>
-							<p><a class="btn btn-round btn-sm btn-black" href="#">Preview template</a></p>
-						</div>
-						<div class="col-md-4">
-							<p><a class="btn btn-round btn-lg btn-gray" href="#">Preview template</a></p>
-							<p><a class="btn btn-round btn-gray" href="#">Preview template</a></p>
-							<p><a class="btn btn-round btn-sm btn-gray" href="#">Preview template</a></p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="space" data-mY="40px"></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-4">
-							<p><a class="btn btn-circle btn-lg btn-brand" href="#">Preview template</a></p>
-							<p><a class="btn btn-circle btn-brand" href="#">Preview template</a></p>
-							<p><a class="btn btn-circle btn-sm btn-brand" href="#">Preview template</a></p>
-						</div>
-						<div class="col-md-4">
-							<p><a class="btn btn-circle btn-lg btn-black" href="#">Preview template</a></p>
-							<p><a class="btn btn-circle btn-black" href="#">Preview template</a></p>
-							<p><a class="btn btn-circle btn-sm btn-black" href="#">Preview template</a></p>
-						</div>
-						<div class="col-md-4">
-							<p><a class="btn btn-circle btn-lg btn-gray" href="#">Preview template</a></p>
-							<p><a class="btn btn-circle btn-gray" href="#">Preview template</a></p>
-							<p><a class="btn btn-circle btn-sm btn-gray" href="#">Preview template</a></p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="space" data-mY="40px"></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-4">
-							<p><a class="btn btn-outline btn-lg btn-brand" href="#">Preview template</a></p>
-							<p><a class="btn btn-outline btn-brand" href="#">Preview template</a></p>
-							<p><a class="btn btn-outline btn-sm btn-brand" href="#">Preview template</a></p>
-						</div>
-						<div class="col-md-4">
-							<p><a class="btn btn-outline btn-lg btn-black" href="#">Preview template</a></p>
-							<p><a class="btn btn-outline btn-black" href="#">Preview template</a></p>
-							<p><a class="btn btn-outline btn-sm btn-black" href="#">Preview template</a></p>
-						</div>
-						<div class="col-md-4">
-							<p><a class="btn btn-outline btn-lg btn-gray" href="#">Preview template</a></p>
-							<p><a class="btn btn-outline btn-gray" href="#">Preview template</a></p>
-							<p><a class="btn btn-outline btn-sm btn-gray" href="#">Preview template</a></p>
-						</div>
-					</div>
-				</div>
-			</section>
-		
-		<!-- Goallist -->
-		<div class="comments-area">
-			<div class="comment-body">
-				<div class="comment-meta">
-					<div class="comment-meta-author"><a href="#">Jason Ford</a></div>
-					<div class="comment-meta-date"><a href="#">May 5, 2015 at 4:51 am</a></div>
-				</div>
-				<a href ="#" data-toggle="collpase">
-					<p>Meh synth Schlitz, tempor duis single-origin coffee ea next level ethnic fingerstache fanny pack nostrud.</p>
-				</a>
-				
 			</div>
-		</div>
+		
+		<!-- 	<div>
+				<div class="searchFilter">
+					<select name="area" id="area" class="form-control">
+						<option value="">목표 거리 선택</option>
+						<option value="5">5km</option>
+						<option value="10">10km</option>
+						<option value="15">15km</option>
+						<option value="20">20km</option>
+						<option value="25">25km</option>
+						<option value="30">30km</option>
+					</select> <br>
+				</div>
+			</div> -->
+
 			<!-- Pie Chart-->
 			<section class="module divider-top">
 				<div class="container">
 					<div class="row">
+						
+					<!--@@@@여기----------------------  -->	
+						<c:forEach var="goal" items="${ goals }">
 						<div class="col-md-3">
 							<div class="pie-chart">
-								<div class="chart" data-percent="82"><span class="chart-text"><span><i class="icon-telescope"></i></span></span></div>
-								<div class="chart-title"><span>Custom Solutions</span></div>
+								<a id="goaltoggle" data-toggle="modal" data-target="myModal">
+								
+									<div class="chart" data-percent="${ goal.goalAmount }">
+											<span class="chart-text"><span><i class="icon-telescope"></i></span></span>
+									</div>
+								</a>
+								<div class="chart-title"><span>${ goal.goalName }</span></div>
 								<div class="chart-content">
-									<p>Map where your photos were taken and discover local points of interest. Map where your photos.</p>
+									<p>${ goal.goalInfo }</p>
 								</div>
+								<p><a class="btn btn-outline btn-sm btn-black" href="#">시작하기</a></p>
 							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="pie-chart">
-								<div class="chart" data-percent="100"><span class="chart-text"><span><i class="icon-circle-compass"></i></span></span></div>
-								<div class="chart-title"><span>Fully Responsive</span></div>
-								<div class="chart-content">
-									<p>Map where your photos were taken and discover local points of interest. Map where your photos.</p>
-								</div>
 							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="pie-chart">
-								<div class="chart" data-percent="70"><span class="chart-text"><span><i class="icon-strategy"></i></span></span></div>
-								<div class="chart-title"><span>User Friendly</span></div>
-								<div class="chart-content">
-									<p>Map where your photos were taken and discover local points of interest. Map where your photos.</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="pie-chart">
-								<div class="chart" data-percent="90"><span class="chart-text"><span><i class="icon-circle-compass"></i></span></span></div>
-								<div class="chart-title"><span>Fully Responsive</span></div>
-								<div class="chart-content">
-									<p>Map where your photos were taken and discover local points of interest. Map where your photos.</p>
-								</div>
-							</div>
-						</div>
+						</c:forEach>
+						
+						
+						<!------------>
 					</div>
 				</div>
 			</section>
+			
+				<!-- Goal-list -->
+			<!-- <div class="comments-area">
+				<div class="comment-body" style="margin-left:400px; margin-right:400px; ">
+					<div class="comment-meta">
+						<div class="comment-meta-author"><a href="#">Jason Ford</a></div>
+						<div class="comment-meta-date"><a href="#">May 5, 2015 at 4:51 am</a></div>
+					</div>
+					
+					<a id="goaltoggle" data-toggle="modal" data-target="myModal">
+						Meh synth Schlitz, tempor duis single-origin coffee ea next level ethnic fingerstache fanny pack nostrud.
+					</a>
+				</div>
+			</div>  -->
 
 
 			<section class="module">

@@ -7,20 +7,33 @@
 	
 	<insert id="insertBoard" parameterType="SharingBoard">
 		INSERT INTO Board(id, locationNo, category, date, title, content)
-		VALUES(#{writer}, #{locationNo}, #{category}, #{date}, #{title}, #{content})
+		VALUES(#{id}, #{locationNo}, #{category}, #{date}, #{title}, #{content})
 	</insert>
 	
 	<select id="selectBoardList" resultType="SharingBoard">
-		SELECT boardNo, id, locationNo, date, title, content  
-		FROM Board
-		WHERE category = 2 
+		SELECT b.boardNo, b.id, b.locationNo, b.date, b.title, b.content, l.locationName  
+		FROM Board b INNER JOIN Location l
+		ON b.locationNo = l.locationNo
+		WHERE b.category = 2
 	</select>
 	
 	<select id="selectBoard" parameterType="hashmap" resultType="SharingBoard">
-		SELECT id writer, locationNo, date, title, content
-		FROM Board
-		WHERE boardNo = #{boardNo} AND category = 2
+		SELECT b.id , b.locationNo, b.date, b.title, b.content, l.locationName
+		FROM Board b INNER JOIN Location l
+		ON b.locationNo = l.locationNo 
+		WHERE b.boardNo = #{boardNo} AND b.category = 2
 	</select>
+	
+	<update id="updateBoard" parameterType="SharingBoard">
+		UPDATE Board
+		SET date = #{date}, locationNo = #{locationNo}, title = #{title}, content = #{content}
+		WHERE boardNo = #{boardNo}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="hashmap">
+		DELETE FROM Board
+		WHERE boardNo = #{boardNo}	
+	</delete>
 	
 </mapper>
 

@@ -28,53 +28,53 @@ public class ThePager2 {
 		StringBuffer linkString = new StringBuffer();
 		
 		//1. 처음, 이전 항목 만들기
-		if (currentPage > 1) {
+		if (currentPage > 0) {
 			linkString.append(
-				String.format("<a href='%s?pageno=1'><img style='vertical-align:middle;width:15px;height:15px' src='/spring-mvc-demoweb3/resources/image/first.png'></a>",linkUrl));
+				String.format("<a href='%s?pageno=0'><img style='vertical-align:middle;width:15px;height:15px' src='/bikelong/resources/image/first.png'></a>",linkUrl));
 			linkString.append("&nbsp;");
 			linkString.append("&nbsp;");
 			linkString.append(String.format(
-				"<a href='%s?pageno=%d'><img style='vertical-align:middle;width:15px;height:15px' src='/spring-mvc-demoweb3/resources/image/prev.png'></a>", linkUrl, currentPage - 1));
+				"<a href='%s?pageno=%d'><img style='vertical-align:middle;width:15px;height:15px' src='/bikelong/resources/image/prev.png'></a>", linkUrl, currentPage - 1));
 			linkString.append("&nbsp;");
 		} else {
-			linkString.append("<img style='vertical-align:middle;width:15px;height:15px' src='/spring-mvc-demoweb3/resources/image/first.png'>");
+			linkString.append("<img style='vertical-align:middle;width:15px;height:15px' src='/bikelong/resources/image/first.png'>");
 			linkString.append("&nbsp;");
 			linkString.append("&nbsp;");
-			linkString.append("<img style='vertical-align:middle;width:15px;height:15px' src='/spring-mvc-demoweb3/resources/image/prev.png'>");
+			linkString.append("<img style='vertical-align:middle;width:15px;height:15px' src='/bikelong/resources/image/prev.png'>");
 			linkString.append("&nbsp;");
 		}
 		
 		//2. 페이지 번호 Link 만들기
-		int pagerBlock = (currentPage - 1) / pagerSize;
-		int start = (pagerBlock * pagerSize) + 1;
+		int pagerBlock = currentPage / pagerSize;
+		int start = pagerBlock * pagerSize;
 		int end = start + pagerSize;
 		for (int i = start; i < end; i++) {
-			if (i > pageCount) break;
+			if (i > pageCount-1) break;
 			linkString.append("&nbsp;");
 			if(i == currentPage) {
-				linkString.append(String.format("[%d]", i));
+				linkString.append(String.format("[%d]", i+1));
 			} else { 
 				linkString.append(String.format(
-					"<a href='%s?pageno=%d'>%d</a>", linkUrl, i, i));
+					"<a href='%s?pageno=%d'>%d</a>", linkUrl, i, i+1));
 			}
 			linkString.append("&nbsp;");
 		}
 		
 		//3. 다음, 마지막 항목 만들기
-		if (currentPage < pageCount) {
+		if (currentPage < pageCount-1) {
 			linkString.append("&nbsp;");
 			linkString.append(String.format(
-				"<a href='%s?pageno=%d'><img style='vertical-align:middle;width:15px;height:15px' src='/spring-mvc-demoweb3/resources/image/next.png'></a>",linkUrl, currentPage + 1));
+				"<a href='%s?pageno=%d'><img style='vertical-align:middle;width:15px;height:15px' src='/bikelong/resources/image/next.png'></a>",linkUrl, currentPage+1));
 			linkString.append("&nbsp;");
 			linkString.append("&nbsp;");
 			linkString.append(String.format(
-				"<a href='%s?pageno=%d'><img style='vertical-align:middle;width:15px;height:15px' src='/spring-mvc-demoweb3/resources/image/last.png'></a>", linkUrl, pageCount));
+				"<a href='%s?pageno=%d'><img style='vertical-align:middle;width:15px;height:15px' src='/bikelong/resources/image/last.png'></a>", linkUrl, pageCount-1));
 		} else {
 			linkString.append("&nbsp;");
-			linkString.append("<img style='vertical-align:middle;width:15px;height:15px' src='/spring-mvc-demoweb3/resources/image/next.png'>");
+			linkString.append("<img style='vertical-align:middle;width:15px;height:15px' src='/bikelong/resources/image/next.png'>");
 			linkString.append("&nbsp;");
 			linkString.append("&nbsp;");
-			linkString.append("<img style='vertical-align:middle;width:15px;height:15px' src='/spring-mvc-demoweb3/resources/image/last.png'>");
+			linkString.append("<img style='vertical-align:middle;width:15px;height:15px' src='/bikelong/resources/image/last.png'>");
 		}
 		
 		return linkString.toString();
