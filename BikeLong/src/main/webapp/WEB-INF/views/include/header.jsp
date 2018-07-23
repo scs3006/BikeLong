@@ -97,9 +97,9 @@
 							<c:if test="${ not empty loginuser }">
 								<li class="menu-item-has-children"><a href="#"><span class="menu-item-span"><i class="ti-user">&nbsp;&nbsp;</i>${id} 님</span></a>
 										<ul class="sub-menu">
-											<li><a href="reservations.jsp">마이페이지</a></li>
-											<li><a href="/bikelong/goal/goal.action">GOAL</a></li>
-											<li><a href="icons.jsp">Icons</a></li> 
+											<li><a href="/bikelong/mypage/mypage.action">MyPage</a></li>
+											<li><a href="/bikelong/mypage/activity.action">Activity</a></li> 
+											<li><a href="/bikelong/goal/goal.action">Goal</a></li>
 										</ul>
 								</li>
 								<li><a href="/bikelong/account/logout.action"><span class="menu-item-span"><i class="icon_trash_alt">&nbsp;&nbsp;</i>Log Out</span></a></li>
