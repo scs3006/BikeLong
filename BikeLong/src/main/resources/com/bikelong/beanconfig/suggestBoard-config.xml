@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+
+	<!-- Mapper 등록 -->
+	<bean id="suggestBoardMapper"
+		class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.bikelong.mapper.SuggestBoardMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
+	<!-- 의존성 주입 -->
+	<bean id="suggestBoardService" class="com.bikelong.service.SuggestBoardServiceImpl">
+		<property name="suggestBoardDao" ref="suggestBoardDao" />
+		<property name="replyDao" ref="replyDao" />
+	</bean>
+	<bean id="suggestBoardDao" class="com.bikelong.dao.MySqlSuggestBoardDao">
+		<property name="suggestBoardMapper" ref="suggestBoardMapper" />
+	</bean>		
+
+</beans>

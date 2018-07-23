@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "mypage")
 public class MypageController {
 	
+	@GetMapping(value = "mypage.action")
+	public String getMypage() {
+		return "mypage/mypage";
+	}
+	
 	@GetMapping(value = "activity.action")
 	public String getActivity() {
 		return "mypage/myactivity";

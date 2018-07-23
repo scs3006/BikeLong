@@ -22,13 +22,14 @@
 					<div class="inner-navigation collapse">
 						<div class="inner-nav onepage-nav">
 							<ul>
+								<li><a href="/bikelong/"><span class="menu-item-span">홈</span></a></li>
 								<li><a href="/bikelong/service/service.action"><span class="menu-item-span">서비스 소개</span></a></li>
+								<li><a href="/bikelong/noticeboard/list.action"><span class="menu-item-span">공지사항</span></a></li>
 								<li><a href="/bikelong/trailpathboard/list.action"><span class="menu-item-span">산책로 추천</span></a></li>
 								<li><a href="/bikelong/route/sharingboardlist.action"><span class="menu-item-span">경로 공유</span></a></li>
-								<li><a href="rentalShop.action"><span class="menu-item-span">대여소 위치</span></a></li>
-								<li><a href="/bikelong/noticeboard/list.action"><span class="menu-item-span">공지사항</span></a></li>
-								<li><a href="index.jsp#services"><span class="menu-item-span">고객의 의견</span></a></li>
-								<li><a href="index.jsp#news"><span class="menu-item-span">갤러리</span></a></li>
+								<li><a href="/bikelong/rentalShop.action"><span class="menu-item-span">대여소 위치</span></a></li>
+								<li><a href="/bikelong/weather/info.action"><span class="menu-item-span">날씨 정보</span></a></li>
+								<li><a href="/bikelong/suggestions/list.action"><span class="menu-item-span">건의 사항</span></a></li>
 								<!-- Pages-->
 								<li class="menu-item-has-children"><a href="features.jsp"><span class="menu-item-span">Pages</span></a>
 									<ul class="sub-menu">

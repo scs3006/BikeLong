@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>공지사항-상세보기</title>
+<title>건의사항-상세보기</title>
 
 
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -20,7 +20,7 @@
 <script type="text/javascript">
 	$(function() {
 		
-		$('#noticeDelete').on('click',function(){
+		$('#suggestDelete').on('click',function(){
 			event.preventDefault();
 			var check = confirm('정말 삭제 하시겠습니까?');
 			if(check){
@@ -95,7 +95,7 @@
 				success : function(data,status,xhr){
 					if(data=="success"){
 						alert('댓글 삭제에 성공하셨습니다.');
-						location.href="/bikelong/noticeboard/detail.action?boardNo=${board.boardNo}";
+						location.href="/bikelong/suggestions/detail.action?boardNo=${board.boardNo}";
 					}
 					if(data=="fail"){
 						alert('댓글 삭제에 실패하셨습니다.');
@@ -159,7 +159,7 @@
 						<article class="post">
 
 							<div>
-								<h1>공지사항</h1>
+								<h1>건의사항</h1>
 							</div>
 
 							<div class="row">
@@ -185,9 +185,9 @@
 										<div class="col-md-12">
 											<div class="text-center">
 												<a class="btn btn-black" href="list.action?pageno=${pageno}">목록보기</a>
-												<c:if test="${loginuser.id eq 'manager' && loginuser ne null}">
+												<c:if test="${loginuser.id eq board.id && loginuser ne null}">
 													<a class="btn btn-black" href="update.action?boardNo=${board.boardNo}&pageno=${pageno}">수정</a>
-													<a class="btn btn-black" id="noticeDelete" href="#">삭제</a>
+													<a class="btn btn-black" id="suggestDelete" href="#">삭제</a>
 												</c:if>
 											</div>
 										</div>

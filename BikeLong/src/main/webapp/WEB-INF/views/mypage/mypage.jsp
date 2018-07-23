@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-	
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -8,7 +8,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="">
-		<title>Tavern - Responsive Restaurant Template(Bootstrap 4)</title>
+		<title>마이페이지</title>
 		<!-- Favicons-->
 		<link rel="shortcut icon" href="/bikelong/resources/assets/images/favicon.png">
 		<link rel="apple-touch-icon" href="/bikelong/resources/assets/images/apple-touch-icon.png">
@@ -22,6 +22,14 @@
 		<link href="/bikelong/resources/assets/css/plugins.min.css" rel="stylesheet">
 		<!-- Template core CSS-->
 		<link href="/bikelong/resources/assets/css/template.css" rel="stylesheet">
+		
+		<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+		
+		<script type="text/javascript">
+		$(function(){
+			
+		});
+		</script>
 	</head>
 	<body>
 
@@ -42,140 +50,97 @@
 					<div class="container">
 						<div class="row align-items-center">
 							<div class="col-md-6">
-								<h1 class="page-title-heading">Activity</h1>
+								<h1 class="page-title-heading">MyPage</h1>
 							</div>
 							<div class="col-md-6">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="/bikelong/index.action">Home</a></li>
-									<li class="breadcrumb-item active">Activity</li>
+									<li class="breadcrumb-item active">Mypage</li>
 								</ol>
 							</div>
 						</div>
 					</div>
 				</section>
 			<!-- Page Header end-->
-			<div class="container" style="padding-top:50px;">
-					<div class="row">
-						<div class="col-md-6 m-auto text-center">
-							<p class="subtitle">WELCOME TO BIKELONG</p>
-							<h1 class="display-1">나의 활동량</h1>
-							<p class="lead">나의 활동량을 확인해보세요.</p>
-							<div class="divider-border"> </div>
-						</div>
-					</div>
-			</div>
 			
-			<section class="module divider-top">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-3">
-							<div class="counter">
-								<div class="counter-icon"><span class="icon-gears"></span></div>
-								<div class="counter-number">
-									<div class="display-1 counter-timer" data-from="0" data-to="785">0</div>
-								</div>
-								<div class="counter-title">
-									<h6><i class="ti-time">&nbsp;&nbsp;</i>이용시간</h6>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="counter">
-								<div class="counter-icon"><span class="icon-linegraph"></span></div>
-								<div class="counter-number">
-									<div class="display-1 counter-timer" data-from="0" data-to="4052">0</div>
-								</div>
-								
-								<div class="counter-title">
-									<span><h6><i class="ti-car">&nbsp;&nbsp;</i>거리(km)</h6></span>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="counter">
-								<div class="counter-icon"><span class="icon-tools"></span></div>
-								<div class="counter-number">
-									<div class="display-1 counter-timer" data-from="0" data-to="546">0</div>
-								</div>
-								<div class="counter-title">
-									<h6><i class="ti-stats-up">&nbsp;&nbsp;</i>활동량(kcal)</h6>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="counter">
-								<div class="counter-icon"><span class="icon-layers"></span></div>
-								<div class="counter-number">
-									<div class="display-1 counter-timer" data-from="0" data-to="468">0</div>
-								</div>
-								<div class="counter-title">
-									<h6><i class="ti-stats-down">&nbsp;&nbsp;</i>탄소절감효과(kg)</h6>
-								</div>
-							</div>
-						</div>
+			<div class="container" style="padding-top:50px;">
+				<div class="row">
+					<div class="col-md-6 m-auto text-center">
+						<p class="subtitle">WELCOME TO BIKELONG</p>
+						<h1 class="display-1">회원 정보 수정</h1>
+						<div class="divider-border"> </div>
 					</div>
 				</div>
-			</section>
+			</div>
 			
-			<section class="module divider-top">
+			<section class="module" style="padding-top: 50px;">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12">
-							<div class="progress-item">
-								<div class="progress-title">하루 이동 거리
-									<div class="pull-right"><span class="progress-number"></span>%</div>
+							<form method="post" id="frm">
+								<div class="row">
+									<div class="col-md-2">
+										<div class="text-center">아이디</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<input class="form-control" type="text" name="id" readonly="readonly" value="${loginuser.id}">
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="text-center">* 이름<br>(한글, 2~10)</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<input class="form-control" type="text" name="name" value="${loginuser.name}" required>
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="text-center">* 비밀번호<br>(영+숫자, 6~20)</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<input class="form-control" type="text" id="checkPw" name="password" placeholder="Password" disabled="disabled">
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="text-center">* 전화번호<br>(010-xxxx-xxxx)</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<input class="form-control" type="text" name="phone" value="${loginuser.phone}" required>
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="text-center">* 주소<br>(시, 구)</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<input class="form-control" type="email" name="address" value="${loginuser.address}" required>
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="text-center">몸무게<br>(미 입력시, 65kg)</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<input class="form-control" type="text" name="weight" value="${loginuser.weight}">
+										</div>
+									</div>
+									<br>
+									<div class="col-md-12">
+										<div class="text-center">
+											<input class="btn btn-black" type="button" value="비밀번호변경">&nbsp;
+											<input class="btn btn-black" type="submit" value="수정">
+										</div>
+									</div>
 								</div>
-								<div class="progress">
-									<div class="progress-bar progress-bar-brand" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-							</div>
-							<br>
-							<div class="progress-item">
-								<div class="progress-title">일주일 이동 거리
-									<div class="pull-right"><span class="progress-number"></span>%</div>
-								</div>
-								<div class="progress">
-									<div class="progress-bar progress-bar-brand" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-							</div>
-							<br>
-							<div class="progress-item">
-								<div class="progress-title">한 달 이동거리
-									<div class="pull-right"><span class="progress-number"></span>%</div>
-								</div>
-								<div class="progress">
-									<div class="progress-bar progress-bar-brand" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-							</div>
+							</form>
 						</div>
 					</div>
-				</div>
-			</section>
-
-			<!-- Pie Chart-->
-			<section class="module divider-top">
-				<div class="container">
 					<div class="row">
-						<div class="col-md-4">
-							<div class="pie-chart">
-								<div class="chart" data-percent="35"><span class="chart-text"><span><i class="icon-bike"></i></span></span></div>
-								<div class="chart-title"><span>하루 활동량</span></div>
-								<p><a class="btn btn-outline btn-sm btn-black" href="#">상세보기</a></p>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="pie-chart">
-								<div class="chart" data-percent="70"><span class="chart-text"><span><i class="icon-bike"></i></span></span></div>
-								<div class="chart-title"><span>일주일 활동량</span></div>
-								<p><a class="btn btn-outline btn-sm btn-black" href="#">상세보기</a></p>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="pie-chart">
-								<div class="chart" data-percent="100"><span class="chart-text"><span><i class="icon-bike"></i></span></span></div>
-								<div class="chart-title"><span>한 달 활동량</span></div>
-								<p><a class="btn btn-outline btn-sm btn-black" href="#">상세보기</a></p>
-							</div>
+						<div class="col-md-12">
+							<div class="space" data-mY="100px"></div>
 						</div>
 					</div>
 				</div>
@@ -334,68 +299,7 @@
 		</div>
 		<!-- Off canvas end-->
 
-		<!-- Reserve Popup-->
-		<div class="white-popup-block mfp-hide" id="test-form">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4 p-0">
-						<div class="qwert" data-background="/bikelong/resources/assets/images/module-2.jpg"></div>
-					</div>
-					<div class="col-md-8">
-						<div class="ddd"><a class="popup-modal-dismiss" href="#"><i class="ti-close"></i></a>
-							<h1 class="display-1">Book a Table</h1>
-							<p class="lead">See how your users experience your website in realtime or view <br/> trends to see any changes in performance over time.</p>
-							<div class="divider-border-left"></div>
-							<div class="space" data-mY="60px"></div>
-							<form method="post" novalidate>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="text" name="name" placeholder="Name" required="">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="text" name="name" placeholder="Phone" required="">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="email" name="email" placeholder="E-mail" required="">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="text" name="subject" placeholder="Persons" required="">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="email" name="email" placeholder="Date" required="">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="text" name="subject" placeholder="Time" required="">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<textarea class="form-control" name="message" placeholder="Special Requests" rows="6" required=""></textarea>
-										</div>
-									</div>
-									<div class="col-md-12">
-										<input class="btn btn-black" type="submit" value="Reserve">
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Reserve Popup end-->
-
+	
 		<!-- To top button--><a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
 
 		<!-- Scripts-->
