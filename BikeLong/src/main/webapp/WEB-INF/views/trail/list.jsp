@@ -45,30 +45,9 @@
 	<!-- Header-->
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<!-- Header end-->
-
 	<!-- Wrapper-->
 	<div class="wrapper">
-
-		<!-- Hero-->
-		<section class="module-cover parallax"
-			data-background="/bikelong/resources/assets/images/module-4.jpg"
-			data-overlay="1" data-gradient="1">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="text-center">
-							<h2 class="display-1">Special Recipes</h2>
-							<p>
-								See how your users experience your website in realtime or view <br />
-								trends to see any changes in performance over time.
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
 		<!-- Hero end-->
-
 		<section class="module">
 			<div class="container">
 				<div class="col-md-12">
@@ -98,6 +77,8 @@
 						<div class="text-center">
 							<a class="btn btn-black"
 								href="/bikelong/trailpathboard/write.action">글쓰기</a>
+							<a class="btn btn-black"
+							href="/bikelong/index.action">돌아가기</a>
 						</div>
 					</div>
 				</div>
