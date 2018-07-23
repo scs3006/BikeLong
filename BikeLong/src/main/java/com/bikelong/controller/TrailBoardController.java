@@ -48,7 +48,7 @@ public class TrailBoardController {
 	public String list(Model model,
 			@RequestParam(value = "pageno", defaultValue = "0") int pageNo) {
 		
-		int pageSize = 8; //한 페이지에 표시할 데이터 갯수
+		int pageSize = 10; //한 페이지에 표시할 데이터 갯수
 		int from = pageNo * pageSize;
 		int to = pageSize;
 		
@@ -68,14 +68,14 @@ public class TrailBoardController {
 
 	@GetMapping(value = "detail.action")
 	public String detail(@RequestParam(value ="pageno", defaultValue = "0") int pageNo,
-			int boardNo, Model model) {
+			int boardNo, Model model, TrailBoard trailBoarddetail) {
 		List<Reply> replyList = replyService.getReplyList(boardNo);
+		trailBoarddetail = trailBoardService.findBoard(boardNo);
 		
 		if(replyList != null && replyList.size() > 0) {
 			model.addAttribute("replyList", replyList);
 		}
 		
-		TrailBoard trailBoarddetail = trailBoardService.findBoard(boardNo);
 		model.addAttribute("trailBoarddetail",trailBoarddetail);
 		model.addAttribute("pageno", pageNo);
 		return "trail/detail";
