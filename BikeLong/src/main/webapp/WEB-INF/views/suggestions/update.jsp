@@ -5,16 +5,16 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="" />
-<meta name="author" content="" />
-<title>자전거 산책로 공유 수정</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content=""/>
+<meta name="author" content=""/>
+<title>건의사항-글 수정</title>
 
 
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script type="text/javascript"
-	src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
-</head>
+<script type="text/javascript" src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+ 
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript">
     $(function(){
        //전역변수
@@ -33,6 +33,7 @@
                 bUseModeChanger : true,
             }
         });
+        
         //전송버튼
         $("#savebtn").click(function(event){
         	event.preventDefault();
@@ -59,16 +60,16 @@
 				}
 			});
         }); 
-        $('#cencel').click(function(){
+        
+        $('#cencel').on("click",function(){
 			location.href="detail.action?boardNo="+${board.boardNo};
 		})		
     });
 </script>
+
 <!-- Favicons-->
-<link rel="shortcut icon"
-	href="/bikelong/resources/assets/images/favicon.png">
-<link rel="apple-touch-icon"
-	href="/bikelong/resources/assets/images/apple-touch-icon.png">
+<link rel="shortcut icon" href="/bikelong/resources/assets/images/favicon.png">
+<link rel="apple-touch-icon" href="/bikelong/resources/assets/images/apple-touch-icon.png">
 <link rel="apple-touch-icon" sizes="72x72"
 	href="/bikelong/resources/assets/images/apple-touch-icon-72x72.png">
 <link rel="apple-touch-icon" sizes="114x114"
@@ -82,11 +83,10 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
 	rel="stylesheet">
 <!-- Plugins and Icon Fonts-->
-<link href="/bikelong/resources/assets/css/plugins.min.css"
-	rel="stylesheet">
+<link href="/bikelong/resources/assets/css/plugins.min.css" rel="stylesheet">
 <!-- Template core CSS-->
-<link href="/bikelong/resources/assets/css/template.css"
-	rel="stylesheet">
+<link href="/bikelong/resources/assets/css/template.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -96,12 +96,12 @@
 		<div class="loader"></div>
 	</div>
 	<!-- Preloader end-->
-
+	
 	<!-- Header-->
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<!-- Header end-->
-
-	<!-- ========================================================================================================= -->
+	
+<!-- ========================================================================================================= -->
 	<!-- Wrapper-->
 	<div class="wrapper">
 		<section class="module">
@@ -111,79 +111,31 @@
 						<!-- Post-->
 						<article class="post">
 
-							<div class="post-preview">
-								<!--  -->
+							<div>
+								<h1>건의사항</h1>
 							</div>
-
+							
 							<div class="row">
 								<div class="col-md-12">
-									<form action="/bikelong/trailpathboard/update.action"
-										id="frm" method="POST" enctype="multipart/form-data"
-										novalidate>
+									<form action="update.action" id="frm" method="POST" enctype="multipart/form-data" novalidate>
 										<div class="row">
-											<div class="col-md-6">
+											<input type="hidden" name="id" value="${board.id}">
+											<input type="hidden" name="boardNo" value="${board.boardNo}">
+											<div class="col-md-12">
 												<div class="form-group">
-													<input class="form-control" type="text" name="id"
-														value="${trailBoardupdate.id}" readonly>
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<input class="form-control" type="date" name="date"
-														value="${trailBoardupdate.date}">
+													<input class="form-control" type="text" name="title" value="${board.title}" required>
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="form-group">
-												<input type="hidden" name="defaultLocationNo" value="${trailBoardupdate.locationNo}">
-													<p>지역 : ${trailBoardupdate.locationName}</p>
-													<select class="select form-control" name="locationNo">
-														<option value="0">지역 변경 없음</option>
-														<option value="1">강남구</option>
-														<option value="2">강동구</option>
-														<option value="3">강북구</option>
-														<option value="4">강서구</option>
-														<option value="5">관악구</option>
-														<option value="6">광진구</option>
-														<option value="7">구로구</option>
-														<option value="8">금천구</option>
-														<option value="9">노원구</option>
-														<option value="10">도봉구</option>
-														<option value="11">동대문구</option>
-														<option value="12">동작구</option>
-														<option value="13">마포구</option>
-														<option value="14">서대문구</option>
-														<option value="15">서초구</option>
-														<option value="16">성동구</option>
-														<option value="17">성북구</option>
-														<option value="18">송파구</option>
-														<option value="19">양천구</option>
-														<option value="20">영등포구</option>
-														<option value="21">용산구</option>
-														<option value="22">은평구</option>
-														<option value="23">종로구</option>
-														<option value="24">중구</option>
-														<option value="25">중랑구</option>
-													</select>
-												</div>
-											</div>
-											<div class="col-md-12">
-												<div class="form-group">
-													<input class="form-control" type="text" name="title"
-														value="${trailBoardupdate.title}">
-												</div>
-											</div>
-											<div class="col-md-12">
-												<div class="form-group">
-													<textarea rows="10" cols="100" name="content" id="content"
-														class="form-control" style="width: 100%; height: 482px">${trailBoardupdate.content}</textarea>
+													<textarea rows="10" cols="100" name="content" id="content" class="form-control" 
+													style="width: 100%; height: 482px" required>${board.content}</textarea>
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="text-center">
-													<input type="button" id="updatebtn" class="btn btn-black" value="수정" /> 
-													<a class="btn btn-black" href="/bikelong/trailpathboard/detail.action?boardNo=${trailBoardupdate.boardNo}">취소</a>
-													<input class="form-control" type="hidden" name="boardNo" value="${trailBoardupdate.boardNo}" >
+													<input type="button" id="savebtn" class="btn btn-black" value="수정"/>
+													<input type="button" id="cencel" class="btn btn-black" value="취소"/>
 												</div>
 											</div>
 										</div>
@@ -203,7 +155,7 @@
 				<path d="M0 100 C40 0 60 0 100 100 Z"></path>
 			</svg>
 		<!-- Footer-->
-		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+			<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 		<!-- Footer end-->
 	</div>
 	<!-- Wrapper end-->
@@ -221,8 +173,8 @@
 				<aside class="widget widget_text">
 					<div class="textwidget">
 						<p>
-							<img src="/bikelong/resources/assets/images/logo-light.png"
-								width="74px" alt="">
+							<img src="/bikelong/resources/assets/images/logo-light.png" width="74px"
+								alt="">
 						</p>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
 							sed do eiusmod tempor.</p>
@@ -293,7 +245,7 @@
 	</div>
 	<!-- Off canvas end-->
 
-
+	
 
 	<!-- Reserve Popup end-->
 

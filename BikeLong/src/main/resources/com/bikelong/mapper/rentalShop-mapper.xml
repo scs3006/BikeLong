@@ -6,8 +6,20 @@
 <mapper namespace="com.bikelong.mapper.RentalShopMapper">
 	
 	<select id="selectRentalShop" resultType="RentalShop">
-		SELECT rentalShopName, location, lat, lng, count
+		SELECT rentalShopNo, rentalShopName, location, lat, lng, count
 		FROM RentalShop
+	</select>
+	
+	<select id="searchRentalShop" parameterType="hashmap" resultType="RentalShop">
+		SELECT rentalShopNo, rentalShopName, location, lat, lng, count
+		FROM RentalShop
+		WHERE
+		<if test='select == "지역"'>
+			location LIKE CONCAT('%', #{text}, '%')
+		</if>
+		<if test='select == "대여소명"'>
+			rentalShopName LIKE CONCAT('%', #{text}, '%')
+		</if>
 	</select>
 
 </mapper>

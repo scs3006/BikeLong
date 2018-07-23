@@ -1,12 +1,19 @@
 package com.bikelong.vo;
 
 public class RentalShop {
+	private int rentalShopNo;
 	private String rentalShopName;
 	private String location;
 	private double lat;
 	private double lng;
 	private int count;
 	
+	public int getRentalShopNo() {
+		return rentalShopNo;
+	}
+	public void setRentalShopNo(int rentalShopNo) {
+		this.rentalShopNo = rentalShopNo;
+	}
 	public String getRentalShopName() {
 		return rentalShopName;
 	}

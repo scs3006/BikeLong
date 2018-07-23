@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.bikelong.mapper.SuggestBoardMapper">
+	
+	<insert id="insertBoard" parameterType="Board">
+		INSERT INTO Board(id, locationNo, category, title, content)
+		VALUES(#{id}, #{locationNo}, #{category}, #{title}, #{content})
+	</insert>
+	
+	<select id="selectBoardListWithPaging" parameterType="hashmap" resultType="Board">
+		SELECT boardNo, title, content, id, date_format(date,'%Y-%m-%d') AS date 
+		FROM Board 
+		WHERE category=4 ORDER BY boardNo DESC
+		LIMIT #{from}, #{to}
+	</select>
+	
+	<select id="selectBoardCount" resultType="int">
+		SELECT COUNT(*)
+		FROM Board 
+		WHERE category=4
+	</select>
+	
+	<select id="selectBoardByBoardNo" parameterType="int" resultType="Board">
+		SELECT boardNo, title, content, id, date_format(date,'%Y-%m-%d') AS date 
+		FROM Board 
+		WHERE BoardNo=#{boardNo};
+	</select>
+	
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM Board WHERE boardNo=#{boardNo}
+	</delete>
+	
+	<update id="updateBoard" parameterType="Board">
+		UPDATE Board SET title=#{title}, content = #{content}, id=#{id}, date = date_format(current_timestamp(),'%Y-%m-%d')
+		WHERE boardNo = #{boardNo}
+	</update>
+	
+</mapper>
+
+
+
+
+
+
+
+

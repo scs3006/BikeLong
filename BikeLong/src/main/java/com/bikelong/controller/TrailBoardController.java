@@ -24,14 +24,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.bikelong.service.ReplyService;
 import com.bikelong.service.TrailBoardService;
-import com.bikelong.ui.ThePager2;
-import com.bikelong.vo.Board;
+import com.bikelong.ui.*;
+import com.bikelong.vo.Reply;
 import com.bikelong.vo.TrailBoard;
+
 
 @Controller
 @RequestMapping(value = "trailpathboard")
 public class TrailBoardController {
+	
+	
+	@Autowired
+	@Qualifier(value = "replyService")
+	private ReplyService replyService;
 
 	@Autowired
 	@Qualifier(value = "trailBoardService")
@@ -47,9 +54,17 @@ public class TrailBoardController {
 	}
 
 	@GetMapping(value = "detail.action")
-	public String detail(int boardNo, Model model) {
+	public String detail(@RequestParam(value ="pageno", defaultValue = "0") int pageNo,
+			int boardNo, Model model) {
+		List<Reply> replyList = replyService.getReplyList(boardNo);
+		
+		if(replyList != null && replyList.size() > 0) {
+			model.addAttribute("replyList", replyList);
+		}
+		
 		TrailBoard trailBoarddetail = trailBoardService.findBoard(boardNo);
 		model.addAttribute("trailBoarddetail",trailBoarddetail);
+		model.addAttribute("pageno", pageNo);
 		return "trail/detail";
 	}
 
@@ -68,14 +83,25 @@ System.out.println(trailBoard.getLocationNo());
 	}
 
 	@GetMapping(value = "update.action")
-	public String update(@RequestParam (value ="boardNo", defaultValue ="0")
-	int boardNo, Model model, TrailBoard trailboardupdate) {
+	public String update(Model model, TrailBoard trailboardupdate,
+			@RequestParam(value ="pageno", defaultValue = "0") int pageNo, int boardNo) {
 		trailboardupdate = trailBoardService.findBoard(boardNo);
 		trailboardupdate.setBoardNo(boardNo);
 		trailboardupdate.setDate(trailboardupdate.getDate().substring(0, 10));
+		model.addAttribute("trailboardupdate", trailboardupdate);
+		model.addAttribute("pageno", pageNo);
 		return "trail/update";
 	}
-	
+	@PostMapping(value = "update.action")
+	@ResponseBody
+	public String postUpdate(TrailBoard trailBoard) {
+		try {
+			trailBoardService.updateBoard(trailBoard);
+		} catch (Exception ex) { // 등록 실패한 경우
+			return "fail";
+		}
+		return "success"; 
+	}
 	
 	@GetMapping(value = "delete.action")
 	public String delete(

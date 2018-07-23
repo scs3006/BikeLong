@@ -85,28 +85,27 @@
 			});
         });
 		
-		$('.deleteReply').each(function(idx){
-			$(this).on('click',function(event){
-				var replyNo = $(this).attr('data-replyNo');
-				$.ajax({
-					url : "/bikelong/reply/delete.action",
-					method : "GET",
-					data : {'replyNo' : replyNo},
-					success : function(data,status,xhr){
-						if(data=="success"){
-							alert('댓글 삭제에 성공하셨습니다.');
-							location.href="/bikelong/noticeboard/detail.action?boardNo=${board.boardNo}";
-						}
-						if(data=="fail"){
-							alert('댓글 삭제에 실패하셨습니다.');
-							return;
-						}
-					},
-					error : function(xhr, status, err){
+		$('div#comments').on('click', 'a.deleteReply',function(event){
+			event.preventDefault();
+			var replyNo = $(this).attr('data-replyNo');
+			$.ajax({
+				url : "/bikelong/reply/delete.action",
+				method : "GET",
+				data : {'replyNo' : replyNo},
+				success : function(data,status,xhr){
+					if(data=="success"){
+						alert('댓글 삭제에 성공하셨습니다.');
+						location.href="/bikelong/noticeboard/detail.action?boardNo=${board.boardNo}";
+					}
+					if(data=="fail"){
 						alert('댓글 삭제에 실패하셨습니다.');
 						return;
 					}
-				});
+				},
+				error : function(xhr, status, err){
+					alert('댓글 삭제에 실패하셨습니다.');
+					return;
+				}
 			});
 		});
 	});

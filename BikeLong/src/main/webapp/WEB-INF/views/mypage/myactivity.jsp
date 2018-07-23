@@ -32,15 +32,32 @@
 		<!-- Preloader end-->
 
 		<!-- Header-->
-		<jsp:include page="/WEB-INF/views/include/header.jsp" /><br/><br/>
+		<jsp:include page="/WEB-INF/views/include/header.jsp" /><br/><br/><br/>
 		<!-- Header end-->
 
 		<!-- Wrapper-->
 		<div class="wrapper">
+			<!-- Page Header-->
+				<section class="module-page-title">
+					<div class="container">
+						<div class="row align-items-center">
+							<div class="col-md-6">
+								<h1 class="page-title-heading">Activity</h1>
+							</div>
+							<div class="col-md-6">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="/bikelong/index.action">Home</a></li>
+									<li class="breadcrumb-item active">Activity</li>
+								</ol>
+							</div>
+						</div>
+					</div>
+				</section>
+			<!-- Page Header end-->
 			<div class="container" style="padding-top:50px;">
 					<div class="row">
 						<div class="col-md-6 m-auto text-center">
-							<p class="subtitle">- Bike Long -</p>
+							<p class="subtitle">WELCOME TO BIKELONG</p>
 							<h1 class="display-1">나의 활동량</h1>
 							<p class="lead">나의 활동량을 확인해보세요.</p>
 							<div class="divider-border"> </div>

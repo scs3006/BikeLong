@@ -29,6 +29,102 @@
 		src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=Vj_z1VQ7HqR8A0hX5tnL&submodules=geocoder">
 	</script>
 	
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$('#search').on('click', function(event) {
+				event.preventDefault();
+				var text = $('#text').val();
+				
+				if(text == '') {
+					alert('검색할 지역이나 대여소 이름을 입력하세요.');
+					return;
+				}
+				
+				var data = $('#searchForm').serialize();
+				$.ajax({
+					"url" : "search.action",
+					"method" : "POST",
+					"data" : data,
+					"success" : function(data, status, xhr) {
+						if(data == null || data == '') {
+							alert('검색하신 정보가 없습니다.');
+							return;
+						} 
+						search(data);
+					},
+					"error" : function(request, status, errpr) {
+						alert("검색 실패");
+					}
+				});
+			});
+			
+			$('#modalClose').on('click', function(event) {
+				$('#searchModal #modal-body').empty();
+			});
+			
+			$(document).keydown(function(event) {
+				if(event.keyCode == 27) {
+					$('#searchModal #modal-body').empty();
+				}
+			});
+			
+		});
+	</script>
+	
+	<style type="text/css">
+		input:-ms-input-placeholder {color:#a8a8a8; }
+		input:-webkit-input-placeholder {color:#a8a8a8; }
+		input:-moz-input-placeholder {color:#a8a8a8; }
+		
+		.search {
+			height: 40px;
+			width: 100%;
+			border: 2px solid #00adc1;
+			background: #ffffff;
+		}
+		
+		.search select {
+			font-size: 16px;
+			width: 20%;
+			height: 100%;
+			border: 1px solid #00adc1;
+			outline: none;
+			float: left;
+		}
+		
+		.search input {
+			font-size: 16px;
+			width: 70%;
+			height: 100%;
+			padding: 10px;
+			border: 1px solid #00adc1;
+			outline: none;
+			float: left;
+		}
+		
+		.search button {
+			width: 10%;
+			height: 100%;
+			border: 1px solid #00adc1;
+			background: #00adc1;
+			outline: none;
+			float: right;
+			color: #ffffff;
+		}
+		
+		.image {
+			margin-top: -40px;
+		}
+		
+		.image span {
+			font-size: 15px;
+			margin-right: 10px;
+		}
+		
+		
+	</style>
+	
 </head>
 <body>
 
@@ -50,26 +146,56 @@
 		<div class="container">
 			<div class="row align-items-center">
 				<div class="col-md-6">
-					<h1 class="page-title-heading">Elements</h1>
+					<h1 class="page-title-heading">RentalShop Location</h1>
 				</div>
 				<div class="col-md-6">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="#">Home</a></li>
 						<li class="breadcrumb-item"><a href="#">Pages</a></li>
-						<li class="breadcrumb-item active">Elements</li>
+						<li class="breadcrumb-item active">RentalShop Location</li>
 					</ol>
 				</div>
 			</div>
 		</div>
 	</section>
 	<!-- Page Header end-->
-
+	
 	<!-- Maps-->
 	<section class="module divider-top">
 		<div class="container">
 			<div class="row">
+				
+				<!-- Images -->
 				<div class="col-md-12">
-					<div id="map" style="width:100%; height:700px;"></div>
+					<div class="image">
+						<img src="/bikelong/resources/assets/images/icon0.gif" width="20px" height="20px"><span>0대</span>
+						<img src="/bikelong/resources/assets/images/icon3.gif" width="20px" height="20px"><span>1~3대</span>
+						<img src="/bikelong/resources/assets/images/icon2.gif" width="20px" height="20px"><span>4~6대</span>
+						<img src="/bikelong/resources/assets/images/icon1.gif" width="20px" height="20px"><span>7대 이상</span>
+						<img src="/bikelong/resources/assets/images/icon4.gif" width="20px" height="20px"><span>임시폐쇠</span>
+					</div>
+				</div>
+				<!-- Images End -->
+				
+				<!-- Search -->
+				<div class="col-md-12">
+					<form id="searchForm">
+						<div class="search">
+							<select id="select" name="select">
+								<option value="지역">지역</option>
+								<option value="대여소명">대여소명</option>
+							</select>
+							<input id="text" name="text" type="text" placeholder="검색어 입력">
+							<button id="search"><img src="/bikelong/resources/assets/images/search.gif" width="30px" height="24px"></button>
+						</div>
+					</form>
+				</div>
+				<!-- Search End -->
+				
+				<div class="col-md-12">
+					<div id="map" style="width:100%; height:700px;">
+					</div>
+					<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 					<script type="text/javascript">
 						var HOME_PATH = window.HOME_PATH || '.';
 						var position = new naver.maps.LatLng(37.485344, 126.901107);
@@ -79,54 +205,135 @@
 						    zoom: 10
 						});
 						
-						var markerOptions = {
-							position: new naver.maps.LatLng(37.485266, 126.901468),
-							map: map,
-							icon: {
-								url: '/bikelong/resources/assets/images/icon1.gif',
-								size: new naver.maps.Size(50, 50),
-						        origin: new naver.maps.Point(0, 0),
-						        anchor: new naver.maps.Point(25, 50)
+						var markers = [];
+						var marker = null;
+						var markerOptions = null;						
+						var contentString = null;
+						var currentInfoWindow = null;
+						var modal = false;
+						
+						function search(data) {
+
+							var cnt = 0;
+							for(var i=0; i < data.length; i++) {
+								cnt++;
 							}
-						};
+							
+							if(cnt > 1) {
+								var modalBody = $('#searchModal #modal-body');
+								
+								for(var i=0; i<data.length; i++) {
+									$("<a href='javascript:mapsMove("+ data[i].lat +","+ data[i].lng +","+ data[i].rentalShopNo +");'><center class='breadcrumb-item' color='black'></center></a><br>").text(data[i].rentalShopName).appendTo(modalBody);
+								}
+								
+								var modal = true;
+								$('#searchModal').modal('show');
+								$('#modal-title').text(cnt + "개의 항목이 검색되었습니다.");
+							} else {
+								mapsMove(data[0].lat, data[0].lng, data[0].rentalShopNo);
+							}	
+						}
 						
-						var marker = new naver.maps.Marker(markerOptions);
+						function mapsMove(lat, lng, i) {
+							var location = new naver.maps.LatLng(lat, lng);
+							map.panTo(location);
+							
+							$('#searchModal').modal('hide');
+							$('#searchModal #modal-body').empty();
+							
+						}
 						
-						var contentString = [
-						        '<div class="iw_inner">',
-						        '   <center style="margin-top: 20px; font-size:15px;">1.구로디지털단지 1번출구 옆</center>',
-						        '   <hr color="black" style="width:220px; height:2px; margin-top: 3px;">',
-						        '   <p>서울특별시 중구 태평로1가 31 | 서울특별시 중구 세종대로 110 서울특별시청<br />',
-						        '       02-120 | 공공,사회기관 &gt; 특별,광역시청<br />',
-						        '       <a href="http://www.seoul.go.kr" target="_blank">www.seoul.go.kr/</a>',
-						        '   </p>',
+						function makeMarkerOptions(count, lat, lng) {
+							var idx;
+							if (count == 0) {
+								idx = 0;
+							} else if (count > 0 && count < 4) {
+								idx = 3
+							} else if (count > 3 && count < 7) {
+								idx = 2;	
+							} else if (count > 6) {
+								idx = 1;
+							}
+							
+							imageUrl = '/bikelong/resources/assets/images/icon' + idx + '.gif';
+							markerOptions = {
+								position: new naver.maps.LatLng(lat, lng),
+								map: map,
+								icon: {
+										url: imageUrl,
+										size: new naver.maps.Size(50, 50),
+								        origin: new naver.maps.Point(0, 0),
+								        anchor: new naver.maps.Point(25, 50)
+								}
+							}
+							
+							return markerOptions;
+						}
+						
+						function makeInfoWindow(currentMarker) {
+							contentString = [
+						        '<div id="iw_inner" class="iw_inner" style="width:265px; height:205px;">',
+						        '   <center style="margin-top: 20px; font-size: 15px;">' + currentMarker.rentalShopNo + '. ' + currentMarker.rentalShopName + '</center>',
+						        '   <hr color="black" style="width:220px; height:2px; margin-top: 3px; margin-bottom: 10px;">',
+						        '   <center style="font-size: 13px;">대여가능 자전거</center>',
+						        '   <center style="font-size: 60px; margin-top: -25px;">' + currentMarker.count + '</count>',
+						        '   <hr color="black" style="width:220px; height:2px; margin-top: -10px; margin-bottom: -40px;">',
+						        '   <button style="width: 80px; height: 35px; font-size: 15px; background: #72ebc9; border: none;">상세정보</button>',
+						        '   <button id="close" style="width: 80px; height: 35px; font-size: 15px; background: #72ebc9; border: none;">확인</button>',
 						        '</div>'
 						    ].join('');
 	
-						var infowindow = new naver.maps.InfoWindow({
-						    content: contentString,
-						    maxWidth: 265,
-						    backgroundColor: "#eee",
-						    borderColor: "#2db400",
-						    borderWidth: 5,
-						    anchorSize: new naver.maps.Size(20, 10), //창 아래 화살표
-						    anchorSkew: true,
-						    anchorColor: "#eee",
-						    pixelOffset: new naver.maps.Point(5, -20) //창 위치
-						});
-	
-						naver.maps.Event.addListener(marker, "click", function(e) {
-						    if (infowindow.getMap()) {
-						        infowindow.close();
-						    } else {
-						        infowindow.open(map, marker);
-						    }
-						});
+							infoWindow = new naver.maps.InfoWindow({
+							    content: contentString,
+							    maxWidth: 265,
+							    maxHeight: 205,
+							    backgroundColor: "#fff",
+							    borderColor: "#000",
+							    borderWidth: 3,
+							    anchorSize: new naver.maps.Size(20, 10), //창 아래 화살표
+							    anchorSkew: true,
+							    anchorColor: "#fff",
+							    pixelOffset: new naver.maps.Point(5, -20) //창 위치
+							});
+							
+							return infoWindow;
+						}
+						
+						<c:forEach var="rentalShop" items="${ rentalShops }" varStatus="status">
+						
+							//marker = new naver.maps.Marker(markerOptions);
+							markerOptions = makeMarkerOptions(${ rentalShop.count }, ${ rentalShop.lat }, ${ rentalShop.lng });
+							marker = new naver.maps.Marker(markerOptions);
+							marker.rentalShop = {
+								"rentalShopNo" : ${rentalShop.rentalShopNo},
+								"rentalShopName" : "${rentalShop.rentalShopName}",
+								"count" : ${rentalShop.count}
+							}	
+							markers.push(marker);
+																				
+							
+		
+							naver.maps.Event.addListener(marker, "click", function(e) {
+								var currentMarker = markers[${status.index}];
+								if (currentInfoWindow && currentInfoWindow.getMap()) {
+									currentInfoWindow.close();
+								}
+								currentInfoWindow = makeInfoWindow(currentMarker.rentalShop)
+							    currentInfoWindow.open(map, currentMarker);
+							        
+						        $('div#map div#iw_inner button#close').on('click', function(event) {
+						        	currentInfoWindow.close();
+						        });
+							});
+						
+					</c:forEach>
+						
 					</script>
 				</div>
 			</div>
 		</div>
 	</section>
+	<!-- Maps End -->
 
 
 	<br><br>
@@ -142,138 +349,27 @@
 </div>
 <!-- Wrapper end-->
 
-<!-- Off canvas-->
-<div class="off-canvas-sidebar" data-background="resources/assets/images/sidebar.jpg">
-	<div class="off-canvas-sidebar-wrapper">
-		<div class="off-canvas-header"><a class="close-offcanvas" href="#"><span class="arrows arrows-arrows-remove"></span></a></div>
-		<div class="off-canvas-content">
-			<!-- Text widget-->
-			<aside class="widget widget_text">
-				<div class="textwidget">
-					<p><img src="resources/assets/images/logo-light.png" width="74px" alt=""></p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
-					<ul class="icon-list">
-						<li><i class="ti-email"></i> info@themebusiness.com</li>
-						<li><i class="ti-headphone-alt"></i> 1-444-123-4559</li>
-						<li><i class="ti-location-pin"></i> Raymond Boulevard 224, New York</li>
-					</ul>
-				</div>
-			</aside>
-			<!-- Recent portfolio widget-->
-			<aside class="widget widget_recent_works">
-				<div class="widget-title">
-					<h5>Instagram</h5>
-				</div>
-				<ul>
-					<li><a href="#"><img src="resources/assets/images/widgets/1.jpg" alt=""></a></li>
-					<li><a href="#"><img src="resources/assets/images/widgets/2.jpg" alt=""></a></li>
-					<li><a href="#"><img src="resources/assets/images/widgets/3.jpg" alt=""></a></li>
-					<li><a href="#"><img src="resources/assets/images/widgets/4.jpg" alt=""></a></li>
-					<li><a href="#"><img src="resources/assets/images/widgets/5.jpg" alt=""></a></li>
-					<li><a href="#"><img src="resources/assets/images/widgets/6.jpg" alt=""></a></li>
-				</ul>
-			</aside>
-			<!-- Text widget-->
-			<!--aside.widget.widget_text
-			.textwidget
-				.up-logo
-					p.text-center.m-b-50: img(src="resources/assets/images/logo-light.png" width="100" alt="")
-				.up-form
-					form(method="post")
-						.form-group
-							input.form-control.form-control-lg(type="email" placeholder="Email")
-						.form-group
-							input.form-control.form-control-lg(type="password" placeholder="Pasword")
-						.form-group
-							button(type="submit" class="btn btn-block btn-lg btn-round btn-brand") Log in
-				.up-help
-					p: a(href="#") Forgot your password?
-					p Don't have an account yet? <a href="#">Sign in</a>
-			
-			-->
+<!-- modal -->
 
-			<!-- Twitter widget-->
-			<aside class="widget twitter-feed-widget">
-				<div class="widget-title">
-					<h5>Twitter Feed</h5>
-				</div>
-				<div class="twitter-feed" data-twitter="345170787868762112" data-number="2"></div>
-			</aside>
-			<ul class="social-icons">
-				<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-				<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-				<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-				<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-				<li><a href="#"><i class="fa fa-vk"></i></a></li>
-			</ul>
-		</div>
-	</div>
+<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-title"></h5>
+                <button id="modalClose" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="modal-body" class="modal-body">	
+            </div>
+            <div class="modal-footer">
+            - 해당 대여소를 선택해 주세요. -
+            </div>
+        </div>
+    </div>
 </div>
-<!-- Off canvas end-->
 
-<!-- Reserve Popup-->
-<div class="white-popup-block mfp-hide" id="test-form">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-4 p-0">
-				<div class="qwert" data-background="resources/assets/images/module-2.jpg"></div>
-			</div>
-			<div class="col-md-8">
-				<div class="ddd"><a class="popup-modal-dismiss" href="#"><i class="ti-close"></i></a>
-					<h1 class="display-1">Book a Table</h1>
-					<p class="lead">See how your users experience your website in realtime or view <br/> trends to see any changes in performance over time.</p>
-					<div class="divider-border-left"></div>
-					<div class="space" data-mY="60px"></div>
-					<form method="post" novalidate>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<input class="form-control" type="text" name="name" placeholder="Name" required="">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<input class="form-control" type="text" name="name" placeholder="Phone" required="">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<input class="form-control" type="email" name="email" placeholder="E-mail" required="">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<input class="form-control" type="text" name="subject" placeholder="Persons" required="">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<input class="form-control" type="email" name="email" placeholder="Date" required="">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<input class="form-control" type="text" name="subject" placeholder="Time" required="">
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="form-group">
-									<textarea class="form-control" name="message" placeholder="Special Requests" rows="6" required=""></textarea>
-								</div>
-							</div>
-							<div class="col-md-12">
-								<input class="btn btn-black" type="submit" value="Reserve">
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Reserve Popup end-->
-
-<!-- To top button--><a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
+<!-- modal(end) -->
 
 <!-- Scripts-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

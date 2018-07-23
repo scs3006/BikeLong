@@ -37,6 +37,7 @@
 		<mapper resource="com/bikelong/mapper/goal-mapper.xml" />
 		<mapper resource="com/bikelong/mapper/noticeBoard-mapper.xml" />
 		<mapper resource="com/bikelong/mapper/reply-mapper.xml" />
+		<mapper resource="com/bikelong/mapper/suggestBoard-mapper.xml" />
 	</mappers>
 
 </configuration>

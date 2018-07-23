@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.bikelong.vo.Board;
 
-public interface NoticeBoardService {
+public interface SuggestBoardService {
 
 	void writeBoard(Board board);
 	List<Board> findBoardListWithPaging(int from, int to);

@@ -609,7 +609,7 @@
 					<!-- Text widget-->
 					<aside class="widget widget_text">
 						<div class="textwidget">
-							<p><img src="resources/assets/images/logo-light.png" width="74px" alt=""></p>
+							<p><img src="resources/assets/images/bikelong-light.png" width="74px" alt=""></p>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
 							<ul class="icon-list">
 								<li><i class="ti-email"></i> info@themebusiness.com</li>
