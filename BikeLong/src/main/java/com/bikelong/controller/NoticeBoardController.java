@@ -44,7 +44,7 @@ public class NoticeBoardController {
 	@GetMapping(value = "list.action")
 	public String getList(@RequestParam(value = "pageno", defaultValue = "0") int pageNo, Model model) {
 		
-		int pageSize = 5; //한 페이지에 표시할 데이터 갯수
+		int pageSize = 8; //한 페이지에 표시할 데이터 갯수
 		int from = pageNo * pageSize;
 		int to = pageSize;
 		
