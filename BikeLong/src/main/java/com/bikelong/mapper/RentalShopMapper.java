@@ -1,9 +1,14 @@
 package com.bikelong.mapper;
 
+import java.util.HashMap;
+import java.util.List;
+
 import com.bikelong.vo.RentalShop;
 
 public interface RentalShopMapper {
 
-	RentalShop selectRentalShop();
+	List<RentalShop> selectRentalShop();
+
+	List<RentalShop> searchRentalShop(HashMap<String, Object> params);
 
 }

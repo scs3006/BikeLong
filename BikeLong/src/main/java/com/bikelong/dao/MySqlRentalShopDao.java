@@ -1,5 +1,8 @@
 package com.bikelong.dao;
 
+import java.util.HashMap;
+import java.util.List;
+
 import com.bikelong.mapper.RentalShopMapper;
 import com.bikelong.vo.RentalShop;
 
@@ -11,9 +14,21 @@ public class MySqlRentalShopDao implements RentalShopDao {
 	}
 	
 	@Override
-	public RentalShop selectRentalShop() {
+	public List<RentalShop> selectRentalShop() {
 		
-		RentalShop rentalShop = rentalShopMapper.selectRentalShop();
+		List<RentalShop> rentalShop = rentalShopMapper.selectRentalShop();
+		
+		return rentalShop;
+	}
+
+	@Override
+	public List<RentalShop> searchRentalShop(String select, String text) {
+		
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("select", select);
+		params.put("text", text);
+		
+		List<RentalShop> rentalShop = rentalShopMapper.searchRentalShop(params);
 		
 		return rentalShop;
 	}

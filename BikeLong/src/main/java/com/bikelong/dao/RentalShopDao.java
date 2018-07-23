@@ -1,9 +1,13 @@
 package com.bikelong.dao;
 
+import java.util.List;
+
 import com.bikelong.vo.RentalShop;
 
 public interface RentalShopDao {
 
-	RentalShop selectRentalShop();
+	List<RentalShop> selectRentalShop();
+
+	List<RentalShop> searchRentalShop(String select, String text);
 
 }

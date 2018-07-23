@@ -29,6 +29,87 @@
 		src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=Vj_z1VQ7HqR8A0hX5tnL&submodules=geocoder">
 	</script>
 	
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$('#search').on('click', function(event) {
+				event.preventDefault();
+				var text = $('#text').val();
+				
+				if(text == '') {
+					alert('검색할 지역이나 대여소 이름을 입력하세요.');
+					return;
+				}
+				
+				var data = $('#searchForm').serialize();
+				$.ajax({
+					"url" : "search.action",
+					"method" : "POST",
+					"data" : data,
+					"success" : function(data, status, xhr) {
+						alert(data);
+						search();
+					},
+					"error" : function(request, status, errpr) {
+						alert("검색 실패");
+					}
+				});
+			});
+		});
+	</script>
+	
+	<style type="text/css">
+		input:-ms-input-placeholder {color:#a8a8a8; }
+		input:-webkit-input-placeholder {color:#a8a8a8; }
+		input:-moz-input-placeholder {color:#a8a8a8; }
+		
+		.search {
+			height: 40px;
+			width: 100%;
+			border: 2px solid #00adc1;
+			background: #ffffff;
+		}
+		
+		.search select {
+			font-size: 16px;
+			width: 20%;
+			height: 100%;
+			border: 1px solid #00adc1;
+			outline: none;
+			float: left;
+		}
+		
+		.search input {
+			font-size: 16px;
+			width: 70%;
+			height: 100%;
+			padding: 10px;
+			border: 1px solid #00adc1;
+			outline: none;
+			float: left;
+		}
+		
+		.search button {
+			width: 10%;
+			height: 100%;
+			border: 1px solid #00adc1;
+			background: #00adc1;
+			outline: none;
+			float: right;
+			color: #ffffff;
+		}
+		
+		.image {
+			margin-top: -40px;
+		}
+		
+		.image span {
+			font-size: 15px;
+			margin-right: 10px;
+		}
+		
+	</style>
+	
 </head>
 <body>
 
@@ -63,13 +144,43 @@
 		</div>
 	</section>
 	<!-- Page Header end-->
-
+	
 	<!-- Maps-->
 	<section class="module divider-top">
 		<div class="container">
 			<div class="row">
+				
+				<!-- Images -->
 				<div class="col-md-12">
-					<div id="map" style="width:100%; height:700px;"></div>
+					<div class="image">
+						<img src="/bikelong/resources/assets/images/icon0.gif" width="20px" height="20px"><span>0대</span>
+						<img src="/bikelong/resources/assets/images/icon3.gif" width="20px" height="20px"><span>1~3대</span>
+						<img src="/bikelong/resources/assets/images/icon2.gif" width="20px" height="20px"><span>4~6대</span>
+						<img src="/bikelong/resources/assets/images/icon1.gif" width="20px" height="20px"><span>7대 이상</span>
+						<img src="/bikelong/resources/assets/images/icon4.gif" width="20px" height="20px"><span>임시폐쇠</span>
+					</div>
+				</div>
+				<!-- Images End -->
+				
+				<!-- Search -->
+				<div class="col-md-12">
+					<form id="searchForm">
+						<div class="search">
+							<select id="select" name="select">
+								<option value="지역">지역</option>
+								<option value="지역">대여소명</option>
+							</select>
+							<input id="text" name="text" type="text" placeholder="검색어 입력">
+							<button id="search"><img src="/bikelong/resources/assets/images/search.gif" width="30px" height="24px"></button>
+						</div>
+					</form>
+				</div>
+				<!-- Search End -->
+				
+				<div class="col-md-12">
+					<div id="map" style="width:100%; height:700px;">
+					</div>
+					<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 					<script type="text/javascript">
 						var HOME_PATH = window.HOME_PATH || '.';
 						var position = new naver.maps.LatLng(37.485344, 126.901107);
@@ -79,54 +190,110 @@
 						    zoom: 10
 						});
 						
-						var markerOptions = {
-							position: new naver.maps.LatLng(37.485266, 126.901468),
-							map: map,
-							icon: {
-								url: '/bikelong/resources/assets/images/icon1.gif',
-								size: new naver.maps.Size(50, 50),
-						        origin: new naver.maps.Point(0, 0),
-						        anchor: new naver.maps.Point(25, 50)
+						var markers = [];
+						var marker = null;
+						var markerOptions = null;						
+						var contentString = null;
+						var currentInfoWindow = null;
+						
+						function search() {
+							alert("들어옴");
+							alert( ${ cnt } );
+							//var search = new naver.maps.LatLng(${ searchRentalShops.lat }, ${ searchRentalShops.lng });
+						}
+						
+						function makeMarkerOptions(count, lat, lng) {
+							var idx;
+							if (count == 0) {
+								idx = 0;
+							} else if (count > 0 && count < 4) {
+								idx = 3
+							} else if (count > 3 && count < 7) {
+								idx = 2;	
+							} else if (count > 6) {
+								idx = 1;
 							}
-						};
+							
+							imageUrl = '/bikelong/resources/assets/images/icon' + idx + '.gif';
+							markerOptions = {
+								position: new naver.maps.LatLng(lat, lng),
+								map: map,
+								icon: {
+										url: imageUrl,
+										size: new naver.maps.Size(50, 50),
+								        origin: new naver.maps.Point(0, 0),
+								        anchor: new naver.maps.Point(25, 50)
+								}
+							}
+							
+							return markerOptions;
+						}
 						
-						var marker = new naver.maps.Marker(markerOptions);
-						
-						var contentString = [
-						        '<div class="iw_inner">',
-						        '   <center style="margin-top: 20px; font-size:15px;">1.구로디지털단지 1번출구 옆</center>',
-						        '   <hr color="black" style="width:220px; height:2px; margin-top: 3px;">',
-						        '   <p>서울특별시 중구 태평로1가 31 | 서울특별시 중구 세종대로 110 서울특별시청<br />',
-						        '       02-120 | 공공,사회기관 &gt; 특별,광역시청<br />',
-						        '       <a href="http://www.seoul.go.kr" target="_blank">www.seoul.go.kr/</a>',
-						        '   </p>',
+						function makeInfoWindow(currentMarker) {
+							contentString = [
+						        '<div id="iw_inner" class="iw_inner" style="width:265px; height:205px;">',
+						        '   <center style="margin-top: 20px; font-size: 15px;">' + currentMarker.rentalShopNo + '. ' + currentMarker.rentalShopName + '</center>',
+						        '   <hr color="black" style="width:220px; height:2px; margin-top: 3px; margin-bottom: 10px;">',
+						        '   <center style="font-size: 13px;">대여가능 자전거</center>',
+						        '   <center style="font-size: 60px; margin-top: -25px;">' + currentMarker.count + '</count>',
+						        '   <hr color="black" style="width:220px; height:2px; margin-top: -10px; margin-bottom: -40px;">',
+						        '   <button style="width: 80px; height: 35px; font-size: 15px; background: #72ebc9; border: none;">상세정보</button>',
+						        '   <button id="close" style="width: 80px; height: 35px; font-size: 15px; background: #72ebc9; border: none;">확인</button>',
 						        '</div>'
 						    ].join('');
 	
-						var infowindow = new naver.maps.InfoWindow({
-						    content: contentString,
-						    maxWidth: 265,
-						    backgroundColor: "#eee",
-						    borderColor: "#2db400",
-						    borderWidth: 5,
-						    anchorSize: new naver.maps.Size(20, 10), //창 아래 화살표
-						    anchorSkew: true,
-						    anchorColor: "#eee",
-						    pixelOffset: new naver.maps.Point(5, -20) //창 위치
-						});
-	
-						naver.maps.Event.addListener(marker, "click", function(e) {
-						    if (infowindow.getMap()) {
-						        infowindow.close();
-						    } else {
-						        infowindow.open(map, marker);
-						    }
-						});
+							infoWindow = new naver.maps.InfoWindow({
+							    content: contentString,
+							    maxWidth: 265,
+							    maxHeight: 205,
+							    backgroundColor: "#fff",
+							    borderColor: "#000",
+							    borderWidth: 3,
+							    anchorSize: new naver.maps.Size(20, 10), //창 아래 화살표
+							    anchorSkew: true,
+							    anchorColor: "#fff",
+							    pixelOffset: new naver.maps.Point(5, -20) //창 위치
+							});
+							
+							return infoWindow;
+						}
+						
+						<c:forEach var="rentalShop" items="${ rentalShops }" varStatus="status">
+							
+							
+							//marker = new naver.maps.Marker(markerOptions);
+							markerOptions = makeMarkerOptions(${ rentalShop.count }, ${ rentalShop.lat }, ${ rentalShop.lng });
+							marker = new naver.maps.Marker(markerOptions);
+							marker.rentalShop = {
+								"rentalShopNo" : ${rentalShop.rentalShopNo},
+								"rentalShopName" : "${rentalShop.rentalShopName}",
+								"count" : ${rentalShop.count}
+							}	
+							markers.push(marker);
+																				
+							
+		
+							naver.maps.Event.addListener(marker, "click", function(e) {
+								var currentMarker = markers[${status.index}];
+								if (currentInfoWindow && currentInfoWindow.getMap()) {
+									currentInfoWindow.close();
+								}
+								currentInfoWindow = makeInfoWindow(currentMarker.rentalShop)
+							    currentInfoWindow.open(map, currentMarker);
+							        
+						        $('div#map div#iw_inner button#close').on('click', function(event) {
+						        	currentInfoWindow.close();
+						        });
+							});
+							
+						</c:forEach>
+						
 					</script>
 				</div>
 			</div>
 		</div>
 	</section>
+	<!-- Maps End -->
 
 
 	<br><br>
