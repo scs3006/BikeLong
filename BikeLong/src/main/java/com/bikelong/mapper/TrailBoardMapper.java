@@ -1,15 +1,17 @@
 package com.bikelong.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.bikelong.vo.*;
 
 public interface TrailBoardMapper {
 
-	void insertBoard(Board trailBoard);
-	Board selectBoard(int boardNo);
-	List<Board> selectBoardList();
-	void updateBoard(Board board);
+	void insertBoard(TrailBoard trailBoard);
+	TrailBoard selectBoard(int boardNo);
+	List<TrailBoard> selectBoardList();
+	void updateBoard(TrailBoard trailBoard);
 	void deleteBoard(int boardNo);
+	
 
 }

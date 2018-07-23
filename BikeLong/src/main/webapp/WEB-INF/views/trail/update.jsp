@@ -14,36 +14,56 @@
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript"
 	src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
-
 </head>
 <script type="text/javascript">
-	$(function() {
-		//전역변수
-		var obj = [];
-		//스마트에디터 프레임생성
-		nhn.husky.EZCreator.createInIFrame({
-			oAppRef : obj,
-			elPlaceHolder : "content",
-			sSkinURI : "/bikelong/resources/editor/SmartEditor2Skin.html",
-			htParams : {
-				// 툴바 사용 여부
-				bUseToolbar : true,
-				// 입력창 크기 조절바 사용 여부
-				bUseVerticalResizer : true,
-				// 모드 탭(Editor | HTML | TEXT) 사용 여부
-				bUseModeChanger : true,
-			}
-		});
-		//전송버튼
-		$("#updatebtn").click(function(event) {
-			event.preventDefault();
-			obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-			//폼 submit
-			$("#frm").submit();
-		});
-	});
+    $(function(){
+       //전역변수
+        var obj = [];              
+        //스마트에디터 프레임생성
+        nhn.husky.EZCreator.createInIFrame({
+            oAppRef: obj,
+            elPlaceHolder: "content",
+            sSkinURI: "/bikelong/resources/editor/SmartEditor2Skin.html",
+            htParams : {
+                // 툴바 사용 여부
+                bUseToolbar : true,            
+                // 입력창 크기 조절바 사용 여부
+                bUseVerticalResizer : true,    
+                // 모드 탭(Editor | HTML | TEXT) 사용 여부
+                bUseModeChanger : true,
+            }
+        });
+        //전송버튼
+        $("#savebtn").click(function(event){
+        	event.preventDefault();
+        	obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+        	
+        	var queryString =  $("#frm").serialize();
+        	$.ajax({
+				url : "update.action",
+				method : "POST",
+				data : queryString,
+				success : function(data,status,xhr){
+					if(data=="success"){
+						alert('게시글 수정에 성공하셨습니다.');
+						location.href = 'detail.action?boardNo='+${board.boardNo}+'&pageno=${pageno}';
+					}
+					if(data=="fail"){
+						alert('게시글 수정에 실패하셨습니다.');
+						return;
+					}
+				},
+				error : function(xhr, status, err){
+					alert('게시글 수정에 실패하셨습니다.');
+					return;
+				}
+			});
+        }); 
+        $('#cencel').click(function(){
+			location.href="detail.action?boardNo="+${board.boardNo};
+		})		
+    });
 </script>
-
 <!-- Favicons-->
 <link rel="shortcut icon"
 	href="/bikelong/resources/assets/images/favicon.png">

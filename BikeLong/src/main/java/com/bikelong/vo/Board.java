@@ -1,7 +1,7 @@
 package com.bikelong.vo;
 
 
-public class Board extends Image{
+public class Board {
 
 	private int boardNo;
 	private String id;
