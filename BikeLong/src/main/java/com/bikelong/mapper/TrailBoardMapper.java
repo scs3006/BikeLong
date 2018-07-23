@@ -9,9 +9,11 @@ public interface TrailBoardMapper {
 
 	void insertBoard(TrailBoard trailBoard);
 	TrailBoard selectBoard(int boardNo);
-	List<TrailBoard> selectBoardList();
+	List<TrailBoard> selectBoardList(HashMap<String, Object> params);
 	void updateBoard(TrailBoard trailBoard);
 	void deleteBoard(int boardNo);
+	int selectBoardCount();
+	TrailBoard selectBoardByBoardNo(int boardNo);
 	
 
 }

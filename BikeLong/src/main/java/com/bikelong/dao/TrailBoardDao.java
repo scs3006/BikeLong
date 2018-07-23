@@ -11,11 +11,15 @@ public interface TrailBoardDao {
 
 	TrailBoard selectBoard(int boardNo);
 
-	List<TrailBoard> selectBoardList();
+	List<TrailBoard> selectBoardList(int from, int to);
 
 	void updateBoard(TrailBoard trailBoard);
 
 	void deleteBoard(int boardNo);
+
+	int selectBoardCount();
+
+	TrailBoard selectBoardByBoardNo(int boardNo);
 
 
 }

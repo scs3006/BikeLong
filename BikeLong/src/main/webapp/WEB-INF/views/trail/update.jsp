@@ -5,70 +5,45 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="" />
-<meta name="author" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content=""/>
+<meta name="author" content=""/>
 <title>자전거 산책로 공유 수정</title>
 
 
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script type="text/javascript"
-	src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
-</head>
+<script type="text/javascript" src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript">
-    $(function(){
-       //전역변수
-        var obj = [];              
-        //스마트에디터 프레임생성
-        nhn.husky.EZCreator.createInIFrame({
-            oAppRef: obj,
-            elPlaceHolder: "content",
-            sSkinURI: "/bikelong/resources/editor/SmartEditor2Skin.html",
-            htParams : {
-                // 툴바 사용 여부
-                bUseToolbar : true,            
-                // 입력창 크기 조절바 사용 여부
-                bUseVerticalResizer : true,    
-                // 모드 탭(Editor | HTML | TEXT) 사용 여부
-                bUseModeChanger : true,
-            }
-        });
-        //전송버튼
-        $("#savebtn").click(function(event){
-        	event.preventDefault();
-        	obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-        	
-        	var queryString =  $("#frm").serialize();
-        	$.ajax({
-				url : "update.action",
-				method : "POST",
-				data : queryString,
-				success : function(data,status,xhr){
-					if(data=="success"){
-						alert('게시글 수정에 성공하셨습니다.');
-						location.href = 'detail.action?boardNo='+${board.boardNo}+'&pageno=${pageno}';
-					}
-					if(data=="fail"){
-						alert('게시글 수정에 실패하셨습니다.');
-						return;
-					}
-				},
-				error : function(xhr, status, err){
-					alert('게시글 수정에 실패하셨습니다.');
-					return;
-				}
-			});
-        }); 
-        $('#cencel').click(function(){
-			location.href="detail.action?boardNo="+${board.boardNo};
-		})		
-    });
+	$(function() {
+		//전역변수
+		var obj = [];
+		//스마트에디터 프레임생성
+		nhn.husky.EZCreator.createInIFrame({
+			oAppRef : obj,
+			elPlaceHolder : "content",
+			sSkinURI : "/bikelong/resources/editor/SmartEditor2Skin.html",
+			htParams : {
+				// 툴바 사용 여부
+				bUseToolbar : true,
+				// 입력창 크기 조절바 사용 여부
+				bUseVerticalResizer : true,
+				// 모드 탭(Editor | HTML | TEXT) 사용 여부
+				bUseModeChanger : true,
+			}
+		});
+		//전송버튼
+		$("#savebtn").click(function(event) {
+			event.preventDefault();
+			obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+			//폼 submit
+			$("#frm").submit();
+		});
+	});
+	
 </script>
 <!-- Favicons-->
-<link rel="shortcut icon"
-	href="/bikelong/resources/assets/images/favicon.png">
-<link rel="apple-touch-icon"
-	href="/bikelong/resources/assets/images/apple-touch-icon.png">
+<link rel="shortcut icon" href="/bikelong/resources/assets/images/favicon.png">
+<link rel="apple-touch-icon" href="/bikelong/resources/assets/images/apple-touch-icon.png">
 <link rel="apple-touch-icon" sizes="72x72"
 	href="/bikelong/resources/assets/images/apple-touch-icon-72x72.png">
 <link rel="apple-touch-icon" sizes="114x114"
@@ -82,11 +57,10 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
 	rel="stylesheet">
 <!-- Plugins and Icon Fonts-->
-<link href="/bikelong/resources/assets/css/plugins.min.css"
-	rel="stylesheet">
+<link href="/bikelong/resources/assets/css/plugins.min.css" rel="stylesheet">
 <!-- Template core CSS-->
-<link href="/bikelong/resources/assets/css/template.css"
-	rel="stylesheet">
+<link href="/bikelong/resources/assets/css/template.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -96,12 +70,12 @@
 		<div class="loader"></div>
 	</div>
 	<!-- Preloader end-->
-
+	
 	<!-- Header-->
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<!-- Header end-->
-
-	<!-- ========================================================================================================= -->
+	
+<!-- ========================================================================================================= -->
 	<!-- Wrapper-->
 	<div class="wrapper">
 		<section class="module">
@@ -124,19 +98,19 @@
 											<div class="col-md-6">
 												<div class="form-group">
 													<input class="form-control" type="text" name="id"
-														value="${trailBoardupdate.id}" readonly>
+														value="${trailboardupdate.id}" readonly>
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
 													<input class="form-control" type="date" name="date"
-														value="${trailBoardupdate.date}">
+														value="${trailboardupdate.date}">
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="form-group">
-												<input type="hidden" name="defaultLocationNo" value="${trailBoardupdate.locationNo}">
-													<p>지역 : ${trailBoardupdate.locationName}</p>
+												<input type="hidden" name="defaultLocationNo" value="${trailboardupdate.locationNo}">
+													<p>지역 : ${trailboardupdate.locationName}</p>
 													<select class="select form-control" name="locationNo">
 														<option value="0">지역 변경 없음</option>
 														<option value="1">강남구</option>
@@ -170,20 +144,20 @@
 											<div class="col-md-12">
 												<div class="form-group">
 													<input class="form-control" type="text" name="title"
-														value="${trailBoardupdate.title}">
+														value="${trailboardupdate.title}">
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="form-group">
 													<textarea rows="10" cols="100" name="content" id="content"
-														class="form-control" style="width: 100%; height: 482px">${trailBoardupdate.content}</textarea>
+														class="form-control" style="width: 100%; height: 482px">${trailboardupdate.content}</textarea>
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="text-center">
 													<input type="button" id="updatebtn" class="btn btn-black" value="수정" /> 
-													<a class="btn btn-black" href="/bikelong/trailpathboard/detail.action?boardNo=${trailBoardupdate.boardNo}">취소</a>
-													<input class="form-control" type="hidden" name="boardNo" value="${trailBoardupdate.boardNo}" >
+													<a class="btn btn-black" href="/bikelong/trailpathboard/detail.action?boardNo=${trailboardupdate.boardNo}">취소</a>
+													<input class="form-control" type="hidden" name="boardNo" value="${trailboardupdate.boardNo}" >
 												</div>
 											</div>
 										</div>
@@ -196,14 +170,13 @@
 				</div>
 			</div>
 		</section>
-
 		<svg class="footer-circle" xmlns="http://www.w3.org/2000/svg"
 			version="1.1" width="100%" height="100" viewbox="0 0 100 100"
 			preserveaspectratio="none">
 				<path d="M0 100 C40 0 60 0 100 100 Z"></path>
 			</svg>
 		<!-- Footer-->
-		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+			<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 		<!-- Footer end-->
 	</div>
 	<!-- Wrapper end-->
@@ -221,8 +194,8 @@
 				<aside class="widget widget_text">
 					<div class="textwidget">
 						<p>
-							<img src="/bikelong/resources/assets/images/logo-light.png"
-								width="74px" alt="">
+							<img src="/bikelong/resources/assets/images/logo-light.png" width="74px"
+								alt="">
 						</p>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
 							sed do eiusmod tempor.</p>
@@ -293,7 +266,7 @@
 	</div>
 	<!-- Off canvas end-->
 
-
+	
 
 	<!-- Reserve Popup end-->
 

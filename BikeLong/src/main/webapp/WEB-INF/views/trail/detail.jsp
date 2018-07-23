@@ -155,11 +155,14 @@
 										<div class="col-md-12">
 											<div class="text-center">
 												<a class="btn btn-black"
-													href="/bikelong/trailpathboard/list.action">목록보기</a> <a
-													class="btn btn-black"
-													href="/bikelong/trailpathboard/update.action?boardNo=${trailBoarddetail.boardNo}">수정</a>
-												<a class="btn btn-black"
-													href="/bikelong/trailpathboard/delete.action?boardNo=${trailBoarddetail.boardNo}&pageNo=${pageNo}">삭제</a>
+													href="/bikelong/trailpathboard/list.action">목록보기</a>
+												<c:if
+													test="${loginuser.id eq 'manager' && loginuser ne null}">
+													<a class="btn btn-black"
+														href="/bikelong/trailpathboard/update.action?boardNo=${trailBoarddetail.boardNo}">수정</a>
+													<a class="btn btn-black"
+														href="/bikelong/trailpathboard/delete.action?boardNo=${trailBoarddetail.boardNo}&pageNo=${ pageNo }">삭제</a>
+												</c:if>
 											</div>
 										</div>
 									</div>

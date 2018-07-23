@@ -6,15 +6,21 @@
 <mapper namespace="com.bikelong.mapper.TrailBoardMapper">
 	
 	<insert id="insertBoard" parameterType="TrailBoard">
-		INSERT INTO Board(id, locationNo, category, date, title, content)
-		VALUES(#{id}, #{locationNo}, #{category}, #{date}, #{title}, #{content})
+			INSERT INTO Board(id, locationNo, category, title, content)
+		VALUES(#{id}, #{locationNo}, #{category}, #{title}, #{content})
 	</insert>
 	
 	<select id="selectBoardList" resultType="TrailBoard">
-		SELECT b.boardNo, b.id, b.locationNo, b.date, b.title, b.content, l.locationName  
-		FROM Board b INNER JOIN Location l
-		ON b.locationNo = l.locationNo
-		WHERE b.category = 1
+		SELECT boardNo, title, content, id, date_format(date,'%Y-%m-%d') AS date 
+		FROM Board 
+		WHERE category=1 ORDER BY boardNo
+		LIMIT #{from}, #{to}
+	</select>
+	
+	<select id="selectBoardCount" resultType="int">
+		SELECT COUNT(*)
+		FROM Board 
+		WHERE category=1
 	</select>
 	
 	<select id="selectBoard" parameterType="hashmap" resultType="TrailBoard">
@@ -24,17 +30,20 @@
 		WHERE b.boardNo = #{boardNo} AND b.category = 1
 	</select>
 	
-	<update id="updateBoard" parameterType="TrailBoard">
-		UPDATE Board
-		SET date = #{date}, locationNo = #{locationNo}, title = #{title}, content = #{content}
+	<update id="updateBoard" parameterType="Board">
+		UPDATE Board SET title=#{title}, content = #{content}, id=#{id}, date = date_format(current_timestamp(),'%Y-%m-%d')
 		WHERE boardNo = #{boardNo}
 	</update>
 	
 	<delete id="deleteBoard" parameterType="hashmap">
-		DELETE FROM Board
-		WHERE boardNo = #{boardNo}	
+		DELETE FROM Board WHERE boardNo=#{boardNo}
 	</delete>
 	
+	<select id="selectBoardByBoardNo" parameterType="int" resultType="Board">
+		SELECT boardNo, title, content, id, date_format(date,'%Y-%m-%d') AS date 
+		FROM Board 
+		WHERE BoardNo=#{boardNo};
+	</select>
 	
 </mapper>
 

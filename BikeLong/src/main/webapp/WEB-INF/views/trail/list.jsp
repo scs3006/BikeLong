@@ -65,26 +65,30 @@
 								<div class="post-wrapper">
 									<div class="post-header" style="height: 15%">
 										<h2 class="post-title display-1">
-											<a
-												href="/bikelong/trailpathboard/detail.action?boardNo=${list.boardNo}">${list.title}</a>
+											<a href="/bikelong/trailpathboard/detail.action?boardNo=${list.boardNo}">${list.title}</a>
 										</h2>
 									</div>
 								</div>
 							</article>
 						</div>
+						<div class="col-md-12">
+							<div class="text-center">${pager}</div>
+						</div>
+						<br> <br> <br> <br>
 					</c:forEach>
 					<div class="col-md-12">
 						<div class="text-center">
-							<a class="btn btn-black"
-								href="/bikelong/trailpathboard/write.action">글쓰기</a>
-							<a class="btn btn-black"
-							href="/bikelong/index.action">돌아가기</a>
+							<a class="btn btn-black" href="/bikelong/index.action">돌아가기</a>
+							<c:if test="${loginuser.id eq 'manager' && loginuser ne null}">
+							<a class="btn btn-black" href="/bikelong/trailpathboard/write.action">글쓰기</a>
+							</c:if>
 						</div>
+						<br>
 					</div>
 				</div>
 			</div>
 		</section>
-
+		<!-- Wrapper end-->
 		<svg class="footer-circle" xmlns="http://www.w3.org/2000/svg"
 			version="1.1" width="100%" height="100" viewbox="0 0 100 100"
 			preserveaspectratio="none">
@@ -94,8 +98,6 @@
 		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 		<!-- Footer end-->
 	</div>
-	<!-- Wrapper end-->
-
 	<!-- Off canvas-->
 	<!-- ======================================================================== -->
 	<div class="off-canvas-sidebar"
