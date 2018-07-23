@@ -45,7 +45,7 @@
 			$(this).hover(function(){$(this).css('cursor', 'pointer')},function(){$(this).css('cursor')});
 			$(this).on("click",function(event){
 				var boardNo = $(this).attr('data-boardNo');
-				location.href="detail.action?boardNo=" + boardNo;
+				location.href="detail.action?boardNo=" + boardNo + "&pageno=" + ${pageno};
 			});		
 		});
 	});
@@ -97,6 +97,12 @@
 										</c:forEach>
 									</table>
 								</div>
+								<div class="col-md-12">
+									<div class="text-center">
+										${pager}
+									</div>
+								</div>
+								<br><br>
 								<c:if test="${loginuser.id eq 'manager' && loginuser ne null}">
 									<div class="col-md-12">
 										<div class="text-center">

@@ -19,13 +19,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bikelong.service.NoticeBoardService;
 import com.bikelong.service.ReplyService;
+import com.bikelong.ui.ThePager2;
 import com.bikelong.vo.Board;
 import com.bikelong.vo.Reply;
-import com.bikelong.vo.SharingBoard;
 
 @Controller
 @RequestMapping(value = "noticeboard")
@@ -41,15 +42,29 @@ public class NoticeBoardController {
 	
 	
 	@GetMapping(value = "list.action")
-	public String getList(Model model) {
-		List<Board> noticeBoardLists = noticeBoarService.findBoardList();
+	public String getList(@RequestParam(value = "pageno", defaultValue = "0") int pageNo, Model model) {
+		
+		int pageSize = 5; //한 페이지에 표시할 데이터 갯수
+		int from = pageNo * pageSize;
+		int to = pageSize;
+		
+		int pagerSize = 5;//번호로 표시할 페이지 목록
+		String linkUrl = "list.action";
+		
+		List<Board> noticeBoardLists = noticeBoarService.findBoardListWithPaging(from, to);
+		int dataCount = noticeBoarService.getBoardCount();
+		
+		ThePager2 pager = new ThePager2(dataCount, pageNo, pageSize, pagerSize, linkUrl);
+		
 		model.addAttribute("noticeList", noticeBoardLists);
+		model.addAttribute("pager", pager);
+		model.addAttribute("pageno", pageNo);
 		return "notice/list";
 	}
 	
 	
 	@GetMapping(value = "detail.action")
-	public String getDetail(int boardNo, Model model) {
+	public String getDetail(@RequestParam(value ="pageno", defaultValue = "0") int pageNo, int boardNo, Model model) {
 		Board board = noticeBoarService.findBoardByBoardNo(boardNo);
 		List<Reply> replyList = replyService.getReplyList(boardNo);
 		
@@ -57,6 +72,7 @@ public class NoticeBoardController {
 			model.addAttribute("replyList", replyList);
 		}
 		model.addAttribute("board", board);
+		model.addAttribute("pageno", pageNo);
 		return "notice/detail";
 	}
 	
@@ -87,9 +103,10 @@ public class NoticeBoardController {
 	}
 	
 	@GetMapping(value = "update.action")
-	public String getUpdate(int boardNo, Model model) {
+	public String getUpdate(@RequestParam(value ="pageno", defaultValue = "0") int pageNo, int boardNo, Model model) {
 		Board board = noticeBoarService.findBoardByBoardNo(boardNo);
 		model.addAttribute("board", board);
+		model.addAttribute("pageno", pageNo);
 		return "notice/update";
 	}
 	
@@ -108,7 +125,7 @@ public class NoticeBoardController {
 	@ResponseBody
 	public String getDelete(int boardNo) {
 		try {
-			noticeBoarService.deleteBoard(boardNo);	// 서비스에서 트랜잭션으로 댓글까지 지우는거 잊지말자!
+			noticeBoarService.deleteBoardTx(boardNo);	// 서비스에서 트랜잭션으로 댓글까지 지우는거 잊지말자!
 		} catch (Exception ex) { // 등록 실패한 경우
 			return "fail";
 		}

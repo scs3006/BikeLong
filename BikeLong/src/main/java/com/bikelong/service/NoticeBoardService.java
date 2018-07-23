@@ -7,9 +7,10 @@ import com.bikelong.vo.Board;
 public interface NoticeBoardService {
 
 	void writeBoard(Board board);
-	List<Board> findBoardList();
+	List<Board> findBoardListWithPaging(int from, int to);
 	Board findBoardByBoardNo(int i);
-	void deleteBoard(int boardNo);
+	void deleteBoardTx(int boardNo);
 	void updateBoard(Board board);
+	int getBoardCount();
 	
 }

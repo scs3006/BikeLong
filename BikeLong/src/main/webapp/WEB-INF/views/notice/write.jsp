@@ -45,15 +45,10 @@
         		$('#frm').find('[name=title]').focus();
         		return;
         	}
-         	
-         	if(content == null || content == ''){
-        		alert('내용을 입력해 주세요.');
-        		return;
-        	}
-        	
+         	        	
          	obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
             //폼 submit
-            //$("#frm").submit();
+            $("#frm").submit();
         }); 
     });
 </script>

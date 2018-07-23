@@ -1,5 +1,6 @@
 package com.bikelong.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.bikelong.mapper.NoticeBoardMapper;
@@ -19,10 +20,13 @@ public class MySqlNoticeBoardDao implements NoticeBoardDao {
 	}
 
 	@Override
-	public List<Board> selectNoticeBoardList() {
-		return noticeBoardMapper.selectNoticeBoardList();
+	public List<Board> selectBoardListWithPaging(int from, int to) {
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("from", from);
+		params.put("to", to);
+		return noticeBoardMapper.selectBoardListWithPaging(params);
 	}
-
+	
 	@Override
 	public Board selectBoardByBoardNo(int boardNo) {
 		return noticeBoardMapper.selectBoardByBoardNo(boardNo);
@@ -37,5 +41,9 @@ public class MySqlNoticeBoardDao implements NoticeBoardDao {
 	public void updateBoard(Board board) {
 		noticeBoardMapper.updateBoard(board);
 	}
-	
+
+	@Override
+	public int selectBoardCount() {
+		return noticeBoardMapper.selectBoardCount();
+	}
 }

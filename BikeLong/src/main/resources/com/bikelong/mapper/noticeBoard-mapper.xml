@@ -10,10 +10,17 @@
 		VALUES(#{id}, #{locationNo}, #{category}, #{title}, #{content})
 	</insert>
 	
-	<select id="selectNoticeBoardList" resultType="Board">
+	<select id="selectBoardListWithPaging" parameterType="hashmap" resultType="Board">
 		SELECT boardNo, title, content, id, date_format(date,'%Y-%m-%d') AS date 
 		FROM Board 
 		WHERE category=3 ORDER BY boardNo
+		LIMIT #{from}, #{to}
+	</select>
+	
+	<select id="selectBoardCount" resultType="int">
+		SELECT COUNT(*)
+		FROM Board 
+		WHERE category=3
 	</select>
 	
 	<select id="selectBoardByBoardNo" parameterType="int" resultType="Board">
