@@ -14,6 +14,17 @@
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO Member VALUES (#{id},#{name},#{password},#{phone},#{weight},#{address},0)
 	</insert>
+	
+	<update id="updateMember" parameterType="Member">
+		UPDATE Member SET name=#{name}, phone = #{phone}, address=#{address}, weight = #{weight}
+		WHERE id = #{id}
+	</update>
+	
+	<select id="selectMemberById" parameterType="string" resultType="Member">
+		SELECT id, name, password, phone, weight, address, point 
+		FROM Member
+		WHERE ID=#{id}
+	</select>
 </mapper>
 
 

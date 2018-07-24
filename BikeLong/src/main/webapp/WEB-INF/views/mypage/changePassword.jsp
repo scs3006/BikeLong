@@ -27,51 +27,9 @@
 		
 		<script type="text/javascript">
 		$(function(){
-			
-			$('#changePw').on('click',function(){
-				location.href="changePassword.action";
-			})
-			
 			$('#frm').on('submit',function(event){
 				event.preventDefault();
 				
-				var regName = /^[가-힣]{2,10}$/;
-				var name = $(this).find('[name=name]').val();
-				if(name != "") {
-				if(!regName.test(name)) {
-					 alert('이름은 한글만 가능, 10문자까지입니다.');
-					 return;
-					}
-				}
-				 
-				var regex= /^\d{3}-\d{4}-\d{4}$/;
-				var phone = $(this).find('[name=phone]').val();
-				if(phone != "") {
-					if(!regex.test(phone) ) {
-						alert('전화번호 형식이 맞지 않습니다.');
-						return;
-					}
-				}
-				
-				var queryString =  $("#frm").serialize();
-				
-				$.ajax({
-					url : "/bikelong/account/update.action",
-					method : "POST",
-					data : queryString,
-					success : function(data,status,xhr){
-						if(data=="success"){
-							alert('정보 수정에 성공하셨습니다.');
-							location.href = '/bikelong/mypage/mypage.action';
-						}
-						if(data=="fail"){
-							alert('정보 수정에 실패하셨습니다.');
-						}
-					},
-					error : function(xhr, status, err){
-						alert('정보 수정에 실패하셨습니다.');
-					}
-				});
 			});
 		});
 		</script>
@@ -124,59 +82,34 @@
 						<div class="col-md-12">
 							<form method="post" id="frm">
 								<div class="row">
-									<div class="col-md-2">
-										<div class="text-center">아이디</div>
+									<div class="col-md-6">
+										<div class="text-center">* 비밀번호</div>
 									</div>
-									<div class="col-md-4">
+									<div class="col-md-6">
 										<div class="form-group">
-											<input class="form-control" type="text" name="id" readonly="readonly" value="${loginuser.id}">
+											<input class="form-control" type="text" placeholder="Password">
 										</div>
 									</div>
-									<div class="col-md-2">
-										<div class="text-center">* 이름<br>(한글, 2~10)</div>
+									<div class="col-md-6">
+										<div class="text-center">* 비밀번호 확인</div>
 									</div>
-									<div class="col-md-4">
+									<div class="col-md-6">
 										<div class="form-group">
-											<input class="form-control" type="text" name="name" value="${loginuser.name}" required>
+											<input class="form-control" type="text" placeholder="Confirm Password">
 										</div>
 									</div>
-									<div class="col-md-2">
-										<div class="text-center">* 비밀번호<br>(영+숫자, 6~20)</div>
+									<div class="col-md-6">
+										<div class="text-center">* 새로운 비밀번호 <br/>(영문 대,소문자,숫자 포함 6~20)</div>
 									</div>
-									<div class="col-md-4">
+									<div class="col-md-6">
 										<div class="form-group">
-											<input class="form-control" type="text" placeholder="Password" disabled="disabled">
+											<input class="form-control" type="text" placeholder="New Password">
 										</div>
 									</div>
-									<div class="col-md-2">
-										<div class="text-center">* 전화번호<br>(010-xxxx-xxxx)</div>
-									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-											<input class="form-control" type="text" name="phone" value="${loginuser.phone}" required>
-										</div>
-									</div>
-									<div class="col-md-2">
-										<div class="text-center">* 주소<br>(시, 구)</div>
-									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-											<input class="form-control" type="text" name="address" value="${loginuser.address}" required>
-										</div>
-									</div>
-									<div class="col-md-2">
-										<div class="text-center">몸무게<br>(미 입력시, 65kg)</div>
-									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-											<input class="form-control" type="text" name="weight" value="${loginuser.weight}">
-										</div>
-									</div>
-									<br>
+									<br/><br/>
 									<div class="col-md-12">
 										<div class="text-center">
-											<input class="btn btn-black" type="button" id="changePw" value="비밀번호변경">&nbsp;
-											<input class="btn btn-black" type="submit" value="수정">
+											<input class="btn btn-black" type="submit" value="비밀번호변경">
 										</div>
 									</div>
 								</div>
