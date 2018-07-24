@@ -16,14 +16,14 @@
 </head>
 <script type="text/javascript">
 	$(function() {
-		$('#noticeDelete').on('click',function(){
+		$('#trailDelete').on('click',function(){
 			event.preventDefault();
 			var check = confirm('정말 삭제 하시겠습니까?');
 			if(check){
 				$.ajax({
-					url : "/bikelong/trailpathboard/delete.action",
+					url : "delete.action",
 					method : "GET",
-					data : {"boardNo" : ${trailBoarddetail.boardNo}},
+					data : {"boardNo" : ${board.boardNo}},
 					success : function(data,status,xhr){
 						if(data=="success"){
 							alert('삭제되었습니다.');
@@ -91,7 +91,7 @@
 				success : function(data,status,xhr){
 					if(data=="success"){
 						alert('댓글 삭제에 성공하셨습니다.');
-						location.href="/bikelong/trailpathboard/detail.action?boardNo=${trailBoarddetail.boardNo}";
+						location.href="/bikelong/noticeboard/detail.action?boardNo=${board.boardNo}";
 					}
 					if(data=="fail"){
 						alert('댓글 삭제에 실패하셨습니다.');
