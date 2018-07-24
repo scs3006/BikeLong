@@ -1,6 +1,6 @@
 package com.bikelong.vo;
 
-import java.sql.Date;
+import java.util.Date;
 
 //데이터베이스의 Member 테이블의 데이터를 저장하기 위한 클래스
 public class History {

@@ -32,7 +32,7 @@
 		WHERE id = #{id}  
 	</select>
 	
-	<select id="selectgps" parameterType="History" resultType="History">
+	<select id="selectgps" parameterType="hashmap" resultType="History">
 		SELECT gpsNo, latitude, longitude  
 		FROM GPS
 		WHERE date BETWEEN #{startTime} AND #{endTime}
