@@ -170,7 +170,7 @@
 							<div class="menu-simple noticeList">
 								<c:forEach var="notice" items="${ noticeList }" begin="0" end="4">
 									<div class="menu-simple-item notice" data-boardNo="${ notice.boardNo }">
-										<div class="menu-simple-item-img"><img src="/bikelong/resources/assets/images/widgets/1.jpg" alt=""></div>						
+										<div class="menu-simple-item-img"><img src="/bikelong/resources/assets/images/widgets/7.jpg" alt=""></div>						
 										<div class="menu-simple-item-inner">
 											<h6><span>${ notice.title }</span><span class="pull-right">${ notice.boardNo }</span></h6>
 											<p>${ notice.id }</p>
@@ -183,7 +183,7 @@
 							<div class="menu-simple noticeList">
 								<c:forEach var="notice" items="${ noticeList }" begin="5" end="9">	
 									<div class="menu-simple-item notice" data-boardNo="${ notice.boardNo }">
-										<div class="menu-simple-item-img"><img src="/bikelong/resources/assets/images/widgets/1.jpg" alt=""></div>						
+										<div class="menu-simple-item-img"><img src="/bikelong/resources/assets/images/widgets/7.jpg" alt=""></div>						
 										<div class="menu-simple-item-inner">
 											<h6><span>${ notice.title }</span><span class="pull-right">${ notice.boardNo }</span></h6>
 											<p>${ notice.id }</p>
