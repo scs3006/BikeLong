@@ -30,59 +30,6 @@
 								<li><a href="/bikelong/rentalShop.action"><span class="menu-item-span">대여소 위치</span></a></li>
 								<li><a href="/bikelong/weather/info.action"><span class="menu-item-span">날씨 정보</span></a></li>
 								<li><a href="/bikelong/suggestions/list.action"><span class="menu-item-span">건의 사항</span></a></li>
-								<!-- Pages-->
-								<li class="menu-item-has-children"><a href="features.jsp"><span class="menu-item-span">Pages</span></a>
-									<ul class="sub-menu">
-										<li class="menu-item-has-children"><a href="#">Blog</a>
-											<ul class="sub-menu">
-												<li><a href="blog-1.jsp">Blog</a></li>
-												<li><a href="blog-single-1.jsp">Post Single</a></li>
-											</ul>
-										</li>
-										<li class="menu-item-has-children"><a href="#">Gallery</a>
-											<ul class="sub-menu">
-												<li><a href="gallery-1.jsp">2 Columns</a></li>
-												<li><a href="gallery-2.jsp">3 Columns</a></li>
-												<li><a href="gallery-3.jsp">4 Columns</a></li>
-											</ul>
-										</li>
-										<li class="menu-item-has-children"><a href="#">Menu Grid</a>
-											<ul class="sub-menu">
-												<li><a href="menu-gallery-1.jsp">2 Columns</a></li>
-												<li><a href="menu-gallery-2.jsp">3 Columns</a></li>
-												<li><a href="menu-gallery-3.jsp">4 Columns</a></li>
-											</ul>
-										</li>
-										<li class="menu-item-has-children"><a href="#">Menu Tiles</a>
-											<ul class="sub-menu">
-												<li><a href="menu-tiles-1.jsp">1 Column</a></li>
-												<li><a href="menu-tiles-2.jsp">2 Columns</a></li>
-											</ul>
-										</li>
-										<li class="menu-item-has-children"><a href="#">Menu Simple</a>
-											<ul class="sub-menu">
-												<li><a href="menu-simple-1.jsp">1 Column</a></li>
-												<li><a href="menu-simple-2.jsp">2 Columns</a></li>
-											</ul>
-										</li>
-										<li class="menu-item-has-children"><a href="#">User Pages</a>
-											<ul class="sub-menu">
-												<li><a href="sign-in.jsp">Sign in</a></li>
-												<li><a href="sign-up.jsp">Sign up</a></li>
-												<li><a href="password-recovery.jsp">Recover password</a></li>
-											</ul>
-										</li>
-										<li class="menu-item-has-children"><a href="#">Contact Us</a>
-											<ul class="sub-menu">
-												<li><a href="contact.jsp">Contact Us 1</a></li>
-												<li><a href="contact-2.jsp">Contact Us 2</a></li>
-											</ul>
-										</li>
-										<li><a href="reservations.jsp">Reservations</a></li>
-										<li><a href="elements.jsp">Elements</a></li>
-										<li><a href="icons.jsp">Icons</a></li>
-									</ul>
-								</li>
 							</ul>
 						</div>
 					</div>

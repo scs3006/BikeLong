@@ -58,6 +58,15 @@
 					</ul>
 				</aside>
 			</div>
+			<div class="col-md-12">
+				<!-- Twitter-->
+				<aside class="widget twitter-feed-widget">
+					<ul>
+						<li style="color: white;">서울특별시 구로구 시흥대로163길 33 주호타워 3층 | 대표자 : 김제환 | Tel: 1599-0000 (사업자등록번호 : 123-45-67890) | 우편번호 00000
+						<br/>관리책임자:담당자명e-mail@email.co.kr(유선:1599-0000)COPYRIGHT @ 2018 All RIGHT RESERVED.</li>
+					</ul>
+				</aside>
+			</div>
 		</div>
 	</div>
 
