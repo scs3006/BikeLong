@@ -8,7 +8,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="">
-		<title>Bike Long</title>
+		<title>BikeLong</title>
 		<!-- Favicons-->
 		<link rel="shortcut icon" href="/bikelong/resources/assets/images/favicon.png">
 		<link rel="apple-touch-icon" href="/bikelong/resources/assets/images/apple-touch-icon.png">
@@ -76,7 +76,7 @@
 						<div class="col-md-6 m-auto text-center">
 							<p class="subtitle">City of Nature</p>
 							<h1 class="display-1">Bike Long</h1>
-							<p class="lead">Bike Long에 오신것을 환영합니다.<br/>건강하고 깨끗한 녹색 성장 선도 도시로 만들어가고 있습니다.</p>
+							<p class="lead">BikeLong에 오신것을 환영합니다.<br/>건강하고 깨끗한 녹색 성장 선도 도시로 만들어가고 있습니다.</p>
 							<div class="divider-border"></div>
 						</div>
 					</div>
@@ -156,7 +156,7 @@
 						<div class="col-md-6 m-auto text-center">
 							<p class="subtitle">City of Nature</p>
 							<h1 class="display-1">Bike Long Notice</h1>
-							<p class="lead">Bike Long 공지사항 입니다. 더 나은 서비스로 여러분을 찾아가겠습니다.</p>
+							<p class="lead">BikeLong 공지사항 입니다. 더 나은 서비스로 여러분을 찾아가겠습니다.</p>
 							<div class="divider-border"></div>
 						</div>
 					</div>
