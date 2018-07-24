@@ -13,7 +13,7 @@
 	<select id="selectBoardListWithPaging" parameterType="hashmap" resultType="Board">
 		SELECT boardNo, title, content, id, date_format(date,'%Y-%m-%d') AS date 
 		FROM Board 
-		WHERE category=3 ORDER BY boardNo
+		WHERE category=3 ORDER BY boardNo DESC
 		LIMIT #{from}, #{to}
 	</select>
 	

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +22,20 @@
 		<link href="/bikelong/resources/assets/css/plugins.min.css" rel="stylesheet">
 		<!-- Template core CSS-->
 		<link href="/bikelong/resources/assets/css/template.css" rel="stylesheet">
+	
+		<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				
+				$('.noticeList .notice').hover(function(){$(this).css('cursor', 'pointer')},function(){$(this).css('cursor')});
+				
+				$('.noticeList').on('click','.notice',function(){
+					var boardNo = $(this).attr('data-boardNo');
+					location.href="noticeboard/detail.action?boardNo=" + boardNo;
+				});
+			});
+		</script>
+		
 	</head>
 	<body>
 
@@ -59,9 +74,9 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-6 m-auto text-center">
-							<p class="subtitle">Discover our story</p>
-							<h1 class="display-1">Welcome to Tavern</h1>
-							<p class="lead">See how your users experience your website in realtime or view <br/> trends to see any changes in performance over time.</p>
+							<p class="subtitle">City of Nature</p>
+							<h1 class="display-1">Bike Long</h1>
+							<p class="lead">Bike Long에 오신것을 환영합니다.<br/>건강하고 깨끗한 녹색 성장 선도 도시로 만들어가고 있습니다.</p>
 							<div class="divider-border"></div>
 						</div>
 					</div>
@@ -72,133 +87,21 @@
 					</div>
 					<div class="row">
 						<div class="col-md-6">
-							<p><a class="photo" href="/bikelong/resources/assets/images/main/1.jpg"><img src="/bikelong/resources/assets/images/main/1.jpg" alt=""></a></p>
+							<p><a class="photo" href="/bikelong/resources/assets/images/main/mainImage1.jpg"><img src="/bikelong/resources/assets/images/main/mainImage1.jpg" alt=""></a></p>
 						</div>
 						<div class="col-md-6">
-							<p><a class="photo" href="/bikelong/resources/assets/images/main/3.jpg"><img src="/bikelong/resources/assets/images/main/3.jpg" alt=""></a></p>
+							<p><a class="photo" href="/bikelong/resources/assets/images/main/mainImage3.jpg"><img src="/bikelong/resources/assets/images/main/mainImage2.jpg" alt=""></a></p>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="space" data-mY="40px"></div>
+						<div class="col-md-6">
+							<p><a class="photo" href="/bikelong/resources/assets/images/main/mainImage3.jpg"><img src="/bikelong/resources/assets/images/main/mainImage3.jpg" alt=""></a></p>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6 m-auto">
-							<div class="text-justify">
-								<p>Need miss all four case fine age tell. He families my pleasant speaking it bringing it thoughts. View busy dine oh in knew if even. Need miss all four case fine age tell. He families my pleasant speaking it bringing it thoughts. View busy dine oh in knew if even. Need miss all four case fine age tell. He families my pleasant speaking it bringing it thoughts. View busy dine oh in knew if even. Need miss all four case fine age tell. He families my pleasant speaking it bringing it thoughts. View busy dine oh in knew if even.</p>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="space" data-mY="60px"></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="text-center"><img src="/bikelong/resources/assets/images/main/sign.png" alt=""></div>
+						<div class="col-md-6">
+							<p><a class="photo" href="/bikelong/resources/assets/images/main/mainImage4.jpg"><img src="/bikelong/resources/assets/images/main/mainImage4.jpg" alt=""></a></p>
 						</div>
 					</div>
 				</div>
 			</section>
 			<!-- Our Story End-->
-
-			<!-- Special Offers-->
-			<section class="module bg-gray" id="special">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-6 m-auto text-center">
-							<p class="subtitle">This is Vela Cuisine</p>
-							<h1 class="display-1">Special Offers</h1>
-							<p class="lead">See how your users experience your website in realtime or view <br/> trends to see any changes in performance over time.</p>
-							<div class="divider-border"></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="space" data-mY="60px"></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="owl-carousel menu-carousel" data-carousel-options="{&quot;nav&quot;: false}">
-								<div class="menu-classic-item">
-									<div class="menu-classic-item-img"><a class="photo" href="/bikelong/resources/assets/images/menu/1.jpg"></a><img src="/bikelong/resources/assets/images/menu/1.jpg" alt="">
-										<div class="menu-classic-item-price">$15
-										</div>
-									</div>
-									<div class="menu-classic-item-inner">
-										<h6>Masala-Spiced Chickpeas</h6>
-										<p>Vanilla, Various Fruit, Cookies</p>
-									</div>
-								</div>
-								<div class="menu-classic-item">
-									<div class="menu-classic-item-img"><a class="photo" href="/bikelong/resources/assets/images/menu/2.jpg"></a><img src="/bikelong/resources/assets/images/menu/2.jpg" alt="">
-										<div class="menu-classic-item-price">$18
-										</div>
-									</div>
-									<div class="menu-classic-item-inner">
-										<h6>Kung Pao Chicken</h6>
-										<p>Vanilla, Various Fruit, Cookies</p>
-									</div>
-								</div>
-								<div class="menu-classic-item">
-									<div class="menu-classic-item-img"><a class="photo" href="/bikelong/resources/assets/images/menu/3.jpg"></a><img src="/bikelong/resources/assets/images/menu/3.jpg" alt="">
-										<div class="menu-classic-item-price">$13
-										</div>
-									</div>
-									<div class="menu-classic-item-inner">
-										<h6>Sweet &amp; Spicy Pork</h6>
-										<p>Vanilla, Various Fruit, Cookies</p>
-									</div>
-								</div>
-								<div class="menu-classic-item">
-									<div class="menu-classic-item-img"><a class="photo" href="/bikelong/resources/assets/images/menu/4.jpg"></a><img src="/bikelong/resources/assets/images/menu/4.jpg" alt="">
-										<div class="menu-classic-item-price">$12
-										</div>
-									</div>
-									<div class="menu-classic-item-inner">
-										<h6>Chicken Stew</h6>
-										<p>Vanilla, Various Fruit, Cookies</p>
-									</div>
-								</div>
-								<div class="menu-classic-item">
-									<div class="menu-classic-item-img"><a class="photo" href="/bikelong/resources/assets/images/menu/5.jpg"></a><img src="/bikelong/resources/assets/images/menu/5.jpg" alt="">
-										<div class="menu-classic-item-price">$21
-										</div>
-									</div>
-									<div class="menu-classic-item-inner">
-										<h6>Jalapeno-Mango Salsa</h6>
-										<p>Vanilla, Various Fruit, Cookies</p>
-									</div>
-								</div>
-								<div class="menu-classic-item">
-									<div class="menu-classic-item-img"><a class="photo" href="/bikelong/resources/assets/images/menu/6.jpg"></a><img src="/bikelong/resources/assets/images/menu/6.jpg" alt="">
-										<div class="menu-classic-item-price">$17
-										</div>
-									</div>
-									<div class="menu-classic-item-inner">
-										<h6>Spicy Fried Rice &amp; Bacon</h6>
-										<p>Vanilla, Various Fruit, Cookies</p>
-									</div>
-								</div>
-								<div class="menu-classic-item">
-									<div class="menu-classic-item-img"><a class="photo" href="/bikelong/resources/assets/images/menu/1.jpg"></a><img src="/bikelong/resources/assets/images/menu/1.jpg" alt="">
-										<div class="menu-classic-item-price">$15
-										</div>
-									</div>
-									<div class="menu-classic-item-inner">
-										<h6>Masala-Spiced Chickpeas</h6>
-										<p>Vanilla, Various Fruit, Cookies</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-			<!-- Special Offers End-->
 
 			<!-- Gallery-->
 			<section class="module no-gutter p-0" id="gallery">
@@ -246,14 +149,14 @@
 			</section>
 			<!-- Gallery end-->
 
-			<!-- Services-->
-			<section class="module" id="services">
+			<!-- Popular Dishes-->
+			<section class="module" id="popular">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-6 m-auto text-center">
-							<p class="subtitle">For your comfort</p>
-							<h1 class="display-1">Stunning Things</h1>
-							<p class="lead">See how your users experience your website in realtime or view <br/> trends to see any changes in performance over time.</p>
+							<p class="subtitle">City of Nature</p>
+							<h1 class="display-1">Bike Long Notice</h1>
+							<p class="lead">Bike Long 공지사항 입니다. 더 나은 서비스로 여러분을 찾아가겠습니다.</p>
 							<div class="divider-border"></div>
 						</div>
 					</div>
@@ -262,227 +165,43 @@
 							<div class="space" data-mY="60px"></div>
 						</div>
 					</div>
-					<div class="row appear-childer">
-						<div class="col-md-3">
-							<div class="icon-box text-center">
-								<div class="icon-box-icon"><span class="icon-clock"></span></div>
-								<div class="icon-box-title">
-									<h5>Opened 24/7</h5>
-								</div>
-								<div class="icon-box-content">
-									<p>Map where your photos were taken and discover local points of interest. Map where your photos.</p>
-								</div>
-								<div class="icon-box-link"><a href="#"></a></div>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="icon-box text-center">
-								<div class="icon-box-icon"><span class="icon-streetsign"></span></div>
-								<div class="icon-box-title">
-									<h5>Free Parking</h5>
-								</div>
-								<div class="icon-box-content">
-									<p>Map where your photos were taken and discover local points of interest. Map where your photos.</p>
-								</div>
-								<div class="icon-box-link"><a href="#"></a></div>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="icon-box text-center">
-								<div class="icon-box-icon"><span class="icon-compass"></span></div>
-								<div class="icon-box-title">
-									<h5>Central Location</h5>
-								</div>
-								<div class="icon-box-content">
-									<p>Map where your photos were taken and discover local points of interest. Map where your photos.</p>
-								</div>
-								<div class="icon-box-link"><a href="#"></a></div>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="icon-box text-center">
-								<div class="icon-box-icon"><span class="icon-linegraph"></span></div>
-								<div class="icon-box-title">
-									<h5>High Quality</h5>
-								</div>
-								<div class="icon-box-content">
-									<p>Map where your photos were taken and discover local points of interest. Map where your photos.</p>
-								</div>
-								<div class="icon-box-link"><a href="#"></a></div>
-							</div>
-						</div>
-					</div>
 					<div class="row">
-						<div class="col-md-12">
-							<div class="space" data-mY="60px"></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6 m-auto">
-							<p class="text-center">* See how your users experience your website in realtime or view trends to see any changes in performance over time.</p>
-						</div>
-					</div>
-				</div>
-			</section>
-			<!-- Services End-->
-
-			<!-- Testimonials-->
-			<section class="module parallax" data-background="/bikelong/resources/assets/images/module-4.jpg" data-overlay="0.7">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="space" data-mY="80px"></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="owl-carousel review-slides" data-carousel-options="{&quot;autoPlay&quot;: &quot;5000&quot;}">
-								<div class="review">
-									<div class="review-icons"><img src="https://s3.amazonaws.com/uifaces/faces/twitter/rem/128.jpg" alt="">
-									</div>
-									<div class="review-content">
-										<blockquote>
-											<p class="display-2">Sea food and the best view. Nothing in excess.</p>
-										</blockquote>
-									</div>
-									<div class="review-author"><span>Albert Einstein</span></div>
-								</div>
-								<div class="review">
-									<div class="review-icons"><img src="https://s3.amazonaws.com/uifaces/faces/twitter/dannpetty/128.jpg" alt="">
-									</div>
-									<div class="review-content">
-										<blockquote>
-											<p class="display-2">Perhaps the most romantic place in the city.</p>
-										</blockquote>
-									</div>
-									<div class="review-author"><span>Ralph Waldo Emerson</span></div>
-								</div>
-								<div class="review">
-									<div class="review-icons"><img src="https://s3.amazonaws.com/uifaces/faces/twitter/walterstephanie/128.jpg" alt="">
-									</div>
-									<div class="review-content">
-										<blockquote>
-											<p class="display-2">I love this place!</p>
-										</blockquote>
-									</div>
-									<div class="review-author"><span>Marilyn Monroe</span></div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="space" data-mY="80px"></div>
-						</div>
-					</div>
-				</div>
-			</section>
-			<!-- Testimonials end-->
-
-			<!-- Chef-->
-			<section class="module bg-gray p-b-0">
-				<div class="container">
-					<div class="row align-items-center">
 						<div class="col-md-6">
-							<p class="subtitle">Professional cook team</p>
-							<h1 class="display-1">In the Kitchen</h1>
-							<p class="lead">Professional chefs rely on a battery of tools and equipment. Chefs must be conscious of their kitchen tools when planning a menu and understand their use and production capacity.</p>
-							<div class="divider-border-left"></div>
-							<div class="space" data-mY="60px"></div><a class="btn btn-black" href="#">View our menu</a>
+							<div class="menu-simple noticeList">
+								<c:forEach var="notice" items="${ noticeList }" begin="0" end="4">
+									<div class="menu-simple-item notice" data-boardNo="${ notice.boardNo }">
+										<div class="menu-simple-item-img"><img src="/bikelong/resources/assets/images/widgets/1.jpg" alt=""></div>						
+										<div class="menu-simple-item-inner">
+											<h6><span>${ notice.title }</span><span class="pull-right">${ notice.boardNo }</span></h6>
+											<p>${ notice.id }</p>
+										</div>
+									</div>
+								</c:forEach>
+							</div>
 						</div>
-						<div class="col-md-6"><img src="/bikelong/resources/assets/images/chef-1.png" alt=""></div>
-					</div>
-				</div>
-			</section>
-			<!-- Chef End-->
-
-			<!-- News-->
-			<section class="module" id="news">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-6 m-auto text-center">
-							<p class="subtitle">From the blog</p>
-							<h1 class="display-1">Special Recipes</h1>
-							<p class="lead">See how your users experience your website in realtime or view <br/> trends to see any changes in performance over time.</p>
-							<div class="divider-border"></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="space" data-mY="60px"></div>
-						</div>
-					</div>
-					<div class="row appear-childer blog-grid">
-						<div class="col-md-4 post-item">
-
-							<!-- Post-->
-							<article class="post">
-								<div class="post-preview"><a href="#"><img src="/bikelong/resources/assets/images/menu/4.jpg" alt=""></a></div>
-								<div class="post-wrapper">
-									<div class="post-header">
-										<h2 class="post-title display-1"><a href="blog-single-1.jsp">Which Lamb is the Best: American, Australian or New Zealand?</a></h2>
+						<div class="col-md-6">
+							<div class="menu-simple noticeList">
+								<c:forEach var="notice" items="${ noticeList }" begin="5" end="9">	
+									<div class="menu-simple-item notice" data-boardNo="${ notice.boardNo }">
+										<div class="menu-simple-item-img"><img src="/bikelong/resources/assets/images/widgets/1.jpg" alt=""></div>						
+										<div class="menu-simple-item-inner">
+											<h6><span>${ notice.title }</span><span class="pull-right">${ notice.boardNo }</span></h6>
+											<p>${ notice.id }</p>
+										</div>
 									</div>
-									<div class="post-content">
-										<p>See how your users experience your website in realtime or view trends to see any changes in performance over time...</p>
-									</div>
-									<div class="post-more"><a href="#">read more...</a></div>
-								</div>
-							</article>
-							<!-- Post end-->
-						</div>
-						<div class="col-md-4 post-item">
-
-							<!-- Post-->
-							<article class="post">
-								<div class="post-preview"><a href="#"><img src="/bikelong/resources/assets/images/menu/5.jpg" alt=""></a></div>
-								<div class="post-wrapper">
-									<div class="post-header">
-										<h2 class="post-title display-1"><a href="blog-single-1.jsp">The Caipirinha Is The Brazilian Cocktail You’ve Been Too Afraid To Pronounce</a></h2>
-									</div>
-									<div class="post-content">
-										<p>See how your users experience your website in realtime or view trends to see any changes in performance over time...</p>
-									</div>
-									<div class="post-more"><a href="#">read more...</a></div>
-								</div>
-							</article>
-							<!-- Post end-->
-						</div>
-						<div class="col-md-4 post-item">
-
-							<!-- Post-->
-							<article class="post">
-								<div class="post-preview"><a href="#"><img src="/bikelong/resources/assets/images/menu/6.jpg" alt=""></a></div>
-								<div class="post-wrapper">
-									<div class="post-header">
-										<h2 class="post-title display-1"><a href="blog-single-1.jsp">The Plum Recipes That’ll Make You Fall In Love With This Stone Fruit</a></h2>
-									</div>
-									<div class="post-content">
-										<p>See how your users experience your website in realtime or view trends to see any changes in performance over time...</p>
-									</div>
-									<div class="post-more"><a href="#">read more...</a></div>
-								</div>
-							</article>
-							<!-- Post end-->
+								</c:forEach>
+							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
 							<div class="space" data-mY="60px"></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="text-center"><a class="btn btn-circle btn-gray" href="#">All Recipes</a></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="space" data-mY="100px"></div>
+							<p class="text-center"><a class="btn btn-black" href="noticeboard/list.action">Other Notice</a></p>
 						</div>
 					</div>
 				</div>
 			</section>
-			<!-- News end-->
+			<!-- Popular Dishes End-->
 
 			<svg class="footer-circle" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewbox="0 0 100 100" preserveaspectratio="none">
 				<path d="M0 100 C40 0 60 0 100 100 Z"></path>
