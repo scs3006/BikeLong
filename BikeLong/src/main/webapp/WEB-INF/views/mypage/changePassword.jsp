@@ -30,6 +30,49 @@
 			$('#frm').on('submit',function(event){
 				event.preventDefault();
 				
+				var regPw = /^[A-Za-z0-9]{6,20}$/;
+				var originPw = $('#originPw').val();
+				var confirmPw = $('#confirmPw').val();
+				var newPassword = $(this).find('[name=password]').val();
+				if(originPw != "") {
+					if(!regPw.test(newPassword)) {
+						alert('비밀번호의 형식을 확인하세요.');
+						return;
+					} else {
+						if(originPw != confirmPw){
+								alert('비밀번호가 불일치합니다.');
+								$('#originPw').val('');
+								$('#confirmPw').val('');
+								return;
+							}
+						}
+					}
+				
+				var queryString =  $("#frm").serialize();
+				
+				$.ajax({
+					url : "/bikelong/account/changePassword.action",
+					method : "POST",
+					data : queryString,
+					success : function(data,status,xhr){
+						if(data=="success"){
+							alert('비밀번호 변경에 성공하셨습니다.');
+							location.href="/bikelong/mypage/mypage.action";
+						}
+						if(data=="checkPw"){
+							alert('기존 비밀번호가 일치하지 않습니다.');
+							$('#originPw').val('');
+							$('#confirmPw').val('');
+						}
+						if(data=="fail"){
+							alert('비밀번호 변경에 실패하셨습니다.');
+						}
+					},
+					error : function(xhr, status, err){
+						alert('비밀번호 변경에 실패하셨습니다.');
+					}
+				});
+				
 			});
 		});
 		</script>
@@ -88,7 +131,7 @@
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<input class="form-control" type="text" placeholder="Password">
+											<input class="form-control" type="password" name="originPw" id="originPw" placeholder="Password">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -96,7 +139,7 @@
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<input class="form-control" type="text" placeholder="Confirm Password">
+											<input class="form-control" type="password" id="confirmPw" placeholder="Confirm Password">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -104,7 +147,8 @@
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<input class="form-control" type="text" placeholder="New Password">
+											<input type="hidden" name="id" value="${loginuser.id}">
+											<input class="form-control" type="password" name="newPassword" placeholder="New Password">
 										</div>
 									</div>
 									<br/><br/>

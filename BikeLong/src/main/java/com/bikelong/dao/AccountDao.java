@@ -8,5 +8,7 @@ public interface AccountDao {
 	void insertMember(Member member);
 	void updateMember(Member member);
 	Member selectMemberById(String id);
+	void updatePassword(String id, String hashedPassword);
+	String selectPasswordById(String id);
 
 }

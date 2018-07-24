@@ -8,4 +8,6 @@ public interface AccountService {
 	void signUpMember(Member member);
 	void updateMember(Member member);
 	Member getMember(String id);
+	void changePassword(String id, String newPassword);
+	String getPassword(String id);
 }

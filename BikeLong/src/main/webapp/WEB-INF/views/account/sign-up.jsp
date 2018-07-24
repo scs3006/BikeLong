@@ -79,12 +79,12 @@
 				}
 				
 				var address = $(this).find('[name=address]').val();
-				var weight = $(this).find('[name=weight]').val();
+				var basicWeight = $(this).find('[name=basicWeight]').val();
 				
 				$.ajax({
 					url : "signup.action",
 					method : "POST",
-					data : {"id" : id, "name" : name, "password" : password, "phone" : phone, "address" : address, "weight" : weight},
+					data : {"id" : id, "name" : name, "password" : password, "phone" : phone, "address" : address, "basicWeight" : basicWeight},
 					success : function(data,status,xhr){
 						if(data=="success"){
 							alert('회원가입에 성공하셨습니다.');
