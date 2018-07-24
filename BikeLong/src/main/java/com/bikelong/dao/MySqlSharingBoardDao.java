@@ -6,7 +6,6 @@ import java.util.List;
 import com.bikelong.mapper.SharingBoardMapper;
 import com.bikelong.vo.History;
 import com.bikelong.vo.SharingBoard;
-import com.sun.tools.sjavac.server.SysInfo;
 
 public class MySqlSharingBoardDao implements SharingBoardDao {
 	
