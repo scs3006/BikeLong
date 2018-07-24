@@ -169,7 +169,7 @@
 			</div>  -->
 
 
-			<section class="module">
+			<!-- <section class="module">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-3">
@@ -223,7 +223,7 @@
 					</div>
 				</div>
 			</section>
-
+ -->
 			
 			<svg class="footer-circle" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewbox="0 0 100 100" preserveaspectratio="none">
 				<path d="M0 100 C40 0 60 0 100 100 Z"></path>
