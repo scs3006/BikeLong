@@ -47,22 +47,35 @@ public class TrailBoardController {
 	@GetMapping(value = "list.action")
 	public String list(Model model,
 			@RequestParam(value = "pageno", defaultValue = "0") int pageNo) {
-		List<TrailBoard> trailBoardlist = trailBoardService.findBoardList();
-	
+		
+		int pageSize = 10; //한 페이지에 표시할 데이터 갯수
+		int from = pageNo * pageSize;
+		int to = pageSize;
+		
+		int pagerSize = 5;//번호로 표시할 페이지 목록
+		String linkUrl = "list.action";
+		
+		List<TrailBoard> trailBoardlist = trailBoardService.findBoardList(from, to);
+		int dataCount = trailBoardService.getBoardCount();
+		
+		ThePager2 pager = new ThePager2(dataCount, pageNo, pageSize, pagerSize, linkUrl);
+		
 		model.addAttribute("trailBoardlist", trailBoardlist);
+		model.addAttribute("pager", pager);
+		model.addAttribute("pageno", pageNo);
 		return "trail/list";
 	}
 
 	@GetMapping(value = "detail.action")
 	public String detail(@RequestParam(value ="pageno", defaultValue = "0") int pageNo,
-			int boardNo, Model model) {
+			int boardNo, Model model, TrailBoard trailBoarddetail) {
 		List<Reply> replyList = replyService.getReplyList(boardNo);
+		trailBoarddetail = trailBoardService.findBoard(boardNo);
 		
 		if(replyList != null && replyList.size() > 0) {
 			model.addAttribute("replyList", replyList);
 		}
 		
-		TrailBoard trailBoarddetail = trailBoardService.findBoard(boardNo);
 		model.addAttribute("trailBoarddetail",trailBoarddetail);
 		model.addAttribute("pageno", pageNo);
 		return "trail/detail";
@@ -85,31 +98,35 @@ System.out.println(trailBoard.getLocationNo());
 	@GetMapping(value = "update.action")
 	public String update(Model model, TrailBoard trailboardupdate,
 			@RequestParam(value ="pageno", defaultValue = "0") int pageNo, int boardNo) {
-		trailboardupdate = trailBoardService.findBoard(boardNo);
-		trailboardupdate.setBoardNo(boardNo);
-		trailboardupdate.setDate(trailboardupdate.getDate().substring(0, 10));
+		trailboardupdate = trailBoardService.findBoardByBoardNo(boardNo);
+		
 		model.addAttribute("trailboardupdate", trailboardupdate);
 		model.addAttribute("pageno", pageNo);
 		return "trail/update";
 	}
 	@PostMapping(value = "update.action")
 	@ResponseBody
-	public String postUpdate(TrailBoard trailBoard) {
+	public String postUpdate(TrailBoard trailBoard,
+			@RequestParam(value ="boardNo", defaultValue = "-1")int boardNo,
+			@RequestParam(value = "pageno", defaultValue = "1") int pageNo) {
 		try {
 			trailBoardService.updateBoard(trailBoard);
 		} catch (Exception ex) { // 등록 실패한 경우
-			return "fail";
+			return "No modifications were made";
 		}
-		return "success"; 
+		return "redirect:list.action?boardNo="+trailBoard.getBoardNo()+"&pageNo="+pageNo; 
 	}
 	
 	@GetMapping(value = "delete.action")
-	public String delete(
+	@ResponseBody
+	public String getDelete(
 			@RequestParam(value ="boardNo", defaultValue = "-1")int boardNo,
 			@RequestParam(value ="pageNo", defaultValue = "1") int pageNo) {
-		
-		System.out.println(boardNo);
-		trailBoardService.deleteBoard(boardNo);
-		return "redirect:list.action?pageno=" + pageNo;
+		try {
+			trailBoardService.deleteBoard(boardNo);	// 서비스에서 트랜잭션으로 댓글까지 지우는거 잊지말자!
+		} catch (Exception ex) { // 등록 실패한 경우
+			return "It has not been delete";
+		}
+		return "redirect:list.action?pageno=" + pageNo; 
 	}
 }

@@ -8,7 +8,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="">
-		<title>Tavern - Responsive Restaurant Template(Bootstrap 4)</title>
+		<title>활동량보기</title>
 		<!-- Favicons-->
 		<link rel="shortcut icon" href="/bikelong/resources/assets/images/favicon.png">
 		<link rel="apple-touch-icon" href="/bikelong/resources/assets/images/apple-touch-icon.png">
@@ -53,7 +53,6 @@
 						</div>
 					</div>
 				</section>
-			<!-- Page Header end-->
 			<div class="container" style="padding-top:50px;">
 					<div class="row">
 						<div class="col-md-6 m-auto text-center">

@@ -13,6 +13,7 @@
 		<typeAlias type="com.bikelong.vo.Board" alias="Board"/>
 		<typeAlias type="com.bikelong.vo.Goal" alias="Goal"/>
 		<typeAlias type="com.bikelong.vo.Reply" alias="Reply"/>
+		<typeAlias type="com.bikelong.vo.History" alias="History"/>
 	</typeAliases>
 
 	<environments default="mysql">

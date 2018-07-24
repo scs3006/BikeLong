@@ -16,4 +16,9 @@ public class MypageController {
 	public String getActivity() {
 		return "mypage/myactivity";
 	}
+	
+	@GetMapping(value = "changePassword.action")
+	public String getchangePassword() {
+		return "mypage/changePassword";
+	}
 }

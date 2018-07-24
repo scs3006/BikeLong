@@ -11,10 +11,14 @@ public interface TrailBoardService {
 
 	TrailBoard findBoard(int boardNo);
 
-	List<TrailBoard> findBoardList();
+	List<TrailBoard> findBoardList(int from, int to);
 
 	void updateBoard(TrailBoard trailBoards);
 
 	void deleteBoard(int boardNo);
+
+	int getBoardCount();
+
+	TrailBoard findBoardByBoardNo(int boardNo);
 
 }

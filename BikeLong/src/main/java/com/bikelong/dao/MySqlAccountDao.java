@@ -25,5 +25,15 @@ public class MySqlAccountDao implements AccountDao {
 	public void insertMember(Member member) {
 		memberMapper.insertMember(member);
 	}
+
+	@Override
+	public void updateMember(Member member) {
+		memberMapper.updateMember(member);
+	}
+
+	@Override
+	public Member selectMemberById(String id) {
+		return memberMapper.selectMemberById(id);
+	}
 	
 }

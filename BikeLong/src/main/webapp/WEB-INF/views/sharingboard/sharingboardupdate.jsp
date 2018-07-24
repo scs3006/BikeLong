@@ -118,8 +118,7 @@
 												<input type="hidden" name="defaultLocationNo" value="${sharingBoardUpdate.locationNo}">
 													<p>지역 : ${sharingBoardUpdate.locationName}</p>
 													<select class="select form-control" name="locationNo">
-														<option value="0">지역 변경 없음</option>
-														<option value="1">강남구</option>
+														<option value="1">(지역 변경) 강남구</option>
 														<option value="2">강동구</option>
 														<option value="3">강북구</option>
 														<option value="4">강서구</option>

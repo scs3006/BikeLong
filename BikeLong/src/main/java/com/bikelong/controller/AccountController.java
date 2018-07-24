@@ -72,6 +72,19 @@ public class AccountController {
 		return "redirect:/index.action";
 	}
 	
+	@PostMapping(value = "/update.action")
+	@ResponseBody
+	public String postSingUp(Member member, HttpSession session) {
+		try {
+			accountService.updateMember(member);
+			member = accountService.getMember(member.getId());
+			session.setAttribute("loginuser", member);
+		} catch (Exception ex) { // 등록 실패한 경우
+			return "fail";
+		}
+		return "success"; 
+	}
+	
 }
 
 

@@ -23,6 +23,16 @@ public class AccountServiceImpl implements AccountService {
 		String hashedPasswd = Util.getHashedString(member.getPassword(), "SHA-256");
 		member.setPassword(hashedPasswd);		
 		accountDao.insertMember(member);
+	}
+
+	@Override
+	public void updateMember(Member member) {
+		accountDao.updateMember(member);
+	}
+
+	@Override
+	public Member getMember(String id) {
+		return accountDao.selectMemberById(id);
 	}	
 
 }

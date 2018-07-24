@@ -98,23 +98,38 @@
 	<!-- Preloader end-->
 	
 	<!-- Header-->
-	<jsp:include page="/WEB-INF/views/include/header.jsp" />
+	<jsp:include page="/WEB-INF/views/include/header.jsp" /><br/><br/><br/>
 	<!-- Header end-->
 	
-<!-- ========================================================================================================= -->
+	<!-- Page Header-->
+	<section class="module-page-title">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-md-6">
+					<h1 class="page-title-heading">공지사항 - 글 수정</h1>
+				</div>
+				<div class="col-md-6">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="/bikelong/index.action">Home</a></li>
+						<li class="breadcrumb-item active"><a href="/bikelong/noticeboard/list.action">Notice Board</a></li>
+						<li class="breadcrumb-item active">
+							<a href="/bikelong/noticeboard/detail.action?boardNo=${board.boardNo}&pageno=${pageno}">Notice Detail</a>
+						</li>
+						<li class="breadcrumb-item active">Notice Update</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
+	
 	<!-- Wrapper-->
 	<div class="wrapper">
-		<section class="module">
+		<section class="module" style="padding-top: 50px;">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-11 m-auto">
 						<!-- Post-->
 						<article class="post">
-
-							<div>
-								<h1>공지사항</h1>
-							</div>
-							
 							<div class="row">
 								<div class="col-md-12">
 									<form action="update.action" id="frm" method="POST" enctype="multipart/form-data" novalidate>

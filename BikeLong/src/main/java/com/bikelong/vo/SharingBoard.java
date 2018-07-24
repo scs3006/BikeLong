@@ -12,6 +12,7 @@ public class SharingBoard {
 	private String locationNo;
 	private String locationName;
 	private String imageName;
+	private int history;
 	
 	public String getDate() {
 		return date;
@@ -67,6 +68,11 @@ public class SharingBoard {
 	public void setLocationName(String locationName) {
 		this.locationName = locationName;
 	}
-	
+	public int getHistory() {
+		return history;
+	}
+	public void setHistory(int history) {
+		this.history = history;
+	}
 		
 }

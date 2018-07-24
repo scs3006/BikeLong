@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,8 +12,8 @@
 
 
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script type="text/javascript"
-	src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=XkRO5MabQSh96y9c_kCn&submodules=geocoder"></script>
 
 </head>
 <script type="text/javascript">
@@ -41,6 +41,24 @@
 			//폼 submit
 			$("#frm").submit();
 		});
+		
+		$("#gpsbtn").on('click',function(event){
+        	event.preventDefault();
+        	 
+        	var data = { "historyTime" : $('#findHistory').val() };
+        	$.ajax({
+				url : "/bikelong/route/gpsfind.action",
+				method : "GET",
+				data : data,
+				success : function(data,status,xhr){
+						alert('성공하셨습니다.');
+				},
+				error : function(xhr, status, err){
+					alert('실패하셨습니다.');
+				}
+			});
+        });
+		
 	});
 </script>
 
@@ -150,6 +168,49 @@
 												</div>
 											</div>
 											<div class="col-md-12">
+											<h6>경로 목록 선택</h6> 
+													<c:forEach var="h" items="${history}">
+														<select class="select form-control" name="history" id="findHistory">
+														<option id="${h.historyNo}" value="${h.startTime}/${h.endTime}">
+														출발시간 : ${h.startTime} / 도착시간 : ${h.endTime}</option>
+														</select>
+												    </c:forEach>
+												     <input type="button" id="gpsbtn" value="경로 찾기">
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													<div class="post-preview">
+														<div id="map" style="width:100%;height:550px;"></div>
+														<script>
+														var map = new naver.maps.Map('map', {
+														    center: new naver.maps.LatLng(37.4820108, 126.8980968),
+														    zoom: 10
+														});
+														
+														var polyline = new naver.maps.Polyline({
+														    map: map,
+														    path: [
+														    	
+														        new naver.maps.LatLng(37.359924641705476, 127.1148204803467),
+														        new naver.maps.LatLng(37.36343797188166, 127.11486339569092),
+														        new naver.maps.LatLng(37.37530703574853, 127.12190151214598),
+														        new naver.maps.LatLng(37.371657839593894, 127.11645126342773),
+														        new naver.maps.LatLng(37.36855417793982, 127.1207857131958)
+														    ],
+														    strokeStyle: 'solid',
+														    strokeColor: '#5347AA',
+														    strokeWeight: 5
+														});
+														
+														var marker = new naver.maps.Marker({
+														    position: new naver.maps.LatLng(37.359924641705476, 127.1148204803467),
+														    map: map
+														});
+														</script>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-12">
 												<div class="form-group">
 													<textarea rows="10" cols="100" name="content" id="content"
 														class="form-control" style="width: 100%; height: 482px"
@@ -163,6 +224,11 @@
 												</div>
 											</div>
 										</div>
+									</form>
+									<form action="">
+										<input type="hidden" name="" value="${history.historyNo}">
+										<input type="hidden" name="" value="${history.startTime}">
+										<input type="hidden" name="" value="${history.endTime}">
 									</form>
 								</div>
 							</div>

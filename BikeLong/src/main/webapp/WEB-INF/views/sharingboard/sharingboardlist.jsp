@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -69,34 +70,41 @@
 		<!-- Hero end-->
 
 		<section class="module">
+			<div class="container">
 				<div class="col-md-12">
-					<div class="text-center">
-						<a class="btn btn-black" href="/bikelong/route/sharingboardwrite.action">글쓰기</a>
+					<div class="text-left">
+						<h1 class="font-weight-bold">경로 공유 게시판</h1>
+					</div>
+					<hr />
+					<div class="text-right">
+						<a class="btn btn-black" href="/bikelong/route/sharingboardwrite.action?id=${id}">글쓰기</a>
 					</div>
 				</div>
-			<div class="container">
-					<div class="col-md-12">
-						<div class="space" data-mY="50px"></div>
-					</div>
+				<div class="col-md-12">
+					<div class="space" data-mY="50px"></div>
+				</div>
 				<div class="row blog-masonry">
-				
+
 					<c:forEach var="lists" items="${ sharingBoardLists }">
 						<div class="col-md-4 post-item">
 							<article class="post">
 								<div class="post-preview">
-									<img src="/bikelong/resources/photoupload/${lists.imageName}" alt="">
+									<img src="/bikelong/resources/photoupload/${lists.imageName}"
+										alt="">
 								</div>
 								<div class="post-wrapper">
 									<div class="post-header" style="height: 15%">
 										<h2 class="post-title display-1">
-											<a href="/bikelong/route/sharingboarddetail.action?boardNo=${lists.boardNo}">${lists.title}</a>
+											<a
+												href="/bikelong/route/sharingboarddetail.action?boardNo=${lists.boardNo}">${lists.title}</a>
 										</h2>
+										<h5>작성자 : ${lists.id}<br/>작성일 : ${lists.date}<br/>지역 : ${lists.locationName}</h5>
 									</div>
 								</div>
 							</article>
 						</div>
 					</c:forEach>
-					
+
 				</div>
 			</div>
 		</section>

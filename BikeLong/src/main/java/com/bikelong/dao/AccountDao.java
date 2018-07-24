@@ -6,5 +6,7 @@ public interface AccountDao {
 
 	Member selectMemberByIdAndPasswd(String id, String passwd);
 	void insertMember(Member member);
+	void updateMember(Member member);
+	Member selectMemberById(String id);
 
 }

@@ -28,6 +28,51 @@
 		<script type="text/javascript">
 		$(function(){
 			
+			$('#changePw').on('click',function(){
+				location.href="changePassword.action";
+			})
+			
+			$('#frm').on('submit',function(event){
+				event.preventDefault();
+				
+				var regName = /^[가-힣]{2,10}$/;
+				var name = $(this).find('[name=name]').val();
+				if(name != "") {
+				if(!regName.test(name)) {
+					 alert('이름은 한글만 가능, 10문자까지입니다.');
+					 return;
+					}
+				}
+				 
+				var regex= /^\d{3}-\d{4}-\d{4}$/;
+				var phone = $(this).find('[name=phone]').val();
+				if(phone != "") {
+					if(!regex.test(phone) ) {
+						alert('전화번호 형식이 맞지 않습니다.');
+						return;
+					}
+				}
+				
+				var queryString =  $("#frm").serialize();
+				
+				$.ajax({
+					url : "/bikelong/account/update.action",
+					method : "POST",
+					data : queryString,
+					success : function(data,status,xhr){
+						if(data=="success"){
+							alert('정보 수정에 성공하셨습니다.');
+							location.href = '/bikelong/mypage/mypage.action';
+						}
+						if(data=="fail"){
+							alert('정보 수정에 실패하셨습니다.');
+						}
+					},
+					error : function(xhr, status, err){
+						alert('정보 수정에 실패하셨습니다.');
+					}
+				});
+			});
 		});
 		</script>
 	</head>
@@ -100,7 +145,7 @@
 									</div>
 									<div class="col-md-4">
 										<div class="form-group">
-											<input class="form-control" type="text" id="checkPw" name="password" placeholder="Password" disabled="disabled">
+											<input class="form-control" type="text" placeholder="Password" disabled="disabled">
 										</div>
 									</div>
 									<div class="col-md-2">
@@ -116,7 +161,7 @@
 									</div>
 									<div class="col-md-4">
 										<div class="form-group">
-											<input class="form-control" type="email" name="address" value="${loginuser.address}" required>
+											<input class="form-control" type="text" name="address" value="${loginuser.address}" required>
 										</div>
 									</div>
 									<div class="col-md-2">
@@ -130,7 +175,7 @@
 									<br>
 									<div class="col-md-12">
 										<div class="text-center">
-											<input class="btn btn-black" type="button" value="비밀번호변경">&nbsp;
+											<input class="btn btn-black" type="button" id="changePw" value="비밀번호변경">&nbsp;
 											<input class="btn btn-black" type="submit" value="수정">
 										</div>
 									</div>
