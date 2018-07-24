@@ -25,6 +25,17 @@
 		FROM Member
 		WHERE ID=#{id}
 	</select>
+	
+	<select id="selectPasswordById" parameterType="string" resultType="string">
+		SELECT password
+		FROM Member
+		WHERE ID=#{id}
+	</select>
+	
+	<update id="updatePassword" parameterType="hashmap">
+		UPDATE Member SET password=#{password}
+		WHERE id=#{id}
+	</update>
 </mapper>
 
 

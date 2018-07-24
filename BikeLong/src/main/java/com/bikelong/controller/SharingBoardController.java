@@ -66,8 +66,8 @@ public class SharingBoardController {
 	@RequestMapping(value = "sharingboardwrite.action", method = RequestMethod.GET)
 	public String write(Model model, String id) {
 		
-		//List<History> history = sharingBoarService.findHistory(id);
-		//model.addAttribute("history", history);
+		List<History> history = sharingBoarService.findHistory(id);
+		model.addAttribute("history", history);
 		
 		return "sharingboard/sharingboardwrite";
 	}

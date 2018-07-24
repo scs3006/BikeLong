@@ -35,5 +35,18 @@ public class MySqlAccountDao implements AccountDao {
 	public Member selectMemberById(String id) {
 		return memberMapper.selectMemberById(id);
 	}
+
+	@Override
+	public void updatePassword(String id, String hashedPassword) {
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("id", id);
+		params.put("password", hashedPassword);
+		memberMapper.updatePassword(params);
+	}
+
+	@Override
+	public String selectPasswordById(String id) {
+		return memberMapper.selectPasswordById(id);
+	}
 	
 }
