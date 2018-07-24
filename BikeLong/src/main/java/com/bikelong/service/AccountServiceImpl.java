@@ -33,6 +33,17 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public Member getMember(String id) {
 		return accountDao.selectMemberById(id);
+	}
+
+	@Override
+	public void changePassword(String id, String newPassword) {
+		String hashedPassword = Util.getHashedString(newPassword, "SHA-256");
+		accountDao.updatePassword(id, hashedPassword);
+	}
+
+	@Override
+	public String getPassword(String id) {
+		return accountDao.selectPasswordById(id);
 	}	
 
 }

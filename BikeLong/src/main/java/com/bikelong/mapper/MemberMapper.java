@@ -10,5 +10,7 @@ public interface MemberMapper {
 	void insertMember(Member member);
 	void updateMember(Member member);
 	Member selectMemberById(String id);
+	void updatePassword(HashMap<String, Object> params);
+	String selectPasswordById(String id);
 
 }

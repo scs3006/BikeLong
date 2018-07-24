@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bikelong.common.Util;
 import com.bikelong.service.AccountService;
 import com.bikelong.vo.Member;
 
@@ -57,6 +58,7 @@ public class AccountController {
 	@PostMapping(value = "/signup.action")
 	@ResponseBody
 	public String postSingUp(@RequestParam(value = "basicWeight", defaultValue = "65") int weight, Member member) {
+		System.out.println(weight);
 		member.setWeight(weight);
 		try {
 			accountService.signUpMember(member);
@@ -74,7 +76,7 @@ public class AccountController {
 	
 	@PostMapping(value = "/update.action")
 	@ResponseBody
-	public String postSingUp(Member member, HttpSession session) {
+	public String postUpdateMember(Member member, HttpSession session) {
 		try {
 			accountService.updateMember(member);
 			member = accountService.getMember(member.getId());
@@ -82,6 +84,26 @@ public class AccountController {
 		} catch (Exception ex) { // 등록 실패한 경우
 			return "fail";
 		}
+		return "success"; 
+	}
+	
+	@PostMapping(value = "/changePassword.action")
+	@ResponseBody
+	public String postChangePassword(String id,String originPw, String newPassword) {
+		
+		String oldPassword = accountService.getPassword(id);
+		String confirmPassword = Util.getHashedString(originPw, "SHA-256");
+		
+		if(oldPassword.equals(confirmPassword)) {
+			try {
+				accountService.changePassword(id, newPassword);
+			} catch (Exception ex) { // 등록 실패한 경우
+				return "fail";
+			}
+		}else {
+			return "checkPw";
+		}
+		
 		return "success"; 
 	}
 	
