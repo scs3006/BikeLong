@@ -6,21 +6,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content=""/>
-<meta name="author" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="" />
+<meta name="author" content="" />
 <title>자전거 산책로 공유 목록</title>
 
 
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
- 
+<script type="text/javascript"
+	src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+
 </head>
 
 
 <!-- Favicons-->
-<link rel="shortcut icon" href="/bikelong/resources/assets/images/favicon.png">
-<link rel="apple-touch-icon" href="/bikelong/resources/assets/images/apple-touch-icon.png">
+<link rel="shortcut icon"
+	href="/bikelong/resources/assets/images/favicon.png">
+<link rel="apple-touch-icon"
+	href="/bikelong/resources/assets/images/apple-touch-icon.png">
 <link rel="apple-touch-icon" sizes="72x72"
 	href="/bikelong/resources/assets/images/apple-touch-icon-72x72.png">
 <link rel="apple-touch-icon" sizes="114x114"
@@ -34,9 +37,11 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
 	rel="stylesheet">
 <!-- Plugins and Icon Fonts-->
-<link href="/bikelong/resources/assets/css/plugins.min.css" rel="stylesheet">
+<link href="/bikelong/resources/assets/css/plugins.min.css"
+	rel="stylesheet">
 <!-- Template core CSS-->
-<link href="/bikelong/resources/assets/css/template.css" rel="stylesheet">
+<link href="/bikelong/resources/assets/css/template.css"
+	rel="stylesheet">
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript">
@@ -53,18 +58,32 @@
 </head>
 
 <body>
-
 	<!-- Preloader-->
 	<div class="page-loader">
 		<div class="loader"></div>
 	</div>
 	<!-- Preloader end-->
-	
 	<!-- Header-->
-	<jsp:include page="/WEB-INF/views/include/header.jsp" />
+	<jsp:include page="/WEB-INF/views/include/header.jsp" /><br />
+	<br />
+	<br />
 	<!-- Header end-->
-	
-<!-- ========================================================================================================= -->
+	<!-- Page Header-->
+	<section class="module-page-title">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-md-6">
+					<h1 class="page-title-heading">자전거 산책로</h1>
+				</div>
+				<div class="col-md-6">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="/bikelong/index.action">Home</a></li>
+						<li class="breadcrumb-item active">Trail Board</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
 	<!-- Wrapper-->
 	<div class="wrapper">
 		<section class="module">
@@ -77,35 +96,36 @@
 								<div class="table-responsive">
 									<table class="table table-hover">
 										<tr>
-										  	<th>번호</th>
-										  	<th>제목</th>
-										  	<th>작성자</th>
-										  	<th>작성일</th>
+											<th>번호</th>
+											<th>제목</th>
+											<th>작성자</th>
+											<th>작성일</th>
+											<th>해당지역</th>
 										</tr>
 										<c:forEach var="trail" items="${ trailBoardlist }">
-										<tr class="clickTr" data-boardNo="${ trail.boardNo }">
-											<td>${ trail.boardNo }</td>
-											<td>${ trail.title }</td>
-											<td>${ trail.id }</td>
-											<td>${ trail.date }</td>
-										</tr>
+											<tr class="clickTr" data-boardNo="${ trail.boardNo }">
+												<td>${ trail.boardNo }</td>
+												<td>${ trail.title }</td>
+												<td>${ trail.id }</td>
+												<td>${ trail.date }</td>
+												<td>${ trail.locationName }</td>
+											</tr>
 										</c:forEach>
 									</table>
 								</div>
 								<br>
 								<div class="col-md-12">
-									<div class="text-center">
-										${pager}
-									</div>
+									<div class="text-center">${pager}</div>
 								</div>
-								<br><br>
+								<br>
+								<br>
 								<div class="col-md-12">
 									<div class="text-center">
 										<c:if test="${loginuser.id eq 'manager' && loginuser ne null}">
 											<a class="btn btn-black"
 												href="/bikelong/trailpathboard/write.action">글쓰기</a>
 										</c:if>
-										<a class="btn btn-black" href="index.action">돌아가기</a>
+										<a class="btn btn-black" href="/bikelong/index.action">돌아가기</a>
 									</div>
 								</div>
 							</div>
@@ -122,7 +142,7 @@
 				<path d="M0 100 C40 0 60 0 100 100 Z"></path>
 			</svg>
 		<!-- Footer-->
-			<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 		<!-- Footer end-->
 	</div>
 	<!-- Wrapper end-->
@@ -140,8 +160,8 @@
 				<aside class="widget widget_text">
 					<div class="textwidget">
 						<p>
-							<img src="/bikelong/resources/assets/images/logo-light.png" width="74px"
-								alt="">
+							<img src="/bikelong/resources/assets/images/logo-light.png"
+								width="74px" alt="">
 						</p>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
 							sed do eiusmod tempor.</p>
@@ -189,9 +209,7 @@
 						.up-help
 							p: a(href="#") Forgot your password?
 							p Don't have an account yet? <a href="#">Sign in</a>
-					
 					-->
-
 				<!-- Twitter widget-->
 				<aside class="widget twitter-feed-widget">
 					<div class="widget-title">
@@ -211,14 +229,9 @@
 		</div>
 	</div>
 	<!-- Off canvas end-->
-
-	
-
 	<!-- Reserve Popup end-->
-
 	<!-- To top button-->
 	<a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
-
 	<!-- Scripts-->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

@@ -14,33 +14,33 @@
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript">
-	$(function() {
-		//전역변수
-		var obj = [];
-		//스마트에디터 프레임생성
-		nhn.husky.EZCreator.createInIFrame({
-			oAppRef : obj,
-			elPlaceHolder : "content",
-			sSkinURI : "/bikelong/resources/editor/SmartEditor2Skin.html",
-			htParams : {
-				// 툴바 사용 여부
-				bUseToolbar : true,
-				// 입력창 크기 조절바 사용 여부
-				bUseVerticalResizer : true,
-				// 모드 탭(Editor | HTML | TEXT) 사용 여부
-				bUseModeChanger : true,
-			}
-		});
-		//전송버튼
-		$("#savebtn").click(function(event) {
-			event.preventDefault();
-			obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-			//폼 submit
-			$("#frm").submit();
-		});
+$(function() {
+	//전역변수
+	var obj = [];
+	//스마트에디터 프레임생성
+	nhn.husky.EZCreator.createInIFrame({
+		oAppRef : obj,
+		elPlaceHolder : "content",
+		sSkinURI : "/bikelong/resources/editor/SmartEditor2Skin.html",
+		htParams : {
+			// 툴바 사용 여부
+			bUseToolbar : true,
+			// 입력창 크기 조절바 사용 여부
+			bUseVerticalResizer : true,
+			// 모드 탭(Editor | HTML | TEXT) 사용 여부
+			bUseModeChanger : true,
+		}
 	});
-	
+	//전송버튼
+	$("#updatebtn").click(function(event) {
+		event.preventDefault();
+		obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+		//폼 submit
+		$("#frm").submit();
+	});
+});
 </script>
+
 <!-- Favicons-->
 <link rel="shortcut icon" href="/bikelong/resources/assets/images/favicon.png">
 <link rel="apple-touch-icon" href="/bikelong/resources/assets/images/apple-touch-icon.png">
@@ -72,10 +72,29 @@
 	<!-- Preloader end-->
 	
 	<!-- Header-->
-	<jsp:include page="/WEB-INF/views/include/header.jsp" />
+	<jsp:include page="/WEB-INF/views/include/header.jsp" /><br/><br/><br/>
 	<!-- Header end-->
 	
-<!-- ========================================================================================================= -->
+	<!-- Page Header-->
+	<section class="module-page-title">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-md-6">
+					<h1 class="page-title-heading">자전거 산책로 - 글 수정</h1>
+				</div>
+				<div class="col-md-6">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="/bikelong/index.action">Home</a></li>
+						<li class="breadcrumb-item active"><a href="/bikelong/trailpathboard/list.action">Trail Board</a></li>
+						<li class="breadcrumb-item active">
+							<a href="/bikelong/trailpathboard/detail.action?boardNo=${trailBoarddetail.boardNo}&pageno=${pageno}">Trail Detail</a>
+						</li>
+						<li class="breadcrumb-item active">Trail Update</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
 	<!-- Wrapper-->
 	<div class="wrapper">
 		<section class="module">

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,15 +9,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>자전거 산책로 공유 상세정보</title>
+<title>자전거 산책로 상세정보</title>
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript"
 	src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
-
 </head>
 <script type="text/javascript">
+	$(function() {
+		$('#noticeDelete').on('click',function(){
+			event.preventDefault();
+			var check = confirm('정말 삭제 하시겠습니까?');
+			if(check){
+				$.ajax({
+					url : "/bikelong/trailpathboard/delete.action",
+					method : "GET",
+					data : {"boardNo" : ${trailBoarddetail.boardNo}},
+					success : function(data,status,xhr){
+						if(data=="success"){
+							alert('삭제되었습니다.');
+							location.href = 'list.action';
+						}
+						if(data=="fail"){
+							alert('삭제에 실패하였습니다.');
+						}
+					},
+					error : function(xhr, status, err){
+						alert('삭제에 실패하였습니다.');
+					}
+				});	
+			}else{
+				return;
+			}
+		});
+		
 		$("#replySubmit").click(function(event){
         	event.preventDefault();
+        	
         	if(!($('#frm input[name=id]').val())){ // null or '' check!
     			var value = confirm('로그인이 필요한 서비스입니다. 로그인 할까요?');
     			if(value){
@@ -25,10 +52,12 @@
     			}
     			return;
     		}
+        	
         	if($('#frm textarea').val().length == 0){
     			alert('댓글 내용을 입력하세요.');
     			return;
     		}
+        	
         	var queryString =  $("#frm").serialize();
         	$.ajax({
 				url : "/bikelong/reply/insert.action",
@@ -51,32 +80,32 @@
 				}
 			});
         });
-		$('.deleteReply').each(function(idx){
-			$(this).click(function(event){
-				var replyNo = $(this).attr('data-replyNo');
-				$.ajax({
-					url : "/bikelong/reply/delete.action",
-					method : "GET",
-					data : {'replyNo' : replyNo},
-					success : function(data,status,xhr){
-						if(data=="success"){
-							alert('댓글 삭제에 성공하셨습니다.');
-							location.href="/bikelong/trailpathboard/detail.action?boardNo=${trailBoarddetail.boardNo}";
-						}
-						if(data=="fail"){
-							alert('댓글 삭제에 실패하셨습니다.');
-							return;
-						}
-					},
-					error : function(xhr, status, err){
+		
+		$('div#comments').on('click', 'a.deleteReply',function(event){
+			event.preventDefault();
+			var replyNo = $(this).attr('data-replyNo');
+			$.ajax({
+				url : "/bikelong/reply/delete.action",
+				method : "GET",
+				data : {'replyNo' : replyNo},
+				success : function(data,status,xhr){
+					if(data=="success"){
+						alert('댓글 삭제에 성공하셨습니다.');
+						location.href="/bikelong/trailpathboard/detail.action?boardNo=${trailBoarddetail.boardNo}";
+					}
+					if(data=="fail"){
 						alert('댓글 삭제에 실패하셨습니다.');
 						return;
 					}
-				});
+				},
+				error : function(xhr, status, err){
+					alert('댓글 삭제에 실패하셨습니다.');
+					return;
+				}
 			});
 		});
+	});
 </script>
-
 <!-- Favicons-->
 <link rel="shortcut icon"
 	href="/bikelong/resources/assets/images/favicon.png">
@@ -103,18 +132,31 @@
 </head>
 
 <body>
-
-	<!-- Preloader-->
+<!-- Preloader-->
 	<div class="page-loader">
 		<div class="loader"></div>
 	</div>
 	<!-- Preloader end-->
-
 	<!-- Header-->
-	<jsp:include page="/WEB-INF/views/include/header.jsp" />
+	<jsp:include page="/WEB-INF/views/include/header.jsp" /><br/><br/><br/>
 	<!-- Header end-->
-
-	<!-- ========================================================================================================= -->
+	<!-- Page Header-->
+	<section class="module-page-title">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-md-6">
+					<h1 class="page-title-heading">자전거 산책로 - 글 상세보기</h1>
+				</div>
+				<div class="col-md-6">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="/bikelong/index.action">Home</a></li>
+						<li class="breadcrumb-item active"><a href="/bikelong/trailpathboard/list.action">Trail Board</a></li>
+						<li class="breadcrumb-item active">Trail Write</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
 	<!-- Wrapper-->
 	<div class="wrapper">
 		<section class="module">
@@ -138,8 +180,7 @@
 											<div class="form-group">글쓴이 : ${trailBoarddetail.id}</div>
 										</div>
 										<div class="col-md-12">
-											<div class="form-group">
-												작성일 : ${trailBoarddetail.date}
+											<div class="form-group">작성일 : ${trailBoarddetail.date}
 											</div>
 										</div>
 										<div class="col-md-12">
@@ -177,8 +218,7 @@
 							<div class="comment-list" id="comments">
 								<c:choose>
 									<c:when test="${ replyList == '' || replyList eq null}">
-										<h3 id="nodata" style="text-align:center">
-										 작성된 댓글이 없습니다.
+										<h3 id="nodata" style="text-align: center">작성된 댓글이 없습니다.
 										</h3>
 									</c:when>
 									<c:otherwise>
@@ -187,7 +227,8 @@
 											<div class="comment">
 												<div class="comment-author">
 													<img class="avatar"
-														src="/bikelong/resources/assets/images/avatar/1.jpg" alt="">
+														src="/bikelong/resources/assets/images/avatar/1.jpg"
+														alt="">
 												</div>
 												<div class="comment-body">
 													<div class="comment-meta">
@@ -197,8 +238,10 @@
 													<div class="comment-content">
 														<p>${reply.content}</p>
 													</div>
-													<c:if test="${loginuser.id eq reply.id && loginuser ne null}">
-														<a class="btn deleteReply" data-replyNo="${reply.replyNo}" href="#">삭제</a>
+													<c:if
+														test="${loginuser.id eq reply.id && loginuser ne null}">
+														<a class="btn deleteReply" data-replyNo="${reply.replyNo}"
+															href="#">삭제</a>
 													</c:if>
 												</div>
 											</div>
@@ -208,15 +251,19 @@
 							</div>
 							<div class="comment-respond">
 								<h5 class="comment-reply-title">댓글 쓰기</h5>
-								
+
 								<form id="frm" class="comment-form row">
-									<input class="form-control" type="hidden" name="id" value="${loginuser.id}">
-									<input class="form-control" type="hidden" name="boardNo" value="${trailBoarddetail.boardNo}">
+									<input class="form-control" type="hidden" name="id"
+										value="${loginuser.id}"> <input class="form-control"
+										type="hidden" name="boardNo"
+										value="${trailBoarddetail.boardNo}">
 									<div class="form-group col-md-12">
-										<textarea class="form-control" rows="8" name="content" placeholder="Comment"></textarea>
+										<textarea class="form-control" rows="8" name="content"
+											placeholder="Comment"></textarea>
 									</div>
 									<div class="form-submit col-md-12">
-										<button class="btn btn-black" id="replySubmit" type="submit">Post Comment</button>
+										<button class="btn btn-black" id="replySubmit" type="submit">Post
+											Comment</button>
 									</div>
 								</form>
 							</div>

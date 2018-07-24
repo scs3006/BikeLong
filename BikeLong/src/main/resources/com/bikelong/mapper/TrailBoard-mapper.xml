@@ -24,10 +24,12 @@
 	</select>
 	
 	<select id="selectBoard" parameterType="hashmap" resultType="TrailBoard">
-		SELECT b.id , b.locationNo, b.date, b.title, b.content, l.locationName
+	
+		SELECT b.id , b.locationNo, date_format(b.date,'%Y-%m-%d') date, b.title, b.content, l.locationName
 		FROM Board b INNER JOIN Location l
 		ON b.locationNo = l.locationNo 
 		WHERE b.boardNo = #{boardNo} AND b.category = 1
+		
 	</select>
 	
 	<update id="updateBoard" parameterType="Board">
@@ -36,7 +38,8 @@
 	</update>
 	
 	<delete id="deleteBoard" parameterType="hashmap">
-		DELETE FROM Board WHERE boardNo=#{boardNo}
+		DELETE FROM Board
+		WHERE boardNo = #{boardNo}
 	</delete>
 	
 	<select id="selectBoardByBoardNo" parameterType="int" resultType="Board">

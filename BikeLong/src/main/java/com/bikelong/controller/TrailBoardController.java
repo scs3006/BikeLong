@@ -27,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.bikelong.service.ReplyService;
 import com.bikelong.service.TrailBoardService;
 import com.bikelong.ui.*;
+import com.bikelong.vo.Board;
 import com.bikelong.vo.Reply;
 import com.bikelong.vo.TrailBoard;
 
@@ -34,8 +35,8 @@ import com.bikelong.vo.TrailBoard;
 @Controller
 @RequestMapping(value = "trailpathboard")
 public class TrailBoardController {
-	
-	
+
+
 	@Autowired
 	@Qualifier(value = "replyService")
 	private ReplyService replyService;
@@ -47,19 +48,19 @@ public class TrailBoardController {
 	@GetMapping(value = "list.action")
 	public String list(Model model,
 			@RequestParam(value = "pageno", defaultValue = "0") int pageNo) {
-		
-		int pageSize = 10; //한 페이지에 표시할 데이터 갯수
+
+		int pageSize = 8; //한 페이지에 표시할 데이터 갯수
 		int from = pageNo * pageSize;
 		int to = pageSize;
-		
+
 		int pagerSize = 5;//번호로 표시할 페이지 목록
 		String linkUrl = "list.action";
-		
+
 		List<TrailBoard> trailBoardlist = trailBoardService.findBoardList(from, to);
 		int dataCount = trailBoardService.getBoardCount();
-		
+
 		ThePager2 pager = new ThePager2(dataCount, pageNo, pageSize, pagerSize, linkUrl);
-		
+
 		model.addAttribute("trailBoardlist", trailBoardlist);
 		model.addAttribute("pager", pager);
 		model.addAttribute("pageno", pageNo);
@@ -71,11 +72,11 @@ public class TrailBoardController {
 			int boardNo, Model model, TrailBoard trailBoarddetail) {
 		List<Reply> replyList = replyService.getReplyList(boardNo);
 		trailBoarddetail = trailBoardService.findBoard(boardNo);
-		
+
 		if(replyList != null && replyList.size() > 0) {
 			model.addAttribute("replyList", replyList);
 		}
-		
+
 		model.addAttribute("trailBoarddetail",trailBoarddetail);
 		model.addAttribute("pageno", pageNo);
 		return "trail/detail";
@@ -83,7 +84,7 @@ public class TrailBoardController {
 
 	@GetMapping(value = "write.action")
 	public String write() {
-			return "trail/write";
+		return "trail/write";
 	}
 
 	@PostMapping(value = "write.action")
@@ -91,42 +92,37 @@ public class TrailBoardController {
 		int cate = 1;
 		trailBoard.setCategory(cate);
 		trailBoardService.writeBoard(trailBoard);
-System.out.println(trailBoard.getLocationNo());
-		return "trail/write";
+		System.out.println(trailBoard.getLocationNo());
+		return "redirect:list.action";
 	}
 
 	@GetMapping(value = "update.action")
-	public String update(Model model, TrailBoard trailboardupdate,
+	public String update(Model model, TrailBoard trailboardupdate,RedirectAttributes redirectAttributes,
 			@RequestParam(value ="pageno", defaultValue = "0") int pageNo, int boardNo) {
 		trailboardupdate = trailBoardService.findBoardByBoardNo(boardNo);
-		
 		model.addAttribute("trailboardupdate", trailboardupdate);
 		model.addAttribute("pageno", pageNo);
 		return "trail/update";
 	}
 	@PostMapping(value = "update.action")
 	@ResponseBody
-	public String postUpdate(TrailBoard trailBoard,
-			@RequestParam(value ="boardNo", defaultValue = "-1")int boardNo,
-			@RequestParam(value = "pageno", defaultValue = "1") int pageNo) {
+	public String postUpdate(TrailBoard trailBoard) {
 		try {
 			trailBoardService.updateBoard(trailBoard);
 		} catch (Exception ex) { // 등록 실패한 경우
-			return "No modifications were made";
+			return "fail";
 		}
-		return "redirect:list.action?boardNo="+trailBoard.getBoardNo()+"&pageNo="+pageNo; 
+		return "success"; 
 	}
-	
+
 	@GetMapping(value = "delete.action")
 	@ResponseBody
-	public String getDelete(
-			@RequestParam(value ="boardNo", defaultValue = "-1")int boardNo,
-			@RequestParam(value ="pageNo", defaultValue = "1") int pageNo) {
+	public String getDelete(int boardNo) {
 		try {
 			trailBoardService.deleteBoard(boardNo);	// 서비스에서 트랜잭션으로 댓글까지 지우는거 잊지말자!
 		} catch (Exception ex) { // 등록 실패한 경우
-			return "It has not been delete";
+			return "fail";
 		}
-		return "redirect:list.action?pageno=" + pageNo; 
+		return "success"; 
 	}
 }
