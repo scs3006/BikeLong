@@ -7,20 +7,20 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="">
-		<title>Tavern - Responsive Restaurant Template(Bootstrap 4)</title>
+		<title>Bike Long</title>
 		<!-- Favicons-->
-		<link rel="shortcut icon" href="resources/assets/images/favicon.png">
-		<link rel="apple-touch-icon" href="resources/assets/images/apple-touch-icon.png">
-		<link rel="apple-touch-icon" sizes="72x72" href="resources/assets/images/apple-touch-icon-72x72.png">
-		<link rel="apple-touch-icon" sizes="114x114" href="resources/assets/images/apple-touch-icon-114x114.png">
+		<link rel="shortcut icon" href="/bikelong/resources/assets/images/favicon.png">
+		<link rel="apple-touch-icon" href="/bikelong/resources/assets/images/apple-touch-icon.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/bikelong/resources/assets/images/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/bikelong/resources/assets/images/apple-touch-icon-114x114.png">
 		<!-- Web Fonts-->
 		<link href="https://fonts.googleapis.com/css?family=PT+Serif%7cSignika:300,400,600,700" rel="stylesheet">
 		<!-- Bootstrap core CSS-->
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet">
 		<!-- Plugins and Icon Fonts-->
-		<link href="resources/assets/css/plugins.min.css" rel="stylesheet">
+		<link href="/bikelong/resources/assets/css/plugins.min.css" rel="stylesheet">
 		<!-- Template core CSS-->
-		<link href="resources/assets/css/template.css" rel="stylesheet">
+		<link href="/bikelong/resources/assets/css/template.css" rel="stylesheet">
 	</head>
 	<body>
 
@@ -43,10 +43,10 @@
 					<div class="row">
 						<div class="col-md-12 m-auto">
 							<div class="text-center">
-								<h6 class="text-uppercase">Wine and Dine</h6>
-								<h1 class="display-1">Fournier Père</h1>
-								<p>See how your users experience your website in realtime or view <br/> trends to see any changes in performance over time.</p>
-								<div class="space" data-mY="40px"></div><a class="btn btn-white" href="#">Purchase now</a>
+								<h6 class="text-uppercase">City of Nature</h6>
+								<h1 class="display-1">Bike Long</h1>
+								<p>Bike Long은 누구나, 언제나, 어디서나 쉽고 편리하게 이용할 수 있는 무인대여 시스템입니다. <br/> 도시의 교통체증, 대기오염, 고유가 문제를 해결하고 건강한 사회 및 시민들의 삶의 질을 높이고자 마련되었습니다.</p>
+								<div class="space" data-mY="40px"></div><a class="btn btn-white" href="#">Service Now</a>
 							</div>
 						</div>
 					</div>
@@ -72,10 +72,10 @@
 					</div>
 					<div class="row">
 						<div class="col-md-6">
-							<p><a class="photo" href="resources/assets/images/main/1.jpg"><img src="resources/assets/images/main/1.jpg" alt=""></a></p>
+							<p><a class="photo" href="/bikelong/resources/assets/images/main/1.jpg"><img src="/bikelong/resources/assets/images/main/1.jpg" alt=""></a></p>
 						</div>
 						<div class="col-md-6">
-							<p><a class="photo" href="resources/assets/images/main/3.jpg"><img src="resources/assets/images/main/3.jpg" alt=""></a></p>
+							<p><a class="photo" href="/bikelong/resources/assets/images/main/3.jpg"><img src="/bikelong/resources/assets/images/main/3.jpg" alt=""></a></p>
 						</div>
 					</div>
 					<div class="row">
@@ -97,7 +97,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<div class="text-center"><img src="resources/assets/images/main/sign.png" alt=""></div>
+							<div class="text-center"><img src="/bikelong/resources/assets/images/main/sign.png" alt=""></div>
 						</div>
 					</div>
 				</div>
@@ -124,7 +124,7 @@
 						<div class="col-md-12">
 							<div class="owl-carousel menu-carousel" data-carousel-options="{&quot;nav&quot;: false}">
 								<div class="menu-classic-item">
-									<div class="menu-classic-item-img"><a class="photo" href="resources/assets/images/menu/1.jpg"></a><img src="resources/assets/images/menu/1.jpg" alt="">
+									<div class="menu-classic-item-img"><a class="photo" href="/bikelong/resources/assets/images/menu/1.jpg"></a><img src="/bikelong/resources/assets/images/menu/1.jpg" alt="">
 										<div class="menu-classic-item-price">$15
 										</div>
 									</div>
@@ -134,7 +134,7 @@
 									</div>
 								</div>
 								<div class="menu-classic-item">
-									<div class="menu-classic-item-img"><a class="photo" href="resources/assets/images/menu/2.jpg"></a><img src="resources/assets/images/menu/2.jpg" alt="">
+									<div class="menu-classic-item-img"><a class="photo" href="/bikelong/resources/assets/images/menu/2.jpg"></a><img src="/bikelong/resources/assets/images/menu/2.jpg" alt="">
 										<div class="menu-classic-item-price">$18
 										</div>
 									</div>
@@ -144,7 +144,7 @@
 									</div>
 								</div>
 								<div class="menu-classic-item">
-									<div class="menu-classic-item-img"><a class="photo" href="resources/assets/images/menu/3.jpg"></a><img src="resources/assets/images/menu/3.jpg" alt="">
+									<div class="menu-classic-item-img"><a class="photo" href="/bikelong/resources/assets/images/menu/3.jpg"></a><img src="/bikelong/resources/assets/images/menu/3.jpg" alt="">
 										<div class="menu-classic-item-price">$13
 										</div>
 									</div>
@@ -154,7 +154,7 @@
 									</div>
 								</div>
 								<div class="menu-classic-item">
-									<div class="menu-classic-item-img"><a class="photo" href="resources/assets/images/menu/4.jpg"></a><img src="resources/assets/images/menu/4.jpg" alt="">
+									<div class="menu-classic-item-img"><a class="photo" href="/bikelong/resources/assets/images/menu/4.jpg"></a><img src="/bikelong/resources/assets/images/menu/4.jpg" alt="">
 										<div class="menu-classic-item-price">$12
 										</div>
 									</div>
@@ -164,7 +164,7 @@
 									</div>
 								</div>
 								<div class="menu-classic-item">
-									<div class="menu-classic-item-img"><a class="photo" href="resources/assets/images/menu/5.jpg"></a><img src="resources/assets/images/menu/5.jpg" alt="">
+									<div class="menu-classic-item-img"><a class="photo" href="/bikelong/resources/assets/images/menu/5.jpg"></a><img src="/bikelong/resources/assets/images/menu/5.jpg" alt="">
 										<div class="menu-classic-item-price">$21
 										</div>
 									</div>
@@ -174,7 +174,7 @@
 									</div>
 								</div>
 								<div class="menu-classic-item">
-									<div class="menu-classic-item-img"><a class="photo" href="resources/assets/images/menu/6.jpg"></a><img src="resources/assets/images/menu/6.jpg" alt="">
+									<div class="menu-classic-item-img"><a class="photo" href="/bikelong/resources/assets/images/menu/6.jpg"></a><img src="/bikelong/resources/assets/images/menu/6.jpg" alt="">
 										<div class="menu-classic-item-price">$17
 										</div>
 									</div>
@@ -184,7 +184,7 @@
 									</div>
 								</div>
 								<div class="menu-classic-item">
-									<div class="menu-classic-item-img"><a class="photo" href="resources/assets/images/menu/1.jpg"></a><img src="resources/assets/images/menu/1.jpg" alt="">
+									<div class="menu-classic-item-img"><a class="photo" href="/bikelong/resources/assets/images/menu/1.jpg"></a><img src="/bikelong/resources/assets/images/menu/1.jpg" alt="">
 										<div class="menu-classic-item-price">$15
 										</div>
 									</div>
@@ -199,112 +199,6 @@
 				</div>
 			</section>
 			<!-- Special Offers End-->
-
-			<!-- Popular Dishes-->
-			<section class="module" id="popular">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-6 m-auto text-center">
-							<p class="subtitle">Tasty and crunchy</p>
-							<h1 class="display-1">Popular Dishes</h1>
-							<p class="lead">See how your users experience your website in realtime or view <br/> trends to see any changes in performance over time.</p>
-							<div class="divider-border"></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="space" data-mY="60px"></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
-							<div class="menu-simple">
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="resources/assets/images/widgets/1.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Wild Mushroom Bucatini with Kale</span><span class="pull-right">$10</span></h6>
-										<p>Cheese, Garlic, Potato, Pork</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="resources/assets/images/widgets/2.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Lemon and Garlic Green Beans</span><span class="pull-right">$12</span></h6>
-										<p>Pork meat, Sauces, Potato</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="resources/assets/images/widgets/3.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>American Brunch Combo Menu</span><span class="pull-right">$21</span></h6>
-										<p>Bacon, Rice, Vegetables</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="resources/assets/images/widgets/4.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Smoked Paprika Hummus</span><span class="pull-right">$18</span></h6>
-										<p>Shrimp, Vegetables, Sauce</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="resources/assets/images/widgets/5.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Italian Source Mushroom</span><span class="pull-right">$21</span></h6>
-										<p>Steak, Spices, Sauces</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="menu-simple">
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="resources/assets/images/widgets/6.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Lemon and Garlic Green Beans</span><span class="pull-right">$12</span></h6>
-										<p>Pork meat, Sauces, Potato</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="resources/assets/images/widgets/1.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>American Brunch Combo Menu</span><span class="pull-right">$21</span></h6>
-										<p>Bacon, Rice, Vegetables</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="resources/assets/images/widgets/2.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Smoked Paprika Hummus</span><span class="pull-right">$18</span></h6>
-										<p>Shrimp, Vegetables, Sauce</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="resources/assets/images/widgets/3.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Italian Source Mushroom</span><span class="pull-right">$21</span></h6>
-										<p>Steak, Spices, Sauces</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="resources/assets/images/widgets/4.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Wild Mushroom Bucatini with Kale</span><span class="pull-right">$10</span></h6>
-										<p>Cheese, Garlic, Potato, Pork</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="space" data-mY="60px"></div>
-							<p class="text-center"><a class="btn btn-black" href="#">View our menu</a></p>
-						</div>
-					</div>
-				</div>
-			</section>
-			<!-- Popular Dishes End-->
 
 			<!-- Gallery-->
 			<section class="module no-gutter p-0" id="gallery">
@@ -328,22 +222,22 @@
 						<div class="col-xl-8 col-lg-12">
 							<div class="gallery gallery-shorcode">
 								<div class="gallery-item">
-									<div class="gallery-image" data-background="resources/assets/images/portfolio/1.jpg"></div><a href="resources/assets/images/portfolio/1.jpg" title="Title 1"></a>
+									<div class="gallery-image" data-background="/bikelong/resources/assets/images/portfolio/1.jpg"></div><a href="/bikelong/resources/assets/images/portfolio/1.jpg" title="Title 1"></a>
 								</div>
 								<div class="gallery-item">
-									<div class="gallery-image" data-background="resources/assets/images/portfolio/5.jpg"></div><a href="resources/assets/images/portfolio/5.jpg" title="Title 2"></a>
+									<div class="gallery-image" data-background="/bikelong/resources/assets/images/portfolio/5.jpg"></div><a href="/bikelong/resources/assets/images/portfolio/5.jpg" title="Title 2"></a>
 								</div>
 								<div class="gallery-item">
-									<div class="gallery-image" data-background="resources/assets/images/portfolio/3.jpg"></div><a href="resources/assets/images/portfolio/3.jpg" title="Title 3"></a>
+									<div class="gallery-image" data-background="/bikelong/resources/assets/images/portfolio/3.jpg"></div><a href="/bikelong/resources/assets/images/portfolio/3.jpg" title="Title 3"></a>
 								</div>
 								<div class="gallery-item">
-									<div class="gallery-image" data-background="resources/assets/images/portfolio/4.jpg"></div><a href="resources/assets/images/portfolio/4.jpg" title="Title 4"></a>
+									<div class="gallery-image" data-background="/bikelong/resources/assets/images/portfolio/4.jpg"></div><a href="/bikelong/resources/assets/images/portfolio/4.jpg" title="Title 4"></a>
 								</div>
 								<div class="gallery-item">
-									<div class="gallery-image" data-background="resources/assets/images/portfolio/2.jpg"></div><a href="resources/assets/images/portfolio/2.jpg" title="Title 5"></a>
+									<div class="gallery-image" data-background="/bikelong/resources/assets/images/portfolio/2.jpg"></div><a href="/bikelong/resources/assets/images/portfolio/2.jpg" title="Title 5"></a>
 								</div>
 								<div class="gallery-item">
-									<div class="gallery-image" data-background="resources/assets/images/portfolio/6.jpg"></div><a href="resources/assets/images/portfolio/6.jpg" title="Title 6"></a>
+									<div class="gallery-image" data-background="/bikelong/resources/assets/images/portfolio/6.jpg"></div><a href="/bikelong/resources/assets/images/portfolio/6.jpg" title="Title 6"></a>
 								</div>
 							</div>
 						</div>
@@ -433,7 +327,7 @@
 			<!-- Services End-->
 
 			<!-- Testimonials-->
-			<section class="module parallax" data-background="resources/assets/images/module-4.jpg" data-overlay="0.7">
+			<section class="module parallax" data-background="/bikelong/resources/assets/images/module-4.jpg" data-overlay="0.7">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12">
@@ -496,7 +390,7 @@
 							<div class="divider-border-left"></div>
 							<div class="space" data-mY="60px"></div><a class="btn btn-black" href="#">View our menu</a>
 						</div>
-						<div class="col-md-6"><img src="resources/assets/images/chef-1.png" alt=""></div>
+						<div class="col-md-6"><img src="/bikelong/resources/assets/images/chef-1.png" alt=""></div>
 					</div>
 				</div>
 			</section>
@@ -523,7 +417,7 @@
 
 							<!-- Post-->
 							<article class="post">
-								<div class="post-preview"><a href="#"><img src="resources/assets/images/menu/4.jpg" alt=""></a></div>
+								<div class="post-preview"><a href="#"><img src="/bikelong/resources/assets/images/menu/4.jpg" alt=""></a></div>
 								<div class="post-wrapper">
 									<div class="post-header">
 										<h2 class="post-title display-1"><a href="blog-single-1.jsp">Which Lamb is the Best: American, Australian or New Zealand?</a></h2>
@@ -540,7 +434,7 @@
 
 							<!-- Post-->
 							<article class="post">
-								<div class="post-preview"><a href="#"><img src="resources/assets/images/menu/5.jpg" alt=""></a></div>
+								<div class="post-preview"><a href="#"><img src="/bikelong/resources/assets/images/menu/5.jpg" alt=""></a></div>
 								<div class="post-wrapper">
 									<div class="post-header">
 										<h2 class="post-title display-1"><a href="blog-single-1.jsp">The Caipirinha Is The Brazilian Cocktail You’ve Been Too Afraid To Pronounce</a></h2>
@@ -557,7 +451,7 @@
 
 							<!-- Post-->
 							<article class="post">
-								<div class="post-preview"><a href="#"><img src="resources/assets/images/menu/6.jpg" alt=""></a></div>
+								<div class="post-preview"><a href="#"><img src="/bikelong/resources/assets/images/menu/6.jpg" alt=""></a></div>
 								<div class="post-wrapper">
 									<div class="post-header">
 										<h2 class="post-title display-1"><a href="blog-single-1.jsp">The Plum Recipes That’ll Make You Fall In Love With This Stone Fruit</a></h2>
@@ -601,137 +495,6 @@
 		</div>
 		<!-- Wrapper end-->
 
-		<!-- Off canvas-->
-		<div class="off-canvas-sidebar" data-background="resources/assets/images/sidebar.jpg">
-			<div class="off-canvas-sidebar-wrapper">
-				<div class="off-canvas-header"><a class="close-offcanvas" href="#"><span class="arrows arrows-arrows-remove"></span></a></div>
-				<div class="off-canvas-content">
-					<!-- Text widget-->
-					<aside class="widget widget_text">
-						<div class="textwidget">
-							<p><img src="resources/assets/images/bikelong-light.png" width="74px" alt=""></p>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
-							<ul class="icon-list">
-								<li><i class="ti-email"></i> info@themebusiness.com</li>
-								<li><i class="ti-headphone-alt"></i> 1-444-123-4559</li>
-								<li><i class="ti-location-pin"></i> Raymond Boulevard 224, New York</li>
-							</ul>
-						</div>
-					</aside>
-					<!-- Recent portfolio widget-->
-					<aside class="widget widget_recent_works">
-						<div class="widget-title">
-							<h5>Instagram</h5>
-						</div>
-						<ul>
-							<li><a href="#"><img src="resources/assets/images/widgets/1.jpg" alt=""></a></li>
-							<li><a href="#"><img src="resources/assets/images/widgets/2.jpg" alt=""></a></li>
-							<li><a href="#"><img src="resources/assets/images/widgets/3.jpg" alt=""></a></li>
-							<li><a href="#"><img src="resources/assets/images/widgets/4.jpg" alt=""></a></li>
-							<li><a href="#"><img src="resources/assets/images/widgets/5.jpg" alt=""></a></li>
-							<li><a href="#"><img src="resources/assets/images/widgets/6.jpg" alt=""></a></li>
-						</ul>
-					</aside>
-					<!-- Text widget-->
-					<!--aside.widget.widget_text
-					.textwidget
-						.up-logo
-							p.text-center.m-b-50: img(src="resources/assets/images/logo-light.png" width="100" alt="")
-						.up-form
-							form(method="post")
-								.form-group
-									input.form-control.form-control-lg(type="email" placeholder="Email")
-								.form-group
-									input.form-control.form-control-lg(type="password" placeholder="Pasword")
-								.form-group
-									button(type="submit" class="btn btn-block btn-lg btn-round btn-brand") Log in
-						.up-help
-							p: a(href="#") Forgot your password?
-							p Don't have an account yet? <a href="#">Sign in</a>
-					
-					-->
-
-					<!-- Twitter widget-->
-					<aside class="widget twitter-feed-widget">
-						<div class="widget-title">
-							<h5>Twitter Feed</h5>
-						</div>
-						<div class="twitter-feed" data-twitter="345170787868762112" data-number="2"></div>
-					</aside>
-					<ul class="social-icons">
-						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-						<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-						<li><a href="#"><i class="fa fa-vk"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<!-- Off canvas end-->
-
-		<!-- Reserve Popup-->
-		<div class="white-popup-block mfp-hide" id="test-form">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4 p-0">
-						<div class="qwert" data-background="resources/assets/images/module-2.jpg"></div>
-					</div>
-					<div class="col-md-8">
-						<div class="ddd"><a class="popup-modal-dismiss" href="#"><i class="ti-close"></i></a>
-							<h1 class="display-1">Book a Table</h1>
-							<p class="lead">See how your users experience your website in realtime or view <br/> trends to see any changes in performance over time.</p>
-							<div class="divider-border-left"></div>
-							<div class="space" data-mY="60px"></div>
-							<form method="post" novalidate>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="text" name="name" placeholder="Name" required="">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="text" name="name" placeholder="Phone" required="">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="email" name="email" placeholder="E-mail" required="">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="text" name="subject" placeholder="Persons" required="">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="email" name="email" placeholder="Date" required="">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="text" name="subject" placeholder="Time" required="">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<textarea class="form-control" name="message" placeholder="Special Requests" rows="6" required=""></textarea>
-										</div>
-									</div>
-									<div class="col-md-12">
-										<input class="btn btn-black" type="submit" value="Reserve">
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Reserve Popup end-->
-
 		<!-- To top button--><a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
 
 		<!-- Scripts-->
@@ -739,7 +502,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA0rANX07hh6ASNKdBr4mZH0KZSqbHYc3Q"></script>
-		<script src="resources/assets/js/plugins.min.js"></script>
-		<script src="resources/assets/js/custom.min.js"></script>
+		<script src="/bikelong/resources/assets/js/plugins.min.js"></script>
+		<script src="/bikelong/resources/assets/js/custom.min.js"></script>
 	</body>
 </html>
