@@ -72,12 +72,16 @@
 							array[i][1] = data[i].longitude;
 						}
 						
+						 var point = e.latlng;
+
 						var poly = 
 					    	for(int i=0; i<mainsize-1; i++){
 					    		new naver.maps.LatLng(array[i][0], array[i][1]),
 					    	}
-					    	new naver.maps.LatLng( array[mainsize-1][0], array[mainsize-1][1])
-					    ;
+					    	new naver.maps.LatLng( array[mainsize-1][0], array[mainsize-1][1]);
+					    	
+					    var path = polyline.getPath();
+						path.push(point);
 						
 					},
 					error : function(xhr, status, err){
@@ -213,25 +217,23 @@
 														<div id="map" style="width:100%;height:550px;"></div>
 														<script>
 														var map = new naver.maps.Map('map', {
-														    center: new naver.maps.LatLng(array[0][0] , array[0][1]),
+														    center: new naver.maps.LatLng(37.3700065 , 127.121359),
 														    zoom: 10
 														});
 														
 														var polyline = new naver.maps.Polyline({
 														    map: map,
-														    path: [poly],
+														    path: [
+														    	new naver.maps.LatLng(37.3700065 , 127.121359),
+														    	new naver.maps.LatLng(37.3700065 , 126.121359)
+														    ],
 														    strokeStyle: 'solid',
 														    strokeColor: '#5347AA',
 														    strokeWeight: 5
 														});
 														
 														var marker = new naver.maps.Marker({
-														    position: new naver.maps.LatLng( array[0][0] , array[0][1] ),
-														    map: map
-														});
-														
-														var marker = new naver.maps.Marker({
-														    position: new naver.maps.LatLng( array[mainsize-1][0] , array[mainsize-1][1] ),
+														    position: new naver.maps.LatLng( 37.3700065 , 127.121359 ),
 														    map: map
 														});
 														</script>
