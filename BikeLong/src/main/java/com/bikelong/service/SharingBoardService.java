@@ -19,6 +19,6 @@ public interface SharingBoardService {
 
 	List<History> findHistory(String id);
 
-	List<History> gpsfind(History history);
+	List<History> gpsfind(String startTime, String endTime);
 
 }

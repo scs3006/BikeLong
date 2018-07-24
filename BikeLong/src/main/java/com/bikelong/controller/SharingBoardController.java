@@ -67,6 +67,7 @@ public class SharingBoardController {
 	public String write(Model model, String id) {
 		
 		List<History> history = sharingBoarService.findHistory(id);
+		
 		model.addAttribute("history", history);
 		
 		return "sharingboard/sharingboardwrite";
@@ -111,22 +112,14 @@ public class SharingBoardController {
 	
 	@RequestMapping(value = "gpsfind.action", method = RequestMethod.GET)
 	@ResponseBody
-	public String gpsfind(String historyTime, History history, Model model) {
+	public List<History> gpsfind(String startTime, String endTime) {
 		
-		String[] str = historyTime.split("/");
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		try {
-			java.sql.Date startTime = (Date) dateFormat.parse(str[0]);
-			java.sql.Date endTime = (Date) dateFormat.parse(str[1]);
-			history.setStartTime(startTime);
-			history.setEndTime(endTime);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		List<History> histories = sharingBoarService.gpsfind(history);
-		model.addAttribute("histories", histories);
+		System.out.println(startTime);
+		System.out.println(endTime);
 		
-		return "success";
+		List<History> histories = sharingBoarService.gpsfind(startTime,endTime);
+		
+		return histories;
 	}
 	
 	

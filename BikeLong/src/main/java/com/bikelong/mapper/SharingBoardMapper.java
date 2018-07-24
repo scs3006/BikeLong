@@ -1,5 +1,6 @@
 package com.bikelong.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.bikelong.vo.History;
@@ -13,6 +14,6 @@ public interface SharingBoardMapper {
 	void updateBoard(SharingBoard sharingBoard);
 	void deleteBoard(int boardNo);
 	List<History> selectHistory(String id);
-	List<History> selectgps(History history);
+	List<History> selectgps(HashMap<String, Object> params);
 
 }
