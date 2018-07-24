@@ -32,11 +32,8 @@
 								<li><a href="/bikelong/suggestions/list.action"><span class="menu-item-span">건의 사항</span></a></li>
 							</ul>
 						</div>
-					</div>
-					<!-- Extra-nav - will be hidden on mobile-->
-					<div class="extra-nav">
-					<div class="inner-nav onepage-nav">
-						<ul>
+						<div class="inner-nav onepage-nav" id="signIn_signUp">
+							<ul>
 							<c:if test="${ empty loginuser }">
 								<li><a href="/bikelong/account/signin.action"><span class="menu-item-span"><i class="ti-power-off">&nbsp;&nbsp;</i>Sign In</span></a></li>
 								<li><a href="/bikelong/account/signup.action"><span class="menu-item-span"><i class="ti-notepad">&nbsp;&nbsp;</i>Sign Up</span></a></li>
@@ -53,6 +50,12 @@
 							</c:if>
 							<!-- <li><a class="popup-book-a-table" href="#test-form"><span class="menu-item-span">Book now</span></a></li> -->
 						</ul>
+						</div>
+					</div>
+					<!-- Extra-nav - will be hidden on mobile-->
+					<div class="extra-nav">
+					<div class="inner-nav onepage-nav">
+						
 						</div>
 					</div>
 					<!-- Mobile menu-->
