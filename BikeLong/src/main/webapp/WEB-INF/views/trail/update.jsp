@@ -14,31 +14,55 @@
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript">
-$(function() {
-	//전역변수
-	var obj = [];
-	//스마트에디터 프레임생성
-	nhn.husky.EZCreator.createInIFrame({
-		oAppRef : obj,
-		elPlaceHolder : "content",
-		sSkinURI : "/bikelong/resources/editor/SmartEditor2Skin.html",
-		htParams : {
-			// 툴바 사용 여부
-			bUseToolbar : true,
-			// 입력창 크기 조절바 사용 여부
-			bUseVerticalResizer : true,
-			// 모드 탭(Editor | HTML | TEXT) 사용 여부
-			bUseModeChanger : true,
-		}
-	});
-	//전송버튼
-	$("#updatebtn").click(function(event) {
-		event.preventDefault();
-		obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-		//폼 submit
-		$("#frm").submit();
-	});
-});
+    $(function(){
+       //전역변수
+        var obj = [];              
+        //스마트에디터 프레임생성
+        nhn.husky.EZCreator.createInIFrame({
+            oAppRef: obj,
+            elPlaceHolder: "content",
+            sSkinURI: "/bikelong/resources/editor/SmartEditor2Skin.html",
+            htParams : {
+                // 툴바 사용 여부
+                bUseToolbar : true,            
+                // 입력창 크기 조절바 사용 여부
+                bUseVerticalResizer : true,    
+                // 모드 탭(Editor | HTML | TEXT) 사용 여부
+                bUseModeChanger : true,
+            }
+        });
+        
+        //전송버튼
+        $("#savebtn").click(function(event){
+        	event.preventDefault();
+        	obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+        	
+        	var queryString =  $("#frm").serialize();
+        	$.ajax({
+				url : "update.action",
+				method : "POST",
+				data : queryString,
+				success : function(data,status,xhr){
+					if(data=="success"){
+						alert('게시글 수정에 성공하셨습니다.');
+						location.href = '/bikelong/trailpathboard/detail.action?boardNo='+${trailboardupdate.boardNo}+'&pageno=${pageno}';
+					}
+					if(data=="fail"){
+						alert('게시글 수정에 실패하셨습니다.');
+						return;
+					}
+				},
+				error : function(xhr, status, err){
+					alert('게시글 수정에 실패하셨습니다.');
+					return;
+				}
+			});
+        }); 
+        
+        $('#cencel').on("click",function(){
+			location.href="/bikelong/trailpathboard/detail.action?boardNo="+${trailboarddetail.boardNo};
+		})		
+    });
 </script>
 
 <!-- Favicons-->
@@ -162,21 +186,19 @@ $(function() {
 											</div>
 											<div class="col-md-12">
 												<div class="form-group">
-													<input class="form-control" type="text" name="title"
-														value="${trailboardupdate.title}">
+													<input class="form-control" type="text" name="title" value="${trailboardupdate.title}" required>
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="form-group">
-													<textarea rows="10" cols="100" name="content" id="content"
-														class="form-control" style="width: 100%; height: 482px">${trailboardupdate.content}</textarea>
+													<textarea rows="10" cols="100" name="content" id="content" class="form-control" 
+													style="width: 100%; height: 482px" required>${trailboardupdate.content}</textarea>
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="text-center">
-													<input type="button" id="updatebtn" class="btn btn-black" value="수정" /> 
-													<a class="btn btn-black" href="/bikelong/trailpathboard/detail.action?boardNo=${trailboardupdate.boardNo}">취소</a>
-													<input class="form-control" type="hidden" name="boardNo" value="${trailboardupdate.boardNo}" >
+													<input type="button" id="savebtn" class="btn btn-black" value="수정"/>
+													<input type="button" id="cencel" class="btn btn-black" value="취소"/>
 												</div>
 											</div>
 										</div>

@@ -11,12 +11,11 @@
 <meta name="author" content="" />
 <title>자전거 산책로 상세정보</title>
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script type="text/javascript"
-	src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 </head>
 <script type="text/javascript">
 	$(function() {
-		$('#noticeDelete').on('click',function(){
+		$('#trailDelete').click(function(){
 			event.preventDefault();
 			var check = confirm('정말 삭제 하시겠습니까?');
 			if(check){
@@ -194,16 +193,18 @@
 											</div>
 										</div>
 										<div class="col-md-12">
-											<div class="text-center">
-												<a class="btn btn-black"
-													href="/bikelong/trailpathboard/list.action">목록보기</a>
-												<c:if
-													test="${loginuser.id eq 'manager' && loginuser ne null}">
+											<div class="col-md-12">
+												<div class="text-center">
 													<a class="btn btn-black"
-														href="/bikelong/trailpathboard/update.action?boardNo=${trailBoarddetail.boardNo}">수정</a>
-													<a class="btn btn-black"
-														href="/bikelong/trailpathboard/delete.action?boardNo=${trailBoarddetail.boardNo}&pageNo=${ pageNo }">삭제</a>
-												</c:if>
+														href="/bikelong/trailpathboard/list.action?pageno=${pageno}">목록보기</a>
+													<c:if
+														test="${loginuser.id eq 'manager' && loginuser ne null}">
+														<a class="btn btn-black"
+															href="/bikelong/trailpathboard/update.action?boardNo=${trailBoarddetail.boardNo}
+															&pageno=${pageno}">수정</a>
+														<a class="btn btn-black" id="trailDelete" href="#">삭제</a>
+													</c:if>
+												</div>
 											</div>
 										</div>
 									</div>
