@@ -315,6 +315,10 @@ body.noscroll {
     margin-right: 15px;
 }
 
+#signIn_signUp{
+	float: right;
+}
+
 /*------------------------------------------------------------------
 [Typography]
 */
@@ -2512,7 +2516,10 @@ button {
     }
 }
 
-@media (max-width: 991px) {
+@media (max-width: 1350px) {
+	
+	#signIn_signUp{float: none;}
+	
     .top-bar {
         display: none;
     }
