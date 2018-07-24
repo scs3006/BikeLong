@@ -35,7 +35,7 @@
 			}
 		});
 		//전송버튼
-		$("#savebtn").on('click',function(event) {
+		$("#savebtn").click(function(event) {
 			event.preventDefault();
 			obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 			//폼 submit
@@ -70,18 +70,31 @@
 </head>
 
 <body>
-
 	<!-- Preloader-->
 	<div class="page-loader">
 		<div class="loader"></div>
 	</div>
 	<!-- Preloader end-->
-
 	<!-- Header-->
-	<jsp:include page="/WEB-INF/views/include/header.jsp" />
+	<jsp:include page="/WEB-INF/views/include/header.jsp" /><br/><br/><br/>
 	<!-- Header end-->
-
-	<!-- ========================================================================================================= -->
+	<!-- Page Header-->
+	<section class="module-page-title">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-md-6">
+					<h1 class="page-title-heading">자전거 산책로 - 글쓰기</h1>
+				</div>
+				<div class="col-md-6">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="/bikelong/index.action">Home</a></li>
+						<li class="breadcrumb-item active"><a href="/bikelong/trailpathboard/list.action">Trail Board</a></li>
+						<li class="breadcrumb-item active">Trail Write</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
 	<!-- Wrapper-->
 	<div class="wrapper">
 		<section class="module">
