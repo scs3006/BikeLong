@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +20,12 @@
 <script type="text/javascript">
 	$(function() {
 		//전역변수
+		var array = new Array();
+		array[0] = new Array();
+		array[1] = new Array();
+		var mainsize;
 		var obj = [];
+		
 		//스마트에디터 프레임생성
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef : obj,
@@ -37,27 +43,50 @@
 		//전송버튼
 		$("#savebtn").on('click',function(event) {
 			event.preventDefault();
+			if($('input:radio[name=history]').is(':checked')){
+				
 			obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 			//폼 submit
 			$("#frm").submit();
+			}else alert("경로를 선택해주세요.");
 		});
+
 		
-		$("#gpsbtn").on('click',function(event){
-        	event.preventDefault();
-        	 
-        	var data = { "historyTime" : $('#findHistory').val() };
-        	$.ajax({
-				url : "/bikelong/route/gpsfind.action",
-				method : "GET",
-				data : data,
-				success : function(data,status,xhr){
-						alert('성공하셨습니다.');
-				},
-				error : function(xhr, status, err){
-					alert('실패하셨습니다.');
-				}
-			});
-        });
+			$("#gpsbtn").on('click',function(event){
+	        	event.preventDefault();
+	        	
+	        	var startTime = $("input:radio[name=history]:checked").attr('data-startTime');
+	        	var endTime = $("input:radio[name=history]:checked").attr('data-endTime');
+	        	var data = { "startTime" : startTime , "endTime" : endTime };
+	        	
+	        	$.ajax({
+					url : "/bikelong/route/gpsfind.action",
+					method : "GET",
+					data : data,
+					success : function(data,status,xhr){
+						var size = data.length;	
+						mainsize = size;
+						
+						for(var i = 0; i < size; i++){
+							array[i][0] = data[i].latitude;
+							array[i][1] = data[i].longitude;
+						}
+						
+						var poly = 
+					    	for(int i=0; i<mainsize-1; i++){
+					    		new naver.maps.LatLng(array[i][0], array[i][1]),
+					    	}
+					    	new naver.maps.LatLng( array[mainsize-1][0], array[mainsize-1][1])
+					    ;
+						
+					},
+					error : function(xhr, status, err){
+						alert('실패하셨습니다.');
+					}
+				});
+	        	
+	        });
+
 		
 	});
 </script>
@@ -167,13 +196,14 @@
 														placeholder="제목" required>
 												</div>
 											</div>
-											<div class="col-md-12">
+											<div class="col-md-12" id="his">
 											<h6>경로 목록 선택</h6> 
 													<c:forEach var="h" items="${history}">
-														<select class="select form-control" name="history" id="findHistory">
-														<option id="${h.historyNo}" value="${h.startTime}/${h.endTime}">
-														출발시간 : ${h.startTime} / 도착시간 : ${h.endTime}</option>
-														</select>
+														<fmt:formatDate value="${h.startTime}" var="startTime" pattern="yyyy-MM-dd hh:mm:ss"/>
+														<fmt:formatDate value="${h.endTime}" var="endTime" pattern="yyyy-MM-dd hh:mm:ss"/>
+														<input type="radio" class="select form-control" id="${h.historyNo}" name="history" 
+														value="${h.historyNo}" data-startTime="${startTime}" data-endTime="${endTime}">
+														출발시간 : ${startTime} / 도착시간 : ${endTime}<br>
 												    </c:forEach>
 												     <input type="button" id="gpsbtn" value="경로 찾기">
 											</div>
@@ -183,27 +213,25 @@
 														<div id="map" style="width:100%;height:550px;"></div>
 														<script>
 														var map = new naver.maps.Map('map', {
-														    center: new naver.maps.LatLng(37.4820108, 126.8980968),
+														    center: new naver.maps.LatLng(array[0][0] , array[0][1]),
 														    zoom: 10
 														});
 														
 														var polyline = new naver.maps.Polyline({
 														    map: map,
-														    path: [
-														    	
-														        new naver.maps.LatLng(37.359924641705476, 127.1148204803467),
-														        new naver.maps.LatLng(37.36343797188166, 127.11486339569092),
-														        new naver.maps.LatLng(37.37530703574853, 127.12190151214598),
-														        new naver.maps.LatLng(37.371657839593894, 127.11645126342773),
-														        new naver.maps.LatLng(37.36855417793982, 127.1207857131958)
-														    ],
+														    path: [poly],
 														    strokeStyle: 'solid',
 														    strokeColor: '#5347AA',
 														    strokeWeight: 5
 														});
 														
 														var marker = new naver.maps.Marker({
-														    position: new naver.maps.LatLng(37.359924641705476, 127.1148204803467),
+														    position: new naver.maps.LatLng( array[0][0] , array[0][1] ),
+														    map: map
+														});
+														
+														var marker = new naver.maps.Marker({
+														    position: new naver.maps.LatLng( array[mainsize-1][0] , array[mainsize-1][1] ),
 														    map: map
 														});
 														</script>
@@ -224,11 +252,6 @@
 												</div>
 											</div>
 										</div>
-									</form>
-									<form action="">
-										<input type="hidden" name="" value="${history.historyNo}">
-										<input type="hidden" name="" value="${history.startTime}">
-										<input type="hidden" name="" value="${history.endTime}">
 									</form>
 								</div>
 							</div>

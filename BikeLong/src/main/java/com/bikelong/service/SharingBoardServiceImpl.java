@@ -51,9 +51,8 @@ public class SharingBoardServiceImpl implements SharingBoardService {
 	}
 
 	@Override
-	public List<History> gpsfind(History history) {
-		List<History> histories = sharingBoardDao.selectgps(history);
-		return histories;
+	public List<History> gpsfind(String startTime, String endTime) {
+		return sharingBoardDao.selectgps(startTime,endTime);
 	}
 
 

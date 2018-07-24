@@ -1,10 +1,12 @@
 package com.bikelong.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.bikelong.mapper.SharingBoardMapper;
 import com.bikelong.vo.History;
 import com.bikelong.vo.SharingBoard;
+import com.sun.tools.sjavac.server.SysInfo;
 
 public class MySqlSharingBoardDao implements SharingBoardDao {
 	
@@ -52,11 +54,12 @@ public class MySqlSharingBoardDao implements SharingBoardDao {
 		return history;
 	}
 
-
 	@Override
-	public List<History> selectgps(History history) {
-		List<History> histories = sharingBoardMapper.selectgps(history);
-		return histories;
+	public List<History> selectgps(String startTime, String endTime) {
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("startTime", startTime);
+		params.put("endTime", endTime);
+		return sharingBoardMapper.selectgps(params);
 	}
 
 

@@ -19,7 +19,7 @@ public interface SharingBoardDao {
 
 	List<History> selectHistory(String id);
 
-	List<History> selectgps(History history);
+	List<History> selectgps(String startTime, String endTime);
 
 
 
