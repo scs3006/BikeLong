@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,7 +41,9 @@ public class SharingBoardController {
 		List<SharingBoard> sharingBoardLists = sharingBoarService.findBoardList();
 		for (SharingBoard sharingBoard : sharingBoardLists) {
 			String [] imagepath = sharingBoard.getContent().split("photoupload/", 40);
-			sharingBoard.setImageName((String) imagepath[1].subSequence(0, 40));
+			if(imagepath.length>1) {
+				sharingBoard.setImageName((String) imagepath[1].subSequence(0, 40));
+			}
 		}
 		model.addAttribute("sharingBoardLists", sharingBoardLists);
 		return "sharingboard/sharingboardlist";
@@ -113,15 +116,12 @@ public class SharingBoardController {
 	@RequestMapping(value = "gpsfind.action", method = RequestMethod.GET)
 	@ResponseBody
 	public List<History> gpsfind(String startTime, String endTime) {
-		
-		System.out.println(startTime);
-		System.out.println(endTime);
-		
 		List<History> histories = sharingBoarService.gpsfind(startTime,endTime);
-		
+		for(History h : histories) {
+			System.out.println(h.getLatitude());
+			System.out.println(h.getLongitude());
+		}
 		return histories;
 	}
-	
-	
-	
+		
 }

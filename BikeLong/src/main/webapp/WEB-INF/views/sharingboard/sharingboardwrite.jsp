@@ -24,8 +24,8 @@
 		array[0] = new Array();
 		array[1] = new Array();
 		var mainsize;
-		var obj = [];
 		
+		var obj = [];
 		//스마트에디터 프레임생성
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef : obj,
@@ -43,54 +43,73 @@
 		//전송버튼
 		$("#savebtn").on('click',function(event) {
 			event.preventDefault();
-			if($('input:radio[name=history]').is(':checked')){
-				
-			obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-			//폼 submit
-			$("#frm").submit();
-			}else alert("경로를 선택해주세요.");
+			if($('input:radio[name=history]').is(':checked') && $('input:radio[name=history]').val()!=null){
+				obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+				$("#frm").submit();	//폼 submit
+			}else alert("경로가 선택되지 않았거나 경로가 존재하지 않습니다.");
 		});
 
-		
-			$("#gpsbtn").on('click',function(event){
-	        	event.preventDefault();
-	        	
-	        	var startTime = $("input:radio[name=history]:checked").attr('data-startTime');
-	        	var endTime = $("input:radio[name=history]:checked").attr('data-endTime');
-	        	var data = { "startTime" : startTime , "endTime" : endTime };
-	        	
-	        	$.ajax({
-					url : "/bikelong/route/gpsfind.action",
-					method : "GET",
-					data : data,
-					success : function(data,status,xhr){
-						var size = data.length;	
-						mainsize = size;
-						
-						for(var i = 0; i < size; i++){
-							array[i][0] = data[i].latitude;
-							array[i][1] = data[i].longitude;
-						}
-						
-						 var point = e.latlng;
-
-						var poly = 
-					    	for(int i=0; i<mainsize-1; i++){
-					    		new naver.maps.LatLng(array[i][0], array[i][1]),
-					    	}
-					    	new naver.maps.LatLng( array[mainsize-1][0], array[mainsize-1][1]);
-					    	
-					    var path = polyline.getPath();
+		$("#gpsbtn").on('click',function(event){
+        	event.preventDefault();
+        	
+        	var startTime = $("input:radio[name=history]:checked").attr('data-startTime');
+        	var endTime = $("input:radio[name=history]:checked").attr('data-endTime');
+        	var parameter = { "startTime" : startTime , "endTime" : endTime };
+        	
+        	$.ajax({
+				url : "/bikelong/route/gpsfind.action",
+				method : "GET",
+				data : parameter,
+				success : function(data,status,xhr){
+					alert('성공');
+					var size = data.length;	
+					var point;
+					var path = polyline.getPath();
+					for(var i = 0; i < size; i++){
+						alert(''+data[i].latitude+'/'+data[i].longitude);
+						point = new naver.maps.LatLng(data[i].latitude, data[i].longitude); 
 						path.push(point);
-						
-					},
-					error : function(xhr, status, err){
-						alert('실패하셨습니다.');
+						new naver.maps.Marker({
+					        map: map,
+					        position: point
+					    });
 					}
-				});
-	        	
-	        });
+				},
+				error : function(xhr, status, err){
+					alert('실패하셨습니다.');
+				}
+			});
+        });
+		
+		
+		var map = new naver.maps.Map('map', {
+		    center: new naver.maps.LatLng(37.3700065 , 127.121359),
+		    zoom: 10,
+		    mapTypeControl: true,
+		    mapTypeControlOptions: {
+		        style: naver.maps.MapTypeControlStyle.DROPDOWN
+		    }
+		});
+		
+		var bicycleLayer = new naver.maps.BicycleLayer();
 
+		naver.maps.Event.addListener(map, 'bicycleLayer_changed', function(bicycleLayer) {
+		    if (bicycleLayer) {
+		        btn.addClass('control-on');
+		    } else {
+		        btn.removeClass('control-on');
+		    }
+		});
+
+		bicycleLayer.setMap(map);
+
+		var polyline = new naver.maps.Polyline({
+		    map: map,
+		    path: [],
+		    strokeStyle: 'solid',
+		    strokeColor: '#5347AA',
+		    strokeWeight: 5
+		});
 		
 	});
 </script>
@@ -201,13 +220,17 @@
 												</div>
 											</div>
 											<div class="col-md-12" id="his">
-											<h6>경로 목록 선택</h6> 
+											<h5>경로 목록 선택 (선택 필수)</h5> 
 													<c:forEach var="h" items="${history}">
-														<fmt:formatDate value="${h.startTime}" var="startTime" pattern="yyyy-MM-dd hh:mm:ss"/>
-														<fmt:formatDate value="${h.endTime}" var="endTime" pattern="yyyy-MM-dd hh:mm:ss"/>
-														<input type="radio" class="select form-control" id="${h.historyNo}" name="history" 
-														value="${h.historyNo}" data-startTime="${startTime}" data-endTime="${endTime}">
-														출발시간 : ${startTime} / 도착시간 : ${endTime}<br>
+														<fmt:formatDate value="${h.startTime}" var="startTime" pattern="yyyy-MM-dd HH:mm:ss"/>
+														<fmt:formatDate value="${h.endTime}" var="endTime" pattern="yyyy-MM-dd HH:mm:ss"/>
+														<table>
+															<tr>
+																<td>출발시간 : ${startTime} / 도착시간 : ${endTime}</td>
+																<td><input type="radio" class="select form-control" id="${h.historyNo}" name="history" 
+														value="${h.historyNo}" data-startTime="${startTime}" data-endTime="${endTime}" style="width: 15px;height: 15px"><br></td>
+															</tr>
+														</table>
 												    </c:forEach>
 												     <input type="button" id="gpsbtn" value="경로 찾기">
 											</div>
@@ -215,28 +238,6 @@
 												<div class="form-group">
 													<div class="post-preview">
 														<div id="map" style="width:100%;height:550px;"></div>
-														<script>
-														var map = new naver.maps.Map('map', {
-														    center: new naver.maps.LatLng(37.3700065 , 127.121359),
-														    zoom: 10
-														});
-														
-														var polyline = new naver.maps.Polyline({
-														    map: map,
-														    path: [
-														    	new naver.maps.LatLng(37.3700065 , 127.121359),
-														    	new naver.maps.LatLng(37.3700065 , 126.121359)
-														    ],
-														    strokeStyle: 'solid',
-														    strokeColor: '#5347AA',
-														    strokeWeight: 5
-														});
-														
-														var marker = new naver.maps.Marker({
-														    position: new naver.maps.LatLng( 37.3700065 , 127.121359 ),
-														    map: map
-														});
-														</script>
 													</div>
 												</div>
 											</div>
