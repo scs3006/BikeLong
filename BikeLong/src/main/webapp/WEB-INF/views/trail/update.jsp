@@ -14,55 +14,31 @@
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript">
-    $(function(){
-       //전역변수
-        var obj = [];              
-        //스마트에디터 프레임생성
-        nhn.husky.EZCreator.createInIFrame({
-            oAppRef: obj,
-            elPlaceHolder: "content",
-            sSkinURI: "/bikelong/resources/editor/SmartEditor2Skin.html",
-            htParams : {
-                // 툴바 사용 여부
-                bUseToolbar : true,            
-                // 입력창 크기 조절바 사용 여부
-                bUseVerticalResizer : true,    
-                // 모드 탭(Editor | HTML | TEXT) 사용 여부
-                bUseModeChanger : true,
-            }
-        });
-        
-        //전송버튼
-        $("#savebtn").click(function(event){
-        	event.preventDefault();
-        	obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-        	
-        	var queryString =  $("#frm").serialize();
-        	$.ajax({
-				url : "update.action",
-				method : "POST",
-				data : queryString,
-				success : function(data,status,xhr){
-					if(data=="success"){
-						alert('게시글 수정에 성공하셨습니다.');
-						location.href = '/bikelong/trailpathboard/detail.action?boardNo='+${trailboardupdate.boardNo}+'&pageno=${pageno}';
-					}
-					if(data=="fail"){
-						alert('게시글 수정에 실패하셨습니다.');
-						return;
-					}
-				},
-				error : function(xhr, status, err){
-					alert('게시글 수정에 실패하셨습니다.');
-					return;
-				}
-			});
-        }); 
-        
-        $('#cencel').on("click",function(){
-			location.href="/bikelong/trailpathboard/detail.action?boardNo="+${trailboarddetail.boardNo};
-		})		
-    });
+$(function() {
+	//전역변수
+	var obj = [];
+	//스마트에디터 프레임생성
+	nhn.husky.EZCreator.createInIFrame({
+		oAppRef : obj,
+		elPlaceHolder : "content",
+		sSkinURI : "/bikelong/resources/editor/SmartEditor2Skin.html",
+		htParams : {
+			// 툴바 사용 여부
+			bUseToolbar : true,
+			// 입력창 크기 조절바 사용 여부
+			bUseVerticalResizer : true,
+			// 모드 탭(Editor | HTML | TEXT) 사용 여부
+			bUseModeChanger : true,
+		}
+	});
+	//전송버튼
+	$("#updatebtn").click(function(event) {
+		event.preventDefault();
+		obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+		//폼 submit
+		$("#frm").submit();
+	});
+});
 </script>
 
 <!-- Favicons-->
@@ -111,7 +87,8 @@
 						<li class="breadcrumb-item"><a href="/bikelong/index.action">Home</a></li>
 						<li class="breadcrumb-item active"><a href="/bikelong/trailpathboard/list.action">Trail Board</a></li>
 						<li class="breadcrumb-item active">
-							<a href="/bikelong/trailpathboard/detail.action?boardNo=${trailBoarddetail.boardNo}&pageno=${pageno}">Trail Detail</a>
+							<a href="/bikelong/trailpathboard/detail.action?boardNo=
+							${trailBoard.boardNo}&pageno=${pageno}">Trail Detail</a>
 						</li>
 						<li class="breadcrumb-item active">Trail Update</li>
 					</ol>
@@ -127,11 +104,6 @@
 					<div class="col-lg-11 m-auto">
 						<!-- Post-->
 						<article class="post">
-
-							<div class="post-preview">
-								<!--  -->
-							</div>
-
 							<div class="row">
 								<div class="col-md-12">
 									<form action="/bikelong/trailpathboard/update.action"
@@ -141,19 +113,19 @@
 											<div class="col-md-6">
 												<div class="form-group">
 													<input class="form-control" type="text" name="id"
-														value="${trailboardupdate.id}" readonly>
+														value="${trailBoard.id}" readonly>
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
 													<input class="form-control" type="date" name="date"
-														value="${trailboardupdate.date}">
+														value="${trailBoard.date}">
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="form-group">
-												<input type="hidden" name="defaultLocationNo" value="${trailboardupdate.locationNo}">
-													<p>지역 : ${trailboardupdate.locationName}</p>
+												<input type="hidden" name="defaultLocationNo" value="${trailBoard.locationNo}">
+													<p>지역 : ${trailBoard.locationName}</p>
 													<select class="select form-control" name="locationNo">
 														<option value="0">지역 변경 없음</option>
 														<option value="1">강남구</option>
@@ -186,19 +158,21 @@
 											</div>
 											<div class="col-md-12">
 												<div class="form-group">
-													<input class="form-control" type="text" name="title" value="${trailboardupdate.title}" required>
+													<input class="form-control" type="text" name="title"
+														value="${trailBoard.title}">
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="form-group">
-													<textarea rows="10" cols="100" name="content" id="content" class="form-control" 
-													style="width: 100%; height: 482px" required>${trailboardupdate.content}</textarea>
+													<textarea rows="10" cols="100" name="content" id="content"
+														class="form-control" style="width: 100%; height: 482px">${trailBoard.content}</textarea>
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="text-center">
-													<input type="button" id="savebtn" class="btn btn-black" value="수정"/>
-													<input type="button" id="cencel" class="btn btn-black" value="취소"/>
+													<input type="button" id="updatebtn" class="btn btn-black" value="수정" /> 
+													<a class="btn btn-black" href="/bikelong/trailpathboard/detail.action?boardNo=${trailBoard.boardNo}">취소</a>
+													<input class="form-control" type="hidden" name="boardNo" value="${trailBoard.boardNo}" >
 												</div>
 											</div>
 										</div>

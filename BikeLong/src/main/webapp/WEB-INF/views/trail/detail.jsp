@@ -1,49 +1,54 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>자전거 산책로 상세정보</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<title>Tavern - Responsive Restaurant Template(Bootstrap 4)</title>
+
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript"
+	src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript"
+	src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=XkRO5MabQSh96y9c_kCn&submodules=geocoder"></script>
 </head>
 <script type="text/javascript">
-	$(function() {
-		$('#trailDelete').click(function(){
-			event.preventDefault();
-			var check = confirm('정말 삭제 하시겠습니까?');
-			if(check){
-				$.ajax({
-					url : "/bikelong/trailpathboard/delete.action",
-					method : "GET",
-					data : {"boardNo" : ${trailBoarddetail.boardNo}},
-					success : function(data,status,xhr){
-						if(data=="success"){
-							alert('삭제되었습니다.');
-							location.href = 'list.action';
-						}
-						if(data=="fail"){
-							alert('삭제에 실패하였습니다.');
-						}
-					},
-					error : function(xhr, status, err){
+$(function() {
+	$('#traildelete').click(function(){
+		event.preventDefault();
+		var check = confirm('정말 삭제 하시겠습니까?');
+		if(check){
+			$.ajax({
+				url : "/bikelong/trailpathboard/delete.action",
+				method : "GET",
+				data : {"boardNo" : ${trailBoarddetail.boardNo}},
+				success : function(data,status,xhr){
+					if(data=="success"){
+						alert('삭제되었습니다.');
+						location.href = 'list.action';
+					}
+					if(data=="fail"){
 						alert('삭제에 실패하였습니다.');
 					}
-				});	
-			}else{
-				return;
-			}
-		});
-		
+				},
+				error : function(xhr, status, err){
+					alert('삭제에 실패하였습니다.');
+				}
+			});	
+		}else{
+			return;
+		}
+	});
+	
+	$(function() {
 		$("#replySubmit").click(function(event){
         	event.preventDefault();
-        	
         	if(!($('#frm input[name=id]').val())){ // null or '' check!
     			var value = confirm('로그인이 필요한 서비스입니다. 로그인 할까요?');
     			if(value){
@@ -51,12 +56,10 @@
     			}
     			return;
     		}
-        	
         	if($('#frm textarea').val().length == 0){
     			alert('댓글 내용을 입력하세요.');
     			return;
     		}
-        	
         	var queryString =  $("#frm").serialize();
         	$.ajax({
 				url : "/bikelong/reply/insert.action",
@@ -79,30 +82,32 @@
 				}
 			});
         });
-		
-		$('div#comments').on('click', 'a.deleteReply',function(event){
-			event.preventDefault();
-			var replyNo = $(this).attr('data-replyNo');
-			$.ajax({
-				url : "/bikelong/reply/delete.action",
-				method : "GET",
-				data : {'replyNo' : replyNo},
-				success : function(data,status,xhr){
-					if(data=="success"){
-						alert('댓글 삭제에 성공하셨습니다.');
-						location.href="/bikelong/trailpathboard/detail.action?boardNo=${trailBoarddetail.boardNo}";
-					}
-					if(data=="fail"){
+		$('.deleteReply').each(function(idx){
+			$(this).on('click',function(event){
+				event.preventDefault();
+				var replyNo = $(this).attr('data-replyNo');
+				$.ajax({
+					url : "/bikelong/reply/delete.action",
+					method : "GET",
+					data : {'replyNo' : replyNo},
+					success : function(data,status,xhr){
+						if(data=="success"){
+							alert('댓글 삭제에 성공하셨습니다.');
+							location.href="/bikelong/trailpathboard/detail.action?boardNo=${trailBoarddetail.boardNo}";
+						}
+						if(data=="fail"){
+							alert('댓글 삭제에 실패하셨습니다.');
+							return;
+						}
+					},
+					error : function(xhr, status, err){
 						alert('댓글 삭제에 실패하셨습니다.');
 						return;
 					}
-				},
-				error : function(xhr, status, err){
-					alert('댓글 삭제에 실패하셨습니다.');
-					return;
-				}
+				});
 			});
 		});
+		
 	});
 </script>
 <!-- Favicons-->
@@ -131,31 +136,36 @@
 </head>
 
 <body>
-<!-- Preloader-->
+	<!-- Preloader-->
 	<div class="page-loader">
 		<div class="loader"></div>
 	</div>
 	<!-- Preloader end-->
 	<!-- Header-->
-	<jsp:include page="/WEB-INF/views/include/header.jsp" /><br/><br/><br/>
+	<jsp:include page="/WEB-INF/views/include/header.jsp" /><br />
+	<br />
+	<br />
 	<!-- Header end-->
 	<!-- Page Header-->
-	<section class="module-page-title">
-		<div class="container">
-			<div class="row align-items-center">
-				<div class="col-md-6">
-					<h1 class="page-title-heading">자전거 산책로 - 글 상세보기</h1>
-				</div>
-				<div class="col-md-6">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="/bikelong/index.action">Home</a></li>
-						<li class="breadcrumb-item active"><a href="/bikelong/trailpathboard/list.action">Trail Board</a></li>
-						<li class="breadcrumb-item active">Trail Write</li>
-					</ol>
+	<div>
+		<section class="module-page-title">
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-md-6">
+						<h1 class="page-title-heading">자전거 산책로</h1>
+					</div>
+					<div class="col-md-6">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="/bikelong/index.action">Home</a></li>
+							<li class="breadcrumb-item active">
+							<a href="/bikelong/trailpathboard/list.action">Trail Board</a></li>
+							<li class="breadcrumb-item active">Trail Detril</li>
+						</ol>
+					</div>
 				</div>
 			</div>
-		</div>
-	</section>
+			</section>
+	<!-- ========================================================================================================= -->
 	<!-- Wrapper-->
 	<div class="wrapper">
 		<section class="module">
@@ -164,53 +174,41 @@
 					<div class="col-lg-11 m-auto">
 						<!-- Post-->
 						<article class="post">
-
-							<div class="post-preview">
-								<!--  -->
-							</div>
-
 							<div class="row">
 								<div class="col-md-12">
-									<div class="row">
-										<div class="col-md-12">
-											<div class="form-group">제목 : ${trailBoarddetail.title}</div>
-										</div>
-										<div class="col-md-12">
-											<div class="form-group">글쓴이 : ${trailBoarddetail.id}</div>
-										</div>
-										<div class="col-md-12">
-											<div class="form-group">작성일 : ${trailBoarddetail.date}
-											</div>
-										</div>
-										<div class="col-md-12">
-											<div class="form-group">
-												해당 지역 : ${trailBoarddetail.locationName} <br /> <br />
-											</div>
-										</div>
-										<div class="col-md-12">
-											<div class="form-group">
-												${trailBoarddetail.content} <br /> <br />
-											</div>
-										</div>
-										<div class="col-md-12">
-											<div class="col-md-12">
-												<div class="text-center">
-													<a class="btn btn-black"
-														href="/bikelong/trailpathboard/list.action?pageno=${pageno}">목록보기</a>
-													<c:if
-														test="${loginuser.id eq 'manager' && loginuser ne null}">
-														<a class="btn btn-black"
-															href="/bikelong/trailpathboard/update.action?boardNo=${trailBoarddetail.boardNo}
-															&pageno=${pageno}">수정</a>
-														<a class="btn btn-black" id="trailDelete" href="#">삭제</a>
-													</c:if>
-												</div>
-											</div>
+									<table class="table table-bordered">
+										<tr>
+											<td>제목</td>
+											<td colspan="4">${trailBoarddetail.title}</td>
+										</tr>
+										<tr>
+											<td>글쓴이</td>
+											<td>${trailBoarddetail.id}</td>
+											<td>작성일</td>
+											<td>${trailBoarddetail.date}</td>
+										</tr>
+										<tr>
+											<td>해당 지역</td>
+											<td colspan="4">${trailBoarddetail.locationName}</td>
+										</tr>
+									</table>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">${trailBoarddetail.content}</div>
+								</div>
+									<div class="col-md-12">
+										<div class="text-center">
+											<hr />
+											<a class="btn btn-black"
+												href="/bikelong/trailpathboard/list.action">목록보기</a>
+											<c:if test="${loginuser.id eq 'manager' && loginuser ne null}">
+												<a class="btn btn-black" href="/bikelong/trailpathboard/update.action?boardNo=
+												${trailBoarddetail.boardNo}&pageno=${pageno}">수정</a>
+												<a class="btn btn-black" id="traildelete" href="#">삭제</a>
+											</c:if>
 										</div>
 									</div>
 								</div>
-
-							</div>
 						</article>
 						<!-- Post end-->
 						<!-- Comments area-->
@@ -252,7 +250,6 @@
 							</div>
 							<div class="comment-respond">
 								<h5 class="comment-reply-title">댓글 쓰기</h5>
-
 								<form id="frm" class="comment-form row">
 									<input class="form-control" type="hidden" name="id"
 										value="${loginuser.id}"> <input class="form-control"
@@ -269,12 +266,11 @@
 								</form>
 							</div>
 						</div>
-						<!-- Comments area end-->
 					</div>
 				</div>
 			</div>
 		</section>
-
+	</div>
 		<svg class="footer-circle" xmlns="http://www.w3.org/2000/svg"
 			version="1.1" width="100%" height="100" viewbox="0 0 100 100"
 			preserveaspectratio="none">
@@ -284,82 +280,8 @@
 		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 		<!-- Footer end-->
 	</div>
-	<!-- Wrapper end-->
-
-	<!-- Off canvas-->
-	<div class="off-canvas-sidebar"
-		data-background="/bikelong/resources/assets/images/sidebar.jpg">
-		<div class="off-canvas-sidebar-wrapper">
-			<div class="off-canvas-header">
-				<a class="close-offcanvas" href="#"><span
-					class="arrows arrows-arrows-remove"></span></a>
-			</div>
-			<div class="off-canvas-content">
-				<!-- Text widget-->
-				<aside class="widget widget_text">
-					<div class="textwidget">
-						<p>
-							<img src="/bikelong/resources/assets/images/logo-light.png"
-								width="74px" alt="">
-						</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-							sed do eiusmod tempor.</p>
-						<ul class="icon-list">
-							<li><i class="ti-email"></i> info@themebusiness.com</li>
-							<li><i class="ti-headphone-alt"></i> 1-444-123-4559</li>
-							<li><i class="ti-location-pin"></i> Raymond Boulevard 224,
-								New York</li>
-						</ul>
-					</div>
-				</aside>
-				<!-- Recent portfolio widget-->
-				<aside class="widget widget_recent_works">
-					<div class="widget-title">
-						<h5>Instagram</h5>
-					</div>
-					<ul>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/1.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/2.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/3.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/4.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/5.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/6.jpg" alt=""></a></li>
-					</ul>
-				</aside>
-
-				<!-- Twitter widget-->
-				<aside class="widget twitter-feed-widget">
-					<div class="widget-title">
-						<h5>Twitter Feed</h5>
-					</div>
-					<div class="twitter-feed" data-twitter="345170787868762112"
-						data-number="2"></div>
-				</aside>
-				<ul class="social-icons">
-					<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-					<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-					<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-					<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-					<li><a href="#"><i class="fa fa-vk"></i></a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<!-- Off canvas end-->
-
-
-
-	<!-- Reserve Popup end-->
-
 	<!-- To top button-->
 	<a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
-
 	<!-- Scripts-->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
