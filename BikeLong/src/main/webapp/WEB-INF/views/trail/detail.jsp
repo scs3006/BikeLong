@@ -16,14 +16,14 @@
 </head>
 <script type="text/javascript">
 	$(function() {
-		$('#noticeDelete').on('click',function(){
+		$('#trailDelete').on('click',function(){
 			event.preventDefault();
 			var check = confirm('정말 삭제 하시겠습니까?');
 			if(check){
 				$.ajax({
-					url : "/bikelong/trailpathboard/delete.action",
+					url : "delete.action",
 					method : "GET",
-					data : {"boardNo" : ${trailBoarddetail.boardNo}},
+					data : {"boardNo" : ${board.boardNo}},
 					success : function(data,status,xhr){
 						if(data=="success"){
 							alert('삭제되었습니다.');
@@ -91,7 +91,7 @@
 				success : function(data,status,xhr){
 					if(data=="success"){
 						alert('댓글 삭제에 성공하셨습니다.');
-						location.href="/bikelong/trailpathboard/detail.action?boardNo=${trailBoarddetail.boardNo}";
+						location.href="/bikelong/noticeboard/detail.action?boardNo=${board.boardNo}";
 					}
 					if(data=="fail"){
 						alert('댓글 삭제에 실패하셨습니다.');
@@ -174,36 +174,39 @@
 								<div class="col-md-12">
 									<div class="row">
 										<div class="col-md-12">
-											<div class="form-group">제목 : ${trailBoarddetail.title}</div>
+											<table class="table table-bordered" style="text-align: center;">
+												<tr>
+													<td>제목</td>
+													<td colspan="4">${trailBoarddetail.title}</td>
+												</tr>
+												<tr>
+													<td>작 성 자</td>
+													<td>${trailBoarddetail.id}</td>
+													<td>작 성 일</td>
+													<td>${trailBoarddetail.date}</td>
+												</tr>
+												<tr>
+													<td>해당 지역</td>
+													<td colspan="4">${trailBoarddetail.locationName}</td>
+												</tr>
+												<tr>
+												 	 <td colspan="4" style="width:100%;height:550px;text-align: left;">${trailBoarddetail.content}</td>
+												 </tr>
+											</table>
 										</div>
 										<div class="col-md-12">
-											<div class="form-group">글쓴이 : ${trailBoarddetail.id}</div>
-										</div>
-										<div class="col-md-12">
-											<div class="form-group">작성일 : ${trailBoarddetail.date}
-											</div>
-										</div>
-										<div class="col-md-12">
-											<div class="form-group">
-												해당 지역 : ${trailBoarddetail.locationName} <br /> <br />
-											</div>
-										</div>
-										<div class="col-md-12">
-											<div class="form-group">
-												${trailBoarddetail.content} <br /> <br />
-											</div>
-										</div>
-										<div class="col-md-12">
-											<div class="text-center">
-												<a class="btn btn-black"
-													href="/bikelong/trailpathboard/list.action">목록보기</a>
-												<c:if
-													test="${loginuser.id eq 'manager' && loginuser ne null}">
+											<div class="col-md-12">
+												<div class="text-center">
 													<a class="btn btn-black"
-														href="/bikelong/trailpathboard/update.action?boardNo=${trailBoarddetail.boardNo}">수정</a>
-													<a class="btn btn-black"
-														href="/bikelong/trailpathboard/delete.action?boardNo=${trailBoarddetail.boardNo}&pageNo=${ pageNo }">삭제</a>
-												</c:if>
+														href="/bikelong/trailpathboard/list.action?pageno=${pageno}">목록보기</a>
+													<c:if
+														test="${loginuser.id eq 'manager' && loginuser ne null}">
+														<a class="btn btn-black"
+															href="/bikelong/trailpathboard/update.action?boardNo=${trailBoarddetail.boardNo}
+															&pageno=${pageno}">수정</a>
+														<a class="btn btn-black" id="trailDelete" href="#">삭제</a>
+													</c:if>
+												</div>
 											</div>
 										</div>
 									</div>
