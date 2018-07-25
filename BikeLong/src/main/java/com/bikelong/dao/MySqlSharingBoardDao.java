@@ -58,6 +58,8 @@ public class MySqlSharingBoardDao implements SharingBoardDao {
 		HashMap<String, Object> params = new HashMap<>();
 		params.put("startTime", startTime);
 		params.put("endTime", endTime);
+		System.out.println(startTime);
+		System.out.println(endTime);
 		return sharingBoardMapper.selectgps(params);
 	}
 
