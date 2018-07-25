@@ -87,7 +87,8 @@ $(function() {
 						<li class="breadcrumb-item"><a href="/bikelong/index.action">Home</a></li>
 						<li class="breadcrumb-item active"><a href="/bikelong/trailpathboard/list.action">Trail Board</a></li>
 						<li class="breadcrumb-item active">
-							<a href="/bikelong/trailpathboard/detail.action?boardNo=${trailBoarddetail.boardNo}&pageno=${pageno}">Trail Detail</a>
+							<a href="/bikelong/trailpathboard/detail.action?boardNo=
+							${trailBoard.boardNo}&pageno=${pageno}">Trail Detail</a>
 						</li>
 						<li class="breadcrumb-item active">Trail Update</li>
 					</ol>
@@ -103,11 +104,6 @@ $(function() {
 					<div class="col-lg-11 m-auto">
 						<!-- Post-->
 						<article class="post">
-
-							<div class="post-preview">
-								<!--  -->
-							</div>
-
 							<div class="row">
 								<div class="col-md-12">
 									<form action="/bikelong/trailpathboard/update.action"
@@ -117,19 +113,19 @@ $(function() {
 											<div class="col-md-6">
 												<div class="form-group">
 													<input class="form-control" type="text" name="id"
-														value="${trailboardupdate.id}" readonly>
+														value="${trailBoard.id}" readonly>
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
 													<input class="form-control" type="date" name="date"
-														value="${trailboardupdate.date}">
+														value="${trailBoard.date}">
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="form-group">
-												<input type="hidden" name="defaultLocationNo" value="${trailboardupdate.locationNo}">
-													<p>지역 : ${trailboardupdate.locationName}</p>
+												<input type="hidden" name="defaultLocationNo" value="${trailBoard.locationNo}">
+													<p>지역 : ${trailBoard.locationName}</p>
 													<select class="select form-control" name="locationNo">
 														<option value="0">지역 변경 없음</option>
 														<option value="1">강남구</option>
@@ -163,20 +159,20 @@ $(function() {
 											<div class="col-md-12">
 												<div class="form-group">
 													<input class="form-control" type="text" name="title"
-														value="${trailboardupdate.title}">
+														value="${trailBoard.title}">
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="form-group">
 													<textarea rows="10" cols="100" name="content" id="content"
-														class="form-control" style="width: 100%; height: 482px">${trailboardupdate.content}</textarea>
+														class="form-control" style="width: 100%; height: 482px">${trailBoard.content}</textarea>
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="text-center">
 													<input type="button" id="updatebtn" class="btn btn-black" value="수정" /> 
-													<a class="btn btn-black" href="/bikelong/trailpathboard/detail.action?boardNo=${trailboardupdate.boardNo}">취소</a>
-													<input class="form-control" type="hidden" name="boardNo" value="${trailboardupdate.boardNo}" >
+													<a class="btn btn-black" href="/bikelong/trailpathboard/detail.action?boardNo=${trailBoard.boardNo}">취소</a>
+													<input class="form-control" type="hidden" name="boardNo" value="${trailBoard.boardNo}" >
 												</div>
 											</div>
 										</div>

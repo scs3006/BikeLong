@@ -27,9 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.bikelong.service.ReplyService;
 import com.bikelong.service.TrailBoardService;
 import com.bikelong.ui.*;
-import com.bikelong.vo.Board;
-import com.bikelong.vo.Reply;
-import com.bikelong.vo.TrailBoard;
+import com.bikelong.vo.*;
 
 
 @Controller
@@ -48,20 +46,25 @@ public class TrailBoardController {
 	@GetMapping(value = "list.action")
 	public String list(Model model,
 			@RequestParam(value = "pageno", defaultValue = "0") int pageNo) {
-
-		int pageSize = 8; //한 페이지에 표시할 데이터 갯수
+		
+		int pageSize = 9; //한 페이지에 표시할 데이터 갯수
 		int from = pageNo * pageSize;
 		int to = pageSize;
 
 		int pagerSize = 5;//번호로 표시할 페이지 목록
 		String linkUrl = "list.action";
 
-		List<TrailBoard> trailBoardlist = trailBoardService.findBoardList(from, to);
+		List<TrailBoard> trailBoard = trailBoardService.findBoardList(from,to);
 		int dataCount = trailBoardService.getBoardCount();
 
+		/*for (TrailBoard Board : trailBoard) {
+			String [] imagepath = Board.getContent().split("photoupload/", 40);
+			Board.setImageName((String) imagepath[1].subSequence(0, 40));
+		}*/
+		
 		ThePager2 pager = new ThePager2(dataCount, pageNo, pageSize, pagerSize, linkUrl);
-
-		model.addAttribute("trailBoardlist", trailBoardlist);
+		
+		model.addAttribute("trailBoard", trailBoard);
 		model.addAttribute("pager", pager);
 		model.addAttribute("pageno", pageNo);
 		return "trail/list";
@@ -95,15 +98,15 @@ public class TrailBoardController {
 		System.out.println(trailBoard.getLocationNo());
 		return "redirect:list.action";
 	}
-
 	@GetMapping(value = "update.action")
-	public String update(Model model, TrailBoard trailboardupdate,RedirectAttributes redirectAttributes,
-			@RequestParam(value ="pageno", defaultValue = "0") int pageNo, int boardNo) {
-		trailboardupdate = trailBoardService.findBoardByBoardNo(boardNo);
-		model.addAttribute("trailboardupdate", trailboardupdate);
+	public String getUpdate(@RequestParam(value ="pageno", defaultValue = "0") int pageNo,
+			int boardNo, Model model, TrailBoard trailBoard) {
+		trailBoard = trailBoardService.findBoardByBoardNo(boardNo);
+		model.addAttribute("trailBoard", trailBoard);
 		model.addAttribute("pageno", pageNo);
-		return "trail/update";
+		return "notice/update";
 	}
+	
 	@PostMapping(value = "update.action")
 	@ResponseBody
 	public String postUpdate(TrailBoard trailBoard) {

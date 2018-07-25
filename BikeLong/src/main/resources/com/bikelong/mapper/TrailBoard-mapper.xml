@@ -11,12 +11,12 @@
 	</insert>
 	
 	<select id="selectBoardList" resultType="TrailBoard">
-		SELECT boardNo, title, content, id, date_format(date,'%Y-%m-%d') AS date 
-		FROM Board 
-		WHERE category=1 ORDER BY boardNo
+		SELECT b.boardNo, b.id, b.locationNo, date_format(b.date,'%Y-%m-%d') date, b.title, b.content, l.locationName  
+		FROM Board b INNER JOIN Location l
+		ON b.locationNo = l.locationNo
+		WHERE b.category = 1
 		LIMIT #{from}, #{to}
 	</select>
-	
 	<select id="selectBoardCount" resultType="int">
 		SELECT COUNT(*)
 		FROM Board 

@@ -13,7 +13,7 @@ public interface TrailBoardService {
 
 	List<TrailBoard> findBoardList(int from, int to);
 
-	void updateBoard(TrailBoard trailBoards);
+	void updateBoard(TrailBoard trailBoard);
 
 	void deleteBoard(int boardNo);
 

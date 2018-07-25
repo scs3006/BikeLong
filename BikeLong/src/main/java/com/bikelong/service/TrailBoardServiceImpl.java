@@ -60,11 +60,14 @@ public class TrailBoardServiceImpl implements TrailBoardService {
 		return trailBoardDao.selectBoardCount();
 	}
 
+
+
 	@Override
 	public TrailBoard findBoardByBoardNo(int boardNo) {
-	
+
 		return trailBoardDao.selectBoardByBoardNo(boardNo);
 	}
 
-
 }
+
+
