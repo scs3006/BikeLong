@@ -23,10 +23,6 @@
 		<link href="/bikelong/resources/assets/css/template.css" rel="stylesheet">
 		<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 		
-		<style type="text/css">
-			.form-control{color : white;}
-		</style>
-		
 		<script type="text/javascript">
 		$(function(){
 			$('form').on('submit',function(event){
@@ -70,7 +66,7 @@
 
 			<!-- Hero-->
 			<section class="module-cover fullscreen parallax" data-background="/bikelong/resources/assets/images/main.jpg" data-overlay="0.5">
-				<div class="container account">
+				<div class="container" id="account">
 					<div class="row">
 						<div class="col-md-4 m-auto">
 							<div class="text-center">
