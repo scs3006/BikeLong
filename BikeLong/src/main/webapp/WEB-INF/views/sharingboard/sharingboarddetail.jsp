@@ -197,7 +197,7 @@
 									<div class="text-center">
 										<hr/>
 										<a class="btn btn-black" href="/bikelong/route/sharingboardlist.action">목록보기</a>
-										<a class="btn btn-black" href="/bikelong/route/sharingboardupdate.action?boardNo=${sharingBoardDetail.boardNo}">수정</a>
+										<a class="btn btn-black" href="/bikelong/route/sharingboardupdate.action?boardNo=${sharingBoardDetail.boardNo}&id=${id}">수정</a>
 										<a class="btn btn-black" href="/bikelong/route/sharingboarddelete.action?boardNo=${sharingBoardDetail.boardNo}">삭제</a>
 									</div>
 								</div>

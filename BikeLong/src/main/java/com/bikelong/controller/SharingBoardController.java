@@ -86,11 +86,15 @@ public class SharingBoardController {
 	}
 	
 	@RequestMapping(value = "sharingboardupdate.action", method = RequestMethod.GET)
-	public String update(@RequestParam (value ="boardNo", defaultValue ="0") int boardNo, Model model, SharingBoard sharingBoardUpdate) {
+	public String update(@RequestParam (value ="boardNo", defaultValue ="0") int boardNo, Model model, SharingBoard sharingBoardUpdate, String id) {
 		
+		List<History> history = sharingBoarService.findHistory(id);
 		sharingBoardUpdate = sharingBoarService.findBoard(boardNo);
 		sharingBoardUpdate.setBoardNo(boardNo);
+		
 		model.addAttribute("sharingBoardUpdate", sharingBoardUpdate);
+		model.addAttribute("history", history);
+
 		return "sharingboard/sharingboardupdate";
 	}
 	
