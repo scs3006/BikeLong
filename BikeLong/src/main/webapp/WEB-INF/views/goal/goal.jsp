@@ -102,7 +102,7 @@
 			<div class="container" style="padding-top:50px;">
 					<div class="row">
 						<div class="col-md-6 m-auto text-center">
-							<p class="subtitle">From the blog</p>
+							<p class="subtitle">To challenge goal</p>
 							<h1 class="display-1">목표 거리</h1>
 							<p class="lead">나에게 맞는 목표를 설정하고 달성해보세요. <br/></p>
 							<div class="divider-border"> </div>

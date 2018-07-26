@@ -6,8 +6,8 @@
 <mapper namespace="com.bikelong.mapper.SharingBoardMapper">
 	
 	<insert id="insertBoard" parameterType="SharingBoard">
-		INSERT INTO Board(id, locationNo, category, date, title, content, historyNo)
-		VALUES(#{id}, #{locationNo}, #{category}, #{date}, #{title}, #{content}, #{historyNo})
+		INSERT INTO Board(id, locationNo, category, date, title, content, history)
+		VALUES(#{id}, #{locationNo}, #{category}, #{date}, #{title}, #{content}, #{history})
 	</insert>
 	
 	<select id="selectBoardList" resultType="SharingBoard">

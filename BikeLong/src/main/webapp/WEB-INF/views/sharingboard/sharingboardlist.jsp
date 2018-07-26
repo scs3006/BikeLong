@@ -90,7 +90,7 @@
 							<article class="post">
 								<div class="post-preview">
 									<img src="/bikelong/resources/photoupload/${lists.imageName}"
-										alt="">
+										alt="b9bbe958-c6c1-46dc-a8b3-4f5ba916dce3.gif">
 								</div>
 								<div class="post-wrapper">
 									<div class="post-header" style="height: 15%">

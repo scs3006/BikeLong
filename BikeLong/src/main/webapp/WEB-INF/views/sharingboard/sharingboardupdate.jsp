@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,11 +16,18 @@
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript"
 	src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript"
+	src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=XkRO5MabQSh96y9c_kCn&submodules=geocoder"></script>
 
 </head>
 <script type="text/javascript">
 	$(function() {
 		//전역변수
+		var array = new Array();
+		array[0] = new Array();
+		array[1] = new Array();
+		var mainsize;
+
 		var obj = [];
 		//스마트에디터 프레임생성
 		nhn.husky.EZCreator.createInIFrame({
@@ -35,12 +44,104 @@
 			}
 		});
 		//전송버튼
-		$("#updatebtn").click(function(event) {
-			event.preventDefault();
-			obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-			//폼 submit
-			$("#frm").submit();
+		$("#updatebtn").on(
+				'click',
+				function(event) {
+					event.preventDefault();
+					if ($('input:radio[name=history]').is(':checked')
+							&& $('input:radio[name=history]').val() != null) {
+						obj.getById["content"]
+								.exec("UPDATE_CONTENTS_FIELD", []);
+						$("#frm").submit(); //폼 submit
+					} else
+						alert("경로가 선택되지 않았거나 경로가 존재하지 않습니다.");
+				});
+		
+		var frist;
+		var second;
+		
+		$("#gpsbtn").on('click',function(event) {
+					event.preventDefault();
+					var startTime = $("input:radio[name=history]:checked")
+							.attr('data-startTime');
+					var endTime = $("input:radio[name=history]:checked").attr(
+							'data-endTime');
+					var parameter = {
+						"startTime" : startTime,
+						"endTime" : endTime
+					};
+
+					$.ajax({
+						url : "/bikelong/route/gpsfind.action",
+						method : "GET",
+						data : parameter,
+						success : function(data, status, xhr) {
+							alert('성공');
+							var size = data.length;
+							var point;
+							var path = polyline.getPath();
+							for (var i = 0; i < size; i++) {
+								alert('' + data[i].latitude + '/'
+										+ data[i].longitude);
+								if(i==0){
+									frist =new naver.maps.LatLng(data[i].latitude,data[i].longitude);
+									new naver.maps.Marker({
+										map : map,
+										position : frist
+									});
+									map.panTo(frist);
+								}else if(i==size-1){
+									second =new naver.maps.LatLng(data[i].latitude,data[i].longitude);
+									new naver.maps.Marker({
+										map : map,
+										position : second
+									});
+								}
+								point = new naver.maps.LatLng(data[i].latitude,
+										data[i].longitude);
+								path.push(point);
+							}
+						},
+						error : function(xhr, status, err) {
+							alert('실패하셨습니다.');
+						}
+					});
+				});
+
+		var map = new naver.maps.Map('map', {
+			center : new naver.maps.LatLng(37.3700065, 127.121359),
+			zoom : 10,
+			mapTypeControl : true,
+			mapTypeControlOptions : {
+				style : naver.maps.MapTypeControlStyle.DROPDOWN
+			}
 		});
+		
+		function mapsMove(lat, lng, i) {
+			map.panTo(frist);
+		}
+		
+		var polyline = new naver.maps.Polyline({
+			map : map,
+			path : [],
+			strokeStyle : 'solid',
+			strokeColor : '#5347AA',
+			strokeWeight : 5
+		});
+
+		var bicycleLayer = new naver.maps.BicycleLayer();
+
+		naver.maps.Event.addListener(map, 'bicycleLayer_changed', function(
+				bicycleLayer) {
+			if (bicycleLayer) {
+				btn.addClass('control-on');
+			} else {
+				btn.removeClass('control-on');
+			}
+		});
+
+		bicycleLayer.setMap(map);
+
 	});
 </script>
 
@@ -97,28 +198,32 @@
 
 							<div class="row">
 								<div class="col-md-12">
-									<form action="/bikelong/route/sharingboardupdate.action"
+									<form action="/bikelong/route/sharingboardwrite.action"
 										id="frm" method="POST" enctype="multipart/form-data"
 										novalidate>
-										<div class="row">
-											<div class="col-md-6">
-												<div class="form-group">
-													<input class="form-control" type="text" name="id"
-														value="${sharingBoardUpdate.id}" readonly>
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<input class="form-control" type="date" name="date"
-														value="${sharingBoardUpdate.date}">
-												</div>
-											</div>
-											<div class="col-md-12">
-												<div class="form-group">
-												<input type="hidden" name="defaultLocationNo" value="${sharingBoardUpdate.locationNo}">
-													<p>지역 : ${sharingBoardUpdate.locationName}</p>
-													<select class="select form-control" name="locationNo">
-														<option value="1">(지역 변경) 강남구</option>
+
+										<table class="table table-bordered">
+											<tr>
+												<td>제목</td>
+												<td colspan="4"><input type="text" name="title"
+													value="${sharingBoardUpdate.title}" style="width: 850px"></td>
+											</tr>
+											<tr>
+												<td>글쓴이</td>
+												<td><input type="text" name="id"
+													value="${sharingBoardUpdate.id}" readonly></td>
+												<td>작성일</td>
+												<td><input type="date" name="date"
+													value="${sharingBoardUpdate.date}"></td>
+											</tr>
+											<tr>
+												<td>서울시 지역구</td>
+												<td>${sharingBoardUpdate.locationName}</td>
+												<td>지역 변경</td>
+												<td><input type="hidden" name="defaultLocationNo"
+													value="${sharingBoardUpdate.locationNo}" align=center>
+													<select name="locationNo">
+														<option value="1">강남구</option>
 														<option value="2">강동구</option>
 														<option value="3">강북구</option>
 														<option value="4">강서구</option>
@@ -143,26 +248,53 @@
 														<option value="23">종로구</option>
 														<option value="24">중구</option>
 														<option value="25">중랑구</option>
-													</select>
-												</div>
+												</select></td>
+											</tr>
+											<tr>
+												<td colspan="4">경로 목록 선택 (선택 필수)</td>
+											</tr>
+										</table>
+										<div class="row">
+											<div class="col-md-12" id="his">
+												<c:forEach var="h" items="${history}">
+													<fmt:formatDate value="${h.startTime}" var="startTime"
+														pattern="yyyy-MM-dd HH:mm:ss" />
+													<fmt:formatDate value="${h.endTime}" var="endTime"
+														pattern="yyyy-MM-dd HH:mm:ss" />
+													<table class="table table-bordered"">
+														<tr>
+															<td>출발시간 : ${startTime} / 도착시간 : ${endTime}</td>
+															<td><input type="radio" class="select form-control"
+																id="${h.historyNo}" name="history"
+																value="${h.historyNo}" data-startTime="${startTime}"
+																data-endTime="${endTime}"
+																style="vertical-align: middle; width: 20px; height: 20px"></td>
+														</tr>
+													</table>
+												</c:forEach>
+												<input type="button" id="gpsbtn" value="경로 찾기" style="vertical-align: middle;">
 											</div>
 											<div class="col-md-12">
 												<div class="form-group">
-													<input class="form-control" type="text" name="title"
-														value="${sharingBoardUpdate.title}">
+													<div class="post-preview">
+														<div id="map" style="width: 100%; height: 550px;"></div>
+													</div>
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="form-group">
 													<textarea rows="10" cols="100" name="content" id="content"
-														class="form-control" style="width: 100%; height: 482px">${sharingBoardUpdate.content}</textarea>
+														class="form-control" style="width: 100%; height: 482px"
+														placeholder="내용" required></textarea>
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="text-center">
-													<input type="button" id="updatebtn" class="btn btn-black" value="수정" /> 
-													<a class="btn btn-black" href="/bikelong/route/sharingboarddetail.action?boardNo=${sharingBoardUpdate.boardNo}">취소</a>
-													<input class="form-control" type="hidden" name="boardNo" value="${sharingBoardUpdate.boardNo}" >
+													<input type="button" id="updatebtn" class="btn btn-black"
+														value="수정" /> <a class="btn btn-black"
+														href="/bikelong/route/sharingboarddetail.action?boardNo=${sharingBoardUpdate.boardNo}">취소</a>
+													<input class="form-control" type="hidden" name="boardNo"
+														value="${sharingBoardUpdate.boardNo}">
 												</div>
 											</div>
 										</div>
@@ -233,24 +365,6 @@
 								src="/bikelong/resources/assets/images/widgets/6.jpg" alt=""></a></li>
 					</ul>
 				</aside>
-				<!-- Text widget-->
-				<!--aside.widget.widget_text
-					.textwidget
-						.up-logo
-							p.text-center.m-b-50: img(src="/bikelong/resources/assets/images/logo-light.png" width="100" alt="")
-						.up-form
-							form(method="post")
-								.form-group
-									input.form-control.form-control-lg(type="email" placeholder="Email")
-								.form-group
-									input.form-control.form-control-lg(type="password" placeholder="Pasword")
-								.form-group
-									button(type="submit" class="btn btn-block btn-lg btn-round btn-brand") Log in
-						.up-help
-							p: a(href="#") Forgot your password?
-							p Don't have an account yet? <a href="#">Sign in</a>
-					
-					-->
 
 				<!-- Twitter widget-->
 				<aside class="widget twitter-feed-widget">

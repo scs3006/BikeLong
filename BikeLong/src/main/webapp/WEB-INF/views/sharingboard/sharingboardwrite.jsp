@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,8 +14,10 @@
 
 
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=XkRO5MabQSh96y9c_kCn&submodules=geocoder"></script>
+<script type="text/javascript"
+	src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript"
+	src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=XkRO5MabQSh96y9c_kCn&submodules=geocoder"></script>
 
 </head>
 <script type="text/javascript">
@@ -24,7 +27,7 @@
 		array[0] = new Array();
 		array[1] = new Array();
 		var mainsize;
-		
+
 		var obj = [];
 		//스마트에디터 프레임생성
 		nhn.husky.EZCreator.createInIFrame({
@@ -41,76 +44,90 @@
 			}
 		});
 		//전송버튼
-		$("#savebtn").on('click',function(event) {
-			event.preventDefault();
-			if($('input:radio[name=history]').is(':checked') && $('input:radio[name=history]').val()!=null){
-				obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-				$("#frm").submit();	//폼 submit
-			}else alert("경로가 선택되지 않았거나 경로가 존재하지 않습니다.");
+		$("#savebtn").on(
+				'click',
+				function(event) {
+					event.preventDefault();
+					if ($('input:radio[name=history]').is(':checked')
+							&& $('input:radio[name=history]').val() != null) {
+						obj.getById["content"]
+								.exec("UPDATE_CONTENTS_FIELD", []);
+						$("#frm").submit(); //폼 submit
+					} else
+						alert("경로가 선택되지 않았거나 경로가 존재하지 않습니다.");
+				});
+
+		$("#gpsbtn").on(
+				'click',
+				function(event) {
+					event.preventDefault();
+
+					var startTime = $("input:radio[name=history]:checked")
+							.attr('data-startTime');
+					var endTime = $("input:radio[name=history]:checked").attr(
+							'data-endTime');
+					var parameter = {
+						"startTime" : startTime,
+						"endTime" : endTime
+					};
+
+					$.ajax({
+						url : "/bikelong/route/gpsfind.action",
+						method : "GET",
+						data : parameter,
+						success : function(data, status, xhr) {
+							alert('성공');
+							var size = data.length;
+							var point;
+							var path = polyline.getPath();
+							for (var i = 0; i < size; i++) {
+								alert('' + data[i].latitude + '/'
+										+ data[i].longitude);
+								point = new naver.maps.LatLng(data[i].latitude,
+										data[i].longitude);
+								path.push(point);
+								new naver.maps.Marker({
+									map : map,
+									position : point
+								});
+							}
+						},
+						error : function(xhr, status, err) {
+							alert('실패하셨습니다.');
+						}
+					});
+				});
+
+		var map = new naver.maps.Map('map', {
+			center : new naver.maps.LatLng(37.3700065, 127.121359),
+			zoom : 10,
+			mapTypeControl : true,
+			mapTypeControlOptions : {
+				style : naver.maps.MapTypeControlStyle.DROPDOWN
+			}
+		});
+		
+		var polyline = new naver.maps.Polyline({
+			map : map,
+			path : [],
+			strokeStyle : 'solid',
+			strokeColor : '#5347AA',
+			strokeWeight : 5
 		});
 
-		$("#gpsbtn").on('click',function(event){
-        	event.preventDefault();
-        	
-        	var startTime = $("input:radio[name=history]:checked").attr('data-startTime');
-        	var endTime = $("input:radio[name=history]:checked").attr('data-endTime');
-        	var parameter = { "startTime" : startTime , "endTime" : endTime };
-        	
-        	$.ajax({
-				url : "/bikelong/route/gpsfind.action",
-				method : "GET",
-				data : parameter,
-				success : function(data,status,xhr){
-					alert('성공');
-					var size = data.length;	
-					var point;
-					var path = polyline.getPath();
-					for(var i = 0; i < size; i++){
-						alert(''+data[i].latitude+'/'+data[i].longitude);
-						point = new naver.maps.LatLng(data[i].latitude, data[i].longitude); 
-						path.push(point);
-						new naver.maps.Marker({
-					        map: map,
-					        position: point
-					    });
-					}
-				},
-				error : function(xhr, status, err){
-					alert('실패하셨습니다.');
-				}
-			});
-        });
-		
-		
-		var map = new naver.maps.Map('map', {
-		    center: new naver.maps.LatLng(37.3700065 , 127.121359),
-		    zoom: 10,
-		    mapTypeControl: true,
-		    mapTypeControlOptions: {
-		        style: naver.maps.MapTypeControlStyle.DROPDOWN
-		    }
-		});
-		
 		var bicycleLayer = new naver.maps.BicycleLayer();
 
-		naver.maps.Event.addListener(map, 'bicycleLayer_changed', function(bicycleLayer) {
-		    if (bicycleLayer) {
-		        btn.addClass('control-on');
-		    } else {
-		        btn.removeClass('control-on');
-		    }
+		naver.maps.Event.addListener(map, 'bicycleLayer_changed', function(
+				bicycleLayer) {
+			if (bicycleLayer) {
+				btn.addClass('control-on');
+			} else {
+				btn.removeClass('control-on');
+			}
 		});
 
 		bicycleLayer.setMap(map);
 
-		var polyline = new naver.maps.Polyline({
-		    map: map,
-		    path: [],
-		    strokeStyle: 'solid',
-		    strokeColor: '#5347AA',
-		    strokeWeight: 5
-		});
-		
 	});
 </script>
 
@@ -167,77 +184,85 @@
 
 							<div class="row">
 								<div class="col-md-12">
-									<form action="/bikelong/route/sharingboardwrite.action" id="frm"
-										method="POST" enctype="multipart/form-data" novalidate>
+									<form action="/bikelong/route/sharingboardwrite.action"
+										id="frm" method="POST" enctype="multipart/form-data"
+										novalidate>
+										<table class="table table-bordered">
+											<tr>
+												<td>제목</td>
+												<td colspan="4"><input type="text" name="title"
+													style="width: 900px" placeholder="제목"></td>
+											</tr>
+											<tr>
+												<td>글쓴이</td>
+												<td><input type="text" name="id"
+													value="${loginuser.id}" readonly></td>
+												<td>작성일</td>
+												<td><input type="date" name="date" placeholder="작성일"></td>
+											</tr>
+											<tr>
+												<td>지역 변경</td>
+												<td colspan="3">
+													<div class="form-group">
+														<select name="locationNo" style="width: 900px">
+															<option value="1">강남구</option>
+															<option value="2">강동구</option>
+															<option value="3">강북구</option>
+															<option value="4">강서구</option>
+															<option value="5">관악구</option>
+															<option value="6">광진구</option>
+															<option value="7">구로구</option>
+															<option value="8">금천구</option>
+															<option value="9">노원구</option>
+															<option value="10">도봉구</option>
+															<option value="11">동대문구</option>
+															<option value="12">동작구</option>
+															<option value="13">마포구</option>
+															<option value="14">서대문구</option>
+															<option value="15">서초구</option>
+															<option value="16">성동구</option>
+															<option value="17">성북구</option>
+															<option value="18">송파구</option>
+															<option value="19">양천구</option>
+															<option value="20">영등포구</option>
+															<option value="21">용산구</option>
+															<option value="22">은평구</option>
+															<option value="23">종로구</option>
+															<option value="24">중구</option>
+															<option value="25">중랑구</option>
+														</select>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="4">경로 목록 선택 (선택 필수)</td>
+											</tr>
+										</table>
 										<div class="row">
-											<div class="col-md-6">
-												<div class="form-group">
-													<input class="form-control" type="text" name="id"
-														value="${loginuser.id}"  readonly>
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<input class="form-control" type="date" name="date"
-														placeholder="작성일">
-												</div>
-											</div>
-											<div class="col-md-12">
-												<div class="form-group">
-													지역 <select class="select form-control" name="locationNo">
-														<option value="1">강남구</option>
-														<option value="2">강동구</option>
-														<option value="3">강북구</option>
-														<option value="4">강서구</option>
-														<option value="5">관악구</option>
-														<option value="6">광진구</option>
-														<option value="7">구로구</option>
-														<option value="8">금천구</option>
-														<option value="9">노원구</option>
-														<option value="10">도봉구</option>
-														<option value="11">동대문구</option>
-														<option value="12">동작구</option>
-														<option value="13">마포구</option>
-														<option value="14">서대문구</option>
-														<option value="15">서초구</option>
-														<option value="16">성동구</option>
-														<option value="17">성북구</option>
-														<option value="18">송파구</option>
-														<option value="19">양천구</option>
-														<option value="20">영등포구</option>
-														<option value="21">용산구</option>
-														<option value="22">은평구</option>
-														<option value="23">종로구</option>
-														<option value="24">중구</option>
-														<option value="25">중랑구</option>
-													</select>
-												</div>
-											</div>
-											<div class="col-md-12">
-												<div class="form-group">
-													<input class="form-control" type="text" name="title"
-														placeholder="제목" required>
-												</div>
-											</div>
 											<div class="col-md-12" id="his">
-											<h5>경로 목록 선택 (선택 필수)</h5> 
-													<c:forEach var="h" items="${history}">
-														<fmt:formatDate value="${h.startTime}" var="startTime" pattern="yyyy-MM-dd HH:mm:ss"/>
-														<fmt:formatDate value="${h.endTime}" var="endTime" pattern="yyyy-MM-dd HH:mm:ss"/>
-														<table>
-															<tr>
-																<td>출발시간 : ${startTime} / 도착시간 : ${endTime}</td>
-																<td><input type="radio" class="select form-control" id="${h.historyNo}" name="history" 
-														value="${h.historyNo}" data-startTime="${startTime}" data-endTime="${endTime}" style="width: 15px;height: 15px"><br></td>
-															</tr>
-														</table>
-												    </c:forEach>
-												     <input type="button" id="gpsbtn" value="경로 찾기">
+												<c:forEach var="h" items="${history}">
+													<fmt:formatDate value="${h.startTime}" var="startTime"
+														pattern="yyyy-MM-dd HH:mm:ss" />
+													<fmt:formatDate value="${h.endTime}" var="endTime"
+														pattern="yyyy-MM-dd HH:mm:ss" />
+													<table class="table table-bordered"">
+														<tr>
+															<td>출발시간 : ${startTime} / 도착시간 : ${endTime}</td>
+															<td><input type="radio" class="select form-control"
+																id="${h.historyNo}" name="history"
+																value="${h.historyNo}" data-startTime="${startTime}"
+																data-endTime="${endTime}"
+																style="vertical-align: middle; width: 20px; height: 20px"></td>
+														</tr>
+													</table>
+												</c:forEach>
+												<input type="button" id="gpsbtn" value="경로 찾기"
+													style="vertical-align: middle;">
 											</div>
 											<div class="col-md-12">
 												<div class="form-group">
 													<div class="post-preview">
-														<div id="map" style="width:100%;height:550px;"></div>
+														<div id="map" style="width: 100%; height: 550px;"></div>
 													</div>
 												</div>
 											</div>
@@ -250,8 +275,9 @@
 											</div>
 											<div class="col-md-12">
 												<div class="text-center">
-													<input type="button" id="savebtn" class="btn btn-black" value="글쓰기" /> 
-													<a class="btn btn-black" href="/bikelong/route/sharingboardlist.action">취소</a>
+													<input type="button" id="savebtn" class="btn btn-black"
+														value="글쓰기" /> <a class="btn btn-black"
+														href="/bikelong/route/sharingboardlist.action">취소</a>
 												</div>
 											</div>
 										</div>
