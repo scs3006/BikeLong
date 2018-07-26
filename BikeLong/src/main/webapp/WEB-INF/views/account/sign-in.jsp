@@ -70,7 +70,7 @@
 
 			<!-- Hero-->
 			<section class="module-cover fullscreen parallax" data-background="/bikelong/resources/assets/images/main.jpg" data-overlay="0.5">
-				<div class="container account">
+				<div class="container" id="account">
 					<div class="row">
 						<div class="col-md-4 m-auto">
 							<div class="text-center">

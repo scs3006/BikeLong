@@ -91,7 +91,7 @@
 						<div class="col-md-6">
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="/bikelong/index.action">Home</a></li>
-								<li class="breadcrumb-item active">Elements</li>
+								<li class="breadcrumb-item active">Goal</li>
 							</ol>
 						</div>
 					</div>
