@@ -27,6 +27,14 @@ public class RentalShopServiceImpl implements RentalShopService {
 		
 		return rentalShop;
 	}
+
+	@Override
+	public RentalShop mobileRentalShop() {
+		
+		
+		
+		return null;
+	}
 	
 	
 }

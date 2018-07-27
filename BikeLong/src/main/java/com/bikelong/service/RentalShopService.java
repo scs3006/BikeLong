@@ -10,4 +10,6 @@ public interface RentalShopService {
 
 	List<RentalShop> searchRentalShop(String select, String text);
 
+	RentalShop mobileRentalShop();
+
 }

@@ -42,4 +42,25 @@ public class rentalShopController {
 		return rentalShop;
 	}
 	
+	@GetMapping(value = "/rentalShopWrite.action")
+	public String rentalShopShowWrite() {
+		return "rentalShop/rentalShop_write";
+	}
+	
+	@PostMapping(value = "/rentalShopWrite.action")
+	public String rentalShopWrite() {
+		
+		
+		
+		return "redirect:rentalShop.action";
+	}
+	
+	@RequestMapping(value = "/mobile_rentalShop.action")
+	public RentalShop mobileRentalShop() {
+		
+		RentalShop rentalShop = rentalShopService.mobileRentalShop();
+		
+		return rentalShop;
+	}
+	
 }

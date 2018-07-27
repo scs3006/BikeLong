@@ -69,6 +69,9 @@
 				}
 			});
 			
+			$('#write').on('click', function(event) {
+				location.href="rentalShopWrite.action";
+			});
 		});
 	</script>
 	
@@ -122,6 +125,46 @@
 			margin-right: 10px;
 		}
 		
+		.write button{
+		  background:#00adc1;
+		  color:#fff;
+		  border:none;
+		  position:relative;
+		  height:45px;
+		  font-size:1.6em;
+		  padding:0 2em;
+		  cursor:pointer;
+		  transition:800ms ease all;
+		  outline:none;
+		}
+		
+		.write button:hover{
+		  background:#fff;
+		  color:#00adc1;
+		}
+		
+		.write button:before,button:after{
+		  content:'';
+		  position:absolute;
+		  top:0;
+		  right:0;
+		  height:2px;
+		  width:0;
+		  background: #00adc1;
+		  transition:400ms ease all;
+		}
+		
+		.write button:after{
+		  right:inherit;
+		  top:inherit;
+		  left:0;
+		  bottom:0;
+		}
+		
+		.write button:hover:before,button:hover:after{
+		  width:100%;
+		  transition:800ms ease all;
+		}
 		
 	</style>
 	
@@ -148,6 +191,7 @@
 				<div class="col-md-6">
 					<h1 class="page-title-heading">RentalShop Location</h1>
 				</div>
+				
 				<div class="col-md-6">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="/bikelong/">Home</a></li>
@@ -375,11 +419,16 @@
 						</div>
 					</div>
 				</div>
+				<div class="col-md-12 write" align="center">
+					<c:if test="${loginuser.id eq 'manager' && loginuser ne null}">
+						<button id="write">대여소 등록</button>
+					</c:if>
+				</div>
 			</div>
 		</div>
 	</section>
 	<!-- Maps End -->
-
+						
 
 	<br><br>
 
