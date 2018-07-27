@@ -14,6 +14,7 @@
 		<typeAlias type="com.bikelong.vo.Goal" alias="Goal"/>
 		<typeAlias type="com.bikelong.vo.Reply" alias="Reply"/>
 		<typeAlias type="com.bikelong.vo.History" alias="History"/>
+		<typeAlias type="com.bikelong.vo.Environment" alias="Environment"/>
 	</typeAliases>
 
 	<environments default="mysql">
@@ -38,6 +39,7 @@
 		<mapper resource="com/bikelong/mapper/noticeBoard-mapper.xml" />
 		<mapper resource="com/bikelong/mapper/reply-mapper.xml" />
 		<mapper resource="com/bikelong/mapper/suggestBoard-mapper.xml" />
+		<mapper resource="com/bikelong/mapper/environment-mapper.xml" />
 	</mappers>
 
 </configuration>

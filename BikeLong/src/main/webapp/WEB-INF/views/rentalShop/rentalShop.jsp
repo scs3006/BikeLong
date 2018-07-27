@@ -277,7 +277,7 @@
 						        '   <center style="font-size: 13px;">대여가능 자전거</center>',
 						        '   <center style="font-size: 60px; margin-top: -25px;">' + currentMarker.count + '</count>',
 						        '   <hr color="black" style="width:220px; height:2px; margin-top: -10px; margin-bottom: -40px;">',
-						        '   <button style="width: 80px; height: 35px; font-size: 15px; background: #72ebc9; border: none;">상세정보</button>',
+						        '   <button id="detailInfo" data-rentalshopNo="'+ currentMarker.rentalShopNo +'" style="width: 80px; height: 35px; font-size: 15px; background: #72ebc9; border: none;">상세정보</button>',
 						        '   <button id="close" style="width: 80px; height: 35px; font-size: 15px; background: #72ebc9; border: none;">확인</button>',
 						        '</div>'
 						    ].join('');
@@ -323,11 +323,57 @@
 						        $('div#map div#iw_inner button#close').on('click', function(event) {
 						        	currentInfoWindow.close();
 						        });
+						        
+						        $('div#map div#iw_inner button#detailInfo').on('click', function(event) {
+						        	currentInfoWindow.close();
+						        	var rentalshopNo = $(this).attr('data-rentalshopNo');
+						        	$.ajax({
+										url : "/bikelong/environment/selectenvironmentlist.action",
+										method : "GET",
+										data : {"rentalshopNo" : rentalshopNo},
+										success : function(data,status,xhr){
+											if(data!=null){
+												alert('상세정보 불러오기 성공');
+											}
+											if(data==null){
+												alert('상세정보 불러오기에 실패하셨습니다.');
+												return;
+											}
+										},
+										error : function(xhr, status, err){
+											alert('상세정보 불러오기에 실패하셨습니다.');
+											return;
+										}
+									});
+						        });
 							});
 						
 					</c:forEach>
 						
 					</script>
+				</div>
+				<div class="col-md-12">
+					<div class="row" style="text-align: center;">
+						<div  class="table-responsive">
+							<table class="table table-bordered">
+								 <tr>
+								 	<th colspan="2">대여소 이름</th>
+								 	<td colspan="4"></td>
+								  </tr>
+								  <tr>	
+								 	<th>온도</th>
+								 	<td></td>
+								 	<th>습도</th>
+								 	<td></td>
+								 	<th>미세먼지</th>
+								 	<td></td>
+								 </tr>
+								 <tr>
+								 	 <td colspan="6" height="400px;"></td>
+								 </tr>
+							</table>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

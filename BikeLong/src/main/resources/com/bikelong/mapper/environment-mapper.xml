@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.bikelong.mapper.EnvironmentMapper">
+	<select id="selectEnvironmentListByRentalShopNo" parameterType="int" resultType="Environment">
+		SELECT r.rentalShopNo,r.rentalShopName, e.environmentNo, e.temperature, e.humidity,e.dust,e.time,e.date
+		FROM RentalShop r, Environment e
+		WHERE r.rentalShopNo = e.rentalShopNo
+		AND r.rentalShopNo = #{rentalshopNo} 
+	</select>
+</mapper>
+
+
+
+
+
+
+
+

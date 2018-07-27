@@ -74,4 +74,5 @@
 	<import resource="classpath:com/bikelong/beanconfig/goal-config.xml" />
 	<import resource="classpath:com/bikelong/beanconfig/reply-config.xml" />
 	<import resource="classpath:com/bikelong/beanconfig/suggestBoard-config.xml" />
+	<import resource="classpath:com/bikelong/beanconfig/environment-config.xml" />
 </beans>
