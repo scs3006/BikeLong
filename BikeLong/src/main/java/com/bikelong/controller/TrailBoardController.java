@@ -49,7 +49,7 @@ public class TrailBoardController {
 	public String list(Model model,
 			@RequestParam(value = "pageno", defaultValue = "0") int pageNo) {
 
-		int pageSize = 8; //한 페이지에 표시할 데이터 갯수
+		int pageSize = 9; //한 페이지에 표시할 데이터 갯수
 		int from = pageNo * pageSize;
 		int to = pageSize;
 
@@ -97,13 +97,14 @@ public class TrailBoardController {
 	}
 
 	@GetMapping(value = "update.action")
-	public String update(Model model, TrailBoard trailboardupdate,RedirectAttributes redirectAttributes,
-			@RequestParam(value ="pageno", defaultValue = "0") int pageNo, int boardNo) {
-		trailboardupdate = trailBoardService.findBoardByBoardNo(boardNo);
-		model.addAttribute("trailboardupdate", trailboardupdate);
+	public String getUpdate(@RequestParam(value ="pageno", defaultValue = "0") int pageNo, int boardNo, Model model) {
+		TrailBoard trailBoardupdate = trailBoardService.findBoardByBoardNo(boardNo);
+		model.addAttribute("trailBoardupdate", trailBoardupdate);
 		model.addAttribute("pageno", pageNo);
 		return "trail/update";
 	}
+	
+	
 	@PostMapping(value = "update.action")
 	@ResponseBody
 	public String postUpdate(TrailBoard trailBoard) {

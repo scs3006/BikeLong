@@ -7,19 +7,17 @@ import com.bikelong.vo.TrailBoard;
 
 public interface TrailBoardDao {
 
+	List<TrailBoard> selectBoardList(int from, int to);
+
+	int selectBoardCount();
+	
 	void insertBoard(TrailBoard trailBoard);
 
 	TrailBoard selectBoard(int boardNo);
 
-	List<TrailBoard> selectBoardList(int from, int to);
+	TrailBoard selectBoardByBoardNo(int boardNo);
 
 	void updateBoard(TrailBoard trailBoard);
 
 	void deleteBoard(int boardNo);
-
-	int selectBoardCount();
-
-	TrailBoard selectBoardByBoardNo(int boardNo);
-
-
 }

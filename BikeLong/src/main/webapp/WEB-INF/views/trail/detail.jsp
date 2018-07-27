@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,8 +46,6 @@ $(function() {
 			return;
 		}
 	});
-	
-	$(function() {
 		$("#replySubmit").click(function(event){
         	event.preventDefault();
         	if(!($('#frm input[name=id]').val())){ // null or '' check!
@@ -83,7 +82,7 @@ $(function() {
 			});
         });
 		$('.deleteReply').each(function(idx){
-			$(this).on('click',function(event){
+			$(this).click(function(event){
 				event.preventDefault();
 				var replyNo = $(this).attr('data-replyNo');
 				$.ajax({
@@ -107,7 +106,6 @@ $(function() {
 				});
 			});
 		});
-		
 	});
 </script>
 <!-- Favicons-->
@@ -134,7 +132,6 @@ $(function() {
 <link href="/bikelong/resources/assets/css/template.css"
 	rel="stylesheet">
 </head>
-
 <body>
 	<!-- Preloader-->
 	<div class="page-loader">
@@ -143,8 +140,6 @@ $(function() {
 	<!-- Preloader end-->
 	<!-- Header-->
 	<jsp:include page="/WEB-INF/views/include/header.jsp" /><br />
-	<br />
-	<br />
 	<!-- Header end-->
 	<!-- Page Header-->
 	<div>
@@ -157,120 +152,150 @@ $(function() {
 					<div class="col-md-6">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="/bikelong/index.action">Home</a></li>
-							<li class="breadcrumb-item active">
-							<a href="/bikelong/trailpathboard/list.action">Trail Board</a></li>
+							<li class="breadcrumb-item active"><a
+								href="/bikelong/trailpathboard/list.action">Trail Board</a></li>
 							<li class="breadcrumb-item active">Trail Detril</li>
 						</ol>
 					</div>
 				</div>
 			</div>
-			</section>
-	<!-- ========================================================================================================= -->
-	<!-- Wrapper-->
-	<div class="wrapper">
-		<section class="module">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-11 m-auto">
-						<!-- Post-->
-						<article class="post">
-							<div class="row">
+		</section>
+		<!-- Wrapper-->
+		<div class="wrapper">
+			<section class="module">
+				<div class="container">
+					<!-- Post-->
+					<article class="post">
+						<div class="row">
+							<div class="col-md-12" style="text-align: center;">
+								<table class="table table-bordered">
+									<tr>
+										<td>제목</td>
+										<td colspan="4">${trailBoarddetail.title}</td>
+									</tr>
+									<tr>
+										<td>글쓴이</td>
+										<td>${trailBoarddetail.id}</td>
+										<td>작성일</td>
+										<td>${trailBoarddetail.date}</td>
+									</tr>
+									<tr>
+										<td>해당 지역</td>
+										<td colspan="4">${trailBoarddetail.locationName}</td>
+									</tr>
+								</table>
 								<div class="col-md-12">
-									<table class="table table-bordered">
-										<tr>
-											<td>제목</td>
-											<td colspan="4">${trailBoarddetail.title}</td>
-										</tr>
-										<tr>
-											<td>글쓴이</td>
-											<td>${trailBoarddetail.id}</td>
-											<td>작성일</td>
-											<td>${trailBoarddetail.date}</td>
-										</tr>
-										<tr>
-											<td>해당 지역</td>
-											<td colspan="4">${trailBoarddetail.locationName}</td>
-										</tr>
-									</table>
+									<div class="form-group">
+										<div class="post-preview">
+											<div id="map" style="width: 100%; height: 550px;"></div>
+											<script>
+												var map = new naver.maps.Map('map', {
+												    center: new naver.maps.LatLng(37.4820108, 126.8980968),
+												    zoom: 10
+												});
+												
+												var polyline = new naver.maps.Polyline({
+												    map: map,
+												    path: [
+												        new naver.maps.LatLng(37.359924641705476, 127.1148204803467),
+												        new naver.maps.LatLng(37.36343797188166, 127.11486339569092),
+												        new naver.maps.LatLng(37.368520071054576, 127.11473464965819),
+												        new naver.maps.LatLng(37.3685882848096, 127.1088123321533),
+												        new naver.maps.LatLng(37.37295383612657, 127.10876941680907),
+												        new naver.maps.LatLng(37.38001321351567, 127.11851119995116),
+												        new naver.maps.LatLng(37.378546827477855, 127.11984157562254),
+												        new naver.maps.LatLng(37.376637072444105, 127.12052822113036),
+												        new naver.maps.LatLng(37.37530703574853, 127.12190151214598),
+												        new naver.maps.LatLng(37.371657839593894, 127.11645126342773),
+												        new naver.maps.LatLng(37.36855417793982, 127.1207857131958)
+												    ],
+												    strokeStyle: 'solid',
+												    strokeColor: '#5347AA',
+												    strokeWeight: 5
+												});
+												var marker = new naver.maps.Marker({
+												    position: new naver.maps.LatLng(37.359924641705476, 127.1148204803467),
+												    map: map
+												});
+												</script>
+										</div>
+									</div>
 								</div>
 								<div class="col-md-12">
 									<div class="form-group">${trailBoarddetail.content}</div>
 								</div>
-									<div class="col-md-12">
-										<div class="text-center">
-											<hr />
-											<a class="btn btn-black"
-												href="/bikelong/trailpathboard/list.action">목록보기</a>
-											<c:if test="${loginuser.id eq 'manager' && loginuser ne null}">
-												<a class="btn btn-black" href="/bikelong/trailpathboard/update.action?boardNo=
-												${trailBoarddetail.boardNo}&pageno=${pageno}">수정</a>
-												<a class="btn btn-black" id="traildelete" href="#">삭제</a>
-											</c:if>
-										</div>
-									</div>
+							</div>
+							<div class="col-md-12">
+								<div class="text-center">
+									<a class="btn btn-black"
+										href="/bikelong/trailpathboard/list.action?pageno=${pageno}">목록보기</a>
+									<c:if test="${loginuser.id eq 'manager' && loginuser ne null}">
+										<a class="btn btn-black"
+											href="/bikelong/trailpathboard/update.action?boardNo=
+													${trailBoarddetail.boardNo}&pageno=${pageno}">수정</a>
+										<a class="btn btn-black" id="traildelete" href="#">삭제</a>
+									</c:if>
 								</div>
-						</article>
-						<!-- Post end-->
-						<!-- Comments area-->
-						<div class="comments-area">
-							<h5 class="comments-title">Comments</h5>
-							<div class="comment-list" id="comments">
-								<c:choose>
-									<c:when test="${ replyList == '' || replyList eq null}">
-										<h3 id="nodata" style="text-align: center">작성된 댓글이 없습니다.
-										</h3>
-									</c:when>
-									<c:otherwise>
-										<!-- 댓글 리스트-->
-										<c:forEach var="reply" items="${ replyList }">
-											<div class="comment">
-												<div class="comment-author">
-													<img class="avatar"
-														src="/bikelong/resources/assets/images/avatar/1.jpg"
-														alt="">
-												</div>
-												<div class="comment-body">
-													<div class="comment-meta">
-														<div class="comment-meta-author">${reply.id}</div>
-														<div class="comment-meta-date">${reply.date}</div>
-													</div>
-													<div class="comment-content">
-														<p>${reply.content}</p>
-													</div>
-													<c:if
-														test="${loginuser.id eq reply.id && loginuser ne null}">
-														<a class="btn deleteReply" data-replyNo="${reply.replyNo}"
-															href="#">삭제</a>
-													</c:if>
-												</div>
+							</div>
+						</div>
+					</article>
+					<!-- Post end-->
+					<!-- Comments area-->
+					<div class="comments-area">
+						<h5 class="comments-title">Comments</h5>
+						<div class="comment-list" id="comments">
+							<c:choose>
+								<c:when test="${ replyList == '' || replyList eq null}">
+									<h3 id="nodata" style="text-align: center">작성된 댓글이 없습니다.</h3>
+								</c:when>
+								<c:otherwise>
+									<!-- 댓글 리스트-->
+									<c:forEach var="reply" items="${ replyList }">
+										<div class="comment">
+											<div class="comment-author">
+												<img class="avatar"
+													src="/bikelong/resources/assets/images/avatar/1.jpg" alt="">
 											</div>
-										</c:forEach>
-									</c:otherwise>
-								</c:choose>
-							</div>
-							<div class="comment-respond">
-								<h5 class="comment-reply-title">댓글 쓰기</h5>
-								<form id="frm" class="comment-form row">
-									<input class="form-control" type="hidden" name="id"
-										value="${loginuser.id}"> <input class="form-control"
-										type="hidden" name="boardNo"
-										value="${trailBoarddetail.boardNo}">
-									<div class="form-group col-md-12">
-										<textarea class="form-control" rows="8" name="content"
-											placeholder="Comment"></textarea>
-									</div>
-									<div class="form-submit col-md-12">
-										<button class="btn btn-black" id="replySubmit" type="submit">Post
-											Comment</button>
-									</div>
-								</form>
-							</div>
+											<div class="comment-body">
+												<div class="comment-meta">
+													<div class="comment-meta-author">${reply.id}</div>
+													<div class="comment-meta-date">${reply.date}</div>
+												</div>
+												<div class="comment-content">
+													<p>${reply.content}</p>
+												</div>
+												<c:if
+													test="${loginuser.id eq reply.id && loginuser ne null}">
+													<a class="btn deleteReply" data-replyNo="${reply.replyNo}"
+														href="#">삭제</a>
+												</c:if>
+											</div>
+										</div>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+						</div>
+						<div class="comment-respond">
+							<h5 class="comment-reply-title">댓글 쓰기</h5>
+							<form id="frm" class="comment-form row">
+								<input class="form-control" type="hidden" name="id"
+									value="${loginuser.id}"> <input class="form-control"
+									type="hidden" name="boardNo"
+									value="${trailBoarddetail.boardNo}">
+								<div class="form-group col-md-12">
+									<textarea class="form-control" rows="8" name="content"
+										placeholder="Comment"></textarea>
+								</div>
+								<div class="form-submit col-md-12">
+									<button class="btn btn-black" id="replySubmit" type="submit">Post
+										Comment</button>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
-			</div>
-		</section>
-	</div>
+			</section>
+		</div>
 		<svg class="footer-circle" xmlns="http://www.w3.org/2000/svg"
 			version="1.1" width="100%" height="100" viewbox="0 0 100 100"
 			preserveaspectratio="none">

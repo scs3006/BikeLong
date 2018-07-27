@@ -9,20 +9,9 @@ import com.bikelong.vo.*;
 public class MySqlTrailBoardDao implements TrailBoardDao{
 	
 	private TrailBoardMapper trailBoardMapper;
+	
 	public void setTrailBoardMapper(TrailBoardMapper trailBoardMapper) {
 		this.trailBoardMapper = trailBoardMapper;
-	}
-
-
-	@Override
-	public void insertBoard(TrailBoard trailBoard) {
-		trailBoardMapper.insertBoard(trailBoard);
-	}
-
-	@Override
-	public TrailBoard selectBoard(int boardNo) {
-		TrailBoard trailBoard = trailBoardMapper.selectBoard(boardNo);
-		return trailBoard;
 	}
 
 	@Override
@@ -34,7 +23,23 @@ public class MySqlTrailBoardDao implements TrailBoardDao{
 		return trailBoardMapper.selectBoardList(params);
 	}
 
+	@Override
+	public int selectBoardCount() {
+		
+		return trailBoardMapper.selectBoardCount();
+	}
 
+	@Override
+	public void insertBoard(TrailBoard trailBoard) {
+		trailBoardMapper.insertBoard(trailBoard);
+	}
+
+	@Override
+	public TrailBoard selectBoard(int boardNo) {
+		TrailBoard trailBoard = trailBoardMapper.selectBoard(boardNo);
+		return trailBoard;
+	}
+	
 	@Override
 	public void updateBoard(TrailBoard trailBoard) {
 		
@@ -42,29 +47,16 @@ public class MySqlTrailBoardDao implements TrailBoardDao{
 		
 	}
 
-
-	@Override
-	public void deleteBoard(int boardNo) {
-		
-		trailBoardMapper.deleteBoard(boardNo);
-	}
-
-
-	@Override
-	public int selectBoardCount() {
-		
-		return trailBoardMapper.selectBoardCount();
-	}
-
-
 	@Override
 	public TrailBoard selectBoardByBoardNo(int boardNo) {
 		
 		return trailBoardMapper.selectBoardByBoardNo(boardNo);
 	}
 
-
-
-
+	@Override
+	public void deleteBoard(int boardNo) {
+		
+		trailBoardMapper.deleteBoard(boardNo);
+	}
 	
 }

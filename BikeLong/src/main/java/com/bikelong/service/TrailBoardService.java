@@ -7,18 +7,18 @@ import com.bikelong.vo.TrailBoard;
 
 public interface TrailBoardService {
 
-	void writeBoard(TrailBoard trailBoard);
-
-	TrailBoard findBoard(int boardNo);
 
 	List<TrailBoard> findBoardList(int from, int to);
 
-	void updateBoard(TrailBoard trailBoards);
-
-	void deleteBoard(int boardNo);
-
 	int getBoardCount();
+
+	TrailBoard findBoard(int boardNo);
+	
+	void writeBoard(TrailBoard trailBoard);
+	
+	void deleteBoard(int boardNo);
 
 	TrailBoard findBoardByBoardNo(int boardNo);
 
+	void updateBoard(TrailBoard trailBoards);
 }

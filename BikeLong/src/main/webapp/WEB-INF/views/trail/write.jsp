@@ -103,11 +103,9 @@
 					<div class="col-lg-11 m-auto">
 						<!-- Post-->
 						<article class="post">
-
 							<div class="post-preview">
 								<!--  -->
 							</div>
-
 							<div class="row">
 								<div class="col-md-12">
 									<form action="/bikelong/trailpathboard/write.action" id="frm"

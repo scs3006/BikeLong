@@ -10,6 +10,7 @@ public class TrailBoardServiceImpl implements TrailBoardService {
 	private TrailBoardDao trailBoardDao;
 	private ReplyDao replyDao;
 
+	
 	public void setTrailBoardDao(TrailBoardDao trailBoardDao) {
 		this.trailBoardDao = trailBoardDao;
 	}	
@@ -17,10 +18,17 @@ public class TrailBoardServiceImpl implements TrailBoardService {
 	public void setReplyDao(ReplyDao replyDao) {
 		this.replyDao = replyDao;
 	}
-
+	
 	@Override
-	public  void writeBoard(TrailBoard trailBoard) {
-		trailBoardDao.insertBoard(trailBoard);
+	public List<TrailBoard> findBoardList(int from, int to) {
+		List<TrailBoard> trailBoard = trailBoardDao.selectBoardList(from, to);
+		return trailBoard;
+	}
+	
+	@Override
+	public int getBoardCount() {
+
+		return trailBoardDao.selectBoardCount();
 	}
 
 	@Override
@@ -28,20 +36,23 @@ public class TrailBoardServiceImpl implements TrailBoardService {
 		TrailBoard trailBoard = trailBoardDao.selectBoard(boardNo);
 		return trailBoard;
 	}
-
+	
 	@Override
-	public List<TrailBoard> findBoardList(int from, int to) {
-		List<TrailBoard> trailBoard = trailBoardDao.selectBoardList(from, to);
-		return trailBoard;
+	public  void writeBoard(TrailBoard trailBoard) {
+		trailBoardDao.insertBoard(trailBoard);
 	}
 
-
+	@Override
+	public TrailBoard findBoardByBoardNo(int boardNo) {
+	
+		return trailBoardDao.selectBoardByBoardNo(boardNo);
+	}
+	
 	@Override
 	public void updateBoard(TrailBoard trailBoard) {
 
 		trailBoardDao.updateBoard(trailBoard);
 	}
-
 
 	@Override
 	public void deleteBoard(int boardNo) {
@@ -52,19 +63,5 @@ public class TrailBoardServiceImpl implements TrailBoardService {
 			throw new RuntimeException();
 		}
 	}
-
-
-	@Override
-	public int getBoardCount() {
-
-		return trailBoardDao.selectBoardCount();
-	}
-
-	@Override
-	public TrailBoard findBoardByBoardNo(int boardNo) {
 	
-		return trailBoardDao.selectBoardByBoardNo(boardNo);
-	}
-
-
 }

@@ -46,11 +46,11 @@
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$('.clickTr').each(function(index){
+		$('.').each(function(index){
 			$(this).hover(function(){$(this).css('cursor', 'pointer')},function(){$(this).css('cursor')});
-			$(this).on("click",function(event){
+			$(this).click(function(event){
 				var boardNo = $(this).attr('data-boardNo');
-				location.href="detail.action?boardNo=" + boardNo + "&pageno=" + ${pageno};
+				location.href="/bikelong/trailpathboard/detail.action?boardNo=" + boardNo + "&pageno=" + ${pageno};
 			});		
 		});
 	});
@@ -88,54 +88,53 @@
 	<div class="wrapper">
 		<section class="module">
 			<div class="container">
-				<div class="row">
-					<div class="col-lg-11 m-auto">
-						<!-- Post-->
-						<article class="post">
-							<div class="row">
-								<div class="table-responsive">
-									<table class="table table-hover">
-										<tr>
-											<th>번호</th>
-											<th>제목</th>
-											<th>작성자</th>
-											<th>작성일</th>
-											<th>해당지역</th>
-										</tr>
-										<c:forEach var="trail" items="${ trailBoardlist }">
-											<tr class="clickTr" data-boardNo="${ trail.boardNo }">
-												<td>${ trail.boardNo }</td>
-												<td>${ trail.title }</td>
-												<td>${ trail.id }</td>
-												<td>${ trail.date }</td>
-												<td>${ trail.locationName }</td>
-											</tr>
-										</c:forEach>
-									</table>
-								</div>
-								<br>
-								<div class="col-md-12">
-									<div class="text-center">${pager}</div>
-								</div>
-								<br>
-								<br>
-								<div class="col-md-12">
-									<div class="text-center">
-										<c:if test="${loginuser.id eq 'manager' && loginuser ne null}">
-											<a class="btn btn-black"
-												href="/bikelong/trailpathboard/write.action">글쓰기</a>
-										</c:if>
-										<a class="btn btn-black" href="/bikelong/index.action">돌아가기</a>
+				<!-- Post-->
+				<article class="post">
+					<div class="row">
+						<div class="col-lg-11 m-auto">
+							<div class="row blog-masonry">
+								<c:forEach var="list" items="${ trailBoardlist }">
+									<div class="col-md-4 post-item">
+										<div class="post-preview">
+											<img src="/bikelong/resources/photoupload/${list.imageName}"
+												alt="">
+										</div>
+										<div class="post-wrapper">
+											<div class="post-header" style="height: 15%; text-align: center;">
+												<h2 class="post-title display-1">
+													<a href="/bikelong/trailpathboard/detail.action?boardNo=
+													${list.boardNo}">${list.title}</a>
+												</h2>
+												<h5>
+													작성자 : ${list.id}<br />
+													작성일 : ${list.date}<br />
+													해당 지역 : ${list.locationName}<br />
+												</h5>
+											</div>
+										</div>
 									</div>
+								</c:forEach>
+							</div>
+							<br>
+							<div class="col-md-12">
+								<div class="text-center">${pager}</div>
+							</div>
+							<br> <br>
+							<div class="col-md-12">
+								<div class="text-center">
+									<c:if test="${loginuser.id eq 'manager' && loginuser ne null}">
+										<a class="btn btn-black"
+										 href="/bikelong/trailpathboard/write.action">글쓰기</a>
+									</c:if>
+										<a class="btn btn-black" href="/bikelong/index.action">돌아가기</a>
 								</div>
 							</div>
-						</article>
-						<!-- Post end-->
+						</div>
 					</div>
-				</div>
+				</article>
+				<!-- Post end-->
 			</div>
 		</section>
-
 		<svg class="footer-circle" xmlns="http://www.w3.org/2000/svg"
 			version="1.1" width="100%" height="100" viewbox="0 0 100 100"
 			preserveaspectratio="none">
