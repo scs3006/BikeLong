@@ -33,15 +33,15 @@ public class AccountController {
 	//모바일 로그인
 	@GetMapping(value = "/msignin.action")
 	@ResponseBody
-	public Object getmSignIn(String id, String password, HttpSession session) {
+	public Object getmSignIn(String id, String password) {
 		// 로그인 가능한지 확인 (데이터베이스에서 확인 - Service 객체에 요청)
+		System.out.println(id);
+		System.out.println(password);
 		Member member = accountService.login(id, password);
 		
 		if (member != null) {// 데이터베이스에서 데이터가 조회된 경우
 			System.out.println("성공");
 			// 로그인 가능한 사용자라면 로그인 처리 (세션이나 쿠키에 데이터 저장)
-			session.setAttribute("loginuser", member);// session에 Member 객체 저장
-			session.setAttribute("id", member.getId());
 			return member;
 		} else {
 			System.out.println("실패");
