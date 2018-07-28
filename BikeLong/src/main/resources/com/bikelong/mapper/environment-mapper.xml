@@ -10,6 +10,14 @@
 		WHERE r.rentalShopNo = e.rentalShopNo
 		AND r.rentalShopNo = #{rentalshopNo} 
 	</select>
+	
+	<!-- 
+	<insert id="insertenvironmentdata" parameterType="hashmap">
+		INSERT INTO Environment( rentalShopNo, temperature, humidity, dust, time, date)
+		VALUES(1, #{t}, #{h}, #{dustDensity}, date_format(now(),"%T") , date_format(now(),""))
+	</insert>
+	 -->
+	
 </mapper>
 
 

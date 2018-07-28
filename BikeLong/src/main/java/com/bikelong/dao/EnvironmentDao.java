@@ -8,5 +8,6 @@ public interface EnvironmentDao {
 
 	List<Environment> selectEnvironmentListByRentalShopNo(int rentalshopNo);
 
+
 	
 }
