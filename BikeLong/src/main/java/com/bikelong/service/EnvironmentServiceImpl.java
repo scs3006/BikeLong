@@ -12,11 +12,15 @@ public class EnvironmentServiceImpl implements EnvironmentService {
 		this.environmentDao = environmentDao;
 	}
 	@Override
-	public List<Environment> getEnvironmentListByRentalShopNo(int rentalshopNo) {
-		return environmentDao.selectEnvironmentListByRentalShopNo(rentalshopNo);
+	public List<Environment> getEnvironmentListByRentalShopNo(int rentalshopNo, String start, String end) {
+		return environmentDao.selectEnvironmentListByRentalShopNo(rentalshopNo, start, end);
 	}
 	@Override
 	public void environmentDataIn(Environment environment) {
 		environmentDao.insertEnvironmentData(environment);
+	}
+	@Override
+	public Environment getEnvironmentByRentalShopNo(int rentalshopNo, String start, String end) {
+		return environmentDao.selectEnvironmentByRentalShopNo(rentalshopNo, start, end);
 	}
 }

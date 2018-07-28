@@ -7,6 +7,7 @@ public class Environment {
 	private int rentalshopNo;
 	private int temperature;
 	private int humidity;
+	private String rentalShopName;
 	private float dust;
 	private int time;
 	public int getTemperature() {
@@ -73,6 +74,12 @@ public class Environment {
 	}
 	public void setRentalShopNo(int rentalShopNo) {
 		this.rentalShopNo = rentalShopNo;
+	}
+	public String getRentalShopName() {
+		return rentalShopName;
+	}
+	public void setRentalShopName(String rentalShopName) {
+		this.rentalShopName = rentalShopName;
 	}
 	
 	

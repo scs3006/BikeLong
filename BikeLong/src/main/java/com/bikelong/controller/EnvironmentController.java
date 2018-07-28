@@ -7,11 +7,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bikelong.service.EnvironmentService;
@@ -27,11 +27,34 @@ public class EnvironmentController {
 	private EnvironmentService environmentService;
 	
 	@GetMapping(value = "/selectenvironmentlist.action")
-	public String postSelectEnvironmentList(int rentalshopNo) {
-		// 로그인 가능한지 확인 (데이터베이스에서 확인 - Service 객체에 요청)
-		List<Environment> environments = environmentService.getEnvironmentListByRentalShopNo(rentalshopNo);
+	public String postSelectEnvironmentList(int rentalshopNo, Model model) {
 		
+		SimpleDateFormat startDateFormat = new SimpleDateFormat ( "yyyy-MM-dd 00:00:00");
+		SimpleDateFormat endDateFormat = new SimpleDateFormat ( "yyyy-MM-dd 23:59:59");
+		String start = startDateFormat.format (new Date());
+		String end = endDateFormat.format (new Date());
+		
+		List<Environment> environments = environmentService.getEnvironmentListByRentalShopNo(rentalshopNo, start, end);
+		if(environments!=null) {
+			model.addAttribute("environments",environments);
+		}
 		return "chart/environmentChart";
+	}
+	
+	@PostMapping(value = "/selectenvironment.action")
+	@ResponseBody
+	public Environment postSelectEnvironment(int rentalshopNo) {
+		
+		SimpleDateFormat startDateFormat = new SimpleDateFormat ( "yyyy-MM-dd 00:00:00");
+		SimpleDateFormat endDateFormat = new SimpleDateFormat ( "yyyy-MM-dd 23:59:59");
+		String start = startDateFormat.format (new Date());
+		String end = endDateFormat.format (new Date());
+		
+		Environment environment = environmentService.getEnvironmentByRentalShopNo(rentalshopNo, start, end);
+		if(environment!=null) {
+			return environment;
+		}
+		return null;
 	}
 	
 	@RequestMapping(value = { "environmentdata.action" }, method = RequestMethod.GET)

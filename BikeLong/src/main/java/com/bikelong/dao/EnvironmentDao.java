@@ -6,9 +6,10 @@ import com.bikelong.vo.Environment;
 
 public interface EnvironmentDao {
 
-	List<Environment> selectEnvironmentListByRentalShopNo(int rentalshopNo);
+	List<Environment> selectEnvironmentListByRentalShopNo(int rentalshopNo, String start, String end);
 
 	void insertEnvironmentData(Environment environment);
+	Environment selectEnvironmentByRentalShopNo(int rentalshopNo, String start, String end);
 
 
 	
