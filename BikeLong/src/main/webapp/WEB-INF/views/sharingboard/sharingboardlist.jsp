@@ -34,6 +34,30 @@
 <link href="/bikelong/resources/assets/css/template.css"
 	rel="stylesheet">
 </head>
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#writebtn").on('click',function(event){
+        	event.preventDefault();
+        	if('${loginuser.id}'){ // null or '' check!
+    				location.href='/bikelong/route/sharingboardwrite.action?id=${loginuser.id}';
+    		}else{
+    			var value = confirm('글쓰기는 로그인이 필요한 서비스입니다. 로그인 할까요?');
+    			if(value){
+    				location.href='/bikelong/account/signin.action';
+    			}
+    			return;
+    		}
+		});
+		
+		$('article').on('click',$('.post-preview,.post-wrapper'),function(event){
+			var boardNo = $(this).attr("data-boardNo");
+			location.href = '/bikelong/route/sharingboarddetail.action?boardNo='+boardNo+'&pageno=${pageno}';
+		});
+		
+	});
+</script>
+
 <body>
 
 	<!-- Preloader-->
@@ -43,68 +67,59 @@
 	<!-- Preloader end-->
 
 	<!-- Header-->
-	<jsp:include page="/WEB-INF/views/include/header.jsp" />
+	<jsp:include page="/WEB-INF/views/include/header.jsp"/>
+	<br />
+	<br />
+	<br />
 	<!-- Header end-->
-
-	<!-- Wrapper-->
-	<div class="wrapper">
-
-		<!-- Hero-->
-		<section class="module-cover parallax"
-			data-background="/bikelong/resources/assets/images/module-4.jpg"
-			data-overlay="1" data-gradient="1">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="text-center">
-							<h2 class="display-1">Special Recipes</h2>
-							<p>
-								See how your users experience your website in realtime or view <br />
-								trends to see any changes in performance over time.
-							</p>
-						</div>
-					</div>
+	<!-- Page Header-->
+	<section class="module-page-title">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-md-6">
+					<h1 class="page-title-heading">경로 공유 게시판</h1>
+				</div>
+				<div class="col-md-6">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="/bikelong/index.action">Home</a></li>
+						<li class="breadcrumb-item active">Route Sharing Board</li>
+					</ol>
 				</div>
 			</div>
-		</section>
-		<!-- Hero end-->
-
+		</div>
+	</section>
+	<!-- Page Header end-->
+	<!-- Wrapper-->
+	<div class="wrapper">
 		<section class="module">
 			<div class="container">
-				<div class="col-md-12">
-					<div class="text-left">
-						<h1 class="font-weight-bold">경로 공유 게시판</h1>
-					</div>
-					<hr />
 					<div class="text-right">
-						<a class="btn btn-black" href="/bikelong/route/sharingboardwrite.action?id=${id}">글쓰기</a>
+						<a id="writebtn" class="btn btn-black" href="#">글쓰기</a>
 					</div>
-				</div>
 				<div class="col-md-12">
 					<div class="space" data-mY="50px"></div>
 				</div>
 				<div class="row blog-masonry">
-
 					<c:forEach var="lists" items="${ sharingBoardLists }">
 						<div class="col-md-4 post-item">
-							<article class="post">
-								<div class="post-preview">
-									<img src="/bikelong/resources/photoupload/${lists.imageName}"
-										alt="b9bbe958-c6c1-46dc-a8b3-4f5ba916dce3.gif">
+							<article class="post module-page-title" style="height: 500px;" data-boardNo="${lists.boardNo}">
+								<div class="post-preview" >
+									<img src="/bikelong/resources/photoupload/${lists.imageName}" style="height: 330px">
 								</div>
-								<div class="post-wrapper">
-									<div class="post-header" style="height: 15%">
+								<div class="post-wrapper" >
+									<div class="post-header" id="userId" data-id="${loginuser.id}" style="text-align: center;">
 										<h2 class="post-title display-1">
-											<a
-												href="/bikelong/route/sharingboarddetail.action?boardNo=${lists.boardNo}">${lists.title}</a>
+											<a href="/bikelong/route/sharingboarddetail.action?boardNo=${lists.boardNo}&pageno=${pageno}">${lists.title}</a>
 										</h2>
 										<h5>작성자 : ${lists.id}<br/>작성일 : ${lists.date}<br/>지역 : ${lists.locationName}</h5>
-									</div>
+									</div>	
 								</div>
 							</article>
 						</div>
 					</c:forEach>
-
+				</div>
+				<div class="col-md-12">
+					<div class="text-center">${pager}</div>
 				</div>
 			</div>
 		</section>
@@ -119,73 +134,6 @@
 		<!-- Footer end-->
 	</div>
 	<!-- Wrapper end-->
-
-	<!-- Off canvas-->
-	<!-- ======================================================================== -->
-	<div class="off-canvas-sidebar"
-		data-background="/bikelong/resources/assets/images/sidebar.jpg">
-		<div class="off-canvas-sidebar-wrapper">
-			<div class="off-canvas-header">
-				<a class="close-offcanvas" href="#"><span
-					class="arrows arrows-arrows-remove"></span></a>
-			</div>
-			<div class="off-canvas-content">
-				<!-- Text widget-->
-				<aside class="widget widget_text">
-					<div class="textwidget">
-						<p>
-							<img src="/bikelong/resources/assets/images/logo-light.png"
-								width="74px" alt="">
-						</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-							sed do eiusmod tempor.</p>
-						<ul class="icon-list">
-							<li><i class="ti-email"></i> info@themebusiness.com</li>
-							<li><i class="ti-headphone-alt"></i> 1-444-123-4559</li>
-							<li><i class="ti-location-pin"></i> Raymond Boulevard 224,
-								New York</li>
-						</ul>
-					</div>
-				</aside>
-				<!-- Recent portfolio widget-->
-				<aside class="widget widget_recent_works">
-					<div class="widget-title">
-						<h5>Instagram</h5>
-					</div>
-					<ul>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/1.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/2.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/3.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/4.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/5.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/6.jpg" alt=""></a></li>
-					</ul>
-				</aside>
-				<!-- Twitter widget-->
-				<aside class="widget twitter-feed-widget">
-					<div class="widget-title">
-						<h5>Twitter Feed</h5>
-					</div>
-					<div class="twitter-feed" data-twitter="345170787868762112"
-						data-number="2"></div>
-				</aside>
-				<ul class="social-icons">
-					<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-					<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-					<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-					<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-					<li><a href="#"><i class="fa fa-vk"></i></a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<!-- Off canvas end-->
 
 
 	<!-- To top button-->

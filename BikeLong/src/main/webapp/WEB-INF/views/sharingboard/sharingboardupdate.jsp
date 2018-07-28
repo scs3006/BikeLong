@@ -26,7 +26,6 @@
 		var array = new Array();
 		array[0] = new Array();
 		array[1] = new Array();
-		var mainsize;
 
 		var obj = [];
 		//스마트에디터 프레임생성
@@ -59,7 +58,6 @@
 		
 		var frist;
 		var second;
-		
 		$("#gpsbtn").on('click',function(event) {
 					event.preventDefault();
 					var startTime = $("input:radio[name=history]:checked")
@@ -76,13 +74,12 @@
 						method : "GET",
 						data : parameter,
 						success : function(data, status, xhr) {
-							alert('성공');
 							var size = data.length;
 							var point;
 							var path = polyline.getPath();
 							for (var i = 0; i < size; i++) {
-								alert('' + data[i].latitude + '/'
-										+ data[i].longitude);
+							//	alert('' + data[i].latitude + '/'
+							//			+ data[i].longitude);
 								if(i==0){
 									frist =new naver.maps.LatLng(data[i].latitude,data[i].longitude);
 									new naver.maps.Marker({
@@ -117,10 +114,6 @@
 			}
 		});
 		
-		function mapsMove(lat, lng, i) {
-			map.panTo(frist);
-		}
-		
 		var polyline = new naver.maps.Polyline({
 			map : map,
 			path : [],
@@ -130,16 +123,6 @@
 		});
 
 		var bicycleLayer = new naver.maps.BicycleLayer();
-
-		naver.maps.Event.addListener(map, 'bicycleLayer_changed', function(
-				bicycleLayer) {
-			if (bicycleLayer) {
-				btn.addClass('control-on');
-			} else {
-				btn.removeClass('control-on');
-			}
-		});
-
 		bicycleLayer.setMap(map);
 
 	});
@@ -198,10 +181,10 @@
 
 							<div class="row">
 								<div class="col-md-12">
-									<form action="/bikelong/route/sharingboardwrite.action"
+									<form action="/bikelong/route/sharingboardupdate.action"
 										id="frm" method="POST" enctype="multipart/form-data"
 										novalidate>
-
+										<input type="hidden" name="pageno" value="${pageno}">								
 										<table class="table table-bordered">
 											<tr>
 												<td>제목</td>
@@ -213,8 +196,7 @@
 												<td><input type="text" name="id"
 													value="${sharingBoardUpdate.id}" readonly></td>
 												<td>작성일</td>
-												<td><input type="date" name="date"
-													value="${sharingBoardUpdate.date}"></td>
+												<td>${sharingBoardUpdate.date}</td>
 											</tr>
 											<tr>
 												<td>서울시 지역구</td>
@@ -285,16 +267,14 @@
 												<div class="form-group">
 													<textarea rows="10" cols="100" name="content" id="content"
 														class="form-control" style="width: 100%; height: 482px"
-														placeholder="내용" required></textarea>
+														placeholder="내용" required>${sharingBoardUpdate.content}</textarea>
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="text-center">
-													<input type="button" id="updatebtn" class="btn btn-black"
-														value="수정" /> <a class="btn btn-black"
-														href="/bikelong/route/sharingboarddetail.action?boardNo=${sharingBoardUpdate.boardNo}">취소</a>
-													<input class="form-control" type="hidden" name="boardNo"
-														value="${sharingBoardUpdate.boardNo}">
+													<input type="button" id="updatebtn" class="btn btn-black" value="수정" />
+													<a class="btn btn-black" href="/bikelong/route/sharingboarddetail.action?boardNo=${sharingBoardUpdate.boardNo}&pageno=${pageno}">취소</a>
+													<input class="form-control" type="hidden" name="boardNo" value="${sharingBoardUpdate.boardNo}">
 												</div>
 											</div>
 										</div>
@@ -318,75 +298,6 @@
 		<!-- Footer end-->
 	</div>
 	<!-- Wrapper end-->
-
-	<!-- Off canvas-->
-	<div class="off-canvas-sidebar"
-		data-background="/bikelong/resources/assets/images/sidebar.jpg">
-		<div class="off-canvas-sidebar-wrapper">
-			<div class="off-canvas-header">
-				<a class="close-offcanvas" href="#"><span
-					class="arrows arrows-arrows-remove"></span></a>
-			</div>
-			<div class="off-canvas-content">
-				<!-- Text widget-->
-				<aside class="widget widget_text">
-					<div class="textwidget">
-						<p>
-							<img src="/bikelong/resources/assets/images/logo-light.png"
-								width="74px" alt="">
-						</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-							sed do eiusmod tempor.</p>
-						<ul class="icon-list">
-							<li><i class="ti-email"></i> info@themebusiness.com</li>
-							<li><i class="ti-headphone-alt"></i> 1-444-123-4559</li>
-							<li><i class="ti-location-pin"></i> Raymond Boulevard 224,
-								New York</li>
-						</ul>
-					</div>
-				</aside>
-				<!-- Recent portfolio widget-->
-				<aside class="widget widget_recent_works">
-					<div class="widget-title">
-						<h5>Instagram</h5>
-					</div>
-					<ul>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/1.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/2.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/3.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/4.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/5.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/6.jpg" alt=""></a></li>
-					</ul>
-				</aside>
-
-				<!-- Twitter widget-->
-				<aside class="widget twitter-feed-widget">
-					<div class="widget-title">
-						<h5>Twitter Feed</h5>
-					</div>
-					<div class="twitter-feed" data-twitter="345170787868762112"
-						data-number="2"></div>
-				</aside>
-				<ul class="social-icons">
-					<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-					<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-					<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-					<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-					<li><a href="#"><i class="fa fa-vk"></i></a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<!-- Off canvas end-->
-
-
 
 	<!-- Reserve Popup end-->
 

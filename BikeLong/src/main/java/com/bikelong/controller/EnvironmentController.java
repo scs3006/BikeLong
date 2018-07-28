@@ -1,5 +1,7 @@
 package com.bikelong.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bikelong.service.EnvironmentService;
@@ -32,21 +35,22 @@ public class EnvironmentController {
 	}
 	
 	@RequestMapping(value = { "environmentdata.action" }, method = RequestMethod.GET)
-	public void helloArduino(int t, int h, int voMeasured) {
+	public void arduinoData(int voMeasured, Environment environment) {
 		
-		System.out.printf("온도 값 : %d\n습도 값 : %d\n 미세먼지 값:%d\n", t, h, voMeasured);
+		SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat timeformat = new SimpleDateFormat("HH");
+		String date = dateformat.format(new Date());
+		String time = timeformat.format(new Date());
+		
 		float calcVoltage = (float) (voMeasured * (5.0 / 1024.0));
-		float dustDensity = (float) (0.17 * calcVoltage-0.1);
-		System.out.println(dustDensity);
+		float dust = (float) (0.17 * calcVoltage);
+		environment.setDust(dust);
+		environment.setTime(Integer.parseInt((time)));
+		environment.setDate(date);
 		
-		
+		System.out.println("들어옴");
+
+		environmentService.environmentDataIn(environment);
 	}
 	
 }
-
-
-
-
-
-
-

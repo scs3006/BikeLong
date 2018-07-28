@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,6 +18,50 @@
 </head>
 <script type="text/javascript">
 	$(function() {
+		//전역변수
+		var array = new Array();
+		array[0] = new Array();
+		array[1] = new Array();
+		var boardNo = $('#map').attr('data-boardNo');
+		
+		$("#updatebtn").on('click',function(event){
+        	event.preventDefault();
+        	if('${loginuser.id}'){ // null or '' check!
+    			if($('#boardId').attr('data-id')=='${loginuser.id}'){
+    				location.href='/bikelong/route/sharingboardupdate.action?boardNo='+boardNo+'&id=${loginuser.id}&pageno=${pageno}';
+    			}else{
+    				alert("게시글 수정은 작성자만 가능합니다.");
+    				return;
+    			}
+    		}else{
+    			var value = confirm('로그인이 필요한 서비스입니다. 로그인 할까요?');
+    			if(value){
+    				location.href='/bikelong/account/signin.action';
+    			}
+    			return;
+    		}
+		});
+		
+		$("#deletebtn").on('click',function(event){
+        	event.preventDefault();
+        	if('${loginuser.id}'){ // null or '' check!
+    			if($('#boardId').attr('data-id')=='${loginuser.id}'){
+    				var value = confirm('해당 게시글을 삭제하시겠습니까?');
+    				if(value){
+    				location.href='/bikelong/route/sharingboarddelete.action?boardNo='+boardNo;
+    				}
+    			}else{
+    				alert("게시글 삭제는 작성자만 가능합니다.");
+    				return;
+    			}
+    		}else{
+    			var value = confirm('로그인이 필요한 서비스입니다. 로그인 할까요?');
+    			if(value){
+    				location.href='/bikelong/account/signin.action';
+    			}
+    			return;
+    		}
+		});
 		
 		$("#replySubmit").click(function(event){
         	event.preventDefault();
@@ -57,31 +102,95 @@
 			});
         });
 		
-		$('.deleteReply').each(function(idx){
-			$(this).on('click',function(event){
-				event.preventDefault();
-				var replyNo = $(this).attr('data-replyNo');
-				$.ajax({
-					url : "/bikelong/reply/delete.action",
-					method : "GET",
-					data : {'replyNo' : replyNo},
-					success : function(data,status,xhr){
-						if(data=="success"){
-							alert('댓글 삭제에 성공하셨습니다.');
-							location.href="/bikelong/route/sharingboarddetail.action?boardNo=${sharingBoardDetail.boardNo}";
-						}
-						if(data=="fail"){
-							alert('댓글 삭제에 실패하셨습니다.');
-							return;
-						}
-					},
-					error : function(xhr, status, err){
+		$('div#comments').on('click', 'a.deleteReply',function(event){
+			event.preventDefault();
+			var replyNo = $(this).attr('data-replyNo');
+			$.ajax({
+				url : "/bikelong/reply/delete.action",
+				method : "GET",
+				data : {'replyNo' : replyNo},
+				success : function(data,status,xhr){
+					if(data=="success"){
+						alert('댓글 삭제에 성공하셨습니다.');
+						location.href="/bikelong/route/sharingboarddetail.action?boardNo="+boardNo+"&pageno=${pageno}";
+					}
+					if(data=="fail"){
 						alert('댓글 삭제에 실패하셨습니다.');
 						return;
 					}
-				});
+				},
+				error : function(xhr, status, err){
+					alert('댓글 삭제에 실패하셨습니다.');
+					return;
+				}
 			});
 		});
+		
+		var frist;
+		var second;
+		$(window).ready(function(){
+					var startTime = $('#map').attr('data-startTime'); 
+					var endTime = $('#map').attr('data-endTime');
+					var parameter = {
+						"startTime" : startTime,
+						"endTime" : endTime
+					};
+
+					$.ajax({
+						url : "/bikelong/route/gpsfind.action",
+						method : "GET",
+						data : parameter,
+						success : function(data, status, xhr) {
+							var size = data.length;
+							var point;
+							var path = polyline.getPath();
+							for (var i = 0; i < size; i++) {
+							//	alert('' + data[i].latitude + '/'
+							//			+ data[i].longitude);
+								if(i==0){
+									frist =new naver.maps.LatLng(data[i].latitude,data[i].longitude);
+									new naver.maps.Marker({
+										map : map,
+										position : frist
+									});
+									map.panTo(frist);
+								}else if(i==size-1){
+									second =new naver.maps.LatLng(data[i].latitude,data[i].longitude);
+									new naver.maps.Marker({
+										map : map,
+										position : second
+									});
+								}
+								point = new naver.maps.LatLng(data[i].latitude,
+										data[i].longitude);
+								path.push(point);
+							}
+						},
+						error : function(xhr, status, err) {
+							alert('실패하셨습니다.');
+						}
+					});
+				});
+					
+		var map = new naver.maps.Map('map', {
+			center : new naver.maps.LatLng(37.3700065, 127.121359),
+			zoom : 10,
+			mapTypeControl : true,
+			mapTypeControlOptions : {
+				style : naver.maps.MapTypeControlStyle.DROPDOWN
+			}
+		});
+		
+		var polyline = new naver.maps.Polyline({
+			map : map,
+			path : [],
+			strokeStyle : 'solid',
+			strokeColor : '#5347AA',
+			strokeWeight : 5
+		});
+
+		var bicycleLayer = new naver.maps.BicycleLayer();
+		bicycleLayer.setMap(map);
 		
 	});
 </script>
@@ -121,7 +230,7 @@
 	<!-- Header-->
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<!-- Header end-->
-
+	
 	<!-- ========================================================================================================= -->
 	<!-- Wrapper-->
 	<div class="wrapper">
@@ -140,7 +249,7 @@
 										  </tr>
 										  <tr>	
 										 	<td>글쓴이</td>
-										 	<td >${sharingBoardDetail.id}</td>
+										 	<td id="boardId" data-id="${sharingBoardDetail.id}">${sharingBoardDetail.id}</td>
 										 	<td>작성일</td>
 										 	<td >${sharingBoardDetail.date}</td>
 										 </tr>
@@ -153,39 +262,10 @@
 								<div class="col-md-12">
 									<div class="form-group">
 										<div class="post-preview">
-											<div id="map" style="width:100%;height:550px;"></div>
-
-												<script>
-												var map = new naver.maps.Map('map', {
-												    center: new naver.maps.LatLng(37.4820108, 126.8980968),
-												    zoom: 10
-												});
-												
-												var polyline = new naver.maps.Polyline({
-												    map: map,
-												    path: [
-												        new naver.maps.LatLng(37.359924641705476, 127.1148204803467),
-												        new naver.maps.LatLng(37.36343797188166, 127.11486339569092),
-												        new naver.maps.LatLng(37.368520071054576, 127.11473464965819),
-												        new naver.maps.LatLng(37.3685882848096, 127.1088123321533),
-												        new naver.maps.LatLng(37.37295383612657, 127.10876941680907),
-												        new naver.maps.LatLng(37.38001321351567, 127.11851119995116),
-												        new naver.maps.LatLng(37.378546827477855, 127.11984157562254),
-												        new naver.maps.LatLng(37.376637072444105, 127.12052822113036),
-												        new naver.maps.LatLng(37.37530703574853, 127.12190151214598),
-												        new naver.maps.LatLng(37.371657839593894, 127.11645126342773),
-												        new naver.maps.LatLng(37.36855417793982, 127.1207857131958)
-												    ],
-												    strokeStyle: 'solid',
-												    strokeColor: '#5347AA',
-												    strokeWeight: 5
-												});
-												
-												var marker = new naver.maps.Marker({
-												    position: new naver.maps.LatLng(37.359924641705476, 127.1148204803467),
-												    map: map
-												});
-												</script>
+											<fmt:formatDate value="${history.startTime}" var="startTime" pattern="yyyy-MM-dd HH:mm:ss" />
+											<fmt:formatDate value="${history.endTime}" var="endTime" pattern="yyyy-MM-dd HH:mm:ss" />
+											<div id="map" style="width:100%;height:550px;" data-startTime="${startTime}" data-endTime="${endTime}"
+											data-boardNo="${sharingBoardDetail.boardNo}"></div>
 										</div>
 								</div>
 								<div class="col-md-12">
@@ -196,12 +276,13 @@
 								<div class="col-md-12">
 									<div class="text-center">
 										<hr/>
-										<a class="btn btn-black" href="/bikelong/route/sharingboardlist.action">목록보기</a>
-										<a class="btn btn-black" href="/bikelong/route/sharingboardupdate.action?boardNo=${sharingBoardDetail.boardNo}&id=${id}">수정</a>
-										<a class="btn btn-black" href="/bikelong/route/sharingboarddelete.action?boardNo=${sharingBoardDetail.boardNo}">삭제</a>
+										<a class="btn btn-black" href="/bikelong/route/sharingboardlist.action?pageno=${pageno}">목록보기</a>
+										<a class="btn btn-black" id="updatebtn" href="#">수정</a>
+										<a class="btn btn-black" id="deletebtn" href="#">삭제</a>
 									</div>
 								</div>
 							</div>
+						</div>
 						</article>
 						<!-- Post end-->
 
@@ -271,73 +352,6 @@
 		<!-- Footer end-->
 	</div>
 	<!-- Wrapper end-->
-
-	<!-- Off canvas-->
-	<div class="off-canvas-sidebar"
-		data-background="/bikelong/resources/assets/images/sidebar.jpg">
-		<div class="off-canvas-sidebar-wrapper">
-			<div class="off-canvas-header">
-				<a class="close-offcanvas" href="#"><span
-					class="arrows arrows-arrows-remove"></span></a>
-			</div>
-			<div class="off-canvas-content">
-				<!-- Text widget-->
-				<aside class="widget widget_text">
-					<div class="textwidget">
-						<p>
-							<img src="/bikelong/resources/assets/images/logo-light.png"
-								width="74px" alt="">
-						</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-							sed do eiusmod tempor.</p>
-						<ul class="icon-list">
-							<li><i class="ti-email"></i> info@themebusiness.com</li>
-							<li><i class="ti-headphone-alt"></i> 1-444-123-4559</li>
-							<li><i class="ti-location-pin"></i> Raymond Boulevard 224,
-								New York</li>
-						</ul>
-					</div>
-				</aside>
-				<!-- Recent portfolio widget-->
-				<aside class="widget widget_recent_works">
-					<div class="widget-title">
-						<h5>Instagram</h5>
-					</div>
-					<ul>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/1.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/2.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/3.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/4.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/5.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/6.jpg" alt=""></a></li>
-					</ul>
-				</aside>
-
-				<!-- Twitter widget-->
-				<aside class="widget twitter-feed-widget">
-					<div class="widget-title">
-						<h5>Twitter Feed</h5>
-					</div>
-					<div class="twitter-feed" data-twitter="345170787868762112"
-						data-number="2"></div>
-				</aside>
-				<ul class="social-icons">
-					<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-					<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-					<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-					<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-					<li><a href="#"><i class="fa fa-vk"></i></a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<!-- Off canvas end-->
 
 	<!-- To top button-->
 	<a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>

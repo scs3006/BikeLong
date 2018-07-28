@@ -11,12 +11,11 @@
 		AND r.rentalShopNo = #{rentalshopNo} 
 	</select>
 	
-	<!-- 
-	<insert id="insertenvironmentdata" parameterType="hashmap">
+	<insert id="insertEnvironmentData" parameterType="Environment">
 		INSERT INTO Environment( rentalShopNo, temperature, humidity, dust, time, date)
-		VALUES(1, #{t}, #{h}, #{dustDensity}, date_format(now(),"%T") , date_format(now(),""))
+		VALUES(#{rentalShopNo}, #{temperature}, #{humidity}, #{dust}, #{time}, #{date})
 	</insert>
-	 -->
+	
 	
 </mapper>
 

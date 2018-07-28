@@ -15,5 +15,9 @@ public class MySqlEnvironmentDao implements EnvironmentDao {
 	public List<Environment> selectEnvironmentListByRentalShopNo(int rentalshopNo) {
 		return environmentMapper.selectEnvironmentListByRentalShopNo(rentalshopNo);
 	}
+	@Override
+	public void insertEnvironmentData(Environment environment) {
+		environmentMapper.insertEnvironmentData(environment);
+	}
 
 }

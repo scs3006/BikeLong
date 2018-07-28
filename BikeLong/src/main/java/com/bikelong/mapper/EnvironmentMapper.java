@@ -8,7 +8,7 @@ public interface EnvironmentMapper {
 
 	List<Environment> selectEnvironmentListByRentalShopNo(int rentalshopNo);
 
-	void insertenvironmentdata(int t, int h, float dustDensity);
+	void insertEnvironmentData(Environment environment);
 	
 
 }

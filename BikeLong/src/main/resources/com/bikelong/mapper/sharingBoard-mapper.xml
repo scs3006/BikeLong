@@ -7,23 +7,36 @@
 	
 	<insert id="insertBoard" parameterType="SharingBoard">
 		INSERT INTO Board(id, locationNo, category, date, title, content, history)
-		VALUES(#{id}, #{locationNo}, #{category}, #{date}, #{title}, #{content}, #{history})
+		VALUES(#{id}, #{locationNo}, #{category}, now(), #{title}, #{content}, #{history})
 	</insert>
 	
-	<select id="selectBoardList" resultType="SharingBoard">
+	<select id="selectBoardList" parameterType="hashmap" resultType="SharingBoard">
 		SELECT b.boardNo, b.id, b.locationNo, date_format(b.date,'%Y-%m-%d') date, b.title, b.content, l.locationName  
 		FROM Board b INNER JOIN Location l
 		ON b.locationNo = l.locationNo
-		WHERE b.category = 2
+		WHERE b.category = 2 ORDER BY boardNo DESC
+		LIMIT #{from}, #{to}
+	</select>
+	
+	<select id="selectBoardCount" resultType="int">
+		SELECT COUNT(*)
+		FROM Board 
+		WHERE category=2
 	</select>
 	
 	<select id="selectBoard" parameterType="hashmap" resultType="SharingBoard">
 	
-		SELECT b.id , b.locationNo, date_format(b.date,'%Y-%m-%d') date, b.title, b.content, l.locationName
+		SELECT b.id , b.locationNo, date_format(b.date,'%Y-%m-%d') date, b.title, b.content, l.locationName, b.history
 		FROM Board b INNER JOIN Location l
 		ON b.locationNo = l.locationNo 
 		WHERE b.boardNo = #{boardNo} AND b.category = 2
 		
+	</select>
+	
+	<select id="selectBoardHistory" parameterType="SharingBoard" resultType="History">
+		SELECT startTime, endTime
+		FROM History
+		WHERE historyNo = #{history}  
 	</select>
 	
 	<select id="selectHistory" parameterType="hashmap" resultType="History">
@@ -51,8 +64,8 @@
 
 	<update id="updateBoard" parameterType="SharingBoard">
 		UPDATE Board
-		SET date = #{date}, locationNo = #{locationNo}, title = #{title}, content = #{content}
-		WHERE boardNo = #{boardNo}
+		SET locationNo = #{locationNo}, title = #{title}, content = #{content}, history=#{history}
+		WHERE boardNo = #{boardNo} AND id = #{id}
 	</update>
 	
 	<delete id="deleteBoard" parameterType="hashmap">

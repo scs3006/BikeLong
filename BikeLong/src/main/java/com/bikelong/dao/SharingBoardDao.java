@@ -11,7 +11,7 @@ public interface SharingBoardDao {
 
 	SharingBoard selectBoard(int boardNo);
 
-	List<SharingBoard> selectBoardList();
+	List<SharingBoard> selectBoardList(int from, int to);
 
 	void updateBoard(SharingBoard sharingBoard);
 
@@ -20,6 +20,8 @@ public interface SharingBoardDao {
 	List<History> selectHistory(String id);
 
 	List<History> selectgps(String startTime, String endTime);
+
+	int selectBoardCount();
 
 
 

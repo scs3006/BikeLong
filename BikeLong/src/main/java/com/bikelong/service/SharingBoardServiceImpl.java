@@ -29,8 +29,8 @@ public class SharingBoardServiceImpl implements SharingBoardService {
 	}
 
 	@Override
-	public List<SharingBoard> findBoardList() {
-		List<SharingBoard> sharingBoard = sharingBoardDao.selectBoardList();
+	public List<SharingBoard> findBoardList(int from, int to) {
+		List<SharingBoard> sharingBoard = sharingBoardDao.selectBoardList(from,to);
 		return sharingBoard;
 	}
 
@@ -53,6 +53,11 @@ public class SharingBoardServiceImpl implements SharingBoardService {
 	@Override
 	public List<History> gpsfind(String startTime, String endTime) {
 		return sharingBoardDao.selectgps(startTime,endTime);
+	}
+
+	@Override
+	public int getBoardCount() {
+		return sharingBoardDao.selectBoardCount();
 	}
 
 

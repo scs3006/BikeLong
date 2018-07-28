@@ -15,4 +15,8 @@ public class EnvironmentServiceImpl implements EnvironmentService {
 	public List<Environment> getEnvironmentListByRentalShopNo(int rentalshopNo) {
 		return environmentDao.selectEnvironmentListByRentalShopNo(rentalshopNo);
 	}
+	@Override
+	public void environmentDataIn(Environment environment) {
+		environmentDao.insertEnvironmentData(environment);
+	}
 }

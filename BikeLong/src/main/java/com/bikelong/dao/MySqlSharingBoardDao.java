@@ -24,13 +24,18 @@ public class MySqlSharingBoardDao implements SharingBoardDao {
 	@Override
 	public SharingBoard selectBoard(int boardNo) {
 		SharingBoard sharingBoard = sharingBoardMapper.selectBoard(boardNo);
+		History history = sharingBoardMapper.selectBoardHistory(sharingBoard);
+		sharingBoard.setHistories(history);
 		return sharingBoard;
 	}
 
 
 	@Override
-	public List<SharingBoard> selectBoardList() {
-		List<SharingBoard> sharingBoard = sharingBoardMapper.selectBoardList();
+	public List<SharingBoard> selectBoardList(int from, int to) {
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("from", from);
+		params.put("to", to);
+		List<SharingBoard> sharingBoard = sharingBoardMapper.selectBoardList(params);
 		return sharingBoard;
 	}
 
@@ -61,6 +66,12 @@ public class MySqlSharingBoardDao implements SharingBoardDao {
 		System.out.println(startTime);
 		System.out.println(endTime);
 		return sharingBoardMapper.selectgps(params);
+	}
+
+
+	@Override
+	public int selectBoardCount() {
+		return sharingBoardMapper.selectBoardCount();
 	}
 
 

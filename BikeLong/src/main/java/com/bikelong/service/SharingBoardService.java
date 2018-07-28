@@ -11,7 +11,7 @@ public interface SharingBoardService {
 
 	SharingBoard findBoard(int boardNo);
 
-	List<SharingBoard> findBoardList();
+	List<SharingBoard> findBoardList(int from, int to);
 
 	void updateBoard(SharingBoard sharingBoard);
 
@@ -20,5 +20,7 @@ public interface SharingBoardService {
 	List<History> findHistory(String id);
 
 	List<History> gpsfind(String startTime, String endTime);
+
+	int getBoardCount();
 
 }

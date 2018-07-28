@@ -8,5 +8,7 @@ public interface EnvironmentService {
 
 	List<Environment> getEnvironmentListByRentalShopNo(int rentalshopNo);
 
+	void environmentDataIn(Environment environment);
+
 
 }

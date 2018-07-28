@@ -26,7 +26,6 @@
 		var array = new Array();
 		array[0] = new Array();
 		array[1] = new Array();
-		var mainsize;
 
 		var obj = [];
 		//스마트에디터 프레임생성
@@ -57,11 +56,10 @@
 						alert("경로가 선택되지 않았거나 경로가 존재하지 않습니다.");
 				});
 
-		$("#gpsbtn").on(
-				'click',
-				function(event) {
+		var frist;
+		var second;
+		$("#gpsbtn").on('click',function(event) {
 					event.preventDefault();
-
 					var startTime = $("input:radio[name=history]:checked")
 							.attr('data-startTime');
 					var endTime = $("input:radio[name=history]:checked").attr(
@@ -76,20 +74,29 @@
 						method : "GET",
 						data : parameter,
 						success : function(data, status, xhr) {
-							alert('성공');
 							var size = data.length;
 							var point;
 							var path = polyline.getPath();
 							for (var i = 0; i < size; i++) {
-								alert('' + data[i].latitude + '/'
-										+ data[i].longitude);
+							//	alert('' + data[i].latitude + '/'
+							//			+ data[i].longitude);
+								if(i==0){
+									frist =new naver.maps.LatLng(data[i].latitude,data[i].longitude);
+									new naver.maps.Marker({
+										map : map,
+										position : frist
+									});
+									map.panTo(frist);
+								}else if(i==size-1){
+									second =new naver.maps.LatLng(data[i].latitude,data[i].longitude);
+									new naver.maps.Marker({
+										map : map,
+										position : second
+									});
+								}
 								point = new naver.maps.LatLng(data[i].latitude,
 										data[i].longitude);
 								path.push(point);
-								new naver.maps.Marker({
-									map : map,
-									position : point
-								});
 							}
 						},
 						error : function(xhr, status, err) {
@@ -116,16 +123,6 @@
 		});
 
 		var bicycleLayer = new naver.maps.BicycleLayer();
-
-		naver.maps.Event.addListener(map, 'bicycleLayer_changed', function(
-				bicycleLayer) {
-			if (bicycleLayer) {
-				btn.addClass('control-on');
-			} else {
-				btn.removeClass('control-on');
-			}
-		});
-
 		bicycleLayer.setMap(map);
 
 	});
@@ -195,10 +192,8 @@
 											</tr>
 											<tr>
 												<td>글쓴이</td>
-												<td><input type="text" name="id"
+												<td colspan="3"><input type="text" name="id"
 													value="${loginuser.id}" readonly></td>
-												<td>작성일</td>
-												<td><input type="date" name="date" placeholder="작성일"></td>
 											</tr>
 											<tr>
 												<td>지역 변경</td>
@@ -277,7 +272,7 @@
 												<div class="text-center">
 													<input type="button" id="savebtn" class="btn btn-black"
 														value="글쓰기" /> <a class="btn btn-black"
-														href="/bikelong/route/sharingboardlist.action">취소</a>
+														href="/bikelong/route/sharingboardlist.action?pageno=${pageno}">취소</a>
 												</div>
 											</div>
 										</div>
@@ -302,76 +297,6 @@
 	</div>
 	<!-- Wrapper end-->
 
-	<!-- Off canvas-->
-	<div class="off-canvas-sidebar"
-		data-background="/bikelong/resources/assets/images/sidebar.jpg">
-		<div class="off-canvas-sidebar-wrapper">
-			<div class="off-canvas-header">
-				<a class="close-offcanvas" href="#"><span
-					class="arrows arrows-arrows-remove"></span></a>
-			</div>
-			<div class="off-canvas-content">
-				<!-- Text widget-->
-				<aside class="widget widget_text">
-					<div class="textwidget">
-						<p>
-							<img src="/bikelong/resources/assets/images/logo-light.png"
-								width="74px" alt="">
-						</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-							sed do eiusmod tempor.</p>
-						<ul class="icon-list">
-							<li><i class="ti-email"></i> info@themebusiness.com</li>
-							<li><i class="ti-headphone-alt"></i> 1-444-123-4559</li>
-							<li><i class="ti-location-pin"></i> Raymond Boulevard 224,
-								New York</li>
-						</ul>
-					</div>
-				</aside>
-				<!-- Recent portfolio widget-->
-				<aside class="widget widget_recent_works">
-					<div class="widget-title">
-						<h5>Instagram</h5>
-					</div>
-					<ul>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/1.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/2.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/3.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/4.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/5.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/6.jpg" alt=""></a></li>
-					</ul>
-				</aside>
-
-				<!-- Twitter widget-->
-				<aside class="widget twitter-feed-widget">
-					<div class="widget-title">
-						<h5>Twitter Feed</h5>
-					</div>
-					<div class="twitter-feed" data-twitter="345170787868762112"
-						data-number="2"></div>
-				</aside>
-				<ul class="social-icons">
-					<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-					<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-					<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-					<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-					<li><a href="#"><i class="fa fa-vk"></i></a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<!-- Off canvas end-->
-
-
-
-	<!-- Reserve Popup end-->
 
 	<!-- To top button-->
 	<a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
