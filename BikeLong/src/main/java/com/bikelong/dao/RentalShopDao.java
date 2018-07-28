@@ -2,6 +2,7 @@ package com.bikelong.dao;
 
 import java.util.List;
 
+import com.bikelong.vo.Bike;
 import com.bikelong.vo.RentalShop;
 
 public interface RentalShopDao {
@@ -11,5 +12,7 @@ public interface RentalShopDao {
 	List<RentalShop> searchRentalShop(String select, String text);
 
 	List<RentalShop> selectMobileRentalShop();
+
+	List<Bike> selectMobileBike(int rentalShopNo);
 
 }

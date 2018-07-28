@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.bikelong.mapper.RentalShopMapper;
+import com.bikelong.vo.Bike;
 import com.bikelong.vo.RentalShop;
 
 public class MySqlRentalShopDao implements RentalShopDao {
@@ -39,6 +40,14 @@ public class MySqlRentalShopDao implements RentalShopDao {
 		List<RentalShop> rentalShop = rentalShopMapper.selectMobileRentalShop();
 		
 		return rentalShop;
+	}
+
+	@Override
+	public List<Bike> selectMobileBike(int rentalShopNo) {
+		
+		List<Bike> bike = rentalShopMapper.selectMobileBike(rentalShopNo);
+		
+		return bike;
 	}
 	
 	

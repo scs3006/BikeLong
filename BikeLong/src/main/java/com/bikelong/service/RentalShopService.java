@@ -2,6 +2,7 @@ package com.bikelong.service;
 
 import java.util.List;
 
+import com.bikelong.vo.Bike;
 import com.bikelong.vo.RentalShop;
 
 public interface RentalShopService {
@@ -11,5 +12,7 @@ public interface RentalShopService {
 	List<RentalShop> searchRentalShop(String select, String text);
 
 	List<RentalShop> mobileRentalShop();
+
+	List<Bike> mobileBike(int rentalShopNo);
 
 }

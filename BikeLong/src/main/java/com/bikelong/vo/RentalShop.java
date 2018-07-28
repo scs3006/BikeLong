@@ -1,6 +1,6 @@
 package com.bikelong.vo;
 
-public class RentalShop {
+public class RentalShop{
 	private int rentalShopNo;
 	private String rentalShopName;
 	private String location;

@@ -26,6 +26,14 @@
 		SELECT rentalShopNo, rentalShopName, location, lat, lng, count
 		FROM RentalShop
 	</select>
+	
+	<select id="selectMobileBike" resultType="Bike" parameterType="int">
+		SELECT B.bikeNo, B.rentalShopNo, B.state, R.rentalShopName
+		FROM Bike B
+		JOIN RentalShop R
+		ON B.rentalShopNo = R.rentalShopNo
+		WHERE B.rentalShopNo = #{rentalShopNo}
+	</select>
 
 </mapper>
 

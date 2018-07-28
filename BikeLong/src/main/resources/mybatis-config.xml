@@ -16,6 +16,7 @@
 		<typeAlias type="com.bikelong.vo.History" alias="History"/>
 		<typeAlias type="com.bikelong.vo.Environment" alias="Environment"/>
 		<typeAlias type="com.bikelong.vo.Gps" alias="Gps"/>
+		<typeAlias type="com.bikelong.vo.Bike" alias="Bike"/>
 	</typeAliases>
 
 	<environments default="mysql">
