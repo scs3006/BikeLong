@@ -38,9 +38,11 @@
 <!-- Template core CSS-->
 <link href="/bikelong/resources/assets/css/template.css" rel="stylesheet">
 
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript">
 	$(function(){
+		
+		$('div#comments').load('/bikelong/reply/findReplyList.action?boardNo=' + $('#frm input[name=boardNo]').val());
+		
 		$('.clickTr').each(function(index){
 			$(this).hover(function(){$(this).css('cursor', 'pointer')},function(){$(this).css('cursor')});
 			$(this).on("click",function(event){
@@ -48,6 +50,7 @@
 				location.href="detail.action?boardNo=" + boardNo + "&pageno=" + ${pageno};
 			});		
 		});
+		
 	});
 </script>
 </head>
@@ -85,6 +88,7 @@
 	<div class="wrapper">
 		<section class="module" style="padding-top: 50px;">
 			<div class="container">
+				<div id="comments"></div>
 				<div class="row">
 					<div class="col-lg-11 m-auto">
 						<!-- Post-->
