@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+
+	<!-- Mapper 등록 -->
+	<bean id="gpsMapper"
+		class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.bikelong.mapper.GpsMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
+	<!-- 의존성 주입 -->
+	<bean id="gpsService" class="com.bikelong.service.GpsServiceImpl">
+		<property name="gpsDao" ref="gpsDao" />
+	</bean>
+	<bean id="gpsDao" class="com.bikelong.dao.MySqlGpsDao">
+		<property name="gpsMapper" ref="gpsMapper" />
+	</bean>		
+
+</beans>
