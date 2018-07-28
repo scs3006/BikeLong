@@ -75,4 +75,5 @@
 	<import resource="classpath:com/bikelong/beanconfig/reply-config.xml" />
 	<import resource="classpath:com/bikelong/beanconfig/suggestBoard-config.xml" />
 	<import resource="classpath:com/bikelong/beanconfig/environment-config.xml" />
+	<import resource="classpath:com/bikelong/beanconfig/gps-config.xml" />
 </beans>
