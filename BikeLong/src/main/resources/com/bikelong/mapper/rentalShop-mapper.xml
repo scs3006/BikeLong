@@ -21,6 +21,11 @@
 			rentalShopName LIKE CONCAT('%', #{text}, '%')
 		</if>
 	</select>
+	
+	<select id="selectMobileRentalShop" resultType="RentalShop">
+		SELECT rentalShopNo, rentalShopName, location, lat, lng, count
+		FROM RentalShop
+	</select>
 
 </mapper>
 

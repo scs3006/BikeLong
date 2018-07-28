@@ -10,4 +10,6 @@ public interface RentalShopDao {
 
 	List<RentalShop> searchRentalShop(String select, String text);
 
+	List<RentalShop> selectMobileRentalShop();
+
 }

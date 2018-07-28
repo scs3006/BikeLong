@@ -29,11 +29,11 @@ public class RentalShopServiceImpl implements RentalShopService {
 	}
 
 	@Override
-	public RentalShop mobileRentalShop() {
+	public List<RentalShop> mobileRentalShop() {
 		
+		List<RentalShop> rentalShop = rentalShopDao.selectMobileRentalShop();
 		
-		
-		return null;
+		return rentalShop;
 	}
 	
 	

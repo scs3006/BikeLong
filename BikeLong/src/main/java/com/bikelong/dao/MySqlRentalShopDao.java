@@ -32,6 +32,14 @@ public class MySqlRentalShopDao implements RentalShopDao {
 		
 		return rentalShop;
 	}
+
+	@Override
+	public List<RentalShop> selectMobileRentalShop() {
+		
+		List<RentalShop> rentalShop = rentalShopMapper.selectMobileRentalShop();
+		
+		return rentalShop;
+	}
 	
 	
 	
