@@ -24,6 +24,7 @@
 	<!-- Template core CSS-->
 	<link href="resources/assets/css/template.css" rel="stylesheet">
 	
+	
 	<!-- naver map API -->
 	<script type="text/javascript"
 		src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=Vj_z1VQ7HqR8A0hX5tnL&submodules=geocoder">
@@ -32,6 +33,7 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 	<script type="text/javascript">
 		$(function() {
+			
 			$('#search').on('click', function(event) {
 				event.preventDefault();
 				var text = $('#text').val();
@@ -371,53 +373,13 @@
 						        $('div#map div#iw_inner button#detailInfo').on('click', function(event) {
 						        	currentInfoWindow.close();
 						        	var rentalshopNo = $(this).attr('data-rentalshopNo');
-						        	$.ajax({
-										url : "/bikelong/environment/selectenvironmentlist.action",
-										method : "GET",
-										data : {"rentalshopNo" : rentalshopNo},
-										success : function(data,status,xhr){
-											if(data!=null){
-												alert('상세정보 불러오기 성공');
-											}
-											if(data==null){
-												alert('상세정보 불러오기에 실패하셨습니다.');
-												return;
-											}
-										},
-										error : function(xhr, status, err){
-											alert('상세정보 불러오기에 실패하셨습니다.');
-											return;
-										}
-									});
+									alert(rentalshopNo);						        	
 						        });
 							});
 						
 					</c:forEach>
 						
 					</script>
-				</div>
-				<div class="col-md-12">
-					<div class="row" style="text-align: center;">
-						<div  class="table-responsive">
-							<table class="table table-bordered">
-								 <tr>
-								 	<th colspan="2">대여소 이름</th>
-								 	<td colspan="4"></td>
-								  </tr>
-								  <tr>	
-								 	<th>온도</th>
-								 	<td></td>
-								 	<th>습도</th>
-								 	<td></td>
-								 	<th>미세먼지</th>
-								 	<td></td>
-								 </tr>
-								 <tr>
-								 	 <td colspan="6" height="400px;"></td>
-								 </tr>
-							</table>
-						</div>
-					</div>
 				</div>
 				<div class="col-md-12 write" align="center">
 					<c:if test="${loginuser.id eq 'manager' && loginuser ne null}">

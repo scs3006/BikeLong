@@ -78,12 +78,7 @@ public class NoticeBoardController {
 	
 	
 	@GetMapping(value = "write.action")
-	public String getWrite(HttpSession session) {
-//		if(session.getAttribute("id")!=null) {
-//			return "sharingwrite";
-//		}else {
-//			return "sign-in";
-//		}
+	public String getWrite() {
 		return "notice/write";
 	}
 	
@@ -209,6 +204,11 @@ public class NoticeBoardController {
 		out.println(sFileInfo);
 	    }catch (Exception e) {
 		}
+	}
+	
+	@GetMapping(value = "chart.action")
+	public String getchart() {
+		return "chart/environmentChart";
 	}
 	
 }

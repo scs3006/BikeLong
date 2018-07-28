@@ -24,16 +24,11 @@ public class EnvironmentController {
 	private EnvironmentService environmentService;
 	
 	@GetMapping(value = "/selectenvironmentlist.action")
-	@ResponseBody
-	public List<Environment> postSelectEnvironmentList(int rentalshopNo) {
+	public String postSelectEnvironmentList(int rentalshopNo) {
 		// 로그인 가능한지 확인 (데이터베이스에서 확인 - Service 객체에 요청)
 		List<Environment> environments = environmentService.getEnvironmentListByRentalShopNo(rentalshopNo);
 		
-		if (environments != null) {// 데이터베이스에서 데이터가 조회된 경우
-			return environments;
-		} else {
-			return null;
-		}
+		return "chart/environmentChart";
 	}
 	
 	@RequestMapping(value = { "environmentdata.action" }, method = RequestMethod.GET)
