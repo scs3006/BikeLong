@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,15 +9,24 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>자전거 산책로 공유 목록</title>
-
-
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript"
 	src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
-
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+</script>
+<!--<script type="text/javascript">
+	$(function(){
+		$('.post-header').each(function(index){
+			$(this).hover(function(){$(this).css('cursor', 'pointer')},function(){$(this).css('cursor')});
+			$(this).on("click",function(event){
+				var boardNo = $(this).attr('data-boardNo');
+				location.href="/bikelong/trailpathboard/detail.action?boardNo=" + boardNo + "&pageno=" + ${pageno};
+			});		
+		});
+	});
+</script>-->
 </head>
-
-
 <!-- Favicons-->
 <link rel="shortcut icon"
 	href="/bikelong/resources/assets/images/favicon.png">
@@ -42,21 +50,7 @@
 <!-- Template core CSS-->
 <link href="/bikelong/resources/assets/css/template.css"
 	rel="stylesheet">
-
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script type="text/javascript">
-	$(function(){
-		$('.').each(function(index){
-			$(this).hover(function(){$(this).css('cursor', 'pointer')},function(){$(this).css('cursor')});
-			$(this).click(function(event){
-				var boardNo = $(this).attr('data-boardNo');
-				location.href="/bikelong/trailpathboard/detail.action?boardNo=" + boardNo + "&pageno=" + ${pageno};
-			});		
-		});
-	});
-</script>
 </head>
-
 <body>
 	<!-- Preloader-->
 	<div class="page-loader">
@@ -65,9 +59,9 @@
 	<!-- Preloader end-->
 	<!-- Header-->
 	<jsp:include page="/WEB-INF/views/include/header.jsp" /><br />
-	<br />
-	<br />
 	<!-- Header end-->
+	<br />
+	<br />
 	<!-- Page Header-->
 	<section class="module-page-title">
 		<div class="container">
@@ -93,25 +87,29 @@
 					<div class="row">
 						<div class="col-lg-11 m-auto">
 							<div class="row blog-masonry">
-								<c:forEach var="list" items="${ trailBoardlist }">
+								<c:forEach var="trailBoardlist" items="${ trailBoardlist }">
 									<div class="col-md-4 post-item">
-										<div class="post-preview">
-											<img src="/bikelong/resources/photoupload/${list.imageName}"
-												alt="">
-										</div>
-										<div class="post-wrapper">
-											<div class="post-header" style="height: 15%; text-align: center;">
-												<h2 class="post-title display-1">
-													<a href="/bikelong/trailpathboard/detail.action?boardNo=
-													${list.boardNo}">${list.title}</a>
-												</h2>
-												<h5>
-													작성자 : ${list.id}<br />
-													작성일 : ${list.date}<br />
-													해당 지역 : ${list.locationName}<br />
-												</h5>
+										<article class="post module-page-title" style="height: 500px;"
+											data-boardNo="${lists.boardNo}">
+											<div class="post-preview">
+												<img
+													src="/bikelong/resources/photoupload/${trailBoardlist.imageName}"
+													style="height: 330px">
 											</div>
-										</div>
+											<div class="post-wrapper">
+												<div class="post-header" id="userId"
+													data-id="${loginuser.id}" style="text-align: center;">
+													<h2 class="post-title display-1">
+														<a
+															href="/bikelong/route/sharingboarddetail.action?boardNo=${trailBoardlist.boardNo}&pageno=${pageno}">${lists.title}</a>
+													</h2>
+													<h5>
+														작성자 : ${trailBoardlist.id}<br />작성일 : ${trailBoardlist.date}<br />지역 :
+														${trailBoardlist.locationName}
+													</h5>
+												</div>
+											</div>
+										</article>
 									</div>
 								</c:forEach>
 							</div>

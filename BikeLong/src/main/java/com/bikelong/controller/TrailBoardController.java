@@ -60,6 +60,13 @@ public class TrailBoardController {
 		int dataCount = trailBoardService.getBoardCount();
 
 		ThePager2 pager = new ThePager2(dataCount, pageNo, pageSize, pagerSize, linkUrl);
+		
+		for (TrailBoard trailBoard : trailBoardlist) {
+			String [] imagepath = trailBoard.getContent().split("photoupload/", 40);
+			if(imagepath.length>1) {
+				trailBoard.setImageName((String) imagepath[1].subSequence(0, 40));
+			}
+		}
 
 		model.addAttribute("trailBoardlist", trailBoardlist);
 		model.addAttribute("pager", pager);

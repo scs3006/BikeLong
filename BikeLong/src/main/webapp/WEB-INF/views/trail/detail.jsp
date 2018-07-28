@@ -141,6 +141,8 @@ $(function() {
 	<!-- Header-->
 	<jsp:include page="/WEB-INF/views/include/header.jsp" /><br />
 	<!-- Header end-->
+	<br />
+	<br />
 	<!-- Page Header-->
 	<div>
 		<section class="module-page-title">
