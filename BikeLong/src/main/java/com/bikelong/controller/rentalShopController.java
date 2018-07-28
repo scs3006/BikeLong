@@ -1,5 +1,6 @@
 package com.bikelong.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,11 +57,23 @@ public class rentalShopController {
 	}
 	
 	@RequestMapping(value = "/mobile_rentalShop.action")
-	public RentalShop mobileRentalShop() {
-		
-		RentalShop rentalShop = rentalShopService.mobileRentalShop();
-		
-		return rentalShop;
+	@ResponseBody
+	public List<RentalShop> mobileRentalShop() {
+		System.out.println("모바일 접속 됨");
+		List<RentalShop> rentalShop = rentalShopService.mobileRentalShop();
+		if(rentalShop != null) {
+			return rentalShop;
+		} else {
+			return null;
+		}
 	}
 	
+	@RequestMapping(value = "/mobile_search.action")
+	@ResponseBody
+	public List<RentalShop> mobileSearch() {
+		
+		System.out.println("검색 모바일 접속");
+		
+		return null;
+	}
 }

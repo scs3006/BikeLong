@@ -11,4 +11,6 @@ public interface RentalShopMapper {
 
 	List<RentalShop> searchRentalShop(HashMap<String, Object> params);
 
+	List<RentalShop> selectMobileRentalShop();
+
 }
