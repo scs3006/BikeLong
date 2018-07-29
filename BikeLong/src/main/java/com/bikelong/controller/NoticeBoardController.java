@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -204,11 +206,5 @@ public class NoticeBoardController {
 		out.println(sFileInfo);
 	    }catch (Exception e) {
 		}
-	}
-	
-	@GetMapping(value = "chart.action")
-	public String getchart() {
-		return "chart/environmentChart";
-	}
-	
+	}	
 }

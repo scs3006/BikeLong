@@ -30,7 +30,17 @@
 		src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=Vj_z1VQ7HqR8A0hX5tnL&submodules=geocoder">
 	</script>
 	
+	<!-- jqplot.end -->
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/bikelong/resources/jqplot/jquery.jqplot.js"></script>
+	<script type="text/javascript" src="/bikelong/resources/jqplot/plugins/jqplot.barRenderer.js"></script>
+	<script type="text/javascript" src="/bikelong/resources/jqplot/plugins/jqplot.highlighter.js"></script>
+	<script type="text/javascript" src="/bikelong/resources/jqplot/plugins/jqplot.cursor.js"></script>
+	<script type="text/javascript" src="/bikelong/resources/jqplot/plugins/jqplot.pointLabels.js"></script>
+	<link rel="stylesheet" type="text/css" href="/bikelong/resources/jqplot/jquery.jqplot.css" />
+	<!-- jqplot.end -->
+	
 	<script type="text/javascript">
 		$(function() {
 			
@@ -240,7 +250,7 @@
 				<div class="col-md-12">
 					<div id="map" style="width:100%; height:700px;">
 					</div>
-					<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+					
 					<script type="text/javascript">
 						var HOME_PATH = window.HOME_PATH || '.';
 						var position = new naver.maps.LatLng(37.485344, 126.901107);
@@ -373,7 +383,30 @@
 						        $('div#map div#iw_inner button#detailInfo').on('click', function(event) {
 						        	currentInfoWindow.close();
 						        	var rentalshopNo = $(this).attr('data-rentalshopNo');
-									alert(rentalshopNo);						        	
+						        	
+						        	$('div#chart').load('/bikelong/environment/selectenvironmentlist.action?rentalshopNo='+rentalshopNo);
+						        	
+						        	$.ajax({
+										url : "/bikelong/environment/selectenvironment.action",
+										method : "POST",
+										data : {"rentalshopNo" : rentalshopNo},
+										success : function(data,status,xhr){
+											if(data!=null){
+												$('td#rentShopName').text(data.rentalShopName);
+												$('td#temperature').text(data.temperature + " °C");
+												$('td#humidity').text(data.humidity + " %");
+												$('td#dust').text(data.dust + " µg");
+											}
+											if(data==null){
+												alert('상세정보 불러오기에 실패하였습니다.');
+												return;
+											}
+										},
+										error : function(xhr, status, err){
+											alert('상세정보 불러오기에 실패하였습니다.');
+											return;
+										}
+									});
 						        });
 							});
 						
@@ -381,6 +414,32 @@
 						
 					</script>
 				</div>
+				
+				<div class="col-md-12">
+				<br/><br/>
+					<div class="table-responsive">
+						<table class="table">
+							<tr>
+							  	<th colspan="2">대여소 이름</th>
+							  	<td colspan="4" id="rentShopName"></td>
+							</tr>
+							<tr>
+								<th>현재 온도</th>
+								<td id="temperature"></td>
+							  	<th >현재 습도</th>
+								<td id="humidity"></td>
+								<th>현재 미세먼지</th>
+								<td id="dust"></td>
+							</tr>
+							<tr>
+								<th colspan="6">
+									<div id="chart"></div>
+								</th>
+							</tr>
+						</table>
+					</div>
+				</div>
+				
 				<div class="col-md-12 write" align="center">
 					<c:if test="${loginuser.id eq 'manager' && loginuser ne null}">
 						<button id="write">대여소 등록</button>
@@ -428,7 +487,6 @@
 <!-- modal(end) -->
 
 <!-- Scripts-->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA0rANX07hh6ASNKdBr4mZH0KZSqbHYc3Q"></script>

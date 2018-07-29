@@ -6,7 +6,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title></title>
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript">
 
 </script>

@@ -4,7 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.bikelong.mapper.GpsMapper">
-
+	<insert id="insertGps" parameterType="Gps">
+		INSERT INTO GPS (id, bikeNo, latitude, longitude, date) 
+		VALUES (#{id},#{bikeNo},#{latitude}, #{longitude}, now());
+	</insert>
 </mapper>
 
 
