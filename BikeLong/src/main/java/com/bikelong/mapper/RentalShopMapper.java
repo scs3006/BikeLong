@@ -3,6 +3,7 @@ package com.bikelong.mapper;
 import java.util.HashMap;
 import java.util.List;
 
+import com.bikelong.vo.Bike;
 import com.bikelong.vo.RentalShop;
 
 public interface RentalShopMapper {
@@ -12,5 +13,7 @@ public interface RentalShopMapper {
 	List<RentalShop> searchRentalShop(HashMap<String, Object> params);
 
 	List<RentalShop> selectMobileRentalShop();
+
+	List<Bike> selectMobileBike(int rentalShopNo);
 
 }

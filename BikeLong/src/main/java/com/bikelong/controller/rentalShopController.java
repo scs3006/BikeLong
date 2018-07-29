@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bikelong.service.RentalShopService;
+import com.bikelong.vo.Bike;
 import com.bikelong.vo.RentalShop;
 
 @Controller
@@ -62,6 +63,7 @@ public class rentalShopController {
 		System.out.println("모바일 접속 됨");
 		List<RentalShop> rentalShop = rentalShopService.mobileRentalShop();
 		if(rentalShop != null) {
+			System.out.println("성공");
 			return rentalShop;
 		} else {
 			return null;
@@ -75,5 +77,20 @@ public class rentalShopController {
 		System.out.println("검색 모바일 접속");
 		
 		return null;
+	}
+	
+	@RequestMapping(value = "/mobile_bike.action")
+	@ResponseBody
+	public List<Bike> mobileBike(int rentalShopNo) {
+		
+		System.out.println("자전거 접속됨");
+		System.out.println(rentalShopNo);
+		List<Bike> bike = rentalShopService.mobileBike(rentalShopNo);
+		
+		for(Bike b : bike) {
+			System.out.println(b.getRentalShopName());
+		}
+		
+		return bike;
 	}
 }

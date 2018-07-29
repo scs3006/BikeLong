@@ -3,6 +3,7 @@ package com.bikelong.service;
 import java.util.List;
 
 import com.bikelong.dao.RentalShopDao;
+import com.bikelong.vo.Bike;
 import com.bikelong.vo.RentalShop;
 
 public class RentalShopServiceImpl implements RentalShopService {
@@ -34,6 +35,14 @@ public class RentalShopServiceImpl implements RentalShopService {
 		List<RentalShop> rentalShop = rentalShopDao.selectMobileRentalShop();
 		
 		return rentalShop;
+	}
+
+	@Override
+	public List<Bike> mobileBike(int rentalShopNo) {
+		
+		List<Bike> bike = rentalShopDao.selectMobileBike(rentalShopNo);
+		
+		return bike;
 	}
 	
 	
