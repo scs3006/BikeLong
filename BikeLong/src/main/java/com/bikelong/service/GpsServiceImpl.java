@@ -1,5 +1,7 @@
 package com.bikelong.service;
 
+import java.util.List;
+
 import com.bikelong.dao.GpsDao;
 import com.bikelong.vo.Gps;
 
@@ -13,5 +15,4 @@ public class GpsServiceImpl implements GpsService {
 	public void insertGps(Gps gps) {
 		gpsDao.insertGps(gps);
 	}
-	
 }

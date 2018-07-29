@@ -1,17 +1,15 @@
 package com.bikelong.vo;
 
-import java.util.Date;
-
 //데이터베이스의 Member 테이블의 데이터를 저장하기 위한 클래스
 public class History {
 
 	private int historyNo;
 	private String id;
 	private int bikeNo;
-	private Date startTime;
-	private Date endTime;
+	private String startTime;
+	private String endTime;
 	
-	private int lentalTime;
+	private int rentalTime;
 	private int distance;
 	private int calorie;
 	
@@ -51,23 +49,23 @@ public class History {
 	public void setBikeNo(int bikeNo) {
 		this.bikeNo = bikeNo;
 	}
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
-	public Date getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
-	public void setEndTime(Date endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
-	public int getLentalTime() {
-		return lentalTime;
+	public int getRentalTime() {
+		return rentalTime;
 	}
-	public void setLentalTime(int lentalTime) {
-		this.lentalTime = lentalTime;
+	public void setRentalTime(int rentalTime) {
+		this.rentalTime = rentalTime;
 	}
 	public int getDistance() {
 		return distance;

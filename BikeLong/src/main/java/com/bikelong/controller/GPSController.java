@@ -22,13 +22,8 @@ public class GPSController {
 	@GetMapping(value = "/minsertgps.action")
 	@ResponseBody
 	public void getInsertGps(Gps gps, String latitude, String longitude ) {
-		System.out.println("자전거 번호 :  " + gps.getBikeNo());
-		System.out.println("아이디 :  " + gps.getId());
 		gps.setLatitude(Double.parseDouble(latitude));
 		gps.setLongitude(Double.parseDouble(longitude));
-		System.out.println("위도 :  " + gps.getLatitude());
-		System.out.println("경도 :  " + gps.getLongitude());
-		System.out.println("=========================================================");
 		gpsService.insertGps(gps);
 	}
 		

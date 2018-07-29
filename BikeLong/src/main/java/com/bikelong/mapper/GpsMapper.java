@@ -6,5 +6,4 @@ public interface GpsMapper {
 
 	void insertGps(Gps gps);
 
-
 }

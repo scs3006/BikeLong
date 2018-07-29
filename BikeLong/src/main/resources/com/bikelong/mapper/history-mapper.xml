@@ -4,7 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.bikelong.mapper.HistoryMapper">
-	
+	<insert id="insertHistory" parameterType="History">
+		INSERT INTO History (id,bikeNo,startTime,endTime,rentalTime,distance,calorie)
+		VALUES (#{id},#{bikeNo},#{startTime},#{endTime},#{rentalTime},#{distance},#{calorie})
+	</insert>
 </mapper>
 
 
