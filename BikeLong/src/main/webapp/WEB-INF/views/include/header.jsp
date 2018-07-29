@@ -27,7 +27,6 @@
 								<li><a href="/bikelong/trailpathboard/list.action"><span class="menu-item-span">산책로 추천</span></a></li>
 								<li><a href="/bikelong/route/sharingboardlist.action"><span class="menu-item-span">경로 공유</span></a></li>
 								<li><a href="/bikelong/rentalShop.action"><span class="menu-item-span">대여소 위치</span></a></li>
-								<li><a href="/bikelong/weather/info.action"><span class="menu-item-span">날씨 정보</span></a></li>
 								<li><a href="/bikelong/suggestions/list.action"><span class="menu-item-span">건의 사항</span></a></li>
 							</ul>
 						</div>

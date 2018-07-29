@@ -88,10 +88,9 @@
 	</script>
 	
 	<style type="text/css">
-		input:-ms-input-placeholder {color:#a8a8a8; }
-		input:-webkit-input-placeholder {color:#a8a8a8; }
-		input:-moz-input-placeholder {color:#a8a8a8; }
-		
+
+		#hiddenTable{visibility: hidden;}
+	
 		.search {
 			height: 40px;
 			width: 100%;
@@ -333,7 +332,7 @@
 						        '   <center style="font-size: 13px;">대여가능 자전거</center>',
 						        '   <center style="font-size: 60px; margin-top: -25px;">' + currentMarker.count + '</count>',
 						        '   <hr color="black" style="width:220px; height:2px; margin-top: -10px; margin-bottom: -40px;">',
-						        '   <button id="detailInfo" data-rentalshopNo="'+ currentMarker.rentalShopNo +'" style="width: 80px; height: 35px; font-size: 15px; background: #72ebc9; border: none;">상세정보</button>',
+						        '   <button id="detailInfo" data-rentalshopNo="'+ currentMarker.rentalShopNo +'" style="width: 80px; height: 35px; font-size: 15px; background: #72ebc9; border: none;">날씨정보</button>',
 						        '   <button id="close" style="width: 80px; height: 35px; font-size: 15px; background: #72ebc9; border: none;">확인</button>',
 						        '</div>'
 						    ].join('');
@@ -382,8 +381,14 @@
 						        
 						        $('div#map div#iw_inner button#detailInfo').on('click', function(event) {
 						        	currentInfoWindow.close();
+						        	//히든으로 숨겨진 날씨정보 테이블을 보이게한다.
+						        	$('div#hiddenTable').css('visibility','visible');
+						        	//날씨정보 테이블로 스크롤 이동
+						        	$('html, body').animate({scrollTop : $('div#hiddenTable').offset().top}, 400);
+
 						        	var rentalshopNo = $(this).attr('data-rentalshopNo');
 						        	
+						        	//외부페이지에서 차트를 불러온다.
 						        	$('div#chart').load('/bikelong/environment/selectenvironmentlist.action?rentalshopNo='+rentalshopNo);
 						        	
 						        	$.ajax({
@@ -393,9 +398,24 @@
 										success : function(data,status,xhr){
 											if(data!=null){
 												$('td#rentShopName').text(data.rentalShopName);
-												$('td#temperature').text(data.temperature + " °C");
-												$('td#humidity').text(data.humidity + " %");
-												$('td#dust').text(data.dust + " µg");
+												
+												if(data.temperature==null || data.temperature ==""){
+													$('td#temperature').text("수집된 정보가 없습니다.");
+												}else{
+													$('td#temperature').text(data.temperature + " °C");
+												}
+												
+												if(data.humidity==null || data.humidity ==""){
+													$('td#humidity').text("수집된 정보가 없습니다.");
+												}else{
+													$('td#humidity').text(data.humidity + " %");
+												}
+												
+												if(data.dust==null || data.dust ==""){
+													$('td#dust').text("수집된 정보가 없습니다.");
+												}else{
+													$('td#dust').text(data.dust + " µg");
+												}
 											}
 											if(data==null){
 												alert('상세정보 불러오기에 실패하였습니다.');
@@ -415,7 +435,7 @@
 					</script>
 				</div>
 				
-				<div class="col-md-12">
+				<div class="col-md-12" id="hiddenTable">
 				<br/><br/>
 					<div class="table-responsive">
 						<table class="table">
