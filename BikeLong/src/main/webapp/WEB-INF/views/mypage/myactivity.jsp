@@ -42,6 +42,8 @@ $(function(){
 	
 	carbon = (distance/1000) * 0.232;
 	
+	
+	
 	$('div#rentalTime').attr('data-to',rentalTime);
 	$('div#distance').attr('data-to',distance);
 	$('div#calorie').attr('data-to',calorie);

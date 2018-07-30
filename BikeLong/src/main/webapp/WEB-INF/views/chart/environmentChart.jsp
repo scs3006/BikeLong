@@ -9,6 +9,9 @@
 <script type="text/javascript">
 $(function(){
 	
+	<c:if test="${ not empty environments }">
+	
+	
 	var temperature = [  
 		  <c:forEach var="data" items="${environments}">
 		            [${data.time},${data.temperature}],
@@ -123,7 +126,9 @@ $(function(){
         	    location : 'ne'  // Legend 위치 (e,w,s,n)(동,서,남,북) 조합가능
         	},
         	highlighter: {show: true}
-	}); 
+	});
+    
+    </c:if>
 });
 </script>
 </head>
