@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>자전거 산책 공유 수정</title>
+<title>자전거 산책 수정</title>
 
 
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -64,12 +64,11 @@ $(function() {
 		});
     }); 
 	  
-    $('#cencel').on("click",function(){
+    $('#cencel').click(function(){
 		location.href="/bikelong/trailpathboard/detail.action?boardNo="+${trailBoardupdate.boardNo};
 	})		
 });
 </script>
-
 <!-- Favicons-->
 <link rel="shortcut icon"
 	href="/bikelong/resources/assets/images/favicon.png">
@@ -112,7 +111,7 @@ $(function() {
 		<div class="container">
 			<div class="row align-items-center">
 				<div class="col-md-6">
-					<h1 class="page-title-heading">자전거 산책로 - 글 수정</h1>
+					<h1 class="page-title-heading">자전거 산책로 글 수정</h1>
 				</div>
 				<div class="col-md-6">
 					<ol class="breadcrumb">
@@ -140,6 +139,7 @@ $(function() {
 								<div class="col-md-12">
 									<form action="/bikelong/trailpathboard/update.action" id="frm"
 										method="POST" enctype="multipart/form-data" novalidate>
+										<input type="hidden" name="boardNo" value="${trailBoardupdate.boardNo}">
 										<table class="table table-bordered" >
 											<tr>
 												<td>제목</td>

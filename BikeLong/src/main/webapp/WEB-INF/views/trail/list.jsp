@@ -1,32 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="" />
-<meta name="author" content="" />
-<title>자전거 산책로 공유 목록</title>
-<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script type="text/javascript"
-	src="/bikelong/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script type="text/javascript">
-</script>
-<!--<script type="text/javascript">
-	$(function(){
-		$('.post-header').each(function(index){
-			$(this).hover(function(){$(this).css('cursor', 'pointer')},function(){$(this).css('cursor')});
-			$(this).on("click",function(event){
-				var boardNo = $(this).attr('data-boardNo');
-				location.href="/bikelong/trailpathboard/detail.action?boardNo=" + boardNo + "&pageno=" + ${pageno};
-			});		
-		});
-	});
-</script>-->
-</head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Tavern - Responsive Restaurant Template(Bootstrap 4)</title>
 <!-- Favicons-->
 <link rel="shortcut icon"
 	href="/bikelong/resources/assets/images/favicon.png">
@@ -51,23 +34,31 @@
 <link href="/bikelong/resources/assets/css/template.css"
 	rel="stylesheet">
 </head>
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+
+</script>
+
 <body>
+
 	<!-- Preloader-->
 	<div class="page-loader">
 		<div class="loader"></div>
 	</div>
 	<!-- Preloader end-->
+
 	<!-- Header-->
-	<jsp:include page="/WEB-INF/views/include/header.jsp" /><br />
+	<jsp:include page="/WEB-INF/views/include/header.jsp" />
+	<br />
+	<br />
+	<br />
 	<!-- Header end-->
-	<br />
-	<br />
 	<!-- Page Header-->
 	<section class="module-page-title">
 		<div class="container">
 			<div class="row align-items-center">
 				<div class="col-md-6">
-					<h1 class="page-title-heading">자전거 산책로</h1>
+					<h1 class="page-title-heading">자전거 산책로 목록</h1>
 				</div>
 				<div class="col-md-6">
 					<ol class="breadcrumb">
@@ -78,59 +69,52 @@
 			</div>
 		</div>
 	</section>
+	<!-- Page Header end-->
 	<!-- Wrapper-->
 	<div class="wrapper">
 		<section class="module">
 			<div class="container">
-				<!-- Post-->
-				<article class="post">
-					<div class="row">
-						<div class="col-lg-11 m-auto">
-							<div class="row blog-masonry">
-								<c:forEach var="trailBoardlist" items="${ trailBoardlist }">
-									<div class="col-md-4 post-item">
-										<article class="post module-page-title" style="height: 500px;"
-											data-boardNo="${lists.boardNo}">
-											<div class="post-preview">
-												<img
-													src="/bikelong/resources/photoupload/${trailBoardlist.imageName}"
-													style="height: 330px">
-											</div>
-											<div class="post-wrapper">
-												<div class="post-header" id="userId"
-													data-id="${loginuser.id}" style="text-align: center;">
-													<h2 class="post-title display-1">
-														<a
-															href="/bikelong/route/sharingboarddetail.action?boardNo=${trailBoardlist.boardNo}&pageno=${pageno}">${lists.title}</a>
-													</h2>
-													<h5>
-														작성자 : ${trailBoardlist.id}<br />작성일 : ${trailBoardlist.date}<br />지역 :
-														${trailBoardlist.locationName}
-													</h5>
-												</div>
-											</div>
-										</article>
-									</div>
-								</c:forEach>
-							</div>
-							<br>
-							<div class="col-md-12">
-								<div class="text-center">${pager}</div>
-							</div>
-							<br> <br>
-							<div class="col-md-12">
-								<div class="text-center">
-									<c:if test="${loginuser.id eq 'manager' && loginuser ne null}">
-										<a class="btn btn-black"
-										 href="/bikelong/trailpathboard/write.action">글쓰기</a>
-									</c:if>
-										<a class="btn btn-black" href="/bikelong/index.action">돌아가기</a>
+				<div class="row blog-masonry">
+					<c:forEach var="trailBoardlist" items="${ trailBoardlist }">
+						<div class="col-md-4 post-item">
+							<article class="post module-page-title" style="height: 500px;"
+								data-boardNo="${lists.boardNo}">
+								<div class="post-preview">
+									<img src="/bikelong/resources/photoupload/${trailBoardlist.imageName}"
+										style="height: 330px">
 								</div>
-							</div>
+								<div class="post-wrapper">
+									<div class="post-header" id="userId" data-id="${loginuser.id}"
+										style="text-align: center;">
+										<h2 class="post-title display-1">
+											<a
+												href="/bikelong/trailpathboard/detail.action?boardNo=${trailBoardlist.boardNo}&pageno=${pageno}">${trailBoardlist.title}</a>
+										</h2>
+										<h5>
+											작성자 : ${trailBoardlist.id}<br />
+											작성일 : ${trailBoardlist.date}<br />
+											해당 지역 : ${trailBoardlist.locationName}<br />
+											게시글 번호 : ${trailBoardlist.boardNo}
+										</h5>
+									</div>
+								</div>
+							</article>
 						</div>
+					</c:forEach>
+				</div>
+				<div class="col-md-12">
+					<div class="text-center">${pager}</div>
+				</div>
+				<br>
+				<div class="col-md-12">
+					<div class="text-center">
+						<c:if test="${loginuser.id eq 'manager' && loginuser ne null}">
+							<a class="btn btn-black"
+								href="/bikelong/trailpathboard/write.action">글쓰기</a>
+						</c:if>
+						<a class="btn btn-black" href="/bikelong/index.action">돌아가기</a>
 					</div>
-				</article>
-				<!-- Post end-->
+				</div>
 			</div>
 		</section>
 		<svg class="footer-circle" xmlns="http://www.w3.org/2000/svg"
@@ -143,90 +127,6 @@
 		<!-- Footer end-->
 	</div>
 	<!-- Wrapper end-->
-
-	<!-- Off canvas-->
-	<div class="off-canvas-sidebar"
-		data-background="/bikelong/resources/assets/images/sidebar.jpg">
-		<div class="off-canvas-sidebar-wrapper">
-			<div class="off-canvas-header">
-				<a class="close-offcanvas" href="#"><span
-					class="arrows arrows-arrows-remove"></span></a>
-			</div>
-			<div class="off-canvas-content">
-				<!-- Text widget-->
-				<aside class="widget widget_text">
-					<div class="textwidget">
-						<p>
-							<img src="/bikelong/resources/assets/images/logo-light.png"
-								width="74px" alt="">
-						</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-							sed do eiusmod tempor.</p>
-						<ul class="icon-list">
-							<li><i class="ti-email"></i> info@themebusiness.com</li>
-							<li><i class="ti-headphone-alt"></i> 1-444-123-4559</li>
-							<li><i class="ti-location-pin"></i> Raymond Boulevard 224,
-								New York</li>
-						</ul>
-					</div>
-				</aside>
-				<!-- Recent portfolio widget-->
-				<aside class="widget widget_recent_works">
-					<div class="widget-title">
-						<h5>Instagram</h5>
-					</div>
-					<ul>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/1.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/2.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/3.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/4.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/5.jpg" alt=""></a></li>
-						<li><a href="#"><img
-								src="/bikelong/resources/assets/images/widgets/6.jpg" alt=""></a></li>
-					</ul>
-				</aside>
-				<!-- Text widget-->
-				<!--aside.widget.widget_text
-					.textwidget
-						.up-logo
-							p.text-center.m-b-50: img(src="/bikelong/resources/assets/images/logo-light.png" width="100" alt="")
-						.up-form
-							form(method="post")
-								.form-group
-									input.form-control.form-control-lg(type="email" placeholder="Email")
-								.form-group
-									input.form-control.form-control-lg(type="password" placeholder="Pasword")
-								.form-group
-									button(type="submit" class="btn btn-block btn-lg btn-round btn-brand") Log in
-						.up-help
-							p: a(href="#") Forgot your password?
-							p Don't have an account yet? <a href="#">Sign in</a>
-					-->
-				<!-- Twitter widget-->
-				<aside class="widget twitter-feed-widget">
-					<div class="widget-title">
-						<h5>Twitter Feed</h5>
-					</div>
-					<div class="twitter-feed" data-twitter="345170787868762112"
-						data-number="2"></div>
-				</aside>
-				<ul class="social-icons">
-					<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-					<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-					<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-					<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-					<li><a href="#"><i class="fa fa-vk"></i></a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<!-- Off canvas end-->
-	<!-- Reserve Popup end-->
 	<!-- To top button-->
 	<a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
 	<!-- Scripts-->

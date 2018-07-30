@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>자전거 산책로 공유 글쓰기</title>
+<title>자전거 산책로 글쓰기</title>
 
 
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -83,7 +83,7 @@
 		<div class="container">
 			<div class="row align-items-center">
 				<div class="col-md-6">
-					<h1 class="page-title-heading">자전거 산책로 - 글쓰기</h1>
+					<h1 class="page-title-heading">자전거 산책로 글쓰기</h1>
 				</div>
 				<div class="col-md-6">
 					<ol class="breadcrumb">

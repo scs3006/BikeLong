@@ -11,7 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-<title>Tavern - Responsive Restaurant Template(Bootstrap 4)</title>
+<title>자전거 산책로 상세보기</title>
 
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript"
@@ -32,7 +32,7 @@ $(function() {
 				success : function(data,status,xhr){
 					if(data=="success"){
 						alert('삭제되었습니다.');
-						location.href = 'list.action';
+						location.href = '/bikelong/trailpathboard/list.action';
 					}
 					if(data=="fail"){
 						alert('삭제에 실패하였습니다.');
@@ -46,67 +46,70 @@ $(function() {
 			return;
 		}
 	});
-		$("#replySubmit").click(function(event){
-        	event.preventDefault();
-        	if(!($('#frm input[name=id]').val())){ // null or '' check!
-    			var value = confirm('로그인이 필요한 서비스입니다. 로그인 할까요?');
-    			if(value){
-    				location.href='/bikelong/account/signin.action';
-    			}
-    			return;
-    		}
-        	if($('#frm textarea').val().length == 0){
-    			alert('댓글 내용을 입력하세요.');
-    			return;
-    		}
-        	var queryString =  $("#frm").serialize();
-        	$.ajax({
-				url : "/bikelong/reply/insert.action",
-				method : "POST",
-				data : queryString,
-				success : function(data,status,xhr){
-					if(data=="success"){
-						alert('댓글 등록에 성공하셨습니다.');
-						$('#frm textarea').val('');
-						$('div#comments').load('/bikelong/reply/findReplyList.action?boardNo=' + $('#frm input[name=boardNo]').val());
-					}
-					if(data=="fail"){
-						alert('댓글 등록에 실패하셨습니다.');
-						return;
-					}
-				},
-				error : function(xhr, status, err){
+	
+	$("#replySubmit").click(function(event){
+    	event.preventDefault();
+    	
+    	if(!($('#frm input[name=id]').val())){ // null or '' check!
+			var value = confirm('로그인이 필요한 서비스입니다. 로그인 할까요?');
+			if(value){
+				location.href='/bikelong/account/signin.action';
+			}
+			return;
+		}
+    	
+    	if($('#frm textarea').val().length == 0){
+			alert('댓글 내용을 입력하세요.');
+			return;
+		}
+    	
+    	var queryString =  $("#frm").serialize();
+    	$.ajax({
+			url : "/bikelong/reply/insert.action",
+			method : "POST",
+			data : queryString,
+			success : function(data,status,xhr){
+				if(data=="success"){
+					alert('댓글 등록에 성공하셨습니다.');
+					$('#frm textarea').val('');
+					$('div#comments').load('/bikelong/reply/findReplyList.action?boardNo=' + $('#frm input[name=boardNo]').val());
+				}
+				if(data=="fail"){
 					alert('댓글 등록에 실패하셨습니다.');
 					return;
 				}
-			});
-        });
-		$('.deleteReply').each(function(idx){
-			$(this).click(function(event){
-				event.preventDefault();
-				var replyNo = $(this).attr('data-replyNo');
-				$.ajax({
-					url : "/bikelong/reply/delete.action",
-					method : "GET",
-					data : {'replyNo' : replyNo},
-					success : function(data,status,xhr){
-						if(data=="success"){
-							alert('댓글 삭제에 성공하셨습니다.');
-							location.href="/bikelong/trailpathboard/detail.action?boardNo=${trailBoarddetail.boardNo}";
-						}
-						if(data=="fail"){
-							alert('댓글 삭제에 실패하셨습니다.');
-							return;
-						}
-					},
-					error : function(xhr, status, err){
-						alert('댓글 삭제에 실패하셨습니다.');
-						return;
-					}
-				});
-			});
+			},
+			error : function(xhr, status, err){
+				alert('댓글 등록에 실패하셨습니다.');
+				return;
+			}
+		});
+    });
+	
+	$('div#comments').on('click', 'a.deleteReply',function(event){
+		event.preventDefault();
+		var replyNo = $(this).attr('data-replyNo');
+		$.ajax({
+			url : "/bikelong/reply/delete.action",
+			method : "GET",
+			data : {'replyNo' : replyNo},
+			success : function(data,status,xhr){
+				if(data=="success"){
+					alert('댓글 삭제에 성공하셨습니다.');
+					location.href="/bikelong/trailpathboard/detail.action?boardNo=${trailBoarddetail.boardNo}";
+				}
+				if(data=="fail"){
+					alert('댓글 삭제에 실패하셨습니다.');
+					return;
+				}
+			},
+			error : function(xhr, status, err){
+				alert('댓글 삭제에 실패하셨습니다.');
+				return;
+			}
 		});
 	});
+});
 </script>
 <!-- Favicons-->
 <link rel="shortcut icon"
@@ -149,13 +152,13 @@ $(function() {
 			<div class="container">
 				<div class="row align-items-center">
 					<div class="col-md-6">
-						<h1 class="page-title-heading">자전거 산책로</h1>
+						<h1 class="page-title-heading">자전거 산책로 상세정보</h1>
 					</div>
 					<div class="col-md-6">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="/bikelong/index.action">Home</a></li>
-							<li class="breadcrumb-item active"><a
-								href="/bikelong/trailpathboard/list.action">Trail Board</a></li>
+							<li class="breadcrumb-item active">
+							<a href="/bikelong/trailpathboard/list.action">Trail Board</a></li>
 							<li class="breadcrumb-item active">Trail Detril</li>
 						</ol>
 					</div>
@@ -176,7 +179,7 @@ $(function() {
 										<td colspan="4">${trailBoarddetail.title}</td>
 									</tr>
 									<tr>
-										<td>글쓴이</td>
+										<td>작성자</td>
 										<td>${trailBoarddetail.id}</td>
 										<td>작성일</td>
 										<td>${trailBoarddetail.date}</td>
@@ -187,43 +190,6 @@ $(function() {
 									</tr>
 								</table>
 								<div class="col-md-12">
-									<div class="form-group">
-										<div class="post-preview">
-											<div id="map" style="width: 100%; height: 550px;"></div>
-											<script>
-												var map = new naver.maps.Map('map', {
-												    center: new naver.maps.LatLng(37.4820108, 126.8980968),
-												    zoom: 10
-												});
-												
-												var polyline = new naver.maps.Polyline({
-												    map: map,
-												    path: [
-												        new naver.maps.LatLng(37.359924641705476, 127.1148204803467),
-												        new naver.maps.LatLng(37.36343797188166, 127.11486339569092),
-												        new naver.maps.LatLng(37.368520071054576, 127.11473464965819),
-												        new naver.maps.LatLng(37.3685882848096, 127.1088123321533),
-												        new naver.maps.LatLng(37.37295383612657, 127.10876941680907),
-												        new naver.maps.LatLng(37.38001321351567, 127.11851119995116),
-												        new naver.maps.LatLng(37.378546827477855, 127.11984157562254),
-												        new naver.maps.LatLng(37.376637072444105, 127.12052822113036),
-												        new naver.maps.LatLng(37.37530703574853, 127.12190151214598),
-												        new naver.maps.LatLng(37.371657839593894, 127.11645126342773),
-												        new naver.maps.LatLng(37.36855417793982, 127.1207857131958)
-												    ],
-												    strokeStyle: 'solid',
-												    strokeColor: '#5347AA',
-												    strokeWeight: 5
-												});
-												var marker = new naver.maps.Marker({
-												    position: new naver.maps.LatLng(37.359924641705476, 127.1148204803467),
-												    map: map
-												});
-												</script>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-12">
 									<div class="form-group">${trailBoarddetail.content}</div>
 								</div>
 							</div>
@@ -233,8 +199,7 @@ $(function() {
 										href="/bikelong/trailpathboard/list.action?pageno=${pageno}">목록보기</a>
 									<c:if test="${loginuser.id eq 'manager' && loginuser ne null}">
 										<a class="btn btn-black"
-											href="/bikelong/trailpathboard/update.action?boardNo=
-													${trailBoarddetail.boardNo}&pageno=${pageno}">수정</a>
+											href="/bikelong/trailpathboard/update.action?boardNo=${trailBoarddetail.boardNo}&pageno=${pageno}">수정</a>
 										<a class="btn btn-black" id="traildelete" href="#">삭제</a>
 									</c:if>
 								</div>
@@ -242,6 +207,8 @@ $(function() {
 						</div>
 					</article>
 					<!-- Post end-->
+					<br>
+					<br>
 					<!-- Comments area-->
 					<div class="comments-area">
 						<h5 class="comments-title">Comments</h5>

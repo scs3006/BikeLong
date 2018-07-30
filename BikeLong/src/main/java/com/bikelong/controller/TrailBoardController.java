@@ -60,11 +60,13 @@ public class TrailBoardController {
 		int dataCount = trailBoardService.getBoardCount();
 
 		ThePager2 pager = new ThePager2(dataCount, pageNo, pageSize, pagerSize, linkUrl);
-		
+
 		for (TrailBoard trailBoard : trailBoardlist) {
 			String [] imagepath = trailBoard.getContent().split("photoupload/", 40);
 			if(imagepath.length>1) {
 				trailBoard.setImageName((String) imagepath[1].subSequence(0, 40));
+			} else {
+				trailBoard.setImageName("b9bbe958-c6c1-46dc-a8b3-4f5ba916dce3.gif");
 			}
 		}
 
@@ -90,12 +92,13 @@ public class TrailBoardController {
 	}
 
 	@GetMapping(value = "write.action")
-	public String write() {
+	public String getWrite() {
+
 		return "trail/write";
 	}
 
 	@PostMapping(value = "write.action")
-	public String writePost(TrailBoard trailBoard) {
+	public String postWrite(TrailBoard trailBoard) {
 		int cate = 1;
 		trailBoard.setCategory(cate);
 		trailBoardService.writeBoard(trailBoard);
@@ -110,8 +113,8 @@ public class TrailBoardController {
 		model.addAttribute("pageno", pageNo);
 		return "trail/update";
 	}
-	
-	
+
+
 	@PostMapping(value = "update.action")
 	@ResponseBody
 	public String postUpdate(TrailBoard trailBoard) {
