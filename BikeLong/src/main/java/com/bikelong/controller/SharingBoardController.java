@@ -106,9 +106,11 @@ public class SharingBoardController {
 			List<History> history = sharingBoarService.findHistory(id);
 			sharingBoardUpdate = sharingBoarService.findBoard(boardNo);
 			sharingBoardUpdate.setBoardNo(boardNo);
+			History his = sharingBoardUpdate.getHistories();
 			
 			model.addAttribute("sharingBoardUpdate", sharingBoardUpdate);
 			model.addAttribute("history", history);
+			model.addAttribute("his", his);
 			model.addAttribute("pageno", pageNo);
 			
 			return "sharingboard/sharingboardupdate";

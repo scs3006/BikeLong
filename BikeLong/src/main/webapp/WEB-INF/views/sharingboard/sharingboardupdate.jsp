@@ -56,17 +56,12 @@
 						alert("경로가 선택되지 않았거나 경로가 존재하지 않습니다.");
 				});
 		
-		var frist;
-		var second;
-		$("#gpsbtn").on('click',function(event) {
-					event.preventDefault();
-					var startTime = $("input:radio[name=history]:checked")
-							.attr('data-startTime');
-					var endTime = $("input:radio[name=history]:checked").attr(
-							'data-endTime');
+		$(window).ready(function(){
+					var startTimeSecond = $('#map').attr('data-startTimeSecond'); 
+					var endTimeSecond = $('#map').attr('data-endTimeSecond');
 					var parameter = {
-						"startTime" : startTime,
-						"endTime" : endTime
+						"startTime" : startTimeSecond,
+						"endTime" : endTimeSecond
 					};
 
 					$.ajax({
@@ -82,14 +77,14 @@
 							//			+ data[i].longitude);
 								if(i==0){
 									frist =new naver.maps.LatLng(data[i].latitude,data[i].longitude);
-									new naver.maps.Marker({
+									fritstMarker = new naver.maps.Marker({
 										map : map,
 										position : frist
 									});
 									map.panTo(frist);
 								}else if(i==size-1){
 									second =new naver.maps.LatLng(data[i].latitude,data[i].longitude);
-									new naver.maps.Marker({
+									secondMarker = new naver.maps.Marker({
 										map : map,
 										position : second
 									});
@@ -104,6 +99,75 @@
 						}
 					});
 				});
+		
+		$("#gpsbtn").on('click',function(event) {
+					event.preventDefault();
+					var startTime = $("input:radio[name=history]:checked")
+							.attr('data-startTime');
+					var endTime = $("input:radio[name=history]:checked").attr(
+							'data-endTime');
+					var parameter = {
+						"startTime" : startTime,
+						"endTime" : endTime
+					};
+					polyline.setMap(null);
+					polyline = new naver.maps.Polyline({
+						map : map,
+						path : [],
+						strokeStyle : 'solid',
+						strokeColor : '#5347AA',
+						strokeWeight : 5
+					});
+
+					$.ajax({
+						url : "/bikelong/route/gpsfind.action",
+						method : "GET",
+						data : parameter,
+						success : function(data, status, xhr) {
+							var size = data.length;
+							var point;
+							var path = polyline.getPath();
+							
+							for (var i = 0; i < size; i++) {
+							//	alert('' + data[i].latitude + '/'
+							//			+ data[i].longitude);
+								if(i==0){
+									frist =new naver.maps.LatLng(data[i].latitude,data[i].longitude);
+									if(fritstMarker!=null){
+										fritstMarker.setMap(null);
+									}
+									fritstMarker = new naver.maps.Marker({
+										map : map,
+										position : frist
+									});
+									map.panTo(frist);
+								}else if(i==size-1){
+									second =new naver.maps.LatLng(data[i].latitude,data[i].longitude);
+									if(secondMarker!=null){
+										secondMarker.setMap();	
+									}
+									secondMarker = new naver.maps.Marker({
+										map : map,
+										position : second
+									});
+								}
+								point = new naver.maps.LatLng(data[i].latitude,
+										data[i].longitude);
+								path.push(point);
+							}
+							distance = polyline.getDistance();
+						},
+						error : function(xhr, status, err) {
+							alert('실패하셨습니다.');
+						}
+					});
+				});
+		
+		var frist;
+		var second;
+		var fritstMarker;
+		var secondMarker;
+		var distance;
 
 		var map = new naver.maps.Map('map', {
 			center : new naver.maps.LatLng(37.3700065, 127.121359),
@@ -239,10 +303,8 @@
 										<div class="row">
 											<div class="col-md-12" id="his">
 												<c:forEach var="h" items="${history}">
-													<fmt:formatDate value="${h.startTime}" var="startTime"
-														pattern="yyyy-MM-dd HH:mm:ss" />
-													<fmt:formatDate value="${h.endTime}" var="endTime"
-														pattern="yyyy-MM-dd HH:mm:ss" />
+													<fmt:formatDate value="${h.startTime}" var="startTime" pattern="yyyy-MM-dd HH:mm:ss" />
+													<fmt:formatDate value="${h.endTime}" var="endTime" pattern="yyyy-MM-dd HH:mm:ss" />
 													<table class="table table-bordered"">
 														<tr>
 															<td>출발시간 : ${startTime} / 도착시간 : ${endTime}</td>
@@ -259,7 +321,9 @@
 											<div class="col-md-12">
 												<div class="form-group">
 													<div class="post-preview">
-														<div id="map" style="width: 100%; height: 550px;"></div>
+														<fmt:formatDate value="${his.startTime}" var="startTimeSecond" pattern="yyyy-MM-dd HH:mm:ss" />
+														<fmt:formatDate value="${his.endTime}" var="endTimeSecond" pattern="yyyy-MM-dd HH:mm:ss" />
+														<div id="map" style="width:100%;height:550px;" data-startTimeSecond="${startTimeSecond}" data-endTimeSecond="${endTimeSecond}"></div>
 													</div>
 												</div>
 											</div>

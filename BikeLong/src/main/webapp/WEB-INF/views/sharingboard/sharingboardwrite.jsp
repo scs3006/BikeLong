@@ -43,9 +43,7 @@
 			}
 		});
 		//전송버튼
-		$("#savebtn").on(
-				'click',
-				function(event) {
+		$("#savebtn").on('click',function(event) {
 					event.preventDefault();
 					if ($('input:radio[name=history]').is(':checked')
 							&& $('input:radio[name=history]').val() != null) {
@@ -56,8 +54,6 @@
 						alert("경로가 선택되지 않았거나 경로가 존재하지 않습니다.");
 				});
 
-		var frist;
-		var second;
 		$("#gpsbtn").on('click',function(event) {
 					event.preventDefault();
 					var startTime = $("input:radio[name=history]:checked")
@@ -68,7 +64,15 @@
 						"startTime" : startTime,
 						"endTime" : endTime
 					};
-
+					polyline.setMap(null);
+					polyline = new naver.maps.Polyline({
+						map : map,
+						path : [],
+						strokeStyle : 'solid',
+						strokeColor : '#5347AA',
+						strokeWeight : 5
+					});
+					
 					$.ajax({
 						url : "/bikelong/route/gpsfind.action",
 						method : "GET",
@@ -77,19 +81,26 @@
 							var size = data.length;
 							var point;
 							var path = polyline.getPath();
+														
 							for (var i = 0; i < size; i++) {
 							//	alert('' + data[i].latitude + '/'
 							//			+ data[i].longitude);
 								if(i==0){
 									frist =new naver.maps.LatLng(data[i].latitude,data[i].longitude);
-									new naver.maps.Marker({
+									if(fritstMarker!=null){
+										fritstMarker.setMap(null);
+									}
+									fritstMarker = new naver.maps.Marker({
 										map : map,
 										position : frist
 									});
 									map.panTo(frist);
 								}else if(i==size-1){
 									second =new naver.maps.LatLng(data[i].latitude,data[i].longitude);
-									new naver.maps.Marker({
+									if(secondMarker!=null){
+										secondMarker.setMap();	
+									}
+									secondMarker = new naver.maps.Marker({
 										map : map,
 										position : second
 									});
@@ -98,13 +109,20 @@
 										data[i].longitude);
 								path.push(point);
 							}
+							distance = polyline.getDistance();
 						},
 						error : function(xhr, status, err) {
 							alert('실패하셨습니다.');
 						}
 					});
 				});
-
+		
+		var frist;
+		var second;
+		var fritstMarker;
+		var secondMarker;
+		var distance;
+		
 		var map = new naver.maps.Map('map', {
 			center : new naver.maps.LatLng(37.3700065, 127.121359),
 			zoom : 10,
@@ -121,10 +139,10 @@
 			strokeColor : '#5347AA',
 			strokeWeight : 5
 		});
-
+		
 		var bicycleLayer = new naver.maps.BicycleLayer();
 		bicycleLayer.setMap(map);
-
+		
 	});
 </script>
 
