@@ -56,7 +56,7 @@ public class MypageController {
 				params.put("requestType", requestType);
 				params.put("id", (String) session.getAttribute("id"));
 				params.put("startDay", startDay);
-				params.put("endDay", endToday);
+				params.put("endToday", endToday);
 				historyList = mypageService.getTotalActivity(params);
 				
 				break;
@@ -65,12 +65,17 @@ public class MypageController {
 				week.add(Calendar.DATE , -7);
 				startDay = startDateFormat.format (week.getTime());
 				System.out.println(startDay);
+				System.out.println(requestType);
 				
 				params.put("requestType", requestType);
 				params.put("id", (String) session.getAttribute("id"));
 				params.put("startDay", startDay);
-				params.put("endDay", endToday);
+				params.put("endToday", endToday);
 				historyList = mypageService.getTotalActivity(params);
+				
+				for(History h : historyList) {
+					System.out.println(h.getCalorie());
+				}
 				
 				break;
 			case 3:
@@ -82,7 +87,7 @@ public class MypageController {
 				params.put("requestType", requestType);
 				params.put("id", (String) session.getAttribute("id"));
 				params.put("startDay", startDay);
-				params.put("endDay", endToday);
+				params.put("endToday", endToday);
 				historyList = mypageService.getTotalActivity(params);
 				
 				break;
