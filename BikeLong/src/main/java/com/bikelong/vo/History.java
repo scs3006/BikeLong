@@ -1,5 +1,7 @@
 package com.bikelong.vo;
 
+import java.util.Date;
+
 //데이터베이스의 Member 테이블의 데이터를 저장하기 위한 클래스
 public class History {
 
@@ -8,6 +10,9 @@ public class History {
 	private int bikeNo;
 	private String startTime;
 	private String endTime;
+	
+	private Date sTime;
+	private Date eTime;
 	
 	private int rentalTime;
 	private int distance;
@@ -85,4 +90,17 @@ public class History {
 	public void setHistoryNo(int historyNo) {
 		this.historyNo = historyNo;
 	}
+	public Date getsTime() {
+		return sTime;
+	}
+	public void setsTime(Date sTime) {
+		this.sTime = sTime;
+	}
+	public Date geteTime() {
+		return eTime;
+	}
+	public void seteTime(Date eTime) {
+		this.eTime = eTime;
+	}
+	
 }

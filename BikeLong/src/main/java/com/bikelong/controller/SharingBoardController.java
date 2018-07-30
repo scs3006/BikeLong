@@ -15,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.bikelong.service.ReplyService;
 import com.bikelong.service.SharingBoardService;
 import com.bikelong.ui.ThePager2;
-import com.bikelong.vo.Board;
 import com.bikelong.vo.History;
 import com.bikelong.vo.Reply;
 import com.bikelong.vo.SharingBoard;
@@ -26,7 +25,7 @@ public class SharingBoardController {
 	
 	@Autowired
 	@Qualifier(value = "sharingBoardService")
-	private SharingBoardService sharingBoarService;
+	private SharingBoardService sharingBoardService;
 	
 	@Autowired
 	@Qualifier(value = "replyService")
@@ -42,7 +41,7 @@ public class SharingBoardController {
 		int pagerSize = 5;//번호로 표시할 페이지 목록
 		String linkUrl = "sharingboardlist.action";
 		
-		List<SharingBoard> sharingBoardLists = sharingBoarService.findBoardList(from, to);
+		List<SharingBoard> sharingBoardLists = sharingBoardService.findBoardList(from, to);
 		for (SharingBoard sharingBoard : sharingBoardLists) {
 			String [] imagepath = sharingBoard.getContent().split("photoupload/", 40);
 			if(imagepath.length>1) {
@@ -51,7 +50,7 @@ public class SharingBoardController {
 				sharingBoard.setImageName("b9bbe958-c6c1-46dc-a8b3-4f5ba916dce3.gif");
 			}
 		}
-		int dataCount = sharingBoarService.getBoardCount();
+		int dataCount = sharingBoardService.getBoardCount();
 		
 		ThePager2 pager = new ThePager2(dataCount, pageNo, pageSize, pagerSize, linkUrl);
 		
@@ -63,12 +62,12 @@ public class SharingBoardController {
 	
 	@RequestMapping(value = "sharingboarddetail.action", method = RequestMethod.GET)
 	public String detail(@RequestParam(value ="pageno", defaultValue = "0") int pageNo, @RequestParam (value="boardNo", defaultValue="0") int boardNo, Model model, SharingBoard sharingBoardDetail) {
-		
-		sharingBoardDetail = sharingBoarService.findBoard(boardNo);
+
+		sharingBoardDetail = sharingBoardService.findBoard(boardNo);
 		sharingBoardDetail.setBoardNo(boardNo);
 		List<Reply> replyList = replyService.getReplyList(boardNo);
 		History history = sharingBoardDetail.getHistories();
-
+		
 		if(replyList != null && replyList.size() > 0) {
 			model.addAttribute("replyList", replyList);
 		}
@@ -81,7 +80,7 @@ public class SharingBoardController {
 	
 	@RequestMapping(value = "sharingboardwrite.action", method = RequestMethod.GET)
 	public String write(Model model, String id) {
-			List<History> history = sharingBoarService.findHistory(id);
+			List<History> history = sharingBoardService.findHistory(id);
 			
 			model.addAttribute("history", history);
 			
@@ -93,7 +92,7 @@ public class SharingBoardController {
 	public String writePost(SharingBoard sharingBoard) {
 		int cate = 2;
 		sharingBoard.setCategory(cate);
-		sharingBoarService.writeBoard(sharingBoard);
+		sharingBoardService.writeBoard(sharingBoard);
 				
 		return "redirect:sharingboardlist.action";
 	}
@@ -103,14 +102,14 @@ public class SharingBoardController {
 			@RequestParam (value ="boardNo", defaultValue ="0") int boardNo, Model model, 
 			SharingBoard sharingBoardUpdate, String id) {
 		
-			List<History> history = sharingBoarService.findHistory(id);
-			sharingBoardUpdate = sharingBoarService.findBoard(boardNo);
+			List<History> history = sharingBoardService.findHistory(id);
+			sharingBoardUpdate = sharingBoardService.findBoard(boardNo);
 			sharingBoardUpdate.setBoardNo(boardNo);
-			History his = sharingBoardUpdate.getHistories();
+			History History = sharingBoardUpdate.getHistories();
 			
 			model.addAttribute("sharingBoardUpdate", sharingBoardUpdate);
 			model.addAttribute("history", history);
-			model.addAttribute("his", his);
+			model.addAttribute("History", History);
 			model.addAttribute("pageno", pageNo);
 			
 			return "sharingboard/sharingboardupdate";
@@ -123,7 +122,7 @@ public class SharingBoardController {
 		if(sharingBoard.getLocationNo()=="0") {
 			sharingBoard.setLocationNo(defaultLocationNo);
 		}
-		sharingBoarService.updateBoard(sharingBoard);
+		sharingBoardService.updateBoard(sharingBoard);
 		redirectAttributes.addAttribute("boardNo", sharingBoard.getBoardNo());
 		model.addAttribute("pageno", pageNo);
 				
@@ -132,7 +131,7 @@ public class SharingBoardController {
 	
 	@RequestMapping(value = "sharingboarddelete.action", method = RequestMethod.GET)
 	public String delete(@RequestParam (value ="boardNo", defaultValue ="0") int boardNo) {
-			sharingBoarService.deleteBoard(boardNo);
+			sharingBoardService.deleteBoard(boardNo);
 			
 			return "redirect:sharingboardlist.action";
 	}
@@ -141,7 +140,7 @@ public class SharingBoardController {
 	@RequestMapping(value = "gpsfind.action", method = RequestMethod.GET)
 	@ResponseBody
 	public List<History> gpsfind(String startTime, String endTime) {
-		List<History> histories = sharingBoarService.gpsfind(startTime,endTime);
+		List<History> histories = sharingBoardService.gpsfind(startTime,endTime);
 		return histories;
 	}
 		

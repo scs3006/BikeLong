@@ -17,7 +17,7 @@
 		WHERE b.category = 2 ORDER BY boardNo DESC
 		LIMIT #{from}, #{to}
 	</select>
-	
+
 	<select id="selectBoardCount" resultType="int">
 		SELECT COUNT(*)
 		FROM Board 
@@ -34,13 +34,13 @@
 	</select>
 	
 	<select id="selectBoardHistory" parameterType="SharingBoard" resultType="History">
-		SELECT startTime, endTime
+		SELECT startTime sTime, endTime eTime
 		FROM History
 		WHERE historyNo = #{history}  
 	</select>
 	
 	<select id="selectHistory" parameterType="hashmap" resultType="History">
-		SELECT historyNo, startTime, endTime
+		SELECT historyNo, startTime sTime, endTime eTime
 		FROM History
 		WHERE id = #{id}  
 	</select>
@@ -51,17 +51,6 @@
 		WHERE date BETWEEN #{startTime} AND #{endTime}
 	</select>
 	
-	<!-- <select id="selectBoardHistory" parameterType="" resultType="">
-		SELECT gpsNo, latitude, longitude
-		FROM GPS
-		WHERE date BETWEEN startTime AND endTime 
-	
-		SELECT h.startTime, h.endTime
-		FROM Board b INNER JOIN History h
-		ON b.historyNo = h.historyNo
-		WHERE h.historyNo = #{}
-	</select> -->
-
 	<update id="updateBoard" parameterType="SharingBoard">
 		UPDATE Board
 		SET locationNo = #{locationNo}, title = #{title}, content = #{content}, history=#{history}

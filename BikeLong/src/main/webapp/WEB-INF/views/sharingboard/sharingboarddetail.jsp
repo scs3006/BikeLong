@@ -262,8 +262,8 @@
 								<div class="col-md-12">
 									<div class="form-group">
 										<div class="post-preview">
-											<fmt:formatDate value="${history.startTime}" var="startTime" pattern="yyyy-MM-dd HH:mm:ss" />
-											<fmt:formatDate value="${history.endTime}" var="endTime" pattern="yyyy-MM-dd HH:mm:ss" />
+											<fmt:formatDate value="${history.sTime}" var="startTime" pattern="yyyy-MM-dd HH:mm:ss"/>
+											<fmt:formatDate value="${history.eTime}" var="endTime" pattern="yyyy-MM-dd HH:mm:ss"/>
 											<div id="map" style="width:100%;height:550px;" data-startTime="${startTime}" data-endTime="${endTime}"
 											data-boardNo="${sharingBoardDetail.boardNo}"></div>
 										</div>

@@ -254,10 +254,8 @@
 										<div class="row">
 											<div class="col-md-12" id="his">
 												<c:forEach var="h" items="${history}">
-													<fmt:formatDate value="${h.startTime}" var="startTime"
-														pattern="yyyy-MM-dd HH:mm:ss" />
-													<fmt:formatDate value="${h.endTime}" var="endTime"
-														pattern="yyyy-MM-dd HH:mm:ss" />
+													<fmt:formatDate value="${h.sTime}" var="startTime" pattern="yyyy-MM-dd HH:mm:ss" />
+													<fmt:formatDate value="${h.eTime}" var="endTime" pattern="yyyy-MM-dd HH:mm:ss" />
 													<table class="table table-bordered"">
 														<tr>
 															<td>출발시간 : ${startTime} / 도착시간 : ${endTime}</td>

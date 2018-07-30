@@ -303,8 +303,8 @@
 										<div class="row">
 											<div class="col-md-12" id="his">
 												<c:forEach var="h" items="${history}">
-													<fmt:formatDate value="${h.startTime}" var="startTime" pattern="yyyy-MM-dd HH:mm:ss" />
-													<fmt:formatDate value="${h.endTime}" var="endTime" pattern="yyyy-MM-dd HH:mm:ss" />
+													<fmt:formatDate value="${h.sTime}" var="startTime" pattern="yyyy-MM-dd HH:mm:ss" />
+													<fmt:formatDate value="${h.eTime}" var="endTime" pattern="yyyy-MM-dd HH:mm:ss" />
 													<table class="table table-bordered"">
 														<tr>
 															<td>출발시간 : ${startTime} / 도착시간 : ${endTime}</td>
@@ -321,8 +321,8 @@
 											<div class="col-md-12">
 												<div class="form-group">
 													<div class="post-preview">
-														<fmt:formatDate value="${his.startTime}" var="startTimeSecond" pattern="yyyy-MM-dd HH:mm:ss" />
-														<fmt:formatDate value="${his.endTime}" var="endTimeSecond" pattern="yyyy-MM-dd HH:mm:ss" />
+														<fmt:formatDate value="${History.sTime}" var="startTimeSecond" pattern="yyyy-MM-dd HH:mm:ss" />
+														<fmt:formatDate value="${History.eTime}" var="endTimeSecond" pattern="yyyy-MM-dd HH:mm:ss" />
 														<div id="map" style="width:100%;height:550px;" data-startTimeSecond="${startTimeSecond}" data-endTimeSecond="${endTimeSecond}"></div>
 													</div>
 												</div>
