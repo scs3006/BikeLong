@@ -22,6 +22,8 @@ public class GPSController {
 	@GetMapping(value = "/minsertgps.action")
 	@ResponseBody
 	public void getInsertGps(Gps gps, String latitude, String longitude ) {
+		System.out.println("latitude : " + latitude);
+		System.out.println("longitude : " + longitude);
 		gps.setLatitude(Double.parseDouble(latitude));
 		gps.setLongitude(Double.parseDouble(longitude));
 		gpsService.insertGps(gps);

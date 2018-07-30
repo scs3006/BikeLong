@@ -44,6 +44,7 @@
 		<mapper resource="com/bikelong/mapper/environment-mapper.xml" />
 		<mapper resource="com/bikelong/mapper/gps-mapper.xml" />
 		<mapper resource="com/bikelong/mapper/history-mapper.xml" />
+		<mapper resource="com/bikelong/mapper/mypage-mapper.xml" />
 	</mappers>
 
 </configuration>

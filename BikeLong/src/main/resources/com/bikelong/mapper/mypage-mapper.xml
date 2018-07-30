@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.bikelong.mapper.MypageMapper">
+	<select id="selectTotalActivity" parameterType="hashmap" resultType="History">
+		SELECT id, rentalTime, distance, calorie
+		FROM History
+		WHERE id = #{id}
+		<if test="requestType == 1">
+    		AND startTime between #{startDay} and #{endToday}
+  		</if>
+  		<if test="requestType == 2 or requestType== 3">
+    		AND startTime between #{startDay} and #{endToday}
+  		</if>
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+

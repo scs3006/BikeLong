@@ -77,4 +77,5 @@
 	<import resource="classpath:com/bikelong/beanconfig/environment-config.xml" />
 	<import resource="classpath:com/bikelong/beanconfig/gps-config.xml" />
 	<import resource="classpath:com/bikelong/beanconfig/history-config.xml" />
+	<import resource="classpath:com/bikelong/beanconfig/mypage-config.xml" />
 </beans>
