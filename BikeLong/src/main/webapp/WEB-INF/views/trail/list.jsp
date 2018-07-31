@@ -36,7 +36,12 @@
 </head>
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
-
+$(function(){
+	$('article').click($('.post-preview,.post-wrapper'),function(event){
+		var boardNo = $(this).attr("data-boardNo");
+		location.href = '/bikelong/trailpathboard/detail.action?boardNo='+boardNo+'&pageno=${pageno}';
+	});
+});
 </script>
 
 <body>
@@ -77,8 +82,7 @@
 				<div class="row blog-masonry">
 					<c:forEach var="trailBoardlist" items="${ trailBoardlist }">
 						<div class="col-md-4 post-item">
-							<article class="post module-page-title" style="height: 500px;"
-								data-boardNo="${trailBoardlist.boardNo}">
+							<article class="post module-page-title" style="height: 500px;" data-boardNo="${trailBoardlist.boardNo}">
 								<div class="post-preview">
 									<img src="/bikelong/resources/photoupload/${trailBoardlist.imageName}"
 										style="height: 330px">
