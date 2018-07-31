@@ -1,6 +1,5 @@
 package com.bikelong.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,5 +94,14 @@ public class rentalShopController {
 		}
 		
 		return bike;
+	}
+	
+	//자전거, 렌탈샵 업데이트 하는 메소드
+	@RequestMapping(value = "/mobile_updateBikeAndRentalShop.action")
+	@ResponseBody
+	public void mobileUpdateBikeAndRentalShop(int bikeNo, int rentalShopNo, int request) {
+		System.out.println("들어옴");
+		rentalShopService.updateBikeAndRentalShopTx(bikeNo,rentalShopNo, request);
+		System.out.println("처리완료");
 	}
 }

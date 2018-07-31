@@ -57,6 +57,23 @@ public class MySqlRentalShopDao implements RentalShopDao {
 		
 		return rentalShop;
 	}
+
+	@Override
+	public void updateRentalShop(int rentalShopNo, int request) {
+		HashMap<String, Object> params =  new HashMap<>();
+		params.put("rentalShopNo", rentalShopNo);
+		params.put("request", request);
+		rentalShopMapper.updateRentalShop(params);
+	}
+
+	@Override
+	public void updateBike(int bikeNo, int request, int rentalShopNo) {
+		HashMap<String, Object> params =  new HashMap<>();
+		params.put("bikeNo", bikeNo);
+		params.put("request", request);
+		params.put("rentalShopNo", rentalShopNo);
+		rentalShopMapper.updateBike(params);
+	}
 	
 	
 	

@@ -32,7 +32,7 @@ public class LogInCheckInterceptor
 		}
 		
 		if (url.contains("/list.action") || url.contains("/detail.action") || url.contains("/sharingboardlist.action") || url.contains("/sharingboarddetail.action") ||
-				url.contains("/route/gpsfind.action")) {
+				url.contains("/route/gpsfind.action") || url.contains("/mypage/mactivity.action")) {
 			redirect = false;
 		}
 		

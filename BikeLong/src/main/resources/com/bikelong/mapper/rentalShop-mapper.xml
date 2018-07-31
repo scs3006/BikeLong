@@ -41,6 +41,26 @@
 		WHERE rentalShopName LIKE CONCAT('%', #{mSearch}, '%')
 	</select>
 
+	<update id="updateBike" parameterType="hashmap">
+		<if test="request == 0">
+    		UPDATE Bike SET state = 1, rentalShopNo = #{rentalShopNo}
+  		</if>
+  		<if test="request == 1">
+    		UPDATE Bike SET state = 0, rentalShopNo = #{rentalShopNo}
+  		</if>
+		WHERE bikeNo = #{bikeNo}
+	</update>
+	
+	<update id="updateRentalShop" parameterType="hashmap">
+		<if test="request == 0">
+    		UPDATE RentalShop SET count = count-1
+  		</if>
+  		<if test="request == 1">
+    		UPDATE RentalShop SET count = count+1
+  		</if>
+		WHERE RentalShopNo = #{rentalShopNo}
+	</update>
+
 </mapper>
 
 

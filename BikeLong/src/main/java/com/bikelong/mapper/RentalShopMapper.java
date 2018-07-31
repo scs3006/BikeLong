@@ -18,4 +18,8 @@ public interface RentalShopMapper {
 
 	List<RentalShop> selectMobileSearch(String mSearch);
 
+	void updateBike(HashMap<String, Object> params);
+
+	void updateRentalShop(HashMap<String, Object> params);
+
 }

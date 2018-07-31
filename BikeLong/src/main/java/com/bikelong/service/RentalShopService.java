@@ -17,4 +17,6 @@ public interface RentalShopService {
 
 	List<RentalShop> mobileSearch(String mSearch);
 
+	void updateBikeAndRentalShopTx(int bikeNo, int rentalShopNo, int request);
+
 }

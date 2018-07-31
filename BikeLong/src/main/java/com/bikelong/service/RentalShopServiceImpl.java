@@ -52,6 +52,17 @@ public class RentalShopServiceImpl implements RentalShopService {
 		
 		return rentalShop;
 	}
+
+	@Override
+	public void updateBikeAndRentalShopTx(int bikeNo, int rentalShopNo, int request) {
+		try {
+			rentalShopDao.updateBike(bikeNo, rentalShopNo, request);
+			rentalShopDao.updateRentalShop(rentalShopNo, request);
+		} catch (Exception e) {
+			throw new RuntimeException();
+		}
+		
+	}
 	
 	
 }
