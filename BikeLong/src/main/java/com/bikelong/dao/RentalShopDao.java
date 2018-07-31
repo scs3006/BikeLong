@@ -15,4 +15,6 @@ public interface RentalShopDao {
 
 	List<Bike> selectMobileBike(int rentalShopNo);
 
+	List<RentalShop> selectMobileSearch(String mSearch);
+
 }

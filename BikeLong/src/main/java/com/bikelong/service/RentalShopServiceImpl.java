@@ -44,6 +44,14 @@ public class RentalShopServiceImpl implements RentalShopService {
 		
 		return bike;
 	}
+
+	@Override
+	public List<RentalShop> mobileSearch(String mSearch) {
+
+		List<RentalShop> rentalShop = rentalShopDao.selectMobileSearch(mSearch);
+		
+		return rentalShop;
+	}
 	
 	
 }

@@ -16,4 +16,6 @@ public interface RentalShopMapper {
 
 	List<Bike> selectMobileBike(int rentalShopNo);
 
+	List<RentalShop> selectMobileSearch(String mSearch);
+
 }

@@ -49,6 +49,14 @@ public class MySqlRentalShopDao implements RentalShopDao {
 		
 		return bike;
 	}
+
+	@Override
+	public List<RentalShop> selectMobileSearch(String mSearch) {
+		
+		List<RentalShop> rentalShop = rentalShopMapper.selectMobileSearch(mSearch);
+		
+		return rentalShop;
+	}
 	
 	
 	
