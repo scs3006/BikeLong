@@ -193,6 +193,12 @@ $(function() {
 									<div class="form-group">${trailBoarddetail.content}</div>
 								</div>
 							</div>
+							<br> <br>
+							<br> <br>
+							<br> <br>
+							<br> <br>
+							<br> <br>
+							<br> <br>
 							<div class="col-md-12">
 								<div class="text-center">
 									<a class="btn btn-black"

@@ -49,7 +49,7 @@ public class TrailBoardController {
 	public String list(Model model,
 			@RequestParam(value = "pageno", defaultValue = "0") int pageNo) {
 
-		int pageSize = 9; //한 페이지에 표시할 데이터 갯수
+		int pageSize = 6; //한 페이지에 표시할 데이터 갯수
 		int from = pageNo * pageSize;
 		int to = pageSize;
 
