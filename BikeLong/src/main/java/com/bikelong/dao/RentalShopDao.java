@@ -17,7 +17,7 @@ public interface RentalShopDao {
 
 	List<RentalShop> selectMobileSearch(String mSearch);
 
-	void updateBike(int bikeNo, int request, int rentalShopNo);
+	void updateBike(int bikeNo, int rentalShopNo, int request);
 
 	void updateRentalShop(int rentalShopNo, int request);
 
