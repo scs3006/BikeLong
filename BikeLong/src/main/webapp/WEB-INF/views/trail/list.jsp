@@ -43,15 +43,12 @@ $(function(){
 	});
 });
 </script>
-
 <body>
-
 	<!-- Preloader-->
 	<div class="page-loader">
 		<div class="loader"></div>
 	</div>
 	<!-- Preloader end-->
-
 	<!-- Header-->
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<br />
