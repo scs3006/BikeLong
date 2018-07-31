@@ -15,4 +15,6 @@ public interface RentalShopService {
 
 	List<Bike> mobileBike(int rentalShopNo);
 
+	List<RentalShop> mobileSearch(String mSearch);
+
 }

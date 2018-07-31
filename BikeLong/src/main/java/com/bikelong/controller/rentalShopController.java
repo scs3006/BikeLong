@@ -72,11 +72,14 @@ public class rentalShopController {
 	
 	@RequestMapping(value = "/mobile_search.action")
 	@ResponseBody
-	public List<RentalShop> mobileSearch() {
+	public List<RentalShop> mobileSearch(String mSearch) {
 		
 		System.out.println("검색 모바일 접속");
+		System.out.println(mSearch);
 		
-		return null;
+		List<RentalShop> rentalShop = rentalShopService.mobileSearch(mSearch);
+		
+		return rentalShop;
 	}
 	
 	@RequestMapping(value = "/mobile_bike.action")
