@@ -56,7 +56,7 @@
 						alert("경로가 선택되지 않았거나 경로가 존재하지 않습니다.");
 				});
 		
-		$(window).ready(function(){
+			$(function(){
 					var startTimeSecond = $('#map').attr('data-startTimeSecond'); 
 					var endTimeSecond = $('#map').attr('data-endTimeSecond');
 					var parameter = {
@@ -226,10 +226,30 @@
 	<!-- Preloader end-->
 
 	<!-- Header-->
-	<jsp:include page="/WEB-INF/views/include/header.jsp" />
+	<jsp:include page="/WEB-INF/views/include/header.jsp"/>
+	<br />
+	<br />
+	<br />
 	<!-- Header end-->
-
-	<!-- ========================================================================================================= -->
+	<!-- Page Header-->
+	<section class="module-page-title">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-md-6">
+					<h1 class="page-title-heading">경로 공유 게시판 > 상세보기 > 수정</h1>
+				</div>
+				<div class="col-md-6">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="/bikelong/index.action">Home</a></li>
+						<li class="breadcrumb-item"><a href="/bikelong/route/sharingboardlist.action?pageno=${pageno}">Route Sharing Board</a></li>
+						<li class="breadcrumb-item"><a href="/bikelong/route/sharingboarddetail.action?boardNo=${sharingBoardUpdate.boardNo}&pageno=${pageno}">Route Sharing Board Detail</a></li>
+						<li class="breadcrumb-item active">Route Sharing Board Update</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Page Header end-->
 	<!-- Wrapper-->
 	<div class="wrapper">
 		<section class="module">

@@ -33,6 +33,12 @@
 					var boardNo = $(this).attr('data-boardNo');
 					location.href="noticeboard/detail.action?boardNo=" + boardNo;
 				});
+				
+				$('.gallery-item').on('click',$('.gallery-image'),function(event){
+					var sharingBoardNo = $(this).attr('data-routeboard');
+					location.href='/bikelong/route/sharingboarddetail.action?boardNo='+sharingBoardNo+'&pageno=0';
+				});
+				
 			});
 		</script>
 		
@@ -105,43 +111,29 @@
 
 			<!-- Gallery-->
 			<section class="module no-gutter p-0" id="gallery">
-				<div class="container-fluid">
+				<div class="container-fluid" >
 					<div class="row">
 						<div class="col-xl-4 col-lg-12 bg-gray">
 							<div class="gallery-shorcode-desc">
 								<div class="vertical-body">
 									<div class="vertical">
 										<div class="text-center">
-											<p class="subtitle">Photos</p>
-											<h1 class="display-1">Gallery</h1>
-											<p class="lead">Map where your photos were taken and discover local <br> points of interest. Map where your photos.</p>
+											<h1 class="display-1">경로 공유 게시판</h1>
+											<p class="lead">BikeLong 서비스를 이용하면서 좋았던 길들을 공유하는 게시판 입니다.<bt/>자신의 경험했던 좋은 길들을 여러사람과 공유해 보세요.</p>
 											<div class="divider-border"></div>
-											<div class="space" data-mY="60px"></div><a class="btn btn-black" href="#">View Gallery</a>
+											<div class="space" data-mY="60px"></div><a class="btn btn-black" href="/bikelong/route/sharingboardlist.action">게시글 더보기</a>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col-xl-8 col-lg-12">
+						<div class="col-xl-8 col-lg-12" >
 							<div class="gallery gallery-shorcode">
-								<div class="gallery-item">
-									<div class="gallery-image" data-background="/bikelong/resources/assets/images/portfolio/1.jpg"></div><a href="/bikelong/resources/assets/images/portfolio/1.jpg" title="Title 1"></a>
-								</div>
-								<div class="gallery-item">
-									<div class="gallery-image" data-background="/bikelong/resources/assets/images/portfolio/5.jpg"></div><a href="/bikelong/resources/assets/images/portfolio/5.jpg" title="Title 2"></a>
-								</div>
-								<div class="gallery-item">
-									<div class="gallery-image" data-background="/bikelong/resources/assets/images/portfolio/3.jpg"></div><a href="/bikelong/resources/assets/images/portfolio/3.jpg" title="Title 3"></a>
-								</div>
-								<div class="gallery-item">
-									<div class="gallery-image" data-background="/bikelong/resources/assets/images/portfolio/4.jpg"></div><a href="/bikelong/resources/assets/images/portfolio/4.jpg" title="Title 4"></a>
-								</div>
-								<div class="gallery-item">
-									<div class="gallery-image" data-background="/bikelong/resources/assets/images/portfolio/2.jpg"></div><a href="/bikelong/resources/assets/images/portfolio/2.jpg" title="Title 5"></a>
-								</div>
-								<div class="gallery-item">
-									<div class="gallery-image" data-background="/bikelong/resources/assets/images/portfolio/6.jpg"></div><a href="/bikelong/resources/assets/images/portfolio/6.jpg" title="Title 6"></a>
-								</div>
+								<c:forEach var="lists" items="${ sharingBoardList }" begin="0" end="6">
+									<div class="gallery-item" style="width: 418.88px; height: 418.88px; text-align: center;"  data-routeboard="${lists.boardNo}">
+										<div class="gallery-image" data-background="/bikelong/resources/photoupload/${lists.imageName}" style="position: relative; width: 418px; height: 418px"></div>
+									</div>
+								</c:forEach>
 							</div>
 						</div>
 					</div>
