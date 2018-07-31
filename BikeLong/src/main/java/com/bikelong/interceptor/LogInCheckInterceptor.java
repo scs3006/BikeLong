@@ -31,7 +31,8 @@ public class LogInCheckInterceptor
 			}
 		}
 		
-		if (url.contains("/list.action") || url.contains("/detail.action") || url.contains("/sharingboardlist.action") || url.contains("/sharingboarddetail.action")) {
+		if (url.contains("/list.action") || url.contains("/detail.action") || url.contains("/sharingboardlist.action") || url.contains("/sharingboarddetail.action") ||
+				url.contains("/route/gpsfind.action")) {
 			redirect = false;
 		}
 		
