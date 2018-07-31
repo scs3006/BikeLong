@@ -34,6 +34,12 @@
 		ON B.rentalShopNo = R.rentalShopNo
 		WHERE B.rentalShopNo = #{rentalShopNo}
 	</select>
+	
+	<select id="selectMobileSearch" resultType="RentalShop" parameterType="String">
+		SELECT rentalShopNo, rentalShopName, location, lat, lng, count
+		FROM RentalShop
+		WHERE rentalShopName LIKE CONCAT('%', #{mSearch}, '%')
+	</select>
 
 </mapper>
 
