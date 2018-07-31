@@ -1,7 +1,5 @@
 package com.bikelong.service;
 
-import java.util.List;
-
 import com.bikelong.dao.GpsDao;
 import com.bikelong.vo.Gps;
 
