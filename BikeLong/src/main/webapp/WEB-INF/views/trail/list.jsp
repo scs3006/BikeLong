@@ -78,7 +78,7 @@
 					<c:forEach var="trailBoardlist" items="${ trailBoardlist }">
 						<div class="col-md-4 post-item">
 							<article class="post module-page-title" style="height: 500px;"
-								data-boardNo="${lists.boardNo}">
+								data-boardNo="${trailBoardlist.boardNo}">
 								<div class="post-preview">
 									<img src="/bikelong/resources/photoupload/${trailBoardlist.imageName}"
 										style="height: 330px">
@@ -94,7 +94,7 @@
 											작성자 : ${trailBoardlist.id}<br />
 											작성일 : ${trailBoardlist.date}<br />
 											해당 지역 : ${trailBoardlist.locationName}<br />
-											게시글 번호 : ${trailBoardlist.boardNo}
+											게시글 번호 : ${trailBoardlist.boardNo}<br />
 										</h5>
 									</div>
 								</div>
@@ -105,12 +105,11 @@
 				<div class="col-md-12">
 					<div class="text-center">${pager}</div>
 				</div>
-				<br>
+				<br><br>
 				<div class="col-md-12">
 					<div class="text-center">
 						<c:if test="${loginuser.id eq 'manager' && loginuser ne null}">
-							<a class="btn btn-black"
-								href="/bikelong/trailpathboard/write.action">글쓰기</a>
+							<a class="btn btn-black" href="/bikelong/trailpathboard/write.action">글쓰기</a>
 						</c:if>
 						<a class="btn btn-black" href="/bikelong/index.action">돌아가기</a>
 					</div>
