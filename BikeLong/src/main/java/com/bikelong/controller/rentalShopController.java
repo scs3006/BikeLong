@@ -101,6 +101,9 @@ public class rentalShopController {
 	@ResponseBody
 	public void mobileUpdateBikeAndRentalShop(int bikeNo, int rentalShopNo, int request) {
 		System.out.println("들어옴");
+		System.out.println(bikeNo);
+		System.out.println(rentalShopNo);
+		System.out.println(request);
 		rentalShopService.updateBikeAndRentalShopTx(bikeNo,rentalShopNo, request);
 		System.out.println("처리완료");
 	}
