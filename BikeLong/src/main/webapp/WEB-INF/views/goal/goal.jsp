@@ -23,20 +23,103 @@
 		<link href="/bikelong/resources/assets/css/plugins.min.css" rel="stylesheet">
 		<!-- Template core CSS-->
 		<link href="/bikelong/resources/assets/css/template.css" rel="stylesheet">
-		
+
 		<!-- script -->
-		<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-		<script type="text/javascript">
-			$(function(){
-				$('#goaltoggle').on('click',function(event){
-					event.preventDefault();
-					$('#myModal').modal();
-				});
-				
-			});
-		</script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<style type="text/css">
+#a#startGoal1{ }
+</style>
+<script type="text/javascript">
+	$(function(){
+		
+		if(${flag}){
+			$('#topGoal').css('display','inline');
+			//$('#originGoal').css('visibility','hidden');
+			$('#originGoal').css('display','none');
+			
+		}else{
+			$('#topGoal').css('display','none');
+			$('#originGoal').css('display','inline');
+		}
+		
+	if(${status} == 0){	
+		$('a#startGoal1').on('click',function(event){
+			event.preventDefault();
+			location.href = "startGoal.action?goalAmount=5";
+			/* $('div#originGoal').css('display',"none"); */
+			/* $('div#originGoal').hide(); */
+		});
+		$('a#startGoal2').on('click',function(event){
+			event.preventDefault();
+			location.href = "startGoal.action?goalAmount=10";
+		
+		});
+		$('a#startGoal3').on('click',function(event){
+			event.preventDefault();
+			location.href = "startGoal.action?goalAmount=20";
+			
+		});
+		$('a#startGoal4').on('click',function(event){
+			event.preventDefault();
+			location.href = "startGoal.action?goalAmount=30";
+			
+		});
+	}else{
+		$('a#startGoal1').text('달성완료').removeAttr('href');
+		$('a#startGoal2').text('달성완료').removeAttr('href');
+		$('a#startGoal3').text('달성완료').removeAttr('href');
+		$('a#startGoal4').text('달성완료').removeAttr('href');
+	}
+		
+ 	 	  if(${flag} != null){  
+ 		    switch (${goalAmount}) {
+			case 5:
+				$('div#changeText p').text('목표 달성 시 50 포인트가 제공됩니다.');
+				break;
+			case 10:
+				$('div#changeText p').text('목표 달성 시 100 포인트가 제공됩니다.');
+				break;
+			case 20:
+				$('div#changeText p').text('목표 달성 시 200 포인트가 제공됩니다.');
+				break;
+			case 30:
+				$('div#changeText p').text('목표 달성 시 300 포인트가 제공됩니다.');
+				break;
+			}
+		  } 
+		
+		 $('#pointtoggle').on('click',function(event){
+			event.preventDefault();
+			
+			if(${goalPercent} >= 100){
+				$('#myModal2').modal();
+			}
+		});
+		 $('#savePoint').on('click',function(event){
+			 event.preventDefault();
+			 
+			 var point; 
+			 
+			 if(${goalAmount} == 5){
+				 point = 50;
+			 }else if(${goalAmount} == 10){
+				 point = 100;
+			 }else if(${goalAmount} == 20){
+				 point = 200;
+			 }else if(${goalAmount} == 30){
+				 point = 300;
+			 }
+			 location.href="savePoint.action?point="+point;
+		 });
+		
+	});
+</script>
 
 <style type="text/css">
+/* #hiddenGoal{
+	visiblilt : hidden;
+} */
+
 .searchFilter{
 	margin-right : 500px;
 	margin-left : 500px;
@@ -56,27 +139,28 @@
 		<jsp:include page="/WEB-INF/views/include/header.jsp" /><br/><br/><br/>
 		<!-- Header end-->
 		
-		<!-- Goal Modal -->
-		 <div class="modal fade" id="myModal" role="dialog">
+		  
+		  <!-- point Modal -->
+		   <div class="modal fade" id="myModal2" role="dialog">
 		    <div class="modal-dialog">
 		    
 		      <!-- Modal content-->
 		      <div class="modal-content">
 		        <div class="modal-header">
-		          <button type="button" class="close" data-dismiss="modal">×</button>
-		          <h4 class="modal-title">닫기</h4>
+		          <!-- <button type="button" class="close" data-dismiss="modal">×</button> -->
+		         <!--  <h4 class="modal-title">닫기</h4> -->
 		        </div>
 		        <div class="modal-body">
-		          <p>Some text in the modal.</p>
+		          <p>포인트를 적립하시겠습니까?</p>
 		        </div>
 		        <div class="modal-footer">
-		          <button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+		          <button type="button" id="savePoint" class="btn btn-default" data-dismiss="modal">확인</button>
 		        </div>
 		      </div>
 		      
 		    </div>
 		  </div>
-		<!-- Goal Modal end -->
+		
 
 		<!-- Wrapper-->
 		<div class="wrapper">
@@ -110,121 +194,106 @@
 					</div>
 			</div>
 		
-		<!-- 	<div>
-				<div class="searchFilter">
-					<select name="area" id="area" class="form-control">
-						<option value="">목표 거리 선택</option>
-						<option value="5">5km</option>
-						<option value="10">10km</option>
-						<option value="15">15km</option>
-						<option value="20">20km</option>
-						<option value="25">25km</option>
-						<option value="30">30km</option>
-					</select> <br>
-				</div>
-			</div> -->
-
 			<!-- Pie Chart-->
-			<section class="module divider-top">
-				<div class="container">
+				<div id="topGoal" class="col-md-12">	
+					<div class="pie-chart">
+							<a id="pointtoggle" data-toggle="modal" data-target="myModal">
+							
+								<div class="chart" data-percent="${goal.percent}">
+										<span class="chart-text"><span><i class="icon-bike"></i></span></span>
+								</div>
+							</a>
+							
+							<div class="chart-title"><span>${goal.goalAmount}Km</span></div>
+							<div id="changeText" class="chart-content">
+								<p>목표 달성 시 50 포인트가 제공됩니다.</p>
+							</div>
+							<!-- <p><a class="btn btn-outline btn-sm btn-black" href="#">시작하기</a></p> -->
+							<p><a class="btn btn-outline btn-sm btn-black" href="statusGoal.action?id=${loginuser.id}">달성량보기</a></p>
+						</div>
+				</div>
+		
+			 <section class="module divider-top"> 
+				<div class="container" id="originGoal">
 					<div class="row">
-						
-					<!--@@@@여기----------------------  -->	
-						<c:forEach var="goal" items="${ goals }">
-						<div class="col-md-3">
-							<div class="pie-chart">
-								<a id="goaltoggle" data-toggle="modal" data-target="myModal">
+					
+					<div class="col-md-3">	
+						<div class="pie-chart">
+								<a id="pointtoggle" data-toggle="modal" data-target="myModal">
 								
-									<div class="chart" data-percent="${ goal.goalAmount }">
+									<div class="chart" data-percent="40">
 											<span class="chart-text"><span><i class="icon-bike"></i></span></span>
 									</div>
 								</a>
-								<div class="chart-title"><span>${ goal.goalName }</span></div>
+								<div class="chart-title"><span>5Km</span></div>
 								<div class="chart-content">
-									<p>${ goal.goalInfo }</p>
+									<p>목표 달성 시 50 포인트가 제공됩니다.</p>
 								</div>
-								<p><a class="btn btn-outline btn-sm btn-black" href="#">시작하기</a></p>
+								<!-- <p><a class="btn btn-outline btn-sm btn-black" href="#">시작하기</a></p> -->
+								<p><a id="startGoal1" class="btn btn-outline btn-sm btn-black">시작하기</a></p>
 							</div>
-							</div>
-						</c:forEach>
+						</div>
 						
+						<div class="col-md-3">	
+						<div class="pie-chart">
+								<a id="pointtoggle" data-toggle="modal" data-target="myModal">
+								
+									<div class="chart" data-percent="40">
+											<span class="chart-text"><span><i class="icon-bike"></i></span></span>
+									</div>
+								</a>
+								<div class="chart-title"><span>10Km</span></div>
+								<div class="chart-content">
+									<p>목표 달성 시 100 포인트가 제공됩니다.</p>
+								</div>
+								<!-- <p><a class="btn btn-outline btn-sm btn-black" href="#">시작하기</a></p> -->
+								<p><a id="startGoal2" class="btn btn-outline btn-sm btn-black">시작하기</a></p>
+							</div>
+						</div>
 						
-						<!------------>
+						<div class="col-md-3">	
+						<div class="pie-chart">
+								<a id="pointtoggle" data-toggle="modal" data-target="myModal">
+								
+									<div class="chart" data-percent="40">
+											<span class="chart-text"><span><i class="icon-bike"></i></span></span>
+									</div>
+								</a>
+								<div class="chart-title"><span>20Km</span></div>
+								<div class="chart-content">
+									<p>목표 달성 시 200 포인트가 제공됩니다.</p>
+								</div>
+								<!-- <p><a class="btn btn-outline btn-sm btn-black" href="#">시작하기</a></p> -->
+								<p><a id="startGoal3" class="btn btn-outline btn-sm btn-black">시작하기</a></p>
+							</div>
+						</div>
+						
+						<div class="col-md-3">	
+						<div class="pie-chart">
+								<a id="pointtoggle" data-toggle="modal" data-target="myModal">
+								
+									<div class="chart" data-percent="40">
+											<span class="chart-text"><span><i class="icon-bike"></i></span></span>
+									</div>
+								</a>
+								<div class="chart-title"><span>30Km</span></div>
+								<div class="chart-content">
+									<p>목표 달성 시 300 포인트가 제공됩니다.</p>
+								</div>
+								<!-- <p><a class="btn btn-outline btn-sm btn-black" href="#">시작하기</a></p> -->
+								<p><a id="startGoal4" class="btn btn-outline btn-sm btn-black">시작하기</a></p>
+							</div>
+						</div>
+						
 					</div>
 				</div>
-			</section>
+		</section> 
+		
+	<!-------------------------  -->
 			
-				<!-- Goal-list -->
-			<!-- <div class="comments-area">
-				<div class="comment-body" style="margin-left:400px; margin-right:400px; ">
-					<div class="comment-meta">
-						<div class="comment-meta-author"><a href="#">Jason Ford</a></div>
-						<div class="comment-meta-date"><a href="#">May 5, 2015 at 4:51 am</a></div>
-					</div>
-					
-					<a id="goaltoggle" data-toggle="modal" data-target="myModal">
-						Meh synth Schlitz, tempor duis single-origin coffee ea next level ethnic fingerstache fanny pack nostrud.
-					</a>
-				</div>
-			</div>  -->
-
-
-			<!-- <section class="module">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-3">
-							<div class="icon-box">
-								<div class="icon-box-icon"><span class="li_pen"></span></div>
-								<div class="icon-box-title">
-									<h5>Opened 24/7</h5>
-								</div>
-								<div class="icon-box-content">
-									<p>Map where your photos were taken and discover local points of interest. Map where your photos.</p>
-								</div>
-								<div class="icon-box-link"><a href="#"></a></div>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="icon-box">
-								<div class="icon-box-icon"><span class="li_phone"></span></div>
-								<div class="icon-box-title">
-									<h5>Free Parking</h5>
-								</div>
-								<div class="icon-box-content">
-									<p>Map where your photos were taken and discover local points of interest. Map where your photos.</p>
-								</div>
-								<div class="icon-box-link"><a href="#"></a></div>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="icon-box">
-								<div class="icon-box-icon"><span class="li_bulb"></span></div>
-								<div class="icon-box-title">
-									<h5>Central Location</h5>
-								</div>
-								<div class="icon-box-content">
-									<p>Map where your photos were taken and discover local points of interest. Map where your photos.</p>
-								</div>
-								<div class="icon-box-link"><a href="#"></a></div>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="icon-box">
-								<div class="icon-box-icon"><span class="li_bulb"></span></div>
-								<div class="icon-box-title">
-									<h5>High Quality</h5>
-								</div>
-								<div class="icon-box-content">
-									<p>Map where your photos were taken and discover local points of interest. Map where your photos.</p>
-								</div>
-								<div class="icon-box-link"><a href="#"></a></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
- -->
+				
 			
+		<!-------------------------  -->	
 			<svg class="footer-circle" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewbox="0 0 100 100" preserveaspectratio="none">
 				<path d="M0 100 C40 0 60 0 100 100 Z"></path>
 			</svg>

@@ -5,10 +5,40 @@
   
 <mapper namespace="com.bikelong.mapper.GoalMapper">
 	
-	<select id = "selectGoalList" resultType="Goal">
-		SELECT goalNo, goalName,goalAmount,goalInfo,date_format(date,'%Y-%m-%d') AS date
+	<insert id="insertGoal" parameterType="Goal">
+		INSERT INTO Goal(goalNo,id,goalAmount,date)
+		VALUES(#{goalNo},#{id},#{goalAmount},now())
+	</insert> 
+	
+	<select id="selectStatus" parameterType="hashmap" resultType="Goal">
+		SELECT goalAmount,date,id,status
 		FROM Goal
+		WHERE id=#{id} 
+		AND date LIKE CONCAT('%', #{today}, '%')
 	</select>
+	
+	<select id="selectHistory" parameterType="Goal" resultType="History">
+		SELECT distance
+		FROM History
+		WHERE id=#{id} AND date_format(startTime ,'%Y-%m-%d') = date_format(#{date},'%Y-%m-%d')
+		
+	</select>
+	
+	<select id="selectPoint" parameterType="Goal" resultType="Member">
+		SELECT point 
+		FROM Member
+		WHERE id=#{id}
+	</select>
+	
+	<update id="insertPoint" parameterType="Member">
+		UPDATE Member SET point=#{point}
+		WHERE id=#{id} 
+	</update>
+	
+	<update id="updateStatus" parameterType="hashmap">
+		UPDATE Goal SET status=1
+		WHERE id=#{id} AND date_format(date,'%Y-%m-%d') = #{today}
+	</update>
 </mapper>
 
 
