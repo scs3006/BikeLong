@@ -28,6 +28,7 @@
 								<li><a href="/bikelong/route/sharingboardlist.action"><span class="menu-item-span">경로 공유</span></a></li>
 								<li><a href="/bikelong/rentalShop.action"><span class="menu-item-span">대여소 위치</span></a></li>
 								<li><a href="/bikelong/suggestions/list.action"><span class="menu-item-span">건의 사항</span></a></li>
+								<li><a href="/bikelong/download.action"><span class="menu-item-span">다운로드</span></a></li>
 							</ul>
 						</div>
 						<div class="inner-nav onepage-nav" id="signIn_signUp">

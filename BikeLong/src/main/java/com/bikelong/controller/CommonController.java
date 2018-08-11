@@ -1,16 +1,21 @@
 package com.bikelong.controller;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.UUID;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -97,6 +102,40 @@ public class CommonController {
 		}
 	}
 	
+	@GetMapping(value = "download.action")
+	public String getDownload() {
+		return "download";
+	}
+	
+	@GetMapping(value = "downloadAPK.action")
+	@ResponseBody
+	public void getDownloadAPK(HttpServletRequest req,HttpServletResponse resp) throws Exception {
+		
+		ServletContext application = req.getSession().getServletContext();
+		String path = application.getRealPath("/WEB-INF/BikeLong.apk");
+		
+		resp.setContentType("application/octet-stream");
+		resp.addHeader("Content-Disposition", 
+				"Attachment;filename=\"" + 
+				new String("BikeLong.apk".getBytes("euc-kr"), "ISO-8859-1") + 
+				"\"");
+		
+		//다운로드 컨텐츠를 응답스트림에 기록
+		BufferedInputStream bistream = 
+				new BufferedInputStream(new FileInputStream(path));
+		BufferedOutputStream bostream = 
+				new BufferedOutputStream(resp.getOutputStream());
+		while (true) {
+			int data = bistream.read();			
+			if (data == -1) break; //EOF (end of file)			
+			bostream.write(data);
+		}
+		
+		bistream.close();
+		bostream.close();
+		
+		
+	}
 
 }
 

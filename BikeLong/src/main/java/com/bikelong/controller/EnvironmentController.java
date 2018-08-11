@@ -60,7 +60,7 @@ public class EnvironmentController {
 	@RequestMapping(value = { "environmentdata.action" }, method = RequestMethod.GET)
 	public void arduinoData(int voMeasured, Environment environment) {
 		
-		SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		SimpleDateFormat timeformat = new SimpleDateFormat("HH");
 		String date = dateformat.format(new Date());
 		String time = timeformat.format(new Date());
